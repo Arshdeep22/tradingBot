@@ -34,3 +34,4 @@ Thumbs.db
 # Secrets
 config/secrets.py
 *.env
+.streamlit/secrets.toml
