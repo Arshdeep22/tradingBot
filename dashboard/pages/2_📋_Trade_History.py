@@ -347,10 +347,19 @@ for idx, row in filtered.iterrows():
             with st.container():
                 st.text(str(trade['reason'])[:500])
 
+        # Delete button
+        col_del, col_tf, _ = st.columns([1, 2, 3])
+        with col_del:
+            if st.button("🗑️ Delete Trade", key=f"del_{idx}", type="secondary"):
+                db.delete_trade(trade['id'])
+                st.success(f"Trade #{trade['id']} deleted!")
+                st.rerun()
+
         # Timeframe selector and Chart
         st.markdown("#### 📈 Trade Journey Chart")
-        tf = st.radio("Timeframe", ["5m", "3m", "15m"],
-                      horizontal=True, key=f"tf_{idx}")
+        with col_tf:
+            tf = st.radio("Timeframe", ["5m", "3m", "15m"],
+                          horizontal=True, key=f"tf_{idx}")
 
         with st.spinner(f"Loading {tf} chart for {trade['symbol']}..."):
             fig = create_trade_chart(trade, timeframe=tf)

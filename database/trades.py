@@ -118,6 +118,17 @@ class TradesMixin:
         conn.close()
         return trades
 
+    def delete_trade(self, trade_id):
+        """Delete a specific trade by ID."""
+        if self.use_supabase:
+            self.supabase_client.table('trades').delete().eq('id', trade_id).execute()
+        else:
+            conn = self._get_connection()
+            c = conn.cursor()
+            c.execute("DELETE FROM trades WHERE id=?", (trade_id,))
+            conn.commit()
+            conn.close()
+
     def get_trades_by_strategy(self, strategy):
         """Get trades filtered by strategy."""
         if self.use_supabase:
