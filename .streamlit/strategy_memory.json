@@ -1,0 +1,276 @@
+{
+  "iterations": [
+    {
+      "timestamp": "2026-05-12T19:17:07.334750",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 3.0,
+        "max_base_candles": 5,
+        "build_days": 11,
+        "test_days": 3
+      },
+      "win_rate": 0.0,
+      "pnl": -65.88999999999987,
+      "zones": 11,
+      "triggered": 10,
+      "wins": 0,
+      "losses": 10,
+      "analysis": "Baseline"
+    },
+    {
+      "timestamp": "2026-05-12T19:17:29.478417",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4,
+        "build_days": 20,
+        "test_days": 8
+      },
+      "win_rate": 30.0,
+      "pnl": 15.080000000000155,
+      "zones": 20,
+      "triggered": 10,
+      "wins": 3,
+      "losses": 7,
+      "analysis": "All 10 triggered trades hit SL with R:R = -1.0, indicating zones are being identified but price is immediately rejecting them. The high min_score=80 is filtering for quality, but test_days=3 is too short for price to reach targets on 15m candles. This is a timing + target distance problem, not a zone quality problem."
+    },
+    {
+      "timestamp": "2026-05-12T19:17:39.462792",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 2.5,
+        "max_base_candles": 3,
+        "build_days": 28,
+        "test_days": 11
+      },
+      "win_rate": 20.0,
+      "pnl": -10.100000000000364,
+      "zones": 12,
+      "triggered": 5,
+      "wins": 1,
+      "losses": 4,
+      "analysis": "30% WR with 3 wins vs 7 losses indicates zone quality is poor despite score=75 filter. All losses are SL_HIT with -1.0 R:R (premature exits), while 3 wins achieved 2.0 R:R targets. Core issue: zones triggering but immediately stopping out suggest weak leg-out strength or false breakouts. The high pending count (10/20) means test_days=8 is insufficient \u2014 price needs more runway."
+    },
+    {
+      "timestamp": "2026-05-12T19:18:01.170325",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4,
+        "build_days": 18,
+        "test_days": 14
+      },
+      "win_rate": 66.66666666666666,
+      "pnl": 41.98000000000002,
+      "zones": 13,
+      "triggered": 3,
+      "wins": 2,
+      "losses": 1,
+      "analysis": "Win rate collapsed to 20% despite high-quality zones (score=82). Root cause: 7 of 12 trades are PENDING\u2014price hasn't reached zone boundaries yet. test_days=11 is too short; many zones need more time. Simultaneously, the 4 triggered trades hit SL (avg R:R=-1.0), suggesting zones are being invalidated before price reaches target, or entry/SL placement is too tight relative to zone structure."
+    },
+    {
+      "timestamp": "2026-05-12T19:18:11.945783",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 72,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4,
+        "build_days": 18,
+        "test_days": 10
+      },
+      "win_rate": 16.666666666666664,
+      "pnl": -27.590000000000373,
+      "zones": 22,
+      "triggered": 12,
+      "wins": 2,
+      "losses": 10,
+      "analysis": "Win rate at 66.7% (2W-1L) is close to target but sample size is small (only 3 triggered). High pending count (10/13) suggests test_days=14 is allowing trades to stay open too long without resolution. The two wins both achieved full R:R=2.0, indicating rr_ratio=2.0 is well-calibrated. Risk: over-tightening min_score may starve signal flow."
+    },
+    {
+      "timestamp": "2026-05-12T19:18:33.161723",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 2.5,
+        "max_base_candles": 3,
+        "build_days": 18,
+        "test_days": 12
+      },
+      "win_rate": 9.090909090909092,
+      "pnl": -55.730000000000246,
+      "zones": 19,
+      "triggered": 11,
+      "wins": 1,
+      "losses": 10,
+      "analysis": "Win rate collapsed from 66.7% (Iter 3) to 16.7% (Iter 4) despite identical min_score=75\u219272 and rr_ratio=2.0. Root cause: lowering min_score from 75 to 72 flooded the system with 22 zones (vs 13), triggering 12 trades with 10 SL hits. The high-quality 66.7% run had only 3 triggers; current run has 4\u00d7 more noise. Supply zones are pending (10 of 12 triggered), indicating price hasn't revisited them yet within test_days=10."
+    },
+    {
+      "timestamp": "2026-05-12T19:28:03.483299",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4,
+        "build_days": 18,
+        "test_days": 14
+      },
+      "win_rate": 0.0,
+      "pnl": -65.88999999999987,
+      "zones": 11,
+      "triggered": 10,
+      "wins": 0,
+      "losses": 10,
+      "analysis": "Baseline"
+    },
+    {
+      "timestamp": "2026-05-12T19:28:19.815892",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 85,
+        "rr_ratio": 2.5,
+        "max_base_candles": 3,
+        "build_days": 18,
+        "test_days": 12
+      },
+      "win_rate": 14.285714285714285,
+      "pnl": -25.4500000000005,
+      "zones": 14,
+      "triggered": 7,
+      "wins": 1,
+      "losses": 6,
+      "analysis": "All 10 triggered trades hit SL with R:R = -1.0, indicating zones are valid but entry timing or SL placement is causing immediate losses. Historical data shows score=75 rr=2.0 build=18d test=14d achieved 66.7% WR with only 3 triggers, but current identical parameters produce 0% WR with 10 triggers \u2014 suggesting market regime shift or zone quality degradation. The anomaly: identical params previously worked (66.7%) but now fail completely, pointing to max_base_candles or leg-out strength assessment as the culprit."
+    },
+    {
+      "timestamp": "2026-05-12T19:28:29.293929",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3,
+        "build_days": 18,
+        "test_days": 14
+      },
+      "win_rate": 66.66666666666666,
+      "pnl": 41.98000000000002,
+      "zones": 11,
+      "triggered": 3,
+      "wins": 2,
+      "losses": 1,
+      "analysis": "Current WR=14.3% is critically low despite high-quality zones (score=85). The core problem: 7 triggered trades yielded only 1 win, with 6 SL hits and 7 pending. Avg R:R=-0.61 reveals targets are being missed while stops are consistently hit. History shows score=75 rr=2.0 build=18 test=14 achieved 66.7% WR (3 trades), proving lower score + lower rr works on this market."
+    },
+    {
+      "timestamp": "2026-05-12T19:28:42.360456",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 74,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3,
+        "build_days": 18,
+        "test_days": 14
+      },
+      "win_rate": 66.66666666666666,
+      "pnl": 41.98000000000002,
+      "zones": 11,
+      "triggered": 3,
+      "wins": 2,
+      "losses": 1,
+      "analysis": "WR at 66.7% with only 3 triggered trades is too small a sample to confirm 70%+ reliability. 8 pending trades suggest price hasn't yet reached them; extending test_days further risks overfit. The high concentration of SUPPLY zones (9/11) with many pending signals that zone quality may be excellent but timing incomplete. Minimal tweaks to the winning formula should consolidate the edge."
+    },
+    {
+      "timestamp": "2026-05-12T19:28:49.798884",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 72,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3,
+        "build_days": 18,
+        "test_days": 10
+      },
+      "win_rate": 20.0,
+      "pnl": -12.140000000000327,
+      "zones": 18,
+      "triggered": 10,
+      "wins": 2,
+      "losses": 8,
+      "analysis": "WR is 66.7% (2W-1L, 3 triggered) \u2014 close to target but need 70%. Critical issue: 8 pending trades (73% of triggered) mean results are incomplete. Sample size is very small (3 triggered). Must balance filtering for quality vs. getting more decisive signals to reach 70% with confidence."
+    },
+    {
+      "timestamp": "2026-05-12T19:29:01.986312",
+      "symbols": [
+        "INFY.NS",
+        "RELIANCE.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3,
+        "build_days": 18,
+        "test_days": 14
+      },
+      "win_rate": 66.66666666666666,
+      "pnl": 41.98000000000002,
+      "zones": 11,
+      "triggered": 3,
+      "wins": 2,
+      "losses": 1,
+      "analysis": "WR collapsed from 66.7% (Iter 2-3) to 20% (Iter 4) after reducing test_days from 14 to 10. The zone count jumped from 11 to 18, triggering 10 trades with 8 SL hits and only 2 wins. Shorter test window (10d) is catching zones too early before price has time to reach target; lowering test_days was the wrong move. Must restore test_days=14 and raise min_score to 75+ to filter marginal zones that trigger prematurely."
+    }
+  ],
+  "best_win_rate": 66.66666666666666,
+  "best_params": {
+    "min_score": 75,
+    "rr_ratio": 2.0,
+    "max_base_candles": 4,
+    "build_days": 18,
+    "test_days": 14
+  }
+}

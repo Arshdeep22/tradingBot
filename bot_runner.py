@@ -49,7 +49,26 @@ logger = logging.getLogger(__name__)
 # Initialize components
 db = DatabaseManager()
 data_fetcher = DataFetcher()
-zone_scanner = ZoneScanner(min_score=80, rr_ratio=3.0)
+
+# Load AI-optimized params from strategy memory if available, else use defaults
+try:
+    from core.llm_advisor import StrategyMemory
+    _mem = StrategyMemory()
+    if _mem.best_params:
+        _lp = _mem.live_params()
+        logger.info(f"Loaded AI-optimized params: score={_lp['min_score']}, rr={_lp['rr_ratio']}, base={_lp['max_base_candles']} (backtest WR: {_mem.best_win_rate:.1f}%)")
+    else:
+        _lp = {"min_score": 80, "rr_ratio": 3.0, "max_base_candles": 5}
+        logger.info("No AI memory found — using default params: score=80, rr=3.0, base=5")
+except Exception as _e:
+    _lp = {"min_score": 80, "rr_ratio": 3.0, "max_base_candles": 5}
+    logger.warning(f"Could not load strategy memory ({_e}) — using defaults")
+
+zone_scanner = ZoneScanner(
+    min_score=_lp["min_score"],
+    rr_ratio=_lp["rr_ratio"],
+    max_base_candles=_lp["max_base_candles"],
+)
 
 
 def is_market_hours() -> bool:

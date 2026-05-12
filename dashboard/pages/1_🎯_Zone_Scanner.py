@@ -14,6 +14,7 @@ from core.data_fetcher import DataFetcher
 from strategies.zone_scanner import ZoneScanner, Zone
 from database.db import DatabaseManager
 from config.settings import INITIAL_CAPITAL, SYMBOLS, NIFTY_50
+from core.llm_advisor import StrategyMemory
 
 st.set_page_config(page_title="Zone Scanner", page_icon="🎯", layout="wide")
 
@@ -21,6 +22,7 @@ st.set_page_config(page_title="Zone Scanner", page_icon="🎯", layout="wide")
 data_fetcher = DataFetcher()
 zone_scanner = ZoneScanner(timeframe="15m")
 db = DatabaseManager()
+_memory = StrategyMemory()
 
 
 def create_chart(data, zones, symbol):
@@ -77,9 +79,22 @@ with st.sidebar:
                               key="zs_symbols")
 
     st.markdown("---")
-    min_score = st.slider("Min Score", 50, 100, 80, 5, key="zs_min")
-    rr_ratio = st.select_slider("Risk:Reward", options=[2.0, 3.0, 4.0, 5.0], value=3.0, key="zs_rr")
+
+    _has_ai = bool(_memory.best_params)
+    _lp = _memory.live_params() if _has_ai else {"min_score": 80, "rr_ratio": 3.0, "max_base_candles": 5}
+    use_ai_params = st.toggle("🤖 Use AI-Optimized Params", value=_has_ai, key="zs_ai", disabled=not _has_ai,
+                              help="Uses the best parameters found by AI backtesting. Run AI Refinement on Test Strategy page first.")
+
+    _score_default = _lp["min_score"] if use_ai_params else 80
+    _rr_default = _lp["rr_ratio"] if use_ai_params else 3.0
+
+    min_score = st.slider("Min Score", 50, 100, _score_default, 5, key="zs_min")
+    rr_ratio = st.select_slider("Risk:Reward", options=[2.0, 2.5, 3.0, 4.0, 5.0], value=_rr_default, key="zs_rr")
     mtf_mode = st.checkbox("Multi-Timeframe (15m→5m→2m)", value=True, key="zs_mtf")
+
+    if use_ai_params and _has_ai:
+        st.info(f"Score={_lp['min_score']} | R:R={_lp['rr_ratio']} | Base={_lp['max_base_candles']} "
+                f"(backtest WR: {_memory.best_win_rate:.1f}%)")
 
     st.markdown("---")
     scan = st.button("🔍 SCAN FOR ZONES", type="primary", use_container_width=True)
@@ -88,6 +103,8 @@ with st.sidebar:
 if scan:
     zone_scanner.min_score = min_score
     zone_scanner.rr_ratio = rr_ratio
+    if use_ai_params and _has_ai:
+        zone_scanner.max_base_candles = _lp["max_base_candles"]
 
     all_zones = []
     all_data = {}
