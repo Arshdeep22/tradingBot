@@ -1,4 +1,5 @@
 """Performance metrics and portfolio snapshots - SQLite and Supabase."""
+import math
 from datetime import datetime
 
 
@@ -23,7 +24,8 @@ class MetricsMixin:
                 "total_trades": 0, "winning_trades": 0, "losing_trades": 0,
                 "win_rate": 0.0, "total_pnl": 0.0, "avg_pnl": 0.0,
                 "max_profit": 0.0, "max_loss": 0.0, "avg_win": 0.0,
-                "avg_loss": 0.0, "profit_factor": 0.0, "max_drawdown": 0.0
+                "avg_loss": 0.0, "profit_factor": 0.0, "max_drawdown": 0.0,
+                "sharpe_ratio": 0.0, "sortino_ratio": 0.0,
             }
 
         total = len(trades)
@@ -49,6 +51,22 @@ class MetricsMixin:
             if dd > max_drawdown:
                 max_drawdown = dd
 
+        # Sharpe and Sortino (annualised, assuming ~252 trading days)
+        # Use per-trade returns (pnl as fraction of initial capital) as proxy for daily returns
+        n = len(pnls)
+        mean_r = sum(pnls) / n
+        variance = sum((p - mean_r) ** 2 for p in pnls) / n if n > 1 else 0
+        std_r = math.sqrt(variance)
+        sharpe = (mean_r / std_r * math.sqrt(252)) if std_r > 0 else 0.0
+
+        downside = [p for p in pnls if p < 0]
+        if downside:
+            downside_var = sum(p ** 2 for p in downside) / n
+            downside_std = math.sqrt(downside_var)
+            sortino = (mean_r / downside_std * math.sqrt(252)) if downside_std > 0 else 0.0
+        else:
+            sortino = float('inf')
+
         return {
             "total_trades": total,
             "winning_trades": len(wins),
@@ -61,7 +79,9 @@ class MetricsMixin:
             "avg_win": round(sum(wins) / len(wins), 2) if wins else 0,
             "avg_loss": round(sum(losses) / len(losses), 2) if losses else 0,
             "profit_factor": round(profit_factor, 2),
-            "max_drawdown": round(max_drawdown, 2)
+            "max_drawdown": round(max_drawdown, 2),
+            "sharpe_ratio": round(sharpe, 2),
+            "sortino_ratio": round(sortino, 2) if sortino != float('inf') else float('inf'),
         }
 
     def save_portfolio_snapshot(self, balance, portfolio_value, open_positions, total_pnl):

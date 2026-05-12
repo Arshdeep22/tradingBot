@@ -39,6 +39,7 @@ MAX_OPEN_POSITIONS = 5    # Maximum simultaneous positions
 STOP_LOSS_PERCENT = 1.0   # 1% stop loss
 TARGET_PERCENT = 2.0      # 2% target (1:2 risk-reward)
 TRAILING_STOP = False     # Enable/disable trailing stop
+MAX_DAILY_LOSS_PCT = 1.0  # Halt new orders if daily P&L drops below -1% of capital
 
 # ============== DATA SETTINGS ==============
 DATA_SOURCE = "yfinance"  # Options: "yfinance", "zerodha"
@@ -68,6 +69,26 @@ MARKET_OPEN_HOUR = 9
 MARKET_OPEN_MINUTE = 15
 MARKET_CLOSE_HOUR = 15
 MARKET_CLOSE_MINUTE = 30
+
+# NSE Trading Holidays 2026 (dates when exchange is closed)
+from datetime import date as _date
+NSE_HOLIDAYS_2026 = {
+    _date(2026, 1, 26),   # Republic Day
+    _date(2026, 2, 26),   # Mahashivratri
+    _date(2026, 3, 20),   # Holi
+    _date(2026, 4, 3),    # Good Friday
+    _date(2026, 4, 14),   # Dr. Ambedkar Jayanti
+    _date(2026, 4, 30),   # Ram Navami
+    _date(2026, 5, 1),    # Maharashtra Day
+    _date(2026, 8, 15),   # Independence Day
+    _date(2026, 8, 27),   # Ganesh Chaturthi
+    _date(2026, 10, 2),   # Gandhi Jayanti
+    _date(2026, 10, 21),  # Dussehra
+    _date(2026, 11, 5),   # Diwali Laxmi Puja
+    _date(2026, 11, 6),   # Diwali Balipratipada
+    _date(2026, 11, 25),  # Guru Nanak Jayanti
+    _date(2026, 12, 25),  # Christmas
+}
 
 # How often to check for signals (in seconds)
 CHECK_INTERVAL = 60  # Check every 60 seconds

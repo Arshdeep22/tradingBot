@@ -79,6 +79,15 @@ class DataFetcher:
             ticker = yf.Ticker(symbol)
             data = ticker.history(period="1d", interval="1m")
             if data is not None and not data.empty:
+                try:
+                    last_ts = data.index[-1]
+                    now_aware = pd.Timestamp.now(tz=last_ts.tzinfo)
+                    age_minutes = (now_aware - last_ts).total_seconds() / 60
+                    if age_minutes > 20:
+                        logger.warning(f"Price data for {symbol} is {age_minutes:.0f} min stale — skipping")
+                        return 0.0
+                except Exception:
+                    pass
                 return float(data['Close'].iloc[-1])
             return 0.0
         except Exception as e:

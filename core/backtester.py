@@ -78,6 +78,8 @@ class Backtester:
             min_score=min_score,
             rr_ratio=rr_ratio
         )
+        self.commission_pct = 0.001   # 0.1% per trade (NSE charges + brokerage)
+        self.slippage_pct = 0.002     # 0.2% slippage on entry
 
     def run(self, data: pd.DataFrame, split_date: datetime, 
             symbol: str = "") -> BacktestReport:
@@ -175,21 +177,31 @@ class Backtester:
     def _simulate_zone(self, zone: Zone, testing_data: pd.DataFrame) -> TradeResult:
         """
         Simulate a single zone through the testing period.
-        
+
         For DEMAND zones: Wait for price to drop to zone_top (entry), then track SL/Target
         For SUPPLY zones: Wait for price to rise to zone_bottom (entry), then track SL/Target
+
+        Applies realistic commission (0.1%) and slippage (0.2%) to every trade.
         """
         result = TradeResult(zone=zone)
-        
+
         testing_data_reset = testing_data.reset_index()
-        
+
+        # Effective entry after slippage (assume worse fill on entry)
+        if zone.zone_type == "DEMAND":
+            effective_entry = zone.entry * (1 + self.slippage_pct)
+        else:
+            effective_entry = zone.entry * (1 - self.slippage_pct)
+
+        # Commission cost: charged on entry + exit (both legs)
+        commission_cost = zone.entry * self.commission_pct * 2
+
         triggered = False
         trigger_idx = -1
 
         for i in range(len(testing_data_reset)):
             candle_high = testing_data_reset['High'].iloc[i]
             candle_low = testing_data_reset['Low'].iloc[i]
-            candle_open = testing_data_reset['Open'].iloc[i]
 
             if not triggered:
                 # Check if zone entry is hit
@@ -199,7 +211,7 @@ class Backtester:
                         triggered = True
                         trigger_idx = i
                         result.triggered = True
-                        result.trigger_price = zone.entry
+                        result.trigger_price = effective_entry
                         result.candles_to_trigger = i
                         # Get time from index
                         if 'index' in testing_data_reset.columns:
@@ -208,14 +220,14 @@ class Backtester:
                             result.trigger_time = str(testing_data_reset['Datetime'].iloc[i])
                         else:
                             result.trigger_time = f"Candle {i}"
-                            
+
                 elif zone.zone_type == "SUPPLY":
                     # Price must rise to or above zone_bottom (entry level)
                     if candle_high >= zone.entry:
                         triggered = True
                         trigger_idx = i
                         result.triggered = True
-                        result.trigger_price = zone.entry
+                        result.trigger_price = effective_entry
                         result.candles_to_trigger = i
                         if 'index' in testing_data_reset.columns:
                             result.trigger_time = str(testing_data_reset['index'].iloc[i])
@@ -228,9 +240,10 @@ class Backtester:
                     if candle_low <= zone.stop_loss:
                         result.outcome = "SL_HIT"
                         result.exit_price = zone.stop_loss
-                        result.pnl = zone.stop_loss - zone.entry
-                        result.pnl_pct = (result.pnl / zone.entry) * 100
-                        risk = zone.entry - zone.stop_loss
+                        raw_pnl = zone.stop_loss - effective_entry
+                        result.pnl = raw_pnl - commission_cost
+                        result.pnl_pct = (result.pnl / effective_entry) * 100
+                        risk = effective_entry - zone.stop_loss
                         result.rr_achieved = result.pnl / risk if risk > 0 else 0
                         result.candles_to_exit = i - trigger_idx
                         if 'index' in testing_data_reset.columns:
@@ -241,9 +254,10 @@ class Backtester:
                     elif candle_high >= zone.target:
                         result.outcome = "TARGET_HIT"
                         result.exit_price = zone.target
-                        result.pnl = zone.target - zone.entry
-                        result.pnl_pct = (result.pnl / zone.entry) * 100
-                        risk = zone.entry - zone.stop_loss
+                        raw_pnl = zone.target - effective_entry
+                        result.pnl = raw_pnl - commission_cost
+                        result.pnl_pct = (result.pnl / effective_entry) * 100
+                        risk = effective_entry - zone.stop_loss
                         result.rr_achieved = result.pnl / risk if risk > 0 else 0
                         result.candles_to_exit = i - trigger_idx
                         if 'index' in testing_data_reset.columns:
@@ -257,9 +271,10 @@ class Backtester:
                     if candle_high >= zone.stop_loss:
                         result.outcome = "SL_HIT"
                         result.exit_price = zone.stop_loss
-                        result.pnl = zone.entry - zone.stop_loss  # Negative
-                        result.pnl_pct = (result.pnl / zone.entry) * 100
-                        risk = zone.stop_loss - zone.entry
+                        raw_pnl = effective_entry - zone.stop_loss  # Negative
+                        result.pnl = raw_pnl - commission_cost
+                        result.pnl_pct = (result.pnl / effective_entry) * 100
+                        risk = zone.stop_loss - effective_entry
                         result.rr_achieved = result.pnl / risk if risk > 0 else 0
                         result.candles_to_exit = i - trigger_idx
                         if 'index' in testing_data_reset.columns:
@@ -270,9 +285,10 @@ class Backtester:
                     elif candle_low <= zone.target:
                         result.outcome = "TARGET_HIT"
                         result.exit_price = zone.target
-                        result.pnl = zone.entry - zone.target  # Positive for short
-                        result.pnl_pct = (result.pnl / zone.entry) * 100
-                        risk = zone.stop_loss - zone.entry
+                        raw_pnl = effective_entry - zone.target  # Positive for short
+                        result.pnl = raw_pnl - commission_cost
+                        result.pnl_pct = (result.pnl / effective_entry) * 100
+                        risk = zone.stop_loss - effective_entry
                         result.rr_achieved = result.pnl / risk if risk > 0 else 0
                         result.candles_to_exit = i - trigger_idx
                         if 'index' in testing_data_reset.columns:
@@ -287,10 +303,10 @@ class Backtester:
             # Calculate current unrealized P&L based on last candle
             last_close = testing_data_reset['Close'].iloc[-1]
             if zone.zone_type == "DEMAND":
-                result.pnl = last_close - zone.entry
+                result.pnl = last_close - effective_entry - commission_cost
             else:
-                result.pnl = zone.entry - last_close
-            result.pnl_pct = (result.pnl / zone.entry) * 100
+                result.pnl = effective_entry - last_close - commission_cost
+            result.pnl_pct = (result.pnl / effective_entry) * 100
 
         return result
 

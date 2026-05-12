@@ -130,6 +130,40 @@ class TradesMixin:
             conn.commit()
             conn.close()
 
+    def update_trade_stop_loss(self, trade_id: int, new_stop_loss: float):
+        """Update the stop loss of an open trade (used for trailing stop / breakeven)."""
+        trade_id = int(trade_id)
+        if self.use_supabase:
+            self.supabase_client.table('trades').update(
+                {'stop_loss': new_stop_loss}
+            ).eq('id', trade_id).eq('status', 'OPEN').execute()
+        else:
+            conn = self._get_connection()
+            c = conn.cursor()
+            c.execute(
+                "UPDATE trades SET stop_loss=? WHERE id=? AND status='OPEN'",
+                (new_stop_loss, trade_id))
+            conn.commit()
+            conn.close()
+
+    def get_closed_trades_for_date(self, date_str: str):
+        """Get closed trades where exit_time falls on the given date (YYYY-MM-DD)."""
+        if self.use_supabase:
+            res = (self.supabase_client.table('trades')
+                   .select('*').eq('status', 'CLOSED')
+                   .gte('exit_time', f"{date_str}T00:00:00")
+                   .lt('exit_time', f"{date_str}T23:59:59")
+                   .execute())
+            return res.data or []
+        conn = self._get_connection()
+        c = conn.cursor()
+        c.execute(
+            "SELECT * FROM trades WHERE status='CLOSED' AND exit_time LIKE ?",
+            (f"{date_str}%",))
+        trades = [dict(row) for row in c.fetchall()]
+        conn.close()
+        return trades
+
     def get_trades_by_strategy(self, strategy):
         """Get trades filtered by strategy."""
         if self.use_supabase:

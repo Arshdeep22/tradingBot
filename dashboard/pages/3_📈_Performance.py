@@ -21,7 +21,7 @@ st.markdown("---")
 metrics = db.get_performance_metrics()
 closed_trades = db.get_closed_trades()
 
-# KPIs
+# KPIs — row 1
 c1, c2, c3, c4, c5 = st.columns(5)
 c1.metric("Total P&L", f"₹{metrics['total_pnl']:,.2f}",
           delta=f"{metrics['total_pnl']/INITIAL_CAPITAL*100:.2f}%" if metrics['total_pnl'] != 0 else None)
@@ -30,6 +30,15 @@ c3.metric("Total Trades", metrics['total_trades'])
 pf = metrics['profit_factor']
 c4.metric("Profit Factor", f"{pf:.2f}" if pf != float('inf') else "∞")
 c5.metric("Max Drawdown", f"₹{metrics['max_drawdown']:,.2f}")
+
+# KPIs — row 2: risk-adjusted returns
+c6, c7, _, _, _ = st.columns(5)
+sharpe = metrics.get('sharpe_ratio', 0.0)
+sortino = metrics.get('sortino_ratio', 0.0)
+c6.metric("Sharpe Ratio", f"{sharpe:.2f}" if sharpe != float('inf') else "∞",
+          help="Annualised Sharpe (>1 = good, >2 = great). Uses per-trade P&L as returns proxy.")
+c7.metric("Sortino Ratio", f"{sortino:.2f}" if sortino != float('inf') else "∞",
+          help="Like Sharpe but only penalises downside volatility. Higher is better.")
 
 st.markdown("---")
 
@@ -65,11 +74,12 @@ if closed_trades:
 
     # Stats
     st.subheader("Key Statistics")
+    sortino_display = f"{metrics['sortino_ratio']:.2f}" if metrics['sortino_ratio'] != float('inf') else "∞"
     st.table(pd.DataFrame({
-        "Metric": ["Avg Win", "Avg Loss", "Max Profit", "Max Loss", "Avg P&L"],
+        "Metric": ["Avg Win", "Avg Loss", "Max Profit", "Max Loss", "Avg P&L", "Sharpe Ratio", "Sortino Ratio"],
         "Value": [f"₹{metrics['avg_win']:,.2f}", f"₹{metrics['avg_loss']:,.2f}",
                   f"₹{metrics['max_profit']:,.2f}", f"₹{metrics['max_loss']:,.2f}",
-                  f"₹{metrics['avg_pnl']:,.2f}"]
+                  f"₹{metrics['avg_pnl']:,.2f}", f"{metrics['sharpe_ratio']:.2f}", sortino_display]
     }))
 else:
     st.info("No closed trades yet. Take trades from the Zone Scanner to see analytics!")

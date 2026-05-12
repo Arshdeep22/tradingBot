@@ -308,17 +308,17 @@ class ZoneScanner(BaseStrategy):
             is_fresh = True
             # Check all candles AFTER zone formation
             for i in range(zone.formed_at_index + zone.base_candles + 1, len(data)):
-                candle_low = data['Low'].iloc[i]
-                candle_high = data['High'].iloc[i]
-
                 if zone.zone_type == "DEMAND":
-                    # Zone is tested if price drops into the zone
-                    if candle_low <= zone.zone_top:
+                    # Stale only if candle closes BELOW zone_bottom (broke through)
+                    # A wick into the zone that closes back above = test-and-hold (still fresh)
+                    candle_close = data['Close'].iloc[i]
+                    if candle_close < zone.zone_bottom:
                         is_fresh = False
                         break
                 elif zone.zone_type == "SUPPLY":
-                    # Zone is tested if price rallies into the zone
-                    if candle_high >= zone.zone_bottom:
+                    # Stale only if candle closes ABOVE zone_top (broke through)
+                    candle_close = data['Close'].iloc[i]
+                    if candle_close > zone.zone_top:
                         is_fresh = False
                         break
 
@@ -369,8 +369,8 @@ class ZoneScanner(BaseStrategy):
         if zone.zone_type == "DEMAND":
             # Buy at top of demand zone
             zone.entry = zone.zone_top
-            # SL below bottom of zone (with 0.1% buffer)
-            zone.stop_loss = round(zone.zone_bottom * (1 - 0.001), 2)
+            # SL below bottom of zone (with 0.4% buffer — wider to survive 15m wicks)
+            zone.stop_loss = round(zone.zone_bottom * (1 - 0.004), 2)
             # Target = Entry + 3 * Risk
             risk = zone.entry - zone.stop_loss
             zone.target = round(zone.entry + (self.rr_ratio * risk), 2)
@@ -378,8 +378,8 @@ class ZoneScanner(BaseStrategy):
         elif zone.zone_type == "SUPPLY":
             # Sell at bottom of supply zone
             zone.entry = zone.zone_bottom
-            # SL above top of zone (with 0.1% buffer)
-            zone.stop_loss = round(zone.zone_top * (1 + 0.001), 2)
+            # SL above top of zone (with 0.4% buffer — wider to survive 15m wicks)
+            zone.stop_loss = round(zone.zone_top * (1 + 0.004), 2)
             # Target = Entry - 3 * Risk
             risk = zone.stop_loss - zone.entry
             zone.target = round(zone.entry - (self.rr_ratio * risk), 2)
@@ -503,6 +503,12 @@ class ZoneScanner(BaseStrategy):
             # Check trend on 5m
             trend = self._check_trend_5m(data_5m, zone)
 
+            # Reject zones that trade against the 5m trend
+            if zone.zone_type == "DEMAND" and trend == "DOWN":
+                continue
+            if zone.zone_type == "SUPPLY" and trend == "UP":
+                continue
+
             # Refine on 3m
             refined_zone = self._refine_on_3m(data_3m, zone) if data_3m is not None else zone
 
@@ -602,12 +608,12 @@ class ZoneScanner(BaseStrategy):
 
             if zone.zone_type == "DEMAND":
                 refined.entry = round(tighter_top, 2)
-                refined.stop_loss = round(tighter_bottom * (1 - 0.001), 2)
+                refined.stop_loss = round(tighter_bottom * (1 - 0.004), 2)
                 risk = refined.entry - refined.stop_loss
                 refined.target = round(refined.entry + (self.rr_ratio * risk), 2)
             else:
                 refined.entry = round(tighter_bottom, 2)
-                refined.stop_loss = round(tighter_top * (1 + 0.001), 2)
+                refined.stop_loss = round(tighter_top * (1 + 0.004), 2)
                 risk = refined.stop_loss - refined.entry
                 refined.target = round(refined.entry - (self.rr_ratio * risk), 2)
 

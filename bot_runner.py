@@ -31,7 +31,7 @@ from config.settings import (
     INITIAL_CAPITAL, SYMBOLS, NIFTY_50,
     MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE,
     MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE,
-    MAX_OPEN_POSITIONS
+    MAX_OPEN_POSITIONS, MAX_DAILY_LOSS_PCT, NSE_HOLIDAYS_2026
 )
 
 # Setup logging
@@ -80,6 +80,11 @@ def is_market_hours() -> bool:
     # Check weekday (Monday=0 to Friday=4)
     if ist_now.weekday() > 4:
         logger.info(f"Weekend - Market closed. IST: {ist_now.strftime('%Y-%m-%d %H:%M:%S')}")
+        return False
+
+    # Check NSE holidays
+    if ist_now.date() in NSE_HOLIDAYS_2026:
+        logger.info(f"NSE Holiday - Market closed. IST: {ist_now.strftime('%Y-%m-%d')}")
         return False
 
     market_open = ist_now.replace(hour=MARKET_OPEN_HOUR, minute=MARKET_OPEN_MINUTE, second=0)
@@ -224,6 +229,24 @@ def monitor_open_trades():
                 closed_count += 1
                 logger.info(f"✅ Trade CLOSED: {symbol} | PnL: ₹{pnl:.2f} | Reason: {close_reason}")
             else:
+                # Trailing stop: move SL to breakeven after 1:1 R is reached
+                risk = abs(entry_price - stop_loss) if stop_loss > 0 else 0
+                if risk > 0 and stop_loss != entry_price:
+                    if side == "BUY" and current_price >= entry_price + risk:
+                        if stop_loss < entry_price:
+                            db.update_trade_stop_loss(trade['id'], entry_price)
+                            logger.info(
+                                f"🔒 Breakeven: {symbol} | SL moved to entry ₹{entry_price:.2f} "
+                                f"(price reached 1:1 R at ₹{entry_price + risk:.2f})"
+                            )
+                    elif side == "SELL" and current_price <= entry_price - risk:
+                        if stop_loss > entry_price:
+                            db.update_trade_stop_loss(trade['id'], entry_price)
+                            logger.info(
+                                f"🔒 Breakeven: {symbol} | SL moved to entry ₹{entry_price:.2f} "
+                                f"(price reached 1:1 R at ₹{entry_price - risk:.2f})"
+                            )
+
                 # Calculate unrealized PnL for logging
                 if side == "BUY":
                     unrealized_pnl = (current_price - entry_price) * quantity
@@ -365,6 +388,25 @@ def main():
         logger.info(f"Trades closed: {closed}")
 
     if not check_only:
+        # Daily loss circuit breaker: halt new orders if daily loss >= 1% of capital
+        try:
+            from datetime import timezone
+            ist_now = datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)
+            today_str = ist_now.strftime("%Y-%m-%d")
+            today_trades = db.get_closed_trades_for_date(today_str)
+            daily_pnl = sum(t.get("pnl", 0) for t in today_trades)
+            daily_loss_limit = INITIAL_CAPITAL * MAX_DAILY_LOSS_PCT / 100
+            if daily_pnl <= -daily_loss_limit:
+                logger.warning(
+                    f"🚨 Daily loss limit hit: ₹{daily_pnl:.2f} <= -₹{daily_loss_limit:.2f} "
+                    f"({MAX_DAILY_LOSS_PCT}% of ₹{INITIAL_CAPITAL:,.0f}). Halting new orders."
+                )
+                print_summary()
+                logger.info("\n🤖 Bot Runner cycle complete!")
+                return
+        except Exception as _e:
+            logger.warning(f"Could not check daily P&L ({_e}) — proceeding with scan")
+
         # Step 3: Auto-scan for new zones
         logger.info("\n--- STEP 3: Auto-Scanning for Zones ---")
         new_orders = auto_scan_zones()
