@@ -25,6 +25,10 @@ on:
           - scan-only
           - force
 
+# Grant write permissions so the bot can push commits
+permissions:
+  contents: write
+
 jobs:
   run-bot:
     runs-on: ubuntu-latest
