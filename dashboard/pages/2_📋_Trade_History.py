@@ -139,13 +139,8 @@ def create_trade_chart(trade_row, timeframe="5m"):
     if chart_data.empty:
         return None
 
-    # Create chart
-    fig = make_subplots(
-        rows=2, cols=1, shared_xaxes=True,
-        vertical_spacing=0.03,
-        subplot_titles=(f'{symbol} ({timeframe}) - Trade Journey', 'Volume'),
-        row_heights=[0.8, 0.2]
-    )
+    # Create chart (single row, no volume)
+    fig = go.Figure()
 
     # Use actual timestamps for x-axis
     x_vals = list(range(len(chart_data)))
@@ -159,15 +154,7 @@ def create_trade_chart(trade_row, timeframe="5m"):
         name='Price',
         increasing_line_color='#26A69A',
         decreasing_line_color='#EF5350'
-    ), row=1, col=1)
-
-    # Volume
-    colors = ['#26A69A' if c >= o else '#EF5350'
-              for c, o in zip(chart_data['Close'], chart_data['Open'])]
-    fig.add_trace(go.Bar(
-        x=x_vals, y=chart_data['Volume'],
-        marker_color=colors, opacity=0.5, name='Volume'
-    ), row=2, col=1)
+    ))
 
     # === LINES START FROM ENTRY TIME ===
 
@@ -179,47 +166,40 @@ def create_trade_chart(trade_row, timeframe="5m"):
     fig.add_shape(type="line",
                   x0=line_start, x1=line_end,
                   y0=entry_price, y1=entry_price,
-                  line=dict(color="#2196F3", width=2, dash="solid"),
-                  row=1, col=1)
+                  line=dict(color="#2196F3", width=2, dash="solid"))
     fig.add_annotation(x=line_end, y=entry_price,
                        text=f"Entry: ₹{entry_price:.2f}",
                        showarrow=False, xanchor="left",
-                       font=dict(size=10, color="#2196F3"), row=1, col=1)
+                       font=dict(size=10, color="#2196F3"))
 
     # Stop Loss - partial line from entry point
     if stop_loss > 0:
         fig.add_shape(type="line",
                       x0=line_start, x1=line_end,
                       y0=stop_loss, y1=stop_loss,
-                      line=dict(color="#F44336", width=2, dash="dash"),
-                      row=1, col=1)
+                      line=dict(color="#F44336", width=2, dash="dash"))
         fig.add_annotation(x=line_end, y=stop_loss,
                            text=f"SL: ₹{stop_loss:.2f}",
                            showarrow=False, xanchor="left",
-                           font=dict(size=10, color="#F44336"), row=1, col=1)
+                           font=dict(size=10, color="#F44336"))
 
     # Target - partial line from entry point
     if target > 0:
         fig.add_shape(type="line",
                       x0=line_start, x1=line_end,
                       y0=target, y1=target,
-                      line=dict(color="#4CAF50", width=2, dash="dash"),
-                      row=1, col=1)
+                      line=dict(color="#4CAF50", width=2, dash="dash"))
         fig.add_annotation(x=line_end, y=target,
                            text=f"Target: ₹{target:.2f}",
                            showarrow=False, xanchor="left",
-                           font=dict(size=10, color="#4CAF50"), row=1, col=1)
+                           font=dict(size=10, color="#4CAF50"))
 
     # === VERTICAL MARKER: TRADE ENTRY ===
-    fig.add_vline(
-        x=entry_idx_rel, line_dash="dot", line_color="#2196F3", line_width=1,
-        row=1, col=1
-    )
+    fig.add_vline(x=entry_idx_rel, line_dash="dot", line_color="#2196F3", line_width=1)
     fig.add_annotation(
         x=entry_idx_rel, y=chart_data['High'].max(),
         text="▼ ZONE TAKEN", showarrow=False,
-        font=dict(size=9, color="#2196F3"),
-        yshift=10, row=1, col=1
+        font=dict(size=9, color="#2196F3"), yshift=10
     )
 
     # === VERTICAL MARKER: EXIT (for closed trades) ===
@@ -228,15 +208,11 @@ def create_trade_chart(trade_row, timeframe="5m"):
         exit_color = "#4CAF50" if pnl > 0 else "#F44336"
         exit_label = "TARGET HIT ✅" if pnl > 0 else "SL HIT ❌"
 
-        fig.add_vline(
-            x=exit_idx_rel, line_dash="dot", line_color=exit_color, line_width=1,
-            row=1, col=1
-        )
+        fig.add_vline(x=exit_idx_rel, line_dash="dot", line_color=exit_color, line_width=1)
         fig.add_annotation(
             x=exit_idx_rel, y=chart_data['Low'].min(),
             text=f"▲ {exit_label}", showarrow=False,
-            font=dict(size=9, color=exit_color),
-            yshift=-10, row=1, col=1
+            font=dict(size=9, color=exit_color), yshift=-10
         )
 
         # Exit price marker
@@ -245,7 +221,7 @@ def create_trade_chart(trade_row, timeframe="5m"):
                 x=[exit_idx_rel], y=[exit_price],
                 mode='markers', marker=dict(size=12, color=exit_color, symbol='x'),
                 name='Exit', showlegend=False
-            ), row=1, col=1)
+            ))
 
     # === CURRENT PRICE (for open trades) ===
     if trade_status == "OPEN":
@@ -254,12 +230,12 @@ def create_trade_chart(trade_row, timeframe="5m"):
             x=[len(chart_data) - 1], y=[current_price],
             mode='markers', marker=dict(size=10, color="#FFD700", symbol='diamond'),
             name='Current', showlegend=False
-        ), row=1, col=1)
+        ))
         fig.add_annotation(
             x=len(chart_data) - 1, y=current_price,
             text=f"CMP: ₹{current_price:.2f}",
             showarrow=True, arrowhead=2, arrowcolor="#FFD700",
-            font=dict(size=10, color="#FFD700"), row=1, col=1
+            font=dict(size=10, color="#FFD700")
         )
 
     # === ZONE SHADING (from entry point only) ===
@@ -268,23 +244,22 @@ def create_trade_chart(trade_row, timeframe="5m"):
                       x0=line_start, x1=line_end,
                       y0=stop_loss, y1=entry_price,
                       fillcolor="rgba(38,166,154,0.08)",
-                      line=dict(color="rgba(38,166,154,0.3)", width=1),
-                      row=1, col=1)
+                      line=dict(color="rgba(38,166,154,0.3)", width=1))
     elif side == "SELL" and stop_loss > 0:
         fig.add_shape(type="rect",
                       x0=line_start, x1=line_end,
                       y0=entry_price, y1=stop_loss,
                       fillcolor="rgba(239,83,80,0.08)",
-                      line=dict(color="rgba(239,83,80,0.3)", width=1),
-                      row=1, col=1)
+                      line=dict(color="rgba(239,83,80,0.3)", width=1))
 
     # Layout
     fig.update_layout(
-        height=500,
+        title=f"{symbol} ({timeframe}) - Trade Journey",
+        height=450,
         showlegend=False,
         xaxis_rangeslider_visible=False,
         template="plotly_dark",
-        margin=dict(l=50, r=80, t=40, b=20),
+        margin=dict(l=50, r=80, t=40, b=50),
         paper_bgcolor='#0E1117',
         plot_bgcolor='#0E1117'
     )
@@ -295,10 +270,8 @@ def create_trade_chart(trade_row, timeframe="5m"):
         tickvals=x_vals[::tick_step],
         ticktext=x_labels[::tick_step],
         tickangle=45,
-        showgrid=True, gridcolor='#1E1E1E',
-        row=2, col=1
+        showgrid=True, gridcolor='#1E1E1E'
     )
-    fig.update_xaxes(showgrid=True, gridcolor='#1E1E1E', row=1, col=1)
     fig.update_yaxes(showgrid=True, gridcolor='#1E1E1E')
 
     return fig

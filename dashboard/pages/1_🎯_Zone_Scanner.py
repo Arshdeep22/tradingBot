@@ -24,19 +24,14 @@ db = DatabaseManager()
 
 
 def create_chart(data, zones, symbol):
-    """Candlestick chart with zones"""
-    fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.03,
-                        subplot_titles=(f'{symbol} - Zones', 'Volume'), row_heights=[0.8, 0.2])
+    """Candlestick chart with zones (no volume)"""
+    fig = go.Figure()
 
     fig.add_trace(go.Candlestick(
         x=list(range(len(data))), open=data['Open'], high=data['High'],
         low=data['Low'], close=data['Close'], name='Price',
         increasing_line_color='#26A69A', decreasing_line_color='#EF5350'
-    ), row=1, col=1)
-
-    colors = ['#26A69A' if c >= o else '#EF5350' for c, o in zip(data['Close'], data['Open'])]
-    fig.add_trace(go.Bar(x=list(range(len(data))), y=data['Volume'],
-                         marker_color=colors, opacity=0.5), row=2, col=1)
+    ))
 
     for zone in zones:
         fc = "rgba(38,166,154,0.15)" if zone.zone_type == "DEMAND" else "rgba(239,83,80,0.15)"
@@ -44,21 +39,21 @@ def create_chart(data, zones, symbol):
 
         fig.add_shape(type="rect", x0=zone.formed_at_index, x1=len(data)-1,
                       y0=zone.zone_bottom, y1=zone.zone_top,
-                      fillcolor=fc, line=dict(color=lc, width=1), row=1, col=1)
+                      fillcolor=fc, line=dict(color=lc, width=1))
 
         fig.add_annotation(x=zone.formed_at_index+2,
                            y=zone.zone_top if zone.zone_type=="DEMAND" else zone.zone_bottom,
                            text=f"{zone.zone_type} ({zone.score})", showarrow=False,
-                           font=dict(size=9, color=lc), row=1, col=1)
+                           font=dict(size=9, color=lc))
 
         fig.add_hline(y=zone.entry, line_dash="dash", line_color="#2196F3", line_width=1,
-                      annotation_text=f"Entry: {zone.entry}", annotation_position="right", row=1, col=1)
+                      annotation_text=f"Entry: {zone.entry}", annotation_position="right")
         fig.add_hline(y=zone.stop_loss, line_dash="dash", line_color="#F44336", line_width=1,
-                      annotation_text=f"SL: {zone.stop_loss}", annotation_position="right", row=1, col=1)
+                      annotation_text=f"SL: {zone.stop_loss}", annotation_position="right")
         fig.add_hline(y=zone.target, line_dash="dash", line_color="#4CAF50", line_width=1,
-                      annotation_text=f"Target: {zone.target}", annotation_position="right", row=1, col=1)
+                      annotation_text=f"Target: {zone.target}", annotation_position="right")
 
-    fig.update_layout(height=550, showlegend=False, xaxis_rangeslider_visible=False,
+    fig.update_layout(height=500, showlegend=False, xaxis_rangeslider_visible=False,
                       template="plotly_dark", margin=dict(l=40, r=40, t=40, b=20),
                       paper_bgcolor='#0E1117', plot_bgcolor='#0E1117')
     fig.update_xaxes(showgrid=True, gridcolor='#1E1E1E')
