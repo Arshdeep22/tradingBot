@@ -120,6 +120,7 @@ class TradesMixin:
 
     def delete_trade(self, trade_id):
         """Delete a specific trade by ID."""
+        trade_id = int(trade_id)
         if self.use_supabase:
             self.supabase_client.table('trades').delete().eq('id', trade_id).execute()
         else:
