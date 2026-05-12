@@ -1,0 +1,252 @@
+================================================================================
+SUPPLY & DEMAND ZONE TRADING STRATEGY
+================================================================================
+Version: 1.0
+Last Updated: 2026-05-12
+Author: [Your Name]
+
+================================================================================
+1. STRATEGY OVERVIEW
+================================================================================
+
+This strategy identifies Supply and Demand zones on price charts and takes 
+trades when price returns to these zones. The key principle is that institutional 
+orders leave "footprints" in the form of supply/demand zones, and price often 
+returns to these zones to fill remaining orders.
+
+- Trade Type: Intraday / Swing
+- Risk:Reward: 1:3
+- Timeframes: 15m (primary), 5m, 3m (confirmation)
+- Markets: Indian Stocks (NSE)
+
+================================================================================
+2. ZONE DEFINITIONS
+================================================================================
+
+DEMAND ZONE (Buy Zone):
+-----------------------
+A demand zone is formed when price drops, consolidates briefly (base), 
+and then rallies sharply upward (leg out).
+
+Pattern: DROP → BASE (1-5 candles) → RALLY (leg out)
+
+- The BASE area becomes the Demand Zone
+- Zone Top = Highest high of base candles
+- Zone Bottom = Lowest low of base candles
+- We BUY when price returns to this zone
+
+SUPPLY ZONE (Sell Zone):
+-------------------------
+A supply zone is formed when price rallies, consolidates briefly (base), 
+and then drops sharply downward (leg out).
+
+Pattern: RALLY → BASE (1-5 candles) → DROP (leg out)
+
+- The BASE area becomes the Supply Zone
+- Zone Top = Highest high of base candles
+- Zone Bottom = Lowest low of base candles
+- We SELL/SHORT when price returns to this zone
+
+================================================================================
+3. ZONE SCORING SYSTEM (Total: 100 points)
+================================================================================
+
+A zone must score >= 80 points to be considered tradeable.
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CRITERIA 1: FRESHNESS (Max 40 points)                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│ A FRESH zone is one that has NEVER been tested (price has not returned      │
+│ to the zone since it was formed).                                           │
+│                                                                             │
+│ Scoring:                                                                    │
+│   - Zone never tested (completely fresh)    = 40 points                     │
+│   - Zone tested once (partially used)       = 0 points (DISCARD)            │
+│   - Zone tested multiple times              = 0 points (DISCARD)            │
+│                                                                             │
+│ Note: Once a zone is tested, it is NO LONGER VALID. Remove it.             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CRITERIA 2: LEG-OUT STRENGTH (Max 30 points)                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│ The leg-out candle is the candle that LEAVES the zone. A bigger, more       │
+│ explosive candle = stronger zone = more institutional interest.              │
+│                                                                             │
+│ Measurement: Body size of leg-out candle as % of price                      │
+│                                                                             │
+│ Scoring:                                                                    │
+│   - STRONGEST (Exciting): Body >= 1.5% of price     = 30 points            │
+│   - STRONGER: Body between 1.0% - 1.5% of price    = 20 points            │
+│   - STRONG: Body between 0.5% - 1.0% of price      = 10 points            │
+│   - WEAK: Body < 0.5% of price                     = 0 points (DISCARD)   │
+│                                                                             │
+│ Additional factors (bonus consideration):                                   │
+│   - Candle closes near its high/low (full body, tiny wicks) = better       │
+│   - Multiple large candles leaving zone = even better                       │
+│   - Gap away from zone = strongest signal                                   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CRITERIA 3: BASE CANDLES (Max 30 points)                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│ The base is the consolidation area that forms the zone. Fewer candles       │
+│ in the base = more explosive move = stronger zone.                          │
+│                                                                             │
+│ Scoring:                                                                    │
+│   - 1-2 base candles (tightest base)       = 30 points                     │
+│   - 3-4 base candles                       = 20 points                     │
+│   - 5 base candles                         = 10 points                     │
+│   - More than 5 base candles               = 0 points (DISCARD)            │
+│                                                                             │
+│ Note: Base candles are typically small-bodied (doji, spinning top,          │
+│ inside bars). They show indecision before the explosive move.               │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+TOTAL SCORE = Freshness + Leg-out Strength + Base Candles
+
+TRADE FILTER: Only take trades with score >= 80
+
+================================================================================
+4. ENTRY RULES
+================================================================================
+
+DEMAND ZONE (Long/Buy):
+- Entry:  At the TOP of the demand zone (zone_top)
+- Reason: When price returns to zone top, it's the first touch
+
+SUPPLY ZONE (Short/Sell):
+- Entry:  At the BOTTOM of the supply zone (zone_bottom)
+- Reason: When price returns to zone bottom, it's the first touch
+
+================================================================================
+5. STOP LOSS RULES
+================================================================================
+
+DEMAND ZONE (Long/Buy):
+- Stop Loss: Below the BOTTOM of the demand zone
+- Buffer: Add 0.1% buffer below zone bottom for safety
+- Formula: SL = zone_bottom * (1 - 0.001)
+
+SUPPLY ZONE (Short/Sell):
+- Stop Loss: Above the TOP of the supply zone
+- Buffer: Add 0.1% buffer above zone top for safety
+- Formula: SL = zone_top * (1 + 0.001)
+
+================================================================================
+6. TARGET RULES
+================================================================================
+
+Risk:Reward Ratio = 1:3
+
+DEMAND ZONE (Long/Buy):
+- Risk = Entry - Stop Loss
+- Target = Entry + (3 × Risk)
+- Formula: Target = entry + 3 * (entry - stop_loss)
+
+SUPPLY ZONE (Short/Sell):
+- Risk = Stop Loss - Entry
+- Target = Entry - (3 × Risk)
+- Formula: Target = entry - 3 * (stop_loss - entry)
+
+================================================================================
+7. ZONE DETECTION ALGORITHM
+================================================================================
+
+Step 1: Identify potential zones
+  - Look for sharp moves (leg-in or leg-out candles > 0.5% body)
+  - Find consolidation (base) before the sharp move out
+
+Step 2: Define zone boundaries
+  - Zone Top = max(high of all base candles)
+  - Zone Bottom = min(low of all base candles)
+
+Step 3: Check freshness
+  - After zone forms, check if price has returned to the zone
+  - If price touches or enters the zone = TESTED (discard)
+  - If price never returned = FRESH (valid)
+
+Step 4: Score the zone
+  - Apply scoring criteria (freshness + leg-out + base)
+  - Only keep zones with score >= 80
+
+Step 5: Calculate trade levels
+  - Entry, Stop Loss, Target based on rules above
+
+================================================================================
+8. POSITION SIZING
+================================================================================
+
+- Maximum risk per trade: 1% of capital
+- Position size = Risk Amount / (Entry - Stop Loss)
+- Example: Capital = 100,000, Risk = 1,000
+  If Entry = 1000, SL = 990 → Risk per share = 10
+  Position size = 1000 / 10 = 100 shares
+
+================================================================================
+9. TRADE MANAGEMENT
+================================================================================
+
+- Take 1-2 trades per day MAXIMUM (best zones only)
+- If multiple zones score 80+, take the HIGHEST scoring one
+- Do NOT add to losing positions
+- Do NOT move stop loss further away
+- Can trail stop loss to breakeven after 1:1 is achieved (optional)
+- Exit at target (1:3) or stop loss - NO exceptions
+
+================================================================================
+10. FILTERS & ADDITIONAL RULES
+================================================================================
+
+DO NOT TRADE:
+- First 15 minutes after market open (9:15 - 9:30 AM)
+- Last 15 minutes before market close (3:15 - 3:30 PM)
+- When major news/events are expected
+- If the broader market (Nifty) is very volatile (> 2% move)
+
+ADDITIONAL ZONE QUALITY CHECKS:
+- Zone should be on a clear trend (demand in uptrend, supply in downtrend)
+- Multiple timeframe confirmation preferred (zone on 15m, entry on 5m)
+- Avoid zones too close to each other (within 0.5%)
+
+================================================================================
+11. WATCHLIST
+================================================================================
+
+Default symbols (NSE):
+- RELIANCE.NS
+- TCS.NS
+- INFY.NS
+- HDFCBANK.NS
+- ICICIBANK.NS
+
+You can add/remove symbols in config/settings.py
+
+================================================================================
+12. PERFORMANCE TRACKING
+================================================================================
+
+Track these metrics:
+- Win Rate (should be > 40% with 1:3 RR to be profitable)
+- Average RR achieved
+- Maximum drawdown
+- Best/worst trade
+- Score vs outcome correlation (do higher-scoring zones win more?)
+
+================================================================================
+END OF STRATEGY DOCUMENT
+================================================================================
+
+NOTES FOR EDITING:
+- Modify scoring weights by changing the point values
+- Adjust RR ratio in section 6
+- Add more criteria to the scoring system
+- Modify position sizing rules
+- Add/remove watchlist symbols
+- Fine-tune the leg-out % thresholds for your market

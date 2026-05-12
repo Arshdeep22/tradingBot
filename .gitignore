@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+.env/
+
+# Database - TRACK trades.db for GitHub Actions persistence
+# database/*.db  (commented out - we need to track trades.db)
+
+# Logs - keep log files but don't track verbose ones
+logs/*.log
+!logs/.gitkeep
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+config/secrets.py
+*.env
