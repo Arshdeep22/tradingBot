@@ -13,6 +13,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 import json
+from typing import Optional
 import streamlit as st
 import plotly.graph_objects as go
 from datetime import datetime
@@ -123,7 +124,7 @@ def scan_all_nifty50(min_score: int):
 
 # ── AI call ──────────────────────────────────────────────────────────────────
 
-def ask_ai(candidates) -> dict | None:
+def ask_ai(candidates) -> Optional[dict]:
     """Send top candidates to Claude and get ranked top 10 with reasoning."""
     try:
         llm = create_llm_from_secrets(st.secrets)
@@ -199,7 +200,7 @@ Respond with this exact JSON structure (no markdown, no extra keys):
 
 # ── Card renderer ────────────────────────────────────────────────────────────
 
-def render_card(rank: int, setup, ai_rec: dict | None, chart_data, idx: int):
+def render_card(rank: int, setup, ai_rec: Optional[dict], chart_data, idx: int):
     symbol_short = setup.symbol.replace(".NS", "")
     risk   = abs(setup.entry - setup.stop_loss)
     reward = abs(setup.target - setup.entry)
