@@ -57,7 +57,7 @@ ZERODHA_API_SECRET = ""
 ZERODHA_ACCESS_TOKEN = ""
 
 # ============== STRATEGY SETTINGS ==============
-ACTIVE_STRATEGY = "ema_crossover"
+ACTIVE_STRATEGY = "Supply & Demand Zones"  # Must match a key in strategies.STRATEGY_REGISTRY
 
 # EMA Crossover Strategy Settings
 EMA_FAST_PERIOD = 9

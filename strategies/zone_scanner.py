@@ -18,7 +18,7 @@ from typing import List, Optional
 from datetime import datetime
 import logging
 
-from strategies.base_strategy import BaseStrategy, Signal, TradeSignal
+from strategies.base_strategy import BaseStrategy, Signal, TradeSignal, TradeSetup
 from config.settings import STOP_LOSS_PERCENT, TARGET_PERCENT
 
 logger = logging.getLogger(__name__)
@@ -432,6 +432,22 @@ class ZoneScanner(BaseStrategy):
         )
 
         return zone
+
+    def get_trade_setups(self, data: pd.DataFrame, symbol: str):
+        """Return one TradeSetup per detected zone (overrides BaseStrategy default)."""
+        zones = self.detect_zones(data, symbol)
+        setups = []
+        for zone in zones:
+            setups.append(TradeSetup(
+                symbol=symbol,
+                side="BUY" if zone.zone_type == "DEMAND" else "SELL",
+                entry=zone.entry,
+                stop_loss=zone.stop_loss,
+                target=zone.target,
+                score=zone.score,
+                reasoning=zone.reasoning,
+            ))
+        return setups
 
     def generate_signal(self, data: pd.DataFrame, symbol: str) -> TradeSignal:
         """

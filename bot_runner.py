@@ -27,11 +27,13 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from database.db import DatabaseManager
 from core.data_fetcher import DataFetcher
 from strategies.zone_scanner import ZoneScanner
+from strategies import STRATEGY_REGISTRY
 from config.settings import (
     INITIAL_CAPITAL, SYMBOLS, NIFTY_50,
     MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE,
     MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE,
-    MAX_OPEN_POSITIONS, MAX_DAILY_LOSS_PCT, NSE_HOLIDAYS_2026
+    MAX_OPEN_POSITIONS, MAX_DAILY_LOSS_PCT, NSE_HOLIDAYS_2026,
+    ACTIVE_STRATEGY,
 )
 
 # Setup logging
@@ -50,6 +52,9 @@ logger = logging.getLogger(__name__)
 db = DatabaseManager()
 data_fetcher = DataFetcher()
 
+# Instantiate the active strategy from the registry
+StrategyClass = STRATEGY_REGISTRY.get(ACTIVE_STRATEGY, ZoneScanner)
+
 # Load AI-optimized params from strategy memory if available, else use defaults
 try:
     from core.llm_advisor import StrategyMemory
@@ -64,11 +69,17 @@ except Exception as _e:
     _lp = {"min_score": 80, "rr_ratio": 3.0, "max_base_candles": 5}
     logger.warning(f"Could not load strategy memory ({_e}) — using defaults")
 
-zone_scanner = ZoneScanner(
-    min_score=_lp["min_score"],
-    rr_ratio=_lp["rr_ratio"],
-    max_base_candles=_lp["max_base_candles"],
-)
+if ACTIVE_STRATEGY == "Supply & Demand Zones":
+    strategy = StrategyClass(
+        min_score=_lp["min_score"],
+        rr_ratio=_lp["rr_ratio"],
+        max_base_candles=_lp["max_base_candles"],
+    )
+else:
+    strategy = StrategyClass()
+
+zone_scanner = strategy  # backward-compat alias used in older code paths
+logger.info(f"Active strategy: {ACTIVE_STRATEGY} ({StrategyClass.__name__})")
 
 
 def is_market_hours() -> bool:
@@ -262,7 +273,7 @@ def monitor_open_trades():
 
 def auto_scan_zones():
     """
-    Automatically scan for new zones and create pending orders.
+    Automatically scan for new trade setups and create pending orders.
     Only runs if we have fewer than MAX_OPEN_POSITIONS pending + open.
     """
     # Check how many orders/trades we already have
@@ -275,7 +286,7 @@ def auto_scan_zones():
         return 0
 
     slots_available = MAX_OPEN_POSITIONS - total_active
-    logger.info(f"Scanning for zones... ({slots_available} slots available)")
+    logger.info(f"Scanning for setups... ({slots_available} slots available)")
 
     # Get symbols that don't already have pending orders or open trades
     active_symbols = set()
@@ -298,15 +309,19 @@ def auto_scan_zones():
             break
 
         try:
-            # Multi-timeframe scan
-            zones = zone_scanner.multi_timeframe_scan(data_fetcher, symbol)
+            data = data_fetcher.get_data(symbol, period="5d", interval="15m")
+            if data is None or len(data) == 0:
+                logger.warning(f"No data for {symbol} — skipping")
+                continue
 
-            if zones:
-                best_zone = zones[0]  # Highest scoring zone
-                logger.info(f"🎯 Zone found: {symbol} - {best_zone.zone_type} (Score: {best_zone.score})")
+            setups = strategy.get_trade_setups(data, symbol)
+
+            if setups:
+                best = setups[0]  # Highest scoring setup
+                logger.info(f"🎯 Setup found: {symbol} - {best.side} (Score: {best.score})")
 
                 # Calculate quantity (1% risk per trade)
-                risk_per_share = abs(best_zone.entry - best_zone.stop_loss)
+                risk_per_share = abs(best.entry - best.stop_loss)
                 if risk_per_share > 0:
                     risk_amount = INITIAL_CAPITAL * 0.01  # 1% of capital
                     quantity = max(1, int(risk_amount / risk_per_share))
@@ -316,16 +331,16 @@ def auto_scan_zones():
                 # Create pending order
                 order_id = db.save_pending_order(
                     symbol=symbol,
-                    side="BUY" if best_zone.zone_type == "DEMAND" else "SELL",
+                    side=best.side,
                     quantity=quantity,
-                    entry_price=best_zone.entry,
-                    stop_loss=best_zone.stop_loss,
-                    target=best_zone.target,
-                    strategy="Supply Demand Zones (Auto)",
-                    reason=best_zone.reasoning
+                    entry_price=best.entry,
+                    stop_loss=best.stop_loss,
+                    target=best.target,
+                    strategy=ACTIVE_STRATEGY,
+                    reason=best.reasoning
                 )
 
-                logger.info(f"📋 Pending order created: #{order_id} | {best_zone.zone_type} {symbol} @ ₹{best_zone.entry:.2f}")
+                logger.info(f"📋 Pending order created: #{order_id} | {best.side} {symbol} @ ₹{best.entry:.2f}")
                 new_orders += 1
 
         except Exception as e:
