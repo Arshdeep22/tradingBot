@@ -24,9 +24,53 @@ st.title("📋 Trade History")
 st.markdown("---")
 
 all_trades = db.get_all_trades()
+pending_orders = db.get_pending_orders()
+
+# ── Pending Orders Section ────────────────────────────────────────────────────
+if pending_orders:
+    st.subheader(f"⏳ Pending Orders ({len(pending_orders)})")
+    st.caption("Waiting for price to reach entry level — will auto-execute via bot runner.")
+
+    for o in pending_orders:
+        icon = "🟢" if o['side'] == "BUY" else "🔴"
+        risk = abs(o['entry_price'] - o['stop_loss'])
+        reward = abs(o['target'] - o['entry_price'])
+        rr = round(reward / risk, 1) if risk > 0 else 0
+        header = (
+            f"{icon} {o['symbol']} | {o['side']} | "
+            f"Entry: ₹{o['entry_price']:.2f} | "
+            f"SL: ₹{o['stop_loss']:.2f} | Target: ₹{o['target']:.2f} | "
+            f"R:R 1:{rr} | {o.get('strategy','')}"
+        )
+        with st.expander(header, expanded=False):
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("📍 Entry", f"₹{o['entry_price']:.2f}")
+            c2.metric("🛑 Stop Loss", f"₹{o['stop_loss']:.2f}")
+            c3.metric("🎯 Target", f"₹{o['target']:.2f}")
+            c4.metric("📦 Qty", o.get('quantity', 0))
+
+            col_a, col_b = st.columns(2)
+            with col_a:
+                st.caption(f"**Strategy:** {o.get('strategy', 'N/A')}")
+                st.caption(f"**Created:** {str(o.get('created_at', ''))[:19]}")
+                st.caption(f"**Expires:** {str(o.get('expires_at', ''))[:19]}")
+            with col_b:
+                st.caption(f"**Side:** {o.get('side')}")
+                if o.get('reason'):
+                    st.caption(f"**Reason:** {str(o['reason'])[:200]}")
+
+            if st.button("❌ Cancel Order", key=f"cancel_pending_{o['id']}", type="secondary"):
+                db.cancel_pending_order(o['id'])
+                st.success(f"Order #{o['id']} cancelled.")
+                st.rerun()
+
+    st.markdown("---")
+
+# ── Executed Trades Section ───────────────────────────────────────────────────
+st.subheader("📋 Executed Trades")
 
 if not all_trades:
-    st.info("No trades yet. Use the Zone Scanner to find and take trades!")
+    st.info("No executed trades yet. Pending orders above will appear here once triggered.")
     st.stop()
 
 df = pd.DataFrame(all_trades)
