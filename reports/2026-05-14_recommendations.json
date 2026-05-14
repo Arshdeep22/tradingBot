@@ -1,0 +1,212 @@
+{
+  "date": "2026-05-14",
+  "scan_time_ist": "2026-05-14 17:30:45",
+  "total_setups_found": 383,
+  "total_candidates_sent_to_ai": 20,
+  "ai_available": true,
+  "market_context": "All 20 setups score 100/100 with identical R:R of 2.0, so differentiation must come from leg-out candle strength, zone tightness, symbol diversity, and avoiding overlapping/conflicting zones on the same stock. Strongest setups feature the largest leg-out candles (indicating institutional momentum) and tightest zones with single-candle bases. Priority given to diversified stock selection and avoiding contradictory setups on the same instrument.",
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1074.2,
+      "stop_loss": 1084.12,
+      "target": 1054.36,
+      "zone_score": 100,
+      "win_probability": 88,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Strongest leg-out candle at 2.4% body - indicating massive institutional selling pressure",
+        "Single candle tight base maximizes precision of zone",
+        "Fresh untested supply zone on SBIN with clear bearish intent"
+      ],
+      "risks": "Banking sector momentum could reverse on positive macro news",
+      "entry_advice": "Limit sell order at 1074.2, wait for price to wick into zone with bearish confirmation candle on 5-min",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "HINDUNILVR.NS",
+      "side": "SELL",
+      "entry": 2317.0,
+      "stop_loss": 2344.74,
+      "target": 2261.52,
+      "zone_score": 100,
+      "win_probability": 86,
+      "conviction": "HIGH",
+      "reasoning": [
+        "1.4% leg-out body is among the strongest across all setups",
+        "HINDUNILVR showing multiple supply zones suggests strong bearish bias",
+        "Fresh zone with tight 2-candle base offers clean entry"
+      ],
+      "risks": "FMCG defensive rotation could provide buying support near this level",
+      "entry_advice": "Limit sell at 2317.0, confirm with bearish engulfing or rejection wick on 15-min chart",
+      "order_placed": false
+    },
+    {
+      "rank": 3,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1464.0,
+      "stop_loss": 1474.88,
+      "target": 1442.24,
+      "zone_score": 100,
+      "win_probability": 85,
+      "conviction": "HIGH",
+      "reasoning": [
+        "RELIANCE is highest liquidity stock ensuring clean fills",
+        "Fresh supply zone with 0.7% leg-out and tight 2-candle base",
+        "Tight zone width (5 points) means precise institutional footprint"
+      ],
+      "risks": "RELIANCE can gap on energy/refining news breaking intraday",
+      "entry_advice": "Limit sell at 1464.0, ensure price approaches from below with momentum fading",
+      "order_placed": false
+    },
+    {
+      "rank": 4,
+      "symbol": "TCS.NS",
+      "side": "SELL",
+      "entry": 2430.6,
+      "stop_loss": 2450.56,
+      "target": 2390.68,
+      "zone_score": 100,
+      "win_probability": 85,
+      "conviction": "HIGH",
+      "reasoning": [
+        "TCS supply zone with 1.2% leg-out candle shows strong institutional selling",
+        "IT sector weakness confirmed by multiple INFY supply zones as well",
+        "Fresh zone with 2-candle tight base provides high-confidence entry"
+      ],
+      "risks": "Earnings season or USD/INR movement could trigger IT sector reversal",
+      "entry_advice": "Limit sell at 2430.6, confirm sector weakness with INFY also trading below its supply zones",
+      "order_placed": false
+    },
+    {
+      "rank": 5,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1759.2,
+      "stop_loss": 1738.12,
+      "target": 1801.36,
+      "zone_score": 100,
+      "win_probability": 84,
+      "conviction": "HIGH",
+      "reasoning": [
+        "BHARTIARTL demand zone with 1.2% leg-out - strongest among its three BUY setups",
+        "Telecom sector tends to hold demand zones well due to institutional accumulation",
+        "Single candle base with 14-point zone width is very tight for this price range"
+      ],
+      "risks": "If broader market sells off, even strong demand zones can break",
+      "entry_advice": "Limit buy at 1759.2, look for bullish hammer or engulfing at zone for confirmation",
+      "order_placed": false
+    },
+    {
+      "rank": 6,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1177.5,
+      "stop_loss": 1195.96,
+      "target": 1140.58,
+      "zone_score": 100,
+      "win_probability": 83,
+      "conviction": "HIGH",
+      "reasoning": [
+        "INFY 0.9% leg-out with fresh supply zone confirms IT sector bearishness",
+        "Multiple supply zones below (1121, 1102) suggest sustained downtrend",
+        "2-candle tight base offers clean institutional selling evidence"
+      ],
+      "risks": "Oversold bounce possible if INFY reaches multiple support levels simultaneously",
+      "entry_advice": "Limit sell at 1177.5, confirm with IT index also showing weakness",
+      "order_placed": false
+    },
+    {
+      "rank": 7,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1237.8,
+      "stop_loss": 1228.67,
+      "target": 1256.06,
+      "zone_score": 100,
+      "win_probability": 82,
+      "conviction": "HIGH",
+      "reasoning": [
+        "ICICIBANK fresh demand zone with 0.7% leg-out and single candle base",
+        "Banking heavyweight with excellent liquidity for clean zone reactions",
+        "Tight 4.2 point zone width suggests precise institutional accumulation"
+      ],
+      "risks": "Conflicting supply zone at 1249.7 limits upside - may get trapped between zones",
+      "entry_advice": "Limit buy at 1237.8, ensure broader BANKNIFTY is showing bullish structure",
+      "order_placed": false
+    },
+    {
+      "rank": 8,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1834.2,
+      "stop_loss": 1820.69,
+      "target": 1861.22,
+      "zone_score": 100,
+      "win_probability": 81,
+      "conviction": "HIGH",
+      "reasoning": [
+        "BHARTIARTL 1.1% leg-out demand zone closest to current trading range",
+        "Single candle base with tight 6.2 point zone for this price level",
+        "Telecom sector structural uptrend supports demand zone validity"
+      ],
+      "risks": "If 1814 demand zone below breaks, this zone may already be invalidated",
+      "entry_advice": "Limit buy at 1834.2, confirm with higher low formation on 5-min chart",
+      "order_placed": false
+    },
+    {
+      "rank": 9,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 751.8,
+      "stop_loss": 745.01,
+      "target": 765.38,
+      "zone_score": 100,
+      "win_probability": 80,
+      "conviction": "HIGH",
+      "reasoning": [
+        "HDFCBANK demand zone with 0.8% leg-out on single candle base",
+        "Largest private bank - institutional activity makes zones highly reliable",
+        "Fresh untested zone adds to probability of strong reaction on first touch"
+      ],
+      "risks": "Narrow absolute SL of ~6.8 points could get stopped out on normal volatility spikes",
+      "entry_advice": "Limit buy at 751.8, wait for price to settle into zone with volume decline before entry",
+      "order_placed": false
+    },
+    {
+      "rank": 10,
+      "symbol": "TCS.NS",
+      "side": "BUY",
+      "entry": 2219.4,
+      "stop_loss": 2203.25,
+      "target": 2251.7,
+      "zone_score": 100,
+      "win_probability": 79,
+      "conviction": "HIGH",
+      "reasoning": [
+        "TCS demand zone with strong 1.1% leg-out candle showing buyer aggression",
+        "Single candle base is the tightest possible - clear institutional footprint",
+        "Provides a contrarian BUY if IT selling exhausts, good portfolio balance"
+      ],
+      "risks": "Conflicting TCS supply zones above suggest bearish bias - demand may fail",
+      "entry_advice": "Limit buy at 2219.4, only enter if broader market shows reversal signs and IT index stabilizes",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 6,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1074.2,
+      "stop_loss": 1084.12,
+      "target": 1054.36,
+      "quantity": 100,
+      "win_probability": 88
+    }
+  ]
+}
