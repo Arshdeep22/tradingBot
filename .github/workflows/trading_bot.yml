@@ -168,7 +168,11 @@ jobs:
           AICORE_RESOURCE_GROUP: ${{ secrets.AICORE_RESOURCE_GROUP }}
         run: |
           mkdir -p logs reports
-          python ai_trade_runner.py
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python ai_trade_runner.py --force
+          else
+            python ai_trade_runner.py
+          fi
 
       - name: 💾 Save Database
         if: always()
