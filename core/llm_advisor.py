@@ -444,5 +444,5 @@ def create_llm_from_secrets(secrets: Dict) -> AICoreLLM:
         client_id=aicore.get("client_id", ""),
         client_secret=aicore.get("client_secret", ""),
         resource_group=aicore.get("resource_group", "default"),
-        model=aicore.get("model", "claude-3.5-sonnet"),
+        model=aicore.get("model", "anthropic--claude-4.6-opus"),
     )

@@ -1,16 +1,19 @@
 name: 🤖 Trading Bot - Auto Runner
 
-# Runs every 5 minutes during Indian market hours (9:15 AM - 3:30 PM IST)
-# IST is UTC+5:30, so:
-#   9:15 AM IST = 3:45 AM UTC
-#   3:30 PM IST = 10:00 AM UTC
-# Cron runs every 5 min from 3:45 to 10:00 UTC (Mon-Fri)
+# Schedule overview (all UTC, IST = UTC+5:30):
+#   Every 5 min  3:00-10:59 UTC  →  8:30 AM - 4:29 PM IST  (bot_runner)
+#   5:30 AM UTC                  →  11:00 AM IST            (ai_trade_runner)
+#   10:05 AM UTC                 →  3:35 PM IST             (report_generator)
 
 on:
   schedule:
     # Every 5 minutes during market hours (UTC times for IST market)
     - cron: '*/5 3-10 * * 1-5'  # Mon-Fri, 3:00-10:59 UTC (8:30 AM - 4:29 PM IST)
-  
+    # AI recommendations at 11:00 AM IST = 5:30 AM UTC
+    - cron: '30 5 * * 1-5'
+    # EOD report at 3:35 PM IST = 10:05 AM UTC
+    - cron: '5 10 * * 1-5'
+
   # Allow manual trigger
   workflow_dispatch:
     inputs:
@@ -24,6 +27,8 @@ on:
           - check-only
           - scan-only
           - force
+          - ai-recommendations
+          - eod-report
 
 # Grant write permissions so the bot can push commits
 permissions:
@@ -32,8 +37,16 @@ permissions:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    
-    # Only run during actual market hours (fine-tuned in the script)
+    # Only run for the 5-min schedule or full/check/scan/force manual triggers
+    if: |
+      github.event_name == 'push' ||
+      (github.event_name == 'schedule' && github.event.schedule == '*/5 3-10 * * 1-5') ||
+      (github.event_name == 'workflow_dispatch' && (
+        github.event.inputs.mode == 'full' ||
+        github.event.inputs.mode == 'check-only' ||
+        github.event.inputs.mode == 'scan-only' ||
+        github.event.inputs.mode == 'force'
+      ))
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
@@ -112,3 +125,139 @@ jobs:
           name: bot-logs-${{ github.run_number }}
           path: logs/bot_runner.log
           retention-days: 7
+
+  # ── AI Recommendations Job ──────────────────────────────────────────────────
+  # Runs at 11:00 AM IST (5:30 AM UTC), Mon-Fri
+  # Scans Nifty 50, asks Claude for top 10, places top 5 as pending orders
+  ai-recommendations:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '30 5 * * 1-5') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'ai-recommendations')
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 📂 Restore Database
+        uses: actions/cache@v4
+        with:
+          path: database/trades.db
+          key: trading-db-${{ github.run_id }}
+          restore-keys: |
+            trading-db-
+
+      - name: 🤖 Run AI Trade Runner
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          AICORE_AUTH_URL: ${{ secrets.AICORE_AUTH_URL }}
+          AICORE_API_URL: ${{ secrets.AICORE_API_URL }}
+          AICORE_CLIENT_ID: ${{ secrets.AICORE_CLIENT_ID }}
+          AICORE_CLIENT_SECRET: ${{ secrets.AICORE_CLIENT_SECRET }}
+          AICORE_RESOURCE_GROUP: ${{ secrets.AICORE_RESOURCE_GROUP }}
+        run: |
+          mkdir -p logs reports
+          python ai_trade_runner.py
+
+      - name: 💾 Save Database
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: database/trades.db
+          key: trading-db-${{ github.run_id }}
+
+      - name: 📊 Commit Changes
+        if: always()
+        run: |
+          git config --local user.email "bot@tradingbot.local"
+          git config --local user.name "Trading Bot"
+          git add database/trades.db reports/ logs/ || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🤖 AI recommendations: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📋 Upload Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-recommendations-logs-${{ github.run_number }}
+          path: logs/ai_trade_runner.log
+          retention-days: 7
+
+  # ── EOD Report Job ───────────────────────────────────────────────────────────
+  # Runs at 3:35 PM IST (10:05 AM UTC), Mon-Fri
+  # Generates reports/YYYY-MM-DD_ai_report.md showing AI trade outcomes
+  eod-report:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '5 10 * * 1-5') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'eod-report')
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 📂 Restore Database
+        uses: actions/cache@v4
+        with:
+          path: database/trades.db
+          key: trading-db-${{ github.run_id }}
+          restore-keys: |
+            trading-db-
+
+      - name: 📈 Generate EOD Report
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          mkdir -p reports logs
+          python report_generator.py
+
+      - name: 📊 Commit Report
+        if: always()
+        run: |
+          git config --local user.email "bot@tradingbot.local"
+          git config --local user.name "Trading Bot"
+          git add reports/ logs/ || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "📊 EOD AI report: $(date -u '+%Y-%m-%d')"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📋 Upload Report Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-report-${{ github.run_number }}
+          path: reports/
+          retention-days: 30
