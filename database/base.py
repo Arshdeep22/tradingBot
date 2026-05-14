@@ -9,17 +9,37 @@ DB_PATH = os.path.join(DB_DIR, "trades.db")
 
 
 def get_supabase_config():
-    """Get Supabase config from Streamlit secrets or env vars."""
+    """Get Supabase config from Streamlit secrets, .streamlit/secrets.toml, or env vars."""
+    # 1. Streamlit runtime (dashboard)
     try:
         import streamlit as st
         if hasattr(st, 'secrets') and 'supabase' in st.secrets:
             return {'url': st.secrets['supabase']['url'], 'key': st.secrets['supabase']['key']}
     except Exception:
         pass
+
+    # 2. .streamlit/secrets.toml (local terminal — bot_runner.py, backtester, etc.)
+    try:
+        import tomllib
+        secrets_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            ".streamlit", "secrets.toml"
+        )
+        if os.path.exists(secrets_path):
+            with open(secrets_path, "rb") as f:
+                secrets = tomllib.load(f)
+            sb = secrets.get("supabase", {})
+            if sb.get("url") and sb.get("key"):
+                return {'url': sb["url"], 'key': sb["key"]}
+    except Exception:
+        pass
+
+    # 3. Environment variables (GitHub Actions)
     url = os.environ.get('SUPABASE_URL', '')
     key = os.environ.get('SUPABASE_KEY', '')
     if url and key:
         return {'url': url, 'key': key}
+
     return None
 
 
