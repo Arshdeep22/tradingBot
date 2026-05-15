@@ -1,0 +1,46 @@
+{
+  "date": "2026-05-15",
+  "wins_analysis": "No wins today as zero trades were executed. The only pending order (INFY BUY at \u20b91,097.50) did not get filled, suggesting the entry level was too far from market price in a strong down-trending session where prices moved lower, not higher toward buy zones.",
+  "losses_analysis": "No losses today either, but the core problem is zero execution. In a -2.2% trending down day, 9 of 10 recommendations were not placed as orders, and the 1 BUY order placed (INFY) never triggered because price was falling away from the buy entry. The system failed to capitalize on a strong directional day by not prioritizing SELL setups for order placement.",
+  "regime_impact": "The strong downtrend (ADX 25, Nifty -2.2%) heavily favored SELL/short setups, yet only 1 order was placed and it was a BUY. The system missed excellent short opportunities on SBIN, HINDUNILVR, TCS, RELIANCE, and ITC which likely moved toward their supply zones. The regime was highly tradeable but the order placement logic did not align with it.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "In trending_down regime (ADX>20, Nifty<-1%), prioritize placing orders on SELL setups ranked in top 5 \u2014 place at least 3-4 SELL orders instead of just 1 BUY order",
+      "reason": "Today had 5 strong SELL setups (SBIN 88%, HINDUNILVR 85%, TCS 84%, RELIANCE 82%, ITC 78%) but none were placed as orders despite a -2.2% down day perfectly suited for shorts",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Increase max pending orders from 1 to 3-5 per day, especially when regime aligns with setup direction \u2014 current 1-order limit causes near-zero execution",
+      "reason": "Only 1 order was placed today out of 10 recommendations. With limit orders needing price to come to them, more orders increases probability of at least 1-2 fills",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Do not place BUY limit orders when regime is trending_down with ADX>20 \u2014 these have very low fill probability as price moves away from buy zones",
+      "reason": "INFY BUY at \u20b91,097.50 remained pending all day because in a -2.2% selloff, price was unlikely to rally back to a demand zone entry",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "For SELL setups in downtrend days, use slightly more aggressive entry (e.g., 0.1-0.2% below zone top) to increase fill probability since price may only wick into supply zones briefly",
+      "reason": "SBIN SELL at \u20b91,074.20 was the #1 ranked setup with 88% probability but was never placed \u2014 even if placed, a tight limit at exact zone top may miss a brief touch",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Add a regime-based filter that removes opposite-direction setups from top 10 display when ADX>22 and trend is clear \u2014 show only trend-aligned setups to focus execution",
+      "reason": "Having BUY setups (INFY, BHARTIARTL) mixed with SELL setups diluted focus; the system chose a counter-trend BUY over multiple high-probability trend-aligned SELLs",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (watch Nifty futures pre-open and VIX>18), aggressively place 3+ SELL orders on SBIN, HINDUNILVR, TCS, RELIANCE near their supply zones identified today \u2014 these zones remain untested and valid.",
+  "symbol_notes": {
+    "SBIN": "Top-ranked SELL setup at \u20b91,074.20 with 88% prob \u2014 if zone untested, prioritize this SHORT tomorrow; likely revisits supply zone on any relief rally",
+    "INFY": "BUY order at \u20b91,097.50 still pending \u2014 cancel if regime remains bearish; consider flipping to SELL setup at \u20b91,177.50 if price rallies",
+    "HINDUNILVR": "Strong SELL setup at \u20b92,317 \u2014 FMCG names tend to see delayed selling in broad market drops; may trigger tomorrow on dead cat bounce",
+    "RELIANCE": "SELL at \u20b91,464 aligns with market regime \u2014 heavyweight likely to retest supply on any morning gap-up attempt"
+  },
+  "confidence": 5
+}
