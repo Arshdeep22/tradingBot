@@ -302,7 +302,14 @@ Respond with this exact JSON:
   "primary_strategy_tomorrow": "Supply & Demand Zones",
   "primary_strategy_reason": "one sentence",
   "update_memory": true,
-  "confidence": 8
+  "confidence": 8,
+  "strategy_weights": {{
+    "trending_up":   {{"Supply & Demand Zones": 3, "EMA Crossover": 6, "RSI Reversal": 3}},
+    "trending_down": {{"Supply & Demand Zones": 3, "EMA Crossover": 6, "RSI Reversal": 3}},
+    "ranging":       {{"Supply & Demand Zones": 4, "EMA Crossover": 2, "RSI Reversal": 6}},
+    "volatile":      {{"Supply & Demand Zones": 6, "EMA Crossover": 3, "RSI Reversal": 3}},
+    "unknown":       {{"Supply & Demand Zones": 4, "EMA Crossover": 4, "RSI Reversal": 4}}
+  }}
 }}"""
 
     raw = llm.chat(
@@ -421,6 +428,14 @@ def main():
                 symbols=list(data_dict.keys()),
             )
             logger.info(f"Fallback memory update: {best['params']} WR={best['win_rate']:.1f}%")
+
+    # Step 5b: Save regime-adaptive strategy weights for bot_runner.py
+    if llm_output and llm_output.get("strategy_weights"):
+        weights_path = ".streamlit/strategy_weights.json"
+        os.makedirs(".streamlit", exist_ok=True)
+        with open(weights_path, "w") as f:
+            json.dump(llm_output["strategy_weights"], f, indent=2)
+        logger.info(f"Strategy weights saved to {weights_path}")
 
     # Step 6: Append to learning journal
     logger.info("\n--- STEP 6: Updating learning journal ---")

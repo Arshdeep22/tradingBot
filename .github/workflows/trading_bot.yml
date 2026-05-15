@@ -84,6 +84,7 @@ jobs:
           path: |
             .streamlit/strategy_memory.json
             .streamlit/learning_journal.json
+            .streamlit/strategy_weights.json
           key: strategy-memory-${{ github.run_id }}
           restore-keys: |
             strategy-memory-
@@ -181,6 +182,7 @@ jobs:
           path: |
             .streamlit/strategy_memory.json
             .streamlit/learning_journal.json
+            .streamlit/strategy_weights.json
           key: strategy-memory-${{ github.run_id }}
           restore-keys: |
             strategy-memory-
@@ -336,6 +338,7 @@ jobs:
           path: |
             .streamlit/strategy_memory.json
             .streamlit/learning_journal.json
+            .streamlit/strategy_weights.json
           key: strategy-memory-${{ github.run_id }}
           restore-keys: |
             strategy-memory-
@@ -360,6 +363,8 @@ jobs:
           path: |
             .streamlit/strategy_memory.json
             .streamlit/learning_journal.json
+            .streamlit/strategy_weights.json
+            .streamlit/strategy_weights.json
           key: strategy-memory-${{ github.run_id }}
 
       - name: 📊 Commit Optimization Results
@@ -367,7 +372,7 @@ jobs:
         run: |
           git config --local user.email "bot@tradingbot.local"
           git config --local user.name "Trading Bot [Optimizer]"
-          git add .streamlit/strategy_memory.json .streamlit/learning_journal.json || true
+          git add .streamlit/strategy_memory.json .streamlit/learning_journal.json .streamlit/strategy_weights.json || true
           git add reports/ logs/ || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
@@ -417,6 +422,7 @@ jobs:
           path: |
             .streamlit/strategy_memory.json
             .streamlit/learning_journal.json
+            .streamlit/strategy_weights.json
           key: strategy-memory-${{ github.run_id }}
           restore-keys: |
             strategy-memory-

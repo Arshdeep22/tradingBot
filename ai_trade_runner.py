@@ -28,7 +28,7 @@ from config.settings import (
     INITIAL_CAPITAL, MAX_OPEN_POSITIONS,
     MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE,
     MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE,
-    NSE_HOLIDAYS_2026,
+    NSE_HOLIDAYS_2026, PAPER_TRADING_MODE,
 )
 
 TOP_N_ORDERS = 5  # How many AI recommendations to auto-place as pending orders
@@ -88,7 +88,11 @@ def place_orders(selected_setups: list, ai_recs: list) -> list:
     active = _active_symbols()
     open_trades = db.get_open_trades()
     pending_orders = db.get_pending_orders()
-    total_active = len(open_trades) + len(pending_orders)
+    # Paper mode: count only open trades — pending orders don't block new slot allocation
+    if PAPER_TRADING_MODE:
+        total_active = len(open_trades)
+    else:
+        total_active = len(open_trades) + len(pending_orders)
     slots = MAX_OPEN_POSITIONS - total_active
 
     if slots <= 0:
@@ -228,12 +232,9 @@ def main():
         except Exception as e:
             logger.warning(f"Could not load weekly insights: {e}")
 
-    # Step 1: Expire previous-day pending orders to free slots for today's scan
-    # In paper mode orders are single-day: yesterday's zones are stale, fresh scan needed
-    logger.info("\n--- STEP 1: Expiring previous-day pending orders ---")
-    from config.settings import PAPER_TRADING_MODE
-    expire_days = 1 if PAPER_TRADING_MODE else 3
-    db.expire_old_orders(max_age_days=expire_days)
+    # Step 1: Expire pending orders older than 3 days to free slots for today's scan
+    logger.info("\n--- STEP 1: Expiring stale pending orders ---")
+    db.expire_old_orders(max_age_days=3)
 
     # Step 2: Scan zones
     logger.info("\n--- STEP 2: Scanning Nifty 50 for zones ---")
