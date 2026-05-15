@@ -1,0 +1,212 @@
+{
+  "date": "2026-05-15",
+  "scan_time_ist": "2026-05-15 11:48:35",
+  "total_setups_found": 425,
+  "total_candidates_sent_to_ai": 20,
+  "ai_available": true,
+  "market_context": "All 20 setups score 100/100 with identical R:R ratios, so differentiation comes from leg-out candle strength (momentum), symbol diversification, and avoiding overlapping/redundant zones on the same stock. Strongest setups feature larger leg-out candle bodies (>1%) indicating institutional participation, combined with fresh untested zones and tight bases across diversified blue-chip names.",
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1074.2,
+      "stop_loss": 1084.12,
+      "target": 1054.36,
+      "zone_score": 100,
+      "win_probability": 88,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Strongest leg-out candle at 2.4% body showing powerful institutional selling",
+        "Fresh untested supply zone with very tight 1-candle base",
+        "SBIN is a high-liquidity stock ensuring clean price action at zones"
+      ],
+      "risks": "Banking sector momentum could override supply if broad market rallies strongly",
+      "entry_advice": "Limit sell order at 1074.2 with confirmation of bearish rejection wick on 5-min chart",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "INFY.NS",
+      "side": "BUY",
+      "entry": 1097.5,
+      "stop_loss": 1088.03,
+      "target": 1116.44,
+      "zone_score": 100,
+      "win_probability": 87,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Exceptional 2.3% leg-out candle body indicating strong demand imbalance",
+        "Fresh demand zone with tight 2-candle base providing clear invalidation",
+        "INFY is highly liquid with institutional participation at key levels"
+      ],
+      "risks": "IT sector weakness or negative global cues could prevent demand zone from holding",
+      "entry_advice": "Limit buy order at 1097.5, watch for bullish engulfing candle on approach",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "HINDUNILVR.NS",
+      "side": "SELL",
+      "entry": 2317.0,
+      "stop_loss": 2344.74,
+      "target": 2261.52,
+      "zone_score": 100,
+      "win_probability": 85,
+      "conviction": "HIGH",
+      "reasoning": [
+        "1.4% leg-out candle shows strong selling conviction from supply zone",
+        "Fresh zone with tight 2-candle base at a premium price level",
+        "HINDUNILVR is a defensive stock - sells work well in risk-off environments"
+      ],
+      "risks": "FMCG sector could see safe-haven buying that absorbs supply",
+      "entry_advice": "Limit sell at 2317.0, confirm with bearish price action or volume spike at zone",
+      "order_placed": false
+    },
+    {
+      "rank": 4,
+      "symbol": "TCS.NS",
+      "side": "SELL",
+      "entry": 2430.6,
+      "stop_loss": 2450.56,
+      "target": 2390.68,
+      "zone_score": 100,
+      "win_probability": 84,
+      "conviction": "HIGH",
+      "reasoning": [
+        "1.2% leg-out candle with fresh supply zone and tight 2-candle base",
+        "TCS is a mega-cap with institutional order flow respecting zones well",
+        "Clear zone boundary at 2430.6-2440.8 provides precise entry"
+      ],
+      "risks": "IT sector earnings optimism could drive price through supply",
+      "entry_advice": "Limit sell at 2430.6, wait for price to enter zone and show rejection",
+      "order_placed": false
+    },
+    {
+      "rank": 5,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1759.2,
+      "stop_loss": 1738.12,
+      "target": 1801.36,
+      "zone_score": 100,
+      "win_probability": 83,
+      "conviction": "HIGH",
+      "reasoning": [
+        "1.2% leg-out candle with fresh demand zone in a strong trending stock",
+        "BHARTIARTL has shown consistent institutional demand with clear structure",
+        "Single candle base indicates decisive institutional buying"
+      ],
+      "risks": "Telecom regulatory news or sector rotation could weaken demand",
+      "entry_advice": "Limit buy at 1759.2, ensure broader market is not in panic-sell mode",
+      "order_placed": false
+    },
+    {
+      "rank": 6,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1464.0,
+      "stop_loss": 1474.88,
+      "target": 1442.24,
+      "zone_score": 100,
+      "win_probability": 82,
+      "conviction": "HIGH",
+      "reasoning": [
+        "RELIANCE is the most liquid NSE stock ensuring reliable zone reactions",
+        "Fresh supply zone with tight 2-candle base and 0.7% leg-out",
+        "Excellent for intraday trading with tight spreads and high volume"
+      ],
+      "risks": "Energy/conglomerate news flow can cause sudden gap-throughs of supply",
+      "entry_advice": "Limit sell at 1464.0, confirm with volume increase and bearish candle pattern",
+      "order_placed": false
+    },
+    {
+      "rank": 7,
+      "symbol": "TCS.NS",
+      "side": "BUY",
+      "entry": 2250.0,
+      "stop_loss": 2233.93,
+      "target": 2282.14,
+      "zone_score": 100,
+      "win_probability": 81,
+      "conviction": "HIGH",
+      "reasoning": [
+        "1.3% leg-out candle is the strongest among TCS demand zones",
+        "Fresh zone with 1-candle base shows decisive institutional buying",
+        "Closer to current trading range making it more actionable near-term"
+      ],
+      "risks": "Multiple demand zones stacked below suggests price may be in distribution",
+      "entry_advice": "Limit buy at 2250.0 with stop below 2233.93, watch for volume confirmation",
+      "order_placed": false
+    },
+    {
+      "rank": 8,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1834.2,
+      "stop_loss": 1820.69,
+      "target": 1861.22,
+      "zone_score": 100,
+      "win_probability": 80,
+      "conviction": "HIGH",
+      "reasoning": [
+        "1.1% leg-out with fresh demand zone in trending BHARTIARTL",
+        "Tight 1-candle base shows swift institutional accumulation",
+        "Highest demand zone among BHARTIARTL setups - nearest to price action"
+      ],
+      "risks": "If price has already moved far above, retracement may overshoot zone",
+      "entry_advice": "Limit buy at 1834.2, ideal if price pulls back gradually rather than sharply",
+      "order_placed": false
+    },
+    {
+      "rank": 9,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1177.5,
+      "stop_loss": 1195.96,
+      "target": 1140.58,
+      "zone_score": 100,
+      "win_probability": 79,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Fresh supply zone on INFY with 0.9% leg-out and tight base",
+        "Diversifies portfolio with a sell-side IT setup complementing buy-side",
+        "2-candle base provides solid zone structure"
+      ],
+      "risks": "If broad market is bullish, IT stocks may break through supply zones",
+      "entry_advice": "Limit sell at 1177.5, best triggered during market weakness or flat conditions",
+      "order_placed": true
+    },
+    {
+      "rank": 10,
+      "symbol": "ITC.NS",
+      "side": "SELL",
+      "entry": 310.5,
+      "stop_loss": 313.55,
+      "target": 304.4,
+      "zone_score": 100,
+      "win_probability": 78,
+      "conviction": "HIGH",
+      "reasoning": [
+        "ITC adds sector diversification with a defensive FMCG/tobacco name",
+        "Fresh supply zone with tight 2-candle base at a clean round-number area",
+        "Low absolute stop loss (Rs 3.05) makes risk management very precise"
+      ],
+      "risks": "ITC often trades in narrow ranges; target may take longer to achieve",
+      "entry_advice": "Limit sell at 310.5, confirm with overhead resistance holding on 5-min chart",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 7,
+      "symbol": "INFY.NS",
+      "side": "BUY",
+      "entry": 1097.5,
+      "stop_loss": 1088.03,
+      "target": 1116.44,
+      "quantity": 105,
+      "win_probability": 87
+    }
+  ]
+}
