@@ -202,6 +202,76 @@ def generate_report(today: str, rec_log: dict, ai_trades: dict, ai_pending: list
     return "\n".join(lines)
 
 
+def generate_trade_feedback(today: str, report_md: str, rec_log: dict,
+                            ai_trades: dict, llm) -> dict:
+    """
+    Call Claude to analyze today's outcomes and produce 3-5 actionable improvements.
+    Writes reports/YYYY-MM-DD_feedback.json consumed by tomorrow's ai_trade_runner.
+    """
+    from core.market_regime import detect_regime
+    regime = detect_regime()
+
+    target_hits = [t for t in ai_trades.values() if "TARGET HIT" in (t.get("reason") or "").upper()]
+    sl_hits = [t for t in ai_trades.values() if "STOP LOSS HIT" in (t.get("reason") or "").upper()]
+
+    system = (
+        "You are an autonomous trading strategy advisor analyzing daily outcomes for a "
+        "paper trading bot on NSE Nifty 50 stocks. "
+        "Give SPECIFIC, ACTIONABLE improvements for tomorrow — not generic advice. "
+        "Respond ONLY with valid JSON, no markdown."
+    )
+
+    user = f"""## Today's EOD Report ({today})
+
+{report_md[:3000]}
+
+## Market Regime Today
+Regime: {regime.regime} | Nifty: {regime.nifty_direction} | ADX: {regime.adx} | VIX: {regime.vix}
+{regime.description}
+
+## Trade Summary
+Wins (target hit): {len(target_hits)} | Losses (SL hit): {len(sl_hits)}
+Total P&L: ₹{sum(t.get("pnl") or 0 for t in ai_trades.values()):,.2f}
+
+## Task
+Analyze wins and losses. For each loss, identify the specific failure reason.
+For each win, identify what made it succeed. Then produce 3-5 specific improvements for tomorrow.
+
+Respond with this exact JSON (no markdown, no extra keys):
+{{
+  "date": "{today}",
+  "wins_analysis": "2-3 sentences on why wins worked",
+  "losses_analysis": "2-3 sentences on why losses failed",
+  "regime_impact": "did today's regime help or hurt? which strategy type fit best?",
+  "improvements": [
+    {{
+      "priority": 1,
+      "action": "concrete action e.g. raise min_score to 82 on trending days",
+      "reason": "specific evidence from today",
+      "applies_to": "morning_scan|strategy_params|entry_timing|symbol_selection"
+    }}
+  ],
+  "tomorrow_focus": "one sentence on what to watch for tomorrow",
+  "symbol_notes": {{
+    "RELIANCE.NS": "demand zone worked perfectly — favour similar BUY setups tomorrow"
+  }},
+  "confidence": 7
+}}"""
+
+    raw = llm.chat(
+        messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
+        max_tokens=2048,
+        temperature=0.2,
+    )
+    text = raw.strip()
+    if text.startswith("```"):
+        lines = text.splitlines()
+        text = "\n".join(
+            lines[1:-1] if lines and lines[-1].strip().startswith("```") else lines[1:]
+        ).strip()
+    return json.loads(text)
+
+
 def main():
     if len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
         today = sys.argv[1]
@@ -227,6 +297,21 @@ def main():
         f.write(report)
 
     logger.info(f"Report saved to {output_path}")
+
+    # EOD feedback: ask Claude what to do differently tomorrow
+    try:
+        from core.ai_recommender import create_llm_from_env
+        llm = create_llm_from_env()
+        feedback = generate_trade_feedback(today, report, rec_log, ai_trades, llm)
+        feedback_path = f"reports/{today}_feedback.json"
+        with open(feedback_path, "w") as f:
+            json.dump(feedback, f, indent=2)
+        logger.info(f"EOD feedback saved to {feedback_path}")
+    except KeyError as e:
+        logger.warning(f"AICORE env var missing ({e}) — skipping EOD feedback")
+    except Exception as e:
+        logger.warning(f"EOD feedback generation failed: {e}")
+
     logger.info("=" * 60)
 
 

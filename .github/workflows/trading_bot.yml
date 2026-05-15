@@ -2,8 +2,10 @@ name: 🤖 Trading Bot - Auto Runner
 
 # Schedule overview (all UTC, IST = UTC+5:30):
 #   Every 5 min  3:00-10:59 UTC  →  8:30 AM - 4:29 PM IST  (bot_runner)
-#   5:31 AM UTC                  →  11:01 AM IST            (ai_trade_runner)
-#   10:05 AM UTC                 →  3:35 PM IST             (report_generator)
+#   5:32 AM UTC                  →  11:02 AM IST            (ai_trade_runner)
+#   10:05 AM UTC                 →  3:35 PM IST             (report_generator + EOD feedback)
+#   11:00 AM UTC                 →  4:30 PM IST             (nightly_optimizer)
+#   13:30 UTC Sunday             →  7:00 PM IST Sunday      (weekly_reviewer)
 
 on:
   schedule:
@@ -13,6 +15,10 @@ on:
     - cron: '32 5 * * 1-5'
     # EOD report at 3:35 PM IST = 10:05 AM UTC
     - cron: '5 10 * * 1-5'
+    # Nightly optimization at 4:30 PM IST = 11:00 AM UTC
+    - cron: '0 11 * * 1-5'
+    # Weekly deep review at 7:00 PM IST Sunday = 13:30 UTC Sunday
+    - cron: '30 13 * * 0'
 
   # Allow manual trigger
   workflow_dispatch:
@@ -29,6 +35,8 @@ on:
           - force
           - ai-recommendations
           - eod-report
+          - nightly-optimize
+          - weekly-review
 
 # Grant write permissions so the bot can push commits
 permissions:
@@ -50,18 +58,18 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
-      
+
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
-      
+
       - name: 📦 Install Dependencies
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-      
+
       - name: 📂 Restore Database
         uses: actions/cache@v4
         with:
@@ -69,7 +77,17 @@ jobs:
           key: trading-db-${{ github.run_id }}
           restore-keys: |
             trading-db-
-      
+
+      - name: 🧠 Restore Strategy Memory
+        uses: actions/cache@v4
+        with:
+          path: |
+            .streamlit/strategy_memory.json
+            .streamlit/learning_journal.json
+          key: strategy-memory-${{ github.run_id }}
+          restore-keys: |
+            strategy-memory-
+
       - name: 🤖 Run Trading Bot
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -90,24 +108,24 @@ jobs:
           else
             python bot_runner.py
           fi
-      
+
       - name: 💾 Save Database
         if: always()
         uses: actions/cache/save@v4
         with:
           path: database/trades.db
           key: trading-db-${{ github.run_id }}
-      
+
       - name: 📊 Commit Database Changes
         if: always()
         run: |
           git config --local user.email "bot@tradingbot.local"
           git config --local user.name "Trading Bot"
-          
+
           # Add database file
           git add database/trades.db || true
           git add logs/ || true
-          
+
           # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
@@ -117,7 +135,7 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: 📋 Upload Logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -127,12 +145,12 @@ jobs:
           retention-days: 7
 
   # ── AI Recommendations Job ──────────────────────────────────────────────────
-  # Runs at 11:00 AM IST (5:30 AM UTC), Mon-Fri
-  # Scans Nifty 50, asks Claude for top 10, places top 5 as pending orders
+  # Runs at 11:02 AM IST (5:32 AM UTC), Mon-Fri
+  # Scans Nifty 50, asks Claude for top 10 (with regime + yesterday's feedback), places top 5
   ai-recommendations:
     runs-on: ubuntu-latest
     if: |
-      (github.event_name == 'schedule' && github.event.schedule == '31 5 * * 1-5') ||
+      (github.event_name == 'schedule' && github.event.schedule == '32 5 * * 1-5') ||
       (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'ai-recommendations')
     steps:
       - name: 📥 Checkout Repository
@@ -156,6 +174,16 @@ jobs:
           key: trading-db-${{ github.run_id }}
           restore-keys: |
             trading-db-
+
+      - name: 🧠 Restore Strategy Memory
+        uses: actions/cache@v4
+        with:
+          path: |
+            .streamlit/strategy_memory.json
+            .streamlit/learning_journal.json
+          key: strategy-memory-${{ github.run_id }}
+          restore-keys: |
+            strategy-memory-
 
       - name: 🤖 Run AI Trade Runner
         env:
@@ -206,7 +234,7 @@ jobs:
 
   # ── EOD Report Job ───────────────────────────────────────────────────────────
   # Runs at 3:35 PM IST (10:05 AM UTC), Mon-Fri
-  # Generates reports/YYYY-MM-DD_ai_report.md showing AI trade outcomes
+  # Generates reports/YYYY-MM-DD_ai_report.md + YYYY-MM-DD_feedback.json
   eod-report:
     runs-on: ubuntu-latest
     if: |
@@ -235,10 +263,15 @@ jobs:
           restore-keys: |
             trading-db-
 
-      - name: 📈 Generate EOD Report
+      - name: 📈 Generate EOD Report + Feedback
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          AICORE_AUTH_URL: ${{ secrets.AICORE_AUTH_URL }}
+          AICORE_API_URL: ${{ secrets.AICORE_API_URL }}
+          AICORE_CLIENT_ID: ${{ secrets.AICORE_CLIENT_ID }}
+          AICORE_CLIENT_SECRET: ${{ secrets.AICORE_CLIENT_SECRET }}
+          AICORE_RESOURCE_GROUP: ${{ secrets.AICORE_RESOURCE_GROUP }}
         run: |
           mkdir -p reports logs
           python report_generator.py
@@ -252,7 +285,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "📊 EOD AI report: $(date -u '+%Y-%m-%d')"
+            git commit -m "📊 EOD report + feedback: $(date -u '+%Y-%m-%d')"
             git push
           fi
         env:
@@ -265,3 +298,159 @@ jobs:
           name: ai-report-${{ github.run_number }}
           path: reports/
           retention-days: 30
+
+  # ── Nightly Optimizer Job ────────────────────────────────────────────────────
+  # Runs at 4:30 PM IST (11:00 AM UTC), Mon-Fri
+  # Backtests all 50 Nifty stocks × 3 strategies × param grids → updates strategy_memory.json
+  nightly-optimize:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '0 11 * * 1-5') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'nightly-optimize')
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 📂 Restore Database
+        uses: actions/cache@v4
+        with:
+          path: database/trades.db
+          key: trading-db-${{ github.run_id }}
+          restore-keys: |
+            trading-db-
+
+      - name: 🧠 Restore Strategy Memory
+        uses: actions/cache@v4
+        with:
+          path: |
+            .streamlit/strategy_memory.json
+            .streamlit/learning_journal.json
+          key: strategy-memory-${{ github.run_id }}
+          restore-keys: |
+            strategy-memory-
+
+      - name: 🔬 Run Nightly Optimizer
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          AICORE_AUTH_URL: ${{ secrets.AICORE_AUTH_URL }}
+          AICORE_API_URL: ${{ secrets.AICORE_API_URL }}
+          AICORE_CLIENT_ID: ${{ secrets.AICORE_CLIENT_ID }}
+          AICORE_CLIENT_SECRET: ${{ secrets.AICORE_CLIENT_SECRET }}
+          AICORE_RESOURCE_GROUP: ${{ secrets.AICORE_RESOURCE_GROUP }}
+        run: |
+          mkdir -p logs reports
+          python nightly_optimizer.py
+
+      - name: 💾 Save Strategy Memory
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .streamlit/strategy_memory.json
+            .streamlit/learning_journal.json
+          key: strategy-memory-${{ github.run_id }}
+
+      - name: 📊 Commit Optimization Results
+        if: always()
+        run: |
+          git config --local user.email "bot@tradingbot.local"
+          git config --local user.name "Trading Bot [Optimizer]"
+          git add .streamlit/strategy_memory.json .streamlit/learning_journal.json || true
+          git add reports/ logs/ || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔬 Nightly optimization: $(date -u '+%Y-%m-%d')"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📋 Upload Optimization Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: optimization-report-${{ github.run_number }}
+          path: |
+            reports/*_optimization.json
+            logs/nightly_optimizer.log
+          retention-days: 30
+
+  # ── Weekly Review Job ────────────────────────────────────────────────────────
+  # Runs at 7:00 PM IST Sunday (13:30 UTC Sunday)
+  # Synthesizes week's data into structural recommendations
+  weekly-review:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '30 13 * * 0') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'weekly-review')
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🧠 Restore Strategy Memory
+        uses: actions/cache@v4
+        with:
+          path: |
+            .streamlit/strategy_memory.json
+            .streamlit/learning_journal.json
+          key: strategy-memory-${{ github.run_id }}
+          restore-keys: |
+            strategy-memory-
+
+      - name: 📅 Run Weekly Reviewer
+        env:
+          AICORE_AUTH_URL: ${{ secrets.AICORE_AUTH_URL }}
+          AICORE_API_URL: ${{ secrets.AICORE_API_URL }}
+          AICORE_CLIENT_ID: ${{ secrets.AICORE_CLIENT_ID }}
+          AICORE_CLIENT_SECRET: ${{ secrets.AICORE_CLIENT_SECRET }}
+          AICORE_RESOURCE_GROUP: ${{ secrets.AICORE_RESOURCE_GROUP }}
+        run: |
+          mkdir -p logs reports/weekly
+          python weekly_reviewer.py
+
+      - name: 📊 Commit Weekly Review
+        if: always()
+        run: |
+          git config --local user.email "bot@tradingbot.local"
+          git config --local user.name "Trading Bot [Weekly]"
+          git add reports/weekly/ logs/ || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "📅 Weekly review: $(date -u '+%Y-W%V')"
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📋 Upload Weekly Review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-review-${{ github.run_number }}
+          path: reports/weekly/
+          retention-days: 90

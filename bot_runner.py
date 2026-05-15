@@ -33,7 +33,7 @@ from config.settings import (
     MARKET_OPEN_HOUR, MARKET_OPEN_MINUTE,
     MARKET_CLOSE_HOUR, MARKET_CLOSE_MINUTE,
     MAX_OPEN_POSITIONS, MAX_DAILY_LOSS_PCT, NSE_HOLIDAYS_2026,
-    ACTIVE_STRATEGY,
+    ACTIVE_STRATEGY, PAPER_TRADING_MODE,
 )
 
 # Setup logging
@@ -53,8 +53,6 @@ db = DatabaseManager()
 data_fetcher = DataFetcher()
 
 # Instantiate the active strategy from the registry
-StrategyClass = STRATEGY_REGISTRY.get(ACTIVE_STRATEGY, ZoneScanner)
-
 # Load AI-optimized params from strategy memory if available, else use defaults
 try:
     from core.llm_advisor import StrategyMemory
@@ -69,7 +67,29 @@ except Exception as _e:
     _lp = {"min_score": 80, "rr_ratio": 3.0, "max_base_candles": 5}
     logger.warning(f"Could not load strategy memory ({_e}) — using defaults")
 
-if ACTIVE_STRATEGY == "Supply & Demand Zones":
+# Regime-aware strategy selection:
+# 1. Best performing strategy over last 5 days (data-driven)
+# 2. Regime recommendation (market-condition-driven)
+# 3. ACTIVE_STRATEGY from settings (fallback)
+_selected_strategy = ACTIVE_STRATEGY
+try:
+    from core.market_regime import detect_regime
+    from core.learning_journal import LearningJournal
+    _regime = detect_regime()
+    _journal_best = LearningJournal().best_strategy_last_n_days(5)
+    if _journal_best:
+        _selected_strategy = _journal_best
+        logger.info(f"Strategy selected by 5-day journal performance: {_selected_strategy}")
+    elif _regime.best_strategy:
+        _selected_strategy = _regime.best_strategy
+        logger.info(f"Strategy selected by regime ({_regime.regime}): {_selected_strategy}")
+    logger.info(f"Regime: {_regime.regime} | ADX={_regime.adx} | VIX={_regime.vix} | Nifty={_regime.nifty_direction}")
+except Exception as _e:
+    logger.warning(f"Regime/journal selection failed ({_e}) — using {_selected_strategy}")
+
+StrategyClass = STRATEGY_REGISTRY.get(_selected_strategy, ZoneScanner)
+
+if _selected_strategy == "Supply & Demand Zones":
     strategy = StrategyClass(
         min_score=_lp["min_score"],
         rr_ratio=_lp["rr_ratio"],
@@ -79,7 +99,11 @@ else:
     strategy = StrategyClass()
 
 zone_scanner = strategy  # backward-compat alias used in older code paths
-logger.info(f"Active strategy: {ACTIVE_STRATEGY} ({StrategyClass.__name__})")
+logger.info(f"Active strategy: {_selected_strategy} ({StrategyClass.__name__})")
+
+# In paper trading mode, scan from the full Nifty 50 (up to 20 symbols)
+# In real money mode, use the default 5-stock watchlist
+_scan_pool = NIFTY_50[:20] if PAPER_TRADING_MODE else SYMBOLS
 
 
 def is_market_hours() -> bool:
@@ -295,8 +319,8 @@ def auto_scan_zones():
     for trade in open_trades:
         active_symbols.add(trade['symbol'])
 
-    # Scan a subset of symbols (to stay within API limits)
-    symbols_to_scan = [s for s in SYMBOLS if s not in active_symbols][:10]
+    # Paper mode: scan top 20 Nifty 50; real money: use default 5-stock watchlist
+    symbols_to_scan = [s for s in _scan_pool if s not in active_symbols]
 
     if not symbols_to_scan:
         logger.info("All watched symbols already have active orders/trades")
@@ -382,14 +406,16 @@ def main():
     # Check market hours (unless forced)
     if not force and not is_market_hours():
         logger.info("Market is closed. Exiting.")
-        # Still expire old orders even when market is closed
-        db.expire_old_orders(max_age_days=3)
+        # Expire stale pending orders even when market is closed
+        expire_days = 1 if PAPER_TRADING_MODE else 3
+        db.expire_old_orders(max_age_days=expire_days)
         return
 
     logger.info("✅ Market is OPEN - Running bot cycle")
 
-    # Expire old pending orders
-    db.expire_old_orders(max_age_days=3)
+    # Expire stale pending orders
+    expire_days = 1 if PAPER_TRADING_MODE else 3
+    db.expire_old_orders(max_age_days=expire_days)
 
     if not scan_only:
         # Step 1: Check pending orders

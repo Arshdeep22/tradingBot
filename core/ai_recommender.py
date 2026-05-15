@@ -72,10 +72,12 @@ def scan_nifty50_zones(min_score: int = 75) -> list:
     return all_setups
 
 
-def get_ai_recommendations(candidates: list, llm: AICoreLLM) -> Optional[dict]:
+def get_ai_recommendations(candidates: list, llm: AICoreLLM,
+                           regime=None, yesterday_feedback: Optional[dict] = None,
+                           weekly_insights: Optional[str] = None) -> Optional[dict]:
     """
     Send top candidates to Claude and get ranked top 10 with reasoning.
-    Same prompt as ask_ai() in dashboard/pages/5_AI_Recommendations.py.
+    Optionally injects market regime and yesterday's feedback into the prompt.
     Returns parsed JSON dict or None on failure.
     """
     setups_payload = []
@@ -98,13 +100,50 @@ def get_ai_recommendations(candidates: list, llm: AICoreLLM) -> Optional[dict]:
     system = (
         "You are an expert NSE equity trader specialising in Supply & Demand zone trading on 15-minute charts. "
         "Evaluate the given trade setups and select the TOP 10 with the highest probability of success. "
-        "Consider zone quality score, R:R ratio, and zone reasoning. "
+        "Consider zone quality score, R:R ratio, zone reasoning, market regime, and yesterday's learnings. "
         "Respond ONLY with valid JSON — no markdown fences, no extra text."
     )
 
-    user = f"""Here are {len(setups_payload)} trade setups detected across Nifty 50 stocks on 15-minute charts.
+    # Build context preamble from regime + feedback
+    context_sections = []
 
-Select exactly 10 with the highest win probability.
+    if regime is not None:
+        context_sections.append(f"""## Market Regime Right Now
+Regime: {regime.regime} | Nifty: {regime.nifty_direction} | ADX: {regime.adx} | VIX: {regime.vix}
+Best strategy for this regime: {regime.best_strategy}
+Context: {regime.description}""")
+
+    if yesterday_feedback:
+        improvements = yesterday_feedback.get("improvements", [])
+        symbol_notes = yesterday_feedback.get("symbol_notes", {})
+        wins_analysis = yesterday_feedback.get("wins_analysis", "")
+        losses_analysis = yesterday_feedback.get("losses_analysis", "")
+
+        feedback_lines = [
+            "## Yesterday's Key Learnings",
+            f"Wins: {wins_analysis}",
+            f"Losses: {losses_analysis}",
+        ]
+        if improvements:
+            feedback_lines.append("Apply today:")
+            for imp in improvements[:5]:
+                feedback_lines.append(f"  - [{imp.get('applies_to','general')}] {imp.get('action','')}")
+        if symbol_notes:
+            feedback_lines.append("Symbol notes:")
+            for sym, note in list(symbol_notes.items())[:8]:
+                feedback_lines.append(f"  {sym}: {note}")
+        context_sections.append("\n".join(feedback_lines))
+
+    if weekly_insights:
+        context_sections.append(f"## Weekly Insights\n{weekly_insights}")
+
+    preamble = "\n\n".join(context_sections)
+    if preamble:
+        preamble += "\n\n"
+
+    user = f"""{preamble}Here are {len(setups_payload)} trade setups detected across Nifty 50 stocks on 15-minute charts.
+
+Select exactly 10 with the highest win probability. Apply regime context and yesterday's learnings above when ranking.
 
 SETUPS:
 {json.dumps(setups_payload, indent=2)}

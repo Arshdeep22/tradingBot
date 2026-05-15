@@ -33,13 +33,23 @@ SUPPORTED_TIMEFRAMES = ["3m", "5m", "15m"]
 # ============== PAPER TRADING SETTINGS ==============
 INITIAL_CAPITAL = 100000  # Starting capital in INR
 MAX_POSITION_SIZE = 0.1   # Max 10% of capital per trade
-MAX_OPEN_POSITIONS = 5    # Maximum simultaneous positions
 
 # ============== RISK MANAGEMENT ==============
-STOP_LOSS_PERCENT = 1.0   # 1% stop loss
-TARGET_PERCENT = 2.0      # 2% target (1:2 risk-reward)
-TRAILING_STOP = False     # Enable/disable trailing stop
-MAX_DAILY_LOSS_PCT = 1.0  # Halt new orders if daily P&L drops below -1% of capital
+# Per-trade SL/TP: keep in ALL modes — these are strategy mechanics, not risk controls.
+# Without them, win/loss signals are meaningless and the learning loop breaks.
+STOP_LOSS_PERCENT = 1.0   # 1% stop loss (per-trade, strategy-level)
+TARGET_PERCENT = 2.0      # 2% target (per-trade, strategy-level)
+TRAILING_STOP = False
+
+# ============== PAPER TRADING MODE ==============
+# PAPER_TRADING_MODE=True  → relaxed aggregate limits for maximum learning throughput
+# PAPER_TRADING_MODE=False → strict risk controls for real money
+# To go live: add GitHub Actions secret PAPER_TRADING_MODE=false (no code change needed)
+import os as _os
+PAPER_TRADING_MODE = _os.environ.get("PAPER_TRADING_MODE", "true").lower() not in ("false", "0", "no")
+
+MAX_OPEN_POSITIONS = 12 if PAPER_TRADING_MODE else 5     # Paper: 12 slots; Real: 5
+MAX_DAILY_LOSS_PCT = 50.0 if PAPER_TRADING_MODE else 1.5  # Paper: effectively off; Real: 1.5%
 
 # ============== DATA SETTINGS ==============
 DATA_SOURCE = "yfinance"  # Options: "yfinance", "zerodha"
