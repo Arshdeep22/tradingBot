@@ -2,15 +2,15 @@ name: 🤖 Trading Bot - Auto Runner
 
 # Schedule overview (all UTC, IST = UTC+5:30):
 #   Every 5 min  3:00-10:59 UTC  →  8:30 AM - 4:29 PM IST  (bot_runner)
-#   5:30 AM UTC                  →  11:00 AM IST            (ai_trade_runner)
+#   5:31 AM UTC                  →  11:01 AM IST            (ai_trade_runner)
 #   10:05 AM UTC                 →  3:35 PM IST             (report_generator)
 
 on:
   schedule:
     # Every 5 minutes during market hours (UTC times for IST market)
     - cron: '*/5 3-10 * * 1-5'  # Mon-Fri, 3:00-10:59 UTC (8:30 AM - 4:29 PM IST)
-    # AI recommendations at 11:00 AM IST = 5:30 AM UTC
-    - cron: '30 5 * * 1-5'
+    # AI recommendations at 11:02 AM IST = 5:32 AM UTC (shifted 2 min to avoid */5 collision)
+    - cron: '32 5 * * 1-5'
     # EOD report at 3:35 PM IST = 10:05 AM UTC
     - cron: '5 10 * * 1-5'
 
@@ -132,7 +132,7 @@ jobs:
   ai-recommendations:
     runs-on: ubuntu-latest
     if: |
-      (github.event_name == 'schedule' && github.event.schedule == '30 5 * * 1-5') ||
+      (github.event_name == 'schedule' && github.event.schedule == '31 5 * * 1-5') ||
       (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'ai-recommendations')
     steps:
       - name: 📥 Checkout Repository
