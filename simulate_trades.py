@@ -77,8 +77,8 @@ for i, trade in enumerate(trades_data):
         entry_price=trade["entry_price"],
         stop_loss=trade["stop_loss"],
         target=trade["target"],
-        strategy="EMA Crossover",
-        reason="EMA 9 crossed above EMA 21"
+        strategy="Supply & Demand Zones",
+        reason="Price entered demand zone"
     )
     
     # Close it
@@ -105,8 +105,8 @@ for symbol in ["RELIANCE.NS", "INFY.NS"]:
         entry_price=entry,
         stop_loss=round(entry * 0.99, 2),
         target=round(entry * 1.02, 2),
-        strategy="EMA Crossover",
-        reason="EMA 9 crossed above EMA 21"
+        strategy="Supply & Demand Zones",
+        reason="Price entered demand zone"
     )
     print(f"  Open: {symbol} | Entry: {entry} | Qty: {quantity}")
 

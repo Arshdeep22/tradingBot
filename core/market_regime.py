@@ -4,6 +4,8 @@ Market Regime Detector
 Classifies current market as: trending_up, trending_down, ranging, volatile.
 Uses Nifty 50 index (^NSEI) and India VIX (^INDIAVIX) from yfinance.
 All calculations are pure pandas/numpy — no extra dependencies needed.
+
+Used for zone quality filtering — e.g. higher min_score in volatile markets.
 """
 
 import logging
@@ -91,7 +93,8 @@ _FALLBACK = RegimeResult(
 def detect_regime() -> RegimeResult:
     """
     Detect current market regime using Nifty 50 index and India VIX.
-    Returns RegimeResult with regime classification and recommended strategy.
+    Returns RegimeResult with regime classification.
+    Always recommends Supply & Demand Zones (single strategy focus).
     """
     try:
         nifty = yf.download("^NSEI", period="30d", interval="1d",
@@ -120,31 +123,29 @@ def detect_regime() -> RegimeResult:
     except Exception:
         pass
 
-    # Regime classification
+    # Regime classification — always use Zones but adapt description
+    best_strategy = "Supply & Demand Zones"
+
     if vix > 20:
         regime = "volatile"
-        best_strategy = "Supply & Demand Zones"
         desc = (f"High VIX={vix:.1f} — fearful market. "
                 "Use only high-quality zones (score 85+); reduce position sizes.")
     elif adx >= 25:
         if five_day_return > 0:
             regime = "trending_up"
-            best_strategy = "EMA Crossover"
             desc = (f"ADX={adx:.1f} strong uptrend (Nifty {direction_str}). "
-                    "EMA crossover and demand zones both effective.")
+                    "Focus on demand zones aligned with trend.")
         else:
             regime = "trending_down"
-            best_strategy = "Supply & Demand Zones"
             desc = (f"ADX={adx:.1f} strong downtrend (Nifty {direction_str}). "
-                    "Supply zones and RSI oversold bounces effective.")
+                    "Focus on supply zones aligned with trend.")
     else:
         regime = "ranging"
-        best_strategy = "RSI Reversal"
         desc = (f"ADX={adx:.1f} — ranging market (Nifty {direction_str}). "
-                "RSI reversal and tight supply/demand zones work best.")
+                "Both supply and demand zones work well in range-bound conditions.")
 
     logger.info(f"Market regime: {regime} | ADX={adx:.1f} | VIX={vix:.1f} | "
-                f"Nifty={direction_str} | Best strategy: {best_strategy}")
+                f"Nifty={direction_str}")
 
     return RegimeResult(
         regime=regime,

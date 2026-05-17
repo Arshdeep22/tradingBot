@@ -95,6 +95,15 @@ class ZoneScanner(BaseStrategy):
         data = data.copy().reset_index(drop=True)
         zones = []
 
+        # Calculate ATR(14) for adaptive SL buffer
+        prev_close = data['Close'].shift(1)
+        tr = pd.concat([
+            data['High'] - data['Low'],
+            (data['High'] - prev_close).abs(),
+            (data['Low'] - prev_close).abs(),
+        ], axis=1).max(axis=1)
+        self._current_atr = float(tr.ewm(com=13, adjust=False).mean().iloc[-1]) if len(data) > 14 else 0.0
+
         # Calculate candle body sizes
         data['body'] = abs(data['Close'] - data['Open'])
         data['body_pct'] = (data['body'] / data['Close']) * 100
@@ -364,23 +373,34 @@ class ZoneScanner(BaseStrategy):
         return zone
 
     def _calculate_trade_levels(self, zone: Zone) -> Zone:
-        """Calculate entry, stop loss, and target for a zone"""
+        """
+        Calculate entry, stop loss, and target for a zone.
+        Uses ATR-based buffer (1.5 x ATR) instead of fixed percentage
+        to adapt to each stock's volatility.
+        """
+        # Use stored ATR value (set during detect_zones), fallback to 0.4% buffer
+        atr_val = getattr(self, '_current_atr', 0)
+        if atr_val <= 0:
+            atr_val = zone.zone_bottom * 0.004
+
+        # Use 1.5x ATR as the buffer below/above zone
+        sl_buffer = atr_val * 1.5
 
         if zone.zone_type == "DEMAND":
             # Buy at top of demand zone
             zone.entry = zone.zone_top
-            # SL below bottom of zone (with 0.4% buffer — wider to survive 15m wicks)
-            zone.stop_loss = round(zone.zone_bottom * (1 - 0.004), 2)
-            # Target = Entry + 3 * Risk
+            # SL below bottom of zone with ATR-based buffer
+            zone.stop_loss = round(zone.zone_bottom - sl_buffer, 2)
+            # Target = Entry + rr_ratio * Risk
             risk = zone.entry - zone.stop_loss
             zone.target = round(zone.entry + (self.rr_ratio * risk), 2)
 
         elif zone.zone_type == "SUPPLY":
             # Sell at bottom of supply zone
             zone.entry = zone.zone_bottom
-            # SL above top of zone (with 0.4% buffer — wider to survive 15m wicks)
-            zone.stop_loss = round(zone.zone_top * (1 + 0.004), 2)
-            # Target = Entry - 3 * Risk
+            # SL above top of zone with ATR-based buffer
+            zone.stop_loss = round(zone.zone_top + sl_buffer, 2)
+            # Target = Entry - rr_ratio * Risk
             risk = zone.stop_loss - zone.entry
             zone.target = round(zone.entry - (self.rr_ratio * risk), 2)
 

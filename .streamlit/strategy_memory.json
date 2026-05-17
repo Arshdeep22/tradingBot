@@ -395,6 +395,134 @@
       "wins": 2,
       "losses": 1,
       "analysis": "Current WR=25% with 8 triggered zones shows test_days=10 is TOO SHORT \u2014 price needs more time to reach targets. History proves test_days=14 consistently yields 66.7% WR with score=75 rr=2.0 build=18d. Reverting to that proven combo."
+    },
+    {
+      "timestamp": "2026-05-15T18:24:23.446133",
+      "symbols": [
+        "ASIANPAINT.NS",
+        "AXISBANK.NS",
+        "BAJFINANCE.NS",
+        "BHARTIARTL.NS",
+        "DMART.NS",
+        "HCLTECH.NS",
+        "HDFCBANK.NS",
+        "HINDUNILVR.NS",
+        "ICICIBANK.NS",
+        "INFY.NS",
+        "ITC.NS",
+        "KOTAKBANK.NS",
+        "LT.NS",
+        "MARUTI.NS",
+        "RELIANCE.NS",
+        "SBIN.NS",
+        "SUNPHARMA.NS",
+        "TCS.NS",
+        "TITAN.NS",
+        "ULTRACEMCO.NS"
+      ],
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3
+      },
+      "win_rate": 5.019305019305019,
+      "pnl": 11598.059999999998,
+      "zones": 259,
+      "triggered": 259,
+      "wins": 13,
+      "losses": 246,
+      "analysis": "Historical trainer: 5.0% WR over 59 trading days"
+    },
+    {
+      "timestamp": "2026-05-15T18:46:14.962043",
+      "symbols": [
+        "BHARTIARTL.NS",
+        "HDFCBANK.NS",
+        "HINDUNILVR.NS",
+        "ICICIBANK.NS",
+        "INFY.NS",
+        "ITC.NS",
+        "KOTAKBANK.NS",
+        "RELIANCE.NS",
+        "SBIN.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      },
+      "win_rate": 7.216494845360824,
+      "pnl": 1069.7600000000002,
+      "zones": 194,
+      "triggered": 194,
+      "wins": 14,
+      "losses": 180,
+      "analysis": "The 12-week walk-forward simulation revealed a deeply challenging environment with only 7.2% win rate across 194 trades. Supply & Demand Zones dominated trade generation but consistently failed, particularly on BUY-side entries during bearish regimes. EMA Crossover showed the highest potential with a single trade generating \u20b91,761 profit (Week 7), suggesting momentum-following strategies vastly outperform mean-reversion in trending markets. RSI Reversal was catastrophic with near-zero success, confirming counter-trend entries are toxic in directional environments."
+    },
+    {
+      "timestamp": "2026-05-15T19:44:12.077343",
+      "symbols": [
+        "BHARTIARTL.NS",
+        "HDFCBANK.NS",
+        "HINDUNILVR.NS",
+        "ICICIBANK.NS",
+        "INFY.NS",
+        "ITC.NS",
+        "KOTAKBANK.NS",
+        "RELIANCE.NS",
+        "SBIN.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      },
+      "win_rate": 24.200913242009133,
+      "pnl": -2456.2099999999996,
+      "zones": 317,
+      "triggered": 317,
+      "wins": 53,
+      "losses": 166,
+      "analysis": "The 12-week walk-forward simulation was overwhelmingly negative with a 24.2% win rate across 317 trades and consistent weekly losses (only Week 2 was profitable). Supply & Demand Zones was the dominant signal generator but proved catastrophically unreliable, particularly on BUY-side trades and in choppy/ranging markets. The optimizer repeatedly over-allocated to S&D zones despite poor performance, revealing a fundamental mismatch between the strategy's zone-detection logic and actual market conditions. The only marginally successful pattern was SELL-side S&D trades on specific stocks (HINDUNILVR) and RSI Reversal signals, though even these were inconsistent."
+    },
+    {
+      "timestamp": "2026-05-15T20:01:05.896016",
+      "symbols": [
+        "ASIANPAINT.NS",
+        "AXISBANK.NS",
+        "BAJFINANCE.NS",
+        "BHARTIARTL.NS",
+        "DMART.NS",
+        "HCLTECH.NS",
+        "HDFCBANK.NS",
+        "HINDUNILVR.NS",
+        "ICICIBANK.NS",
+        "INFY.NS",
+        "ITC.NS",
+        "KOTAKBANK.NS",
+        "LT.NS",
+        "MARUTI.NS",
+        "RELIANCE.NS",
+        "SBIN.NS",
+        "SUNPHARMA.NS",
+        "TCS.NS",
+        "TITAN.NS",
+        "ULTRACEMCO.NS"
+      ],
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3
+      },
+      "win_rate": 23.643410852713178,
+      "pnl": -3077.6200000000003,
+      "zones": 335,
+      "triggered": 335,
+      "wins": 61,
+      "losses": 197,
+      "analysis": "The 12-week walk-forward simulation produced a deeply negative outcome with 23.6% win rate across 335 trades, indicating all three strategies struggled significantly in the prevailing bearish/choppy market regime. No strategy achieved consistent profitability\u2014Supply & Demand Zones generated the most trades but was consistently stopped out on BUY-side entries, RSI Reversal counter-trend entries failed catastrophically in trending phases, and EMA Crossover showed occasional promise but had insufficient trade volume to validate. The only marginally positive weeks (2, 12) occurred when win rates exceeded 35%, suggesting the core issue is excessive trade frequency with insufficient signal quality filtering."
     }
   ],
   "best_win_rate": 66.66666666666666,

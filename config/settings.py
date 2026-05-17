@@ -69,10 +69,6 @@ ZERODHA_ACCESS_TOKEN = ""
 # ============== STRATEGY SETTINGS ==============
 ACTIVE_STRATEGY = "Supply & Demand Zones"  # Must match a key in strategies.STRATEGY_REGISTRY
 
-# EMA Crossover Strategy Settings
-EMA_FAST_PERIOD = 9
-EMA_SLOW_PERIOD = 21
-
 # ============== SCHEDULE SETTINGS ==============
 # Market hours (IST)
 MARKET_OPEN_HOUR = 9

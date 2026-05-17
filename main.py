@@ -22,7 +22,7 @@ from config.settings import (
     SYMBOLS, DEFAULT_TIMEFRAME, INITIAL_CAPITAL,
     ACTIVE_STRATEGY
 )
-from strategies.ema_crossover import EMACrossoverStrategy
+from strategies.zone_scanner import ZoneScanner
 from core.paper_trader import PaperTrader
 from core.engine import TradingEngine
 
@@ -47,18 +47,22 @@ def setup_logging():
     )
 
 
-def get_strategy(strategy_name: str):
-    """Get strategy instance by name"""
-    strategies = {
-        "ema_crossover": EMACrossoverStrategy(timeframe=DEFAULT_TIMEFRAME),
-    }
+def get_strategy():
+    """Get the Zone Scanner strategy instance with AI-optimized params if available"""
+    try:
+        from core.llm_advisor import StrategyMemory
+        mem = StrategyMemory()
+        if mem.best_params:
+            lp = mem.live_params()
+            return ZoneScanner(
+                min_score=lp["min_score"],
+                rr_ratio=lp["rr_ratio"],
+                max_base_candles=lp["max_base_candles"],
+            )
+    except Exception:
+        pass
 
-    if strategy_name not in strategies:
-        print(f"Unknown strategy: {strategy_name}")
-        print(f"Available strategies: {list(strategies.keys())}")
-        sys.exit(1)
-
-    return strategies[strategy_name]
+    return ZoneScanner()
 
 
 def main():
@@ -79,7 +83,7 @@ def main():
     print()
 
     # Initialize components
-    strategy = get_strategy(ACTIVE_STRATEGY)
+    strategy = get_strategy()
     broker = PaperTrader(initial_capital=INITIAL_CAPITAL)
 
     # Create trading engine
