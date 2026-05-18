@@ -1,0 +1,47 @@
+{
+  "date": "2026-05-18",
+  "wins_analysis": "No wins today as none of the 5 placed pending orders were triggered. Entry levels were set too far from the current market price, meaning price did not retrace to the supply zones before continuing down.",
+  "losses_analysis": "No losses either, but the fundamental issue is zero execution \u2014 all 5 orders remained pending. In a strong downtrend (-0.7%), price often does not retrace to distant supply zones; it trends lower from nearer resistance. The entry prices were set at zones above the day's trading range, making fills impossible.",
+  "regime_impact": "The downtrend regime was correctly identified and SELL-side bias was appropriate. However, the strategy failed to capitalize because supply zone entries were too far from intraday price action. A trending_down regime favors entries at CLOSER supply zones or breakout-continuation entries rather than distant retracement zones.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "For trending_down days (ADX>22, Nifty<-0.5%), prioritize supply zones within 0.5% of the previous close or current price rather than distant zones 1-2% above. Filter out any entry price more than 0.8% above the opening price.",
+      "reason": "All 5 pending orders were never reached because entries were set at supply zones too far above the day's price action in a strong downtrend where retracements are shallow.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Add a 'proximity filter' that checks if the entry price is within the previous day's high-low range. If the entry is above the prior day's high in a downtrend, skip it or lower priority significantly.",
+      "reason": "SBIN entry at 1074.20, HINDUNILVR at 2317, INFY at 1177.50 \u2014 these may have been above the day's high, making execution impossible.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "Reduce duplicate symbol entries. HINDUNILVR had 3 of 10 recommendations (ranks 2, 6, 9). Limit to max 1 setup per symbol in top 10 to improve diversification and execution probability.",
+      "reason": "3 HINDUNILVR setups and 2 RELIANCE setups consumed 5 of 10 slots. If that stock doesn't reach any zone, half the recommendations are wasted. Diversification increases probability of at least some fills.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Introduce a secondary entry mechanism: if the primary supply zone is not hit by 11:30 AM, place a limit order at the nearest 15-min supply zone (formed intraday) within 0.3% of current price to catch intraday moves.",
+      "reason": "Zero execution means zero P&L. An adaptive intraday re-scan would have identified closer entry points as the downtrend developed during the session.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Consider adding market orders or 'at open' entries for the highest conviction setups (AI prob \u2265 83%) when the gap direction aligns with the trade direction (gap down for SELL setups) instead of waiting for limit fills at distant zones.",
+      "reason": "SBIN (85%) and HINDUNILVR (83%) had very high conviction but zero fills. In a trending market, waiting for perfect entries means missing the move entirely.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues, use tighter supply zones within 0.3-0.5% of opening price for SELL entries, prioritize stocks showing weakest relative strength, and ensure at least 3 different symbols get orders placed.",
+  "symbol_notes": {
+    "SBIN.NS": "85% conviction SELL never triggered \u2014 check if tomorrow's open is near 1074 level; if so, this zone may still be valid for a fresh entry.",
+    "HINDUNILVR.NS": "Had 3 setups but none triggered \u2014 over-represented in recommendations. Use only the single best zone tomorrow.",
+    "INFY.NS": "SELL at 1177.50 pending \u2014 verify if this level aligns with tomorrow's pre-market range; if gap down opens below this, cancel and find closer zone.",
+    "RELIANCE.NS": "Two SELL entries at very different levels (1464 and 1336) suggests confusion on which zone is active. Use only the zone nearest to current price.",
+    "ICICIBANK.NS": "Not placed despite 78% probability \u2014 consider placing it tomorrow if zone is still intact and within proximity of opening price."
+  },
+  "confidence": 4
+}
