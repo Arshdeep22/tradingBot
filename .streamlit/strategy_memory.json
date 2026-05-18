@@ -523,6 +523,33 @@
       "wins": 61,
       "losses": 197,
       "analysis": "The 12-week walk-forward simulation produced a deeply negative outcome with 23.6% win rate across 335 trades, indicating all three strategies struggled significantly in the prevailing bearish/choppy market regime. No strategy achieved consistent profitability\u2014Supply & Demand Zones generated the most trades but was consistently stopped out on BUY-side entries, RSI Reversal counter-trend entries failed catastrophically in trending phases, and EMA Crossover showed occasional promise but had insufficient trade volume to validate. The only marginally positive weeks (2, 12) occurred when win rates exceeded 35%, suggesting the core issue is excessive trade frequency with insufficient signal quality filtering."
+    },
+    {
+      "timestamp": "2026-05-17T18:52:27.643180",
+      "symbols": [
+        "BHARTIARTL.NS",
+        "HDFCBANK.NS",
+        "HINDUNILVR.NS",
+        "ICICIBANK.NS",
+        "INFY.NS",
+        "ITC.NS",
+        "KOTAKBANK.NS",
+        "RELIANCE.NS",
+        "SBIN.NS",
+        "TCS.NS"
+      ],
+      "params": {
+        "min_score": 85,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      },
+      "win_rate": 25.412541254125415,
+      "pnl": -3084.37,
+      "zones": 454,
+      "triggered": 454,
+      "wins": 77,
+      "losses": 226,
+      "analysis": "The walk-forward simulation of 454 trades over 12 weeks produced a dismal 25.4% overall win rate with consistent negative P&L, indicating the zone scanner alone is insufficient for profitable trading. The system chronically over-traded (30-44 trades/week) with poor zone quality filtering, frequently entering against prevailing trends. The only profitable week (Week 5, 50% WR, \u20b9+35) coincided with higher min_score thresholds and reduced RR targets, while catastrophic weeks (4 and 7 at 7.7% and 4.0% WR) occurred when the system traded aggressively into trending markets without directional bias filtering."
     }
   ],
   "best_win_rate": 66.66666666666666,

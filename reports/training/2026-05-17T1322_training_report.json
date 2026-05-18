@@ -1,0 +1,5840 @@
+{
+  "run_id": "2026-05-17T1322",
+  "run_timestamp": "2026-05-17T13:22:27.680678+00:00",
+  "training_period": {
+    "start": "2026-02-16",
+    "end": "2026-05-15"
+  },
+  "trading_days": 59,
+  "symbols_used": [
+    "RELIANCE.NS",
+    "TCS.NS",
+    "HDFCBANK.NS",
+    "INFY.NS",
+    "ICICIBANK.NS",
+    "HINDUNILVR.NS",
+    "SBIN.NS",
+    "BHARTIARTL.NS",
+    "ITC.NS",
+    "KOTAKBANK.NS"
+  ],
+  "quick_mode": true,
+  "no_ai": false,
+  "total_setups_found": 454,
+  "total_triggered": 454,
+  "total_wins": 77,
+  "total_losses": 226,
+  "overall_win_rate": 25.4,
+  "total_pnl": -3084.37,
+  "optimizer_runs": 11,
+  "claude_calls": 5,
+  "final_zone_params": {
+    "min_score": 85,
+    "rr_ratio": 1.5,
+    "max_base_candles": 3
+  },
+  "weekly_summary": [
+    {
+      "week_num": 1,
+      "start_date": "2026-02-16",
+      "end_date": "2026-02-20",
+      "trading_days": 5,
+      "triggered": 36,
+      "wins": 5,
+      "losses": 21,
+      "win_rate": 19.2,
+      "pnl": -266.21
+    },
+    {
+      "week_num": 2,
+      "start_date": "2026-02-23",
+      "end_date": "2026-02-27",
+      "trading_days": 5,
+      "triggered": 43,
+      "wins": 10,
+      "losses": 18,
+      "win_rate": 35.7,
+      "pnl": -47.22
+    },
+    {
+      "week_num": 3,
+      "start_date": "2026-03-02",
+      "end_date": "2026-03-09",
+      "trading_days": 5,
+      "triggered": 31,
+      "wins": 10,
+      "losses": 17,
+      "win_rate": 37.0,
+      "pnl": -313.41
+    },
+    {
+      "week_num": 4,
+      "start_date": "2026-03-10",
+      "end_date": "2026-03-16",
+      "trading_days": 5,
+      "triggered": 43,
+      "wins": 2,
+      "losses": 24,
+      "win_rate": 7.7,
+      "pnl": -434.1
+    },
+    {
+      "week_num": 5,
+      "start_date": "2026-03-17",
+      "end_date": "2026-03-23",
+      "trading_days": 5,
+      "triggered": 31,
+      "wins": 11,
+      "losses": 11,
+      "win_rate": 50.0,
+      "pnl": 35.07
+    },
+    {
+      "week_num": 6,
+      "start_date": "2026-03-24",
+      "end_date": "2026-04-01",
+      "trading_days": 5,
+      "triggered": 41,
+      "wins": 9,
+      "losses": 23,
+      "win_rate": 28.1,
+      "pnl": -273.92
+    },
+    {
+      "week_num": 7,
+      "start_date": "2026-04-02",
+      "end_date": "2026-04-09",
+      "trading_days": 5,
+      "triggered": 41,
+      "wins": 1,
+      "losses": 24,
+      "win_rate": 4.0,
+      "pnl": -381.47
+    },
+    {
+      "week_num": 8,
+      "start_date": "2026-04-10",
+      "end_date": "2026-04-17",
+      "trading_days": 5,
+      "triggered": 42,
+      "wins": 3,
+      "losses": 14,
+      "win_rate": 17.6,
+      "pnl": -282.16
+    },
+    {
+      "week_num": 9,
+      "start_date": "2026-04-20",
+      "end_date": "2026-04-24",
+      "trading_days": 5,
+      "triggered": 32,
+      "wins": 4,
+      "losses": 20,
+      "win_rate": 16.7,
+      "pnl": -382.66
+    },
+    {
+      "week_num": 10,
+      "start_date": "2026-04-27",
+      "end_date": "2026-05-04",
+      "trading_days": 5,
+      "triggered": 38,
+      "wins": 5,
+      "losses": 20,
+      "win_rate": 20.0,
+      "pnl": -272.19
+    },
+    {
+      "week_num": 11,
+      "start_date": "2026-05-05",
+      "end_date": "2026-05-11",
+      "trading_days": 5,
+      "triggered": 44,
+      "wins": 11,
+      "losses": 26,
+      "win_rate": 29.7,
+      "pnl": -294.43
+    },
+    {
+      "week_num": 12,
+      "start_date": "2026-05-12",
+      "end_date": "2026-05-15",
+      "trading_days": 4,
+      "triggered": 32,
+      "wins": 6,
+      "losses": 8,
+      "win_rate": 42.9,
+      "pnl": -171.67
+    }
+  ],
+  "params_history": [
+    {
+      "day_idx": 5,
+      "date": "2026-02-20",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 10,
+      "date": "2026-02-27",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 10,
+      "date": "2026-02-27",
+      "trigger": "claude_synthesis",
+      "analysis": "Overall win rate is 27.8% (15/54 decided trades) with a strong directional bias: SELL trades won 14/25 (56%) while BUY trades won only 1/29 (3.4%). The market exhibited a persistent bearish trend across this 10-day period, making demand zones (BUY) consistently fail. Symbols like RELIANCE (6/6 SELL wins), ICICIBANK, and BHARTIARTL performed well on SELL side, while TCS BUY trades lost all 5 attempts totaling \u20b9-210.",
+      "zone_params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 15,
+      "date": "2026-03-09",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 20,
+      "date": "2026-03-16",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 20,
+      "date": "2026-03-16",
+      "trigger": "claude_synthesis",
+      "analysis": "With a 22.6% win rate (12/53 decided trades) and heavy losses totaling \u20b9-756, the current parameters are far too permissive. BUY trades were catastrophic with only 5 wins vs ~35 losses, particularly BHARTIARTL.NS (0 wins, 8+ losses losing \u20b9-335) and TCS.NS BUY (0 wins, 6 losses). SELL trades performed relatively better at 7 wins from fewer attempts, suggesting a bearish market regime where demand zones are consistently failing.",
+      "zone_params": {
+        "min_score": 88,
+        "rr_ratio": 1.5,
+        "max_base_candles": 2
+      }
+    },
+    {
+      "day_idx": 25,
+      "date": "2026-03-23",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 30,
+      "date": "2026-04-01",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 30,
+      "date": "2026-04-01",
+      "trigger": "claude_synthesis",
+      "analysis": "Win rate is 37% (20/72) with a negative P&L of \u20b9-250. SELL trades significantly outperform BUY trades with 13 wins vs 7 wins despite fewer total sell trades, suggesting a bearish market bias during this period. BUY trades on TCS.NS (-36 avg loss), INFY.NS (-24 avg loss), RELIANCE.NS, and BHARTIARTL.NS are consistently hitting stop losses, indicating demand zones are failing to hold.",
+      "zone_params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 35,
+      "date": "2026-04-09",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 40,
+      "date": "2026-04-17",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 40,
+      "date": "2026-04-17",
+      "trigger": "claude_synthesis",
+      "analysis": "With only 4 wins out of 83 trades (9.5% win rate, \u20b9-666 P&L), the system is catastrophically over-trading with extremely poor zone selection. 38 SL_HIT losses indicate zones are being entered against the prevailing trend \u2014 70+ of 83 trades were SELL-side during what appears to be a broadly bullish/choppy market. EXPIRED trades (41 of 83) with small negative P&L suggest zones are being touched but price lacks momentum to reach targets at 2.0 RR.",
+      "zone_params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 45,
+      "date": "2026-04-24",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 50,
+      "date": "2026-05-04",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "day_idx": 50,
+      "date": "2026-05-04",
+      "trigger": "claude_synthesis",
+      "analysis": "Win rate of 18.4% (9/70) is catastrophically low, with only 9 TARGET_HITs against 40 SL_HITs and 21 EXPIRED trades. TCS.NS is the worst performer with 9 losses and only 1 win (P&L approx -\u20b9281), while BHARTIARTL.NS shows 0 wins from 10 trades. The average winning trade (\u20b921.1) vs average SL loss (\u20b9-18.5) shows the 2.0 RR ratio is not being achieved in practice, suggesting zones are too close to price action or stop-losses are too tight.",
+      "zone_params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 55,
+      "date": "2026-05-11",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    }
+  ],
+  "final_summary": {
+    "executive_summary": "The walk-forward simulation of 454 trades over 12 weeks produced a dismal 25.4% overall win rate with consistent negative P&L, indicating the zone scanner alone is insufficient for profitable trading. The system chronically over-traded (30-44 trades/week) with poor zone quality filtering, frequently entering against prevailing trends. The only profitable week (Week 5, 50% WR, \u20b9+35) coincided with higher min_score thresholds and reduced RR targets, while catastrophic weeks (4 and 7 at 7.7% and 4.0% WR) occurred when the system traded aggressively into trending markets without directional bias filtering.",
+    "key_insights": [
+      "Zone scoring threshold of 70 is far too permissive - the system generates excessive low-quality signals that get stopped out; weeks with implied higher filtering (Week 5 at 50% WR, Week 12 at 42.9% WR) dramatically outperformed, suggesting min_score of 82-85 is necessary to filter noise",
+      "The 2.0 RR ratio is rarely achieved in practice - actual winning trades averaged only \u20b921.1 while stops averaged \u20b918.5 (effective RR ~1.14:1), meaning price enters zones but lacks momentum to reach full targets; a 1.3-1.5 RR with higher win rate is mathematically superior for this setup",
+      "Trading against the prevailing trend is the #1 killer - SELL zones in bullish markets and BUY zones in bearish markets account for the majority of SL_HIT losses; TCS.NS (9 losses/1 win) and BHARTIARTL.NS (0 wins/10 trades) show certain instruments need directional bias confirmation before entry",
+      "EXPIRED trades (averaging 40-50% of all trades) with small negative P&L indicate zones are being touched but price consolidates rather than reversing sharply - tighter base candle requirements (max 2-3) would select only the sharpest departure zones with genuine institutional interest",
+      "The optimizer consistently reverted to permissive params (min_score 70, RR 2.0) because it lacked enough winning trade data to validate tighter settings - this is a classic overfitting-to-noise trap where the system needs fewer, higher-conviction trades rather than more attempts"
+    ],
+    "best_performing_setup": "Week 5 (50% WR, only profitable week) and Week 12 (42.9% WR, smallest loss) shared common characteristics: fewer total trades (31-32 vs 40+ average), implying natural market conditions filtered out weak zones. The Claude synthesis recommendations of min_score 82, RR 1.5, max_base_candles 3 were directionally correct but never given sufficient runway to prove themselves as the mini_optimizer kept reverting to looser params. The strongest pattern appears to be fresh (untested) zones with very tight bases (2-3 candles), high departure momentum, entered only in alignment with the higher-timeframe trend direction.",
+    "recommended_live_approach": "Drastically reduce trade frequency by implementing strict quality gates: minimum zone score of 85, maximum 2-3 base candles for sharp institutional prints, RR target of 1.5 to improve hit rate, and critically add a trend-alignment filter (only take BUY zones in uptrending instruments, SELL zones in downtrending). Limit to 3-5 trades per day maximum across all instruments. Avoid TCS.NS and BHARTIARTL.NS unless zone scores exceed 90. Consider partial profit-taking at 1.0 RR with trail to 1.5 RR to capture the frequent 'touch-and-fade' behavior observed in expired trades. The zone scanner should be treated as a candidate generator, not a trade signal - additional confluence (volume spike at zone, higher-timeframe alignment, time-of-day filter avoiding first 15 and last 15 minutes) is essential for profitability.",
+    "recommended_params": {
+      "min_score": 85,
+      "rr_ratio": 1.5,
+      "max_base_candles": 3
+    },
+    "confidence_in_params": 3
+  },
+  "daily_results": [
+    {
+      "date": "2026-02-16",
+      "day_idx": 1,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-17",
+      "day_idx": 2,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 22.06,
+          "entry": 1431.23,
+          "trigger_time": "Candle 32",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -56.08,
+          "entry": 2722.33,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 19"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 5.85,
+          "entry": 922.0,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 44.14,
+          "entry": 1349.59,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 14.96,
+          "entry": 1406.58,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -25.49,
+          "entry": 2305.6,
+          "trigger_time": "Candle 56",
+          "exit_time": "Candle 60"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.67,
+          "entry": 1219.33,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -19.94,
+          "entry": 2008.31,
+          "trigger_time": "Candle 54",
+          "exit_time": "Candle 65"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.64,
+          "entry": 422.59,
+          "trigger_time": "Candle 29",
+          "exit_time": "Candle 64"
+        }
+      ],
+      "triggered": 9,
+      "wins": 2,
+      "losses": 5,
+      "win_rate": 28.6,
+      "pnl": -41.81,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-18",
+      "day_idx": 3,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 18.86,
+          "entry": 1431.23,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -42.7,
+          "entry": 2706.78,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 20"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 7.0,
+          "entry": 922.0,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 30.25,
+          "entry": 1385.52,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 18.43,
+          "entry": 1406.58,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -22.44,
+          "entry": 2305.6,
+          "trigger_time": "Candle 31",
+          "exit_time": "Candle 34"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -19.75,
+          "entry": 1219.33,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 41"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -19.77,
+          "entry": 2008.31,
+          "trigger_time": "Candle 29",
+          "exit_time": "Candle 39"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 0.1,
+          "entry": 326.45,
+          "trigger_time": "Candle 40",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.09,
+          "entry": 422.59,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 34"
+        }
+      ],
+      "triggered": 10,
+      "wins": 2,
+      "losses": 5,
+      "win_rate": 28.6,
+      "pnl": -35.11,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-19",
+      "day_idx": 4,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -47.18,
+          "entry": 2740.97,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 3"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -3.45,
+          "entry": 922.0,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.57,
+          "entry": 1349.59,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 44"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -0.42,
+          "entry": 1401.39,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -22.42,
+          "entry": 2305.6,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 9"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -18.41,
+          "entry": 1219.33,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -18.79,
+          "entry": 2008.31,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 14"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -1.7,
+          "entry": 326.45,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -4.01,
+          "entry": 424.65,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 5"
+        }
+      ],
+      "triggered": 9,
+      "wins": 0,
+      "losses": 6,
+      "win_rate": 0.0,
+      "pnl": -137.95,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-20",
+      "day_idx": 5,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -54.12,
+          "entry": 2681.95,
+          "trigger_time": "Candle 8",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 9.65,
+          "entry": 922.0,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 13.78,
+          "entry": 1401.39,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -33.04,
+          "entry": 2317.26,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 24"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -15.97,
+          "entry": 1216.56,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 20"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 36.63,
+          "entry": 1988.52,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.5,
+          "entry": 326.45,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -4.77,
+          "entry": 423.15,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        }
+      ],
+      "triggered": 8,
+      "wins": 1,
+      "losses": 5,
+      "win_rate": 16.7,
+      "pnl": -51.34,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-23",
+      "day_idx": 6,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 13.86,
+          "entry": 1436.42,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 55"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -52.99,
+          "entry": 2681.95,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 12.34,
+          "entry": 922.0,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 55"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 22.2,
+          "entry": 1327.54,
+          "trigger_time": "Candle 2",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -1.32,
+          "entry": 1401.39,
+          "trigger_time": "Candle 62",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 23.63,
+          "entry": 2346.68,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -13.53,
+          "entry": 1210.72,
+          "trigger_time": "Candle 56",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 20.47,
+          "entry": 1984.72,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -0.32,
+          "entry": 318.89,
+          "trigger_time": "Candle 58",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 1.21,
+          "entry": 422.89,
+          "trigger_time": "Candle 55",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 10,
+      "wins": 4,
+      "losses": 1,
+      "win_rate": 80.0,
+      "pnl": 25.55,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-24",
+      "day_idx": 7,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 13.5,
+          "entry": 1436.42,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 30"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 7.63,
+          "entry": 2661.37,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -10.11,
+          "entry": 915.13,
+          "trigger_time": "Candle 8",
+          "exit_time": "Candle 30"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -1.14,
+          "entry": 1406.58,
+          "trigger_time": "Candle 65",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -14.99,
+          "entry": 1210.72,
+          "trigger_time": "Candle 31",
+          "exit_time": "Candle 39"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -1.07,
+          "entry": 318.89,
+          "trigger_time": "Candle 33",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 0.61,
+          "entry": 422.89,
+          "trigger_time": "Candle 30",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 7,
+      "wins": 1,
+      "losses": 2,
+      "win_rate": 33.3,
+      "pnl": -5.57,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-25",
+      "day_idx": 8,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -24.26,
+          "entry": 1416.73,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 15"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -10.17,
+          "entry": 915.13,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 5"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 15.04,
+          "entry": 1406.58,
+          "trigger_time": "Candle 40",
+          "exit_time": "Candle 48"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -11.26,
+          "entry": 2344.68,
+          "trigger_time": "Candle 44",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -16.36,
+          "entry": 1210.72,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 21"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -26.45,
+          "entry": 1945.68,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 6"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.14,
+          "entry": 318.89,
+          "trigger_time": "Candle 8",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.9,
+          "entry": 422.89,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 58"
+        }
+      ],
+      "triggered": 8,
+      "wins": 1,
+      "losses": 6,
+      "win_rate": 14.3,
+      "pnl": -82.5,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-26",
+      "day_idx": 9,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 27.0,
+          "entry": 1402.79,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 37.07,
+          "entry": 2668.15,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -12.09,
+          "entry": 910.02,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 4"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 2.78,
+          "entry": 1282.96,
+          "trigger_time": "Candle 51",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 15.88,
+          "entry": 1406.58,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 23"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 19.73,
+          "entry": 2296.28,
+          "trigger_time": "Candle 58",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -14.4,
+          "entry": 1198.6,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 13"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -26.99,
+          "entry": 1925.44,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.0,
+          "entry": 318.89,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.56,
+          "entry": 422.89,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 33"
+        }
+      ],
+      "triggered": 10,
+      "wins": 3,
+      "losses": 5,
+      "win_rate": 37.5,
+      "pnl": 40.42,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-02-27",
+      "day_idx": 10,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 29.58,
+          "entry": 1402.79,
+          "trigger_time": "Candle 2",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -9.33,
+          "entry": 2587.16,
+          "trigger_time": "Candle 59",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 21.88,
+          "entry": 1282.96,
+          "trigger_time": "Candle 26",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -15.13,
+          "entry": 1389.67,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 15"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -33.38,
+          "entry": 2296.28,
+          "trigger_time": "Candle 33",
+          "exit_time": "Candle 65"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -17.0,
+          "entry": 1204.8,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 3.43,
+          "entry": 1913.17,
+          "trigger_time": "Candle 63",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.17,
+          "entry": 418.39,
+          "trigger_time": "Candle 9",
+          "exit_time": "Candle 17"
+        }
+      ],
+      "triggered": 8,
+      "wins": 1,
+      "losses": 4,
+      "win_rate": 20.0,
+      "pnl": -25.12,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-02",
+      "day_idx": 11,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -21.07,
+          "entry": 1368.46,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 45"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -39.75,
+          "entry": 2587.16,
+          "trigger_time": "Candle 34",
+          "exit_time": "Candle 48"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 24.11,
+          "entry": 1282.96,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 12.92,
+          "entry": 1189.62,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -55.76,
+          "entry": 1886.06,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -4.16,
+          "entry": 312.62,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 46"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 4.2,
+          "entry": 410.68,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 17"
+        }
+      ],
+      "triggered": 7,
+      "wins": 3,
+      "losses": 4,
+      "win_rate": 42.9,
+      "pnl": -79.51,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-04",
+      "day_idx": 12,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -25.35,
+          "entry": 1368.46,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 38"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -40.07,
+          "entry": 2587.16,
+          "trigger_time": "Candle 9",
+          "exit_time": "Candle 23"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 24.18,
+          "entry": 1293.78,
+          "trigger_time": "Candle 22",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -39.01,
+          "entry": 2296.28,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 15"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -16.83,
+          "entry": 1886.06,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -4.33,
+          "entry": 312.62,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 21"
+        }
+      ],
+      "triggered": 6,
+      "wins": 1,
+      "losses": 4,
+      "win_rate": 20.0,
+      "pnl": -101.41,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-05",
+      "day_idx": 13,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -37.48,
+          "entry": 2576.74,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 18.27,
+          "entry": 871.1,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 20.09,
+          "entry": 1293.78,
+          "trigger_time": "Candle 2",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -18.61,
+          "entry": 1362.72,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -15.43,
+          "entry": 1167.33,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 10"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -56.17,
+          "entry": 1886.06,
+          "trigger_time": "Candle 30",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 3.83,
+          "entry": 312.12,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -6.3,
+          "entry": 405.51,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 39"
+        }
+      ],
+      "triggered": 8,
+      "wins": 3,
+      "losses": 5,
+      "win_rate": 37.5,
+      "pnl": -91.8,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-06",
+      "day_idx": 14,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 28.66,
+          "entry": 1393.58,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -34.24,
+          "entry": 2583.96,
+          "trigger_time": "Candle 2",
+          "exit_time": "Candle 14"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 19.63,
+          "entry": 1293.78,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -52.57,
+          "entry": 1886.06,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -4.97,
+          "entry": 311.07,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -6.53,
+          "entry": 405.51,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 15"
+        }
+      ],
+      "triggered": 6,
+      "wins": 2,
+      "losses": 4,
+      "win_rate": 33.3,
+      "pnl": -50.02,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-09",
+      "day_idx": 15,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -9.36,
+          "entry": 1393.58,
+          "trigger_time": "Candle 64",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -9.72,
+          "entry": 1282.96,
+          "trigger_time": "Candle 57",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 29.05,
+          "entry": 1864.66,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 43"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -0.64,
+          "entry": 308.88,
+          "trigger_time": "Candle 33",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 4,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "pnl": 9.33,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-10",
+      "day_idx": 16,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -6.36,
+          "entry": 1393.58,
+          "trigger_time": "Candle 39",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 47.06,
+          "entry": 2514.46,
+          "trigger_time": "Candle 16",
+          "exit_time": "Candle 41"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -3.83,
+          "entry": 834.16,
+          "trigger_time": "Candle 25",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.95,
+          "entry": 1282.96,
+          "trigger_time": "Candle 32",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -8.18,
+          "entry": 1272.14,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -29.66,
+          "entry": 2190.27,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 20"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -23.95,
+          "entry": 1098.09,
+          "trigger_time": "Candle 34",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -28.25,
+          "entry": 1846.69,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 22"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -5.16,
+          "entry": 304.29,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 7"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 7.82,
+          "entry": 390.42,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 41"
+        }
+      ],
+      "triggered": 10,
+      "wins": 2,
+      "losses": 5,
+      "win_rate": 28.6,
+      "pnl": -72.46,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-11",
+      "day_idx": 17,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -14.26,
+          "entry": 1393.58,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -13.19,
+          "entry": 834.16,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -20.57,
+          "entry": 1282.96,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -19.08,
+          "entry": 1272.14,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 7.28,
+          "entry": 2175.44,
+          "trigger_time": "Candle 48",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -15.63,
+          "entry": 1071.54,
+          "trigger_time": "Candle 44",
+          "exit_time": "Candle 49"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -58.87,
+          "entry": 1861.72,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 3"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.56,
+          "entry": 307.81,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 37"
+        }
+      ],
+      "triggered": 8,
+      "wins": 0,
+      "losses": 6,
+      "win_rate": 0.0,
+      "pnl": -137.88,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-12",
+      "day_idx": 18,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -22.14,
+          "entry": 1393.58,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -13.22,
+          "entry": 834.16,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -24.16,
+          "entry": 1271.54,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 5.78,
+          "entry": 2175.44,
+          "trigger_time": "Candle 23",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -33.59,
+          "entry": 1809.41,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 46"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 0.12,
+          "entry": 308.03,
+          "trigger_time": "Candle 63",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 6,
+      "wins": 0,
+      "losses": 4,
+      "win_rate": 0.0,
+      "pnl": -87.21,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-13",
+      "day_idx": 19,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.78,
+          "entry": 1393.58,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -30.83,
+          "entry": 2425.84,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 10"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 1.46,
+          "entry": 845.95,
+          "trigger_time": "Candle 65",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -19.38,
+          "entry": 1259.11,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -14.74,
+          "entry": 1274.75,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 45"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 12.88,
+          "entry": 2175.44,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -7.44,
+          "entry": 1058.18,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -33.69,
+          "entry": 1809.41,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 21"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 2.97,
+          "entry": 308.03,
+          "trigger_time": "Candle 38",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 9,
+      "wins": 0,
+      "losses": 5,
+      "win_rate": 0.0,
+      "pnl": -110.55,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-16",
+      "day_idx": 20,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -7.12,
+          "entry": 1402.89,
+          "trigger_time": "Candle 37",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 15.14,
+          "entry": 2459.27,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 2.26,
+          "entry": 845.95,
+          "trigger_time": "Candle 40",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -31.05,
+          "entry": 1233.83,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 43"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -21.06,
+          "entry": 1244.91,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 12"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 35.78,
+          "entry": 2175.44,
+          "trigger_time": "Candle 13",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -22.88,
+          "entry": 1051.89,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 14"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 5.53,
+          "entry": 1864.66,
+          "trigger_time": "Candle 50",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 3.37,
+          "entry": 308.03,
+          "trigger_time": "Candle 13",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -5.97,
+          "entry": 366.52,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 12"
+        }
+      ],
+      "triggered": 10,
+      "wins": 0,
+      "losses": 4,
+      "win_rate": 0.0,
+      "pnl": -26.0,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-17",
+      "day_idx": 21,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 29.48,
+          "entry": 2385.46,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 10.52,
+          "entry": 845.95,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 19"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -24.13,
+          "entry": 1241.91,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.66,
+          "entry": 1284.36,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -29.77,
+          "entry": 2166.22,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 36"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 3.42,
+          "entry": 1046.99,
+          "trigger_time": "Candle 61",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 22.48,
+          "entry": 1864.66,
+          "trigger_time": "Candle 25",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.83,
+          "entry": 302.6,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 58"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 0.13,
+          "entry": 367.28,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 9,
+      "wins": 3,
+      "losses": 4,
+      "win_rate": 42.9,
+      "pnl": -13.36,
+      "params": {
+        "min_score": 88,
+        "rr_ratio": 1.5,
+        "max_base_candles": 2
+      }
+    },
+    {
+      "date": "2026-03-18",
+      "day_idx": 22,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -2.47,
+          "entry": 1414.37,
+          "trigger_time": "Candle 45",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -33.58,
+          "entry": 2398.79,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 33"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -13.17,
+          "entry": 833.61,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 21.93,
+          "entry": 2149.59,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 20.09,
+          "entry": 1046.99,
+          "trigger_time": "Candle 36",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.67,
+          "entry": 302.6,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 33"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -1.02,
+          "entry": 367.28,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 7,
+      "wins": 2,
+      "losses": 3,
+      "win_rate": 40.0,
+      "pnl": -11.89,
+      "params": {
+        "min_score": 88,
+        "rr_ratio": 1.5,
+        "max_base_candles": 2
+      }
+    },
+    {
+      "date": "2026-03-19",
+      "day_idx": 23,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 3.73,
+          "entry": 1414.37,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 20.66,
+          "entry": 1046.99,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -0.28,
+          "entry": 1799.79,
+          "trigger_time": "Candle 46",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 2.43,
+          "entry": 307.83,
+          "trigger_time": "Candle 26",
+          "exit_time": "Candle 38"
+        }
+      ],
+      "triggered": 4,
+      "wins": 2,
+      "losses": 0,
+      "win_rate": 100.0,
+      "pnl": 26.54,
+      "params": {
+        "min_score": 88,
+        "rr_ratio": 1.5,
+        "max_base_candles": 2
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "day_idx": 24,
+      "trades": [
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -23.28,
+          "entry": 1256.41,
+          "trigger_time": "Candle 13",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.68,
+          "entry": 1046.99,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 9.12,
+          "entry": 1799.79,
+          "trigger_time": "Candle 21",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 2.51,
+          "entry": 307.83,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 13"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -6.9,
+          "entry": 367.28,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 17"
+        }
+      ],
+      "triggered": 5,
+      "wins": 1,
+      "losses": 3,
+      "win_rate": 25.0,
+      "pnl": -40.23,
+      "params": {
+        "min_score": 88,
+        "rr_ratio": 1.5,
+        "max_base_candles": 2
+      }
+    },
+    {
+      "date": "2026-03-23",
+      "day_idx": 25,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -2.27,
+          "entry": 1414.37,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 37.92,
+          "entry": 2383.26,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 26"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 19.63,
+          "entry": 1252.9,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 24"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 6.38,
+          "entry": 2149.59,
+          "trigger_time": "Candle 55",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 18.21,
+          "entry": 1052.49,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 21"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -5.86,
+          "entry": 364.77,
+          "trigger_time": "Candle 19",
+          "exit_time": "Candle 31"
+        }
+      ],
+      "triggered": 6,
+      "wins": 3,
+      "losses": 1,
+      "win_rate": 75.0,
+      "pnl": 74.01,
+      "params": {
+        "min_score": 88,
+        "rr_ratio": 1.5,
+        "max_base_candles": 2
+      }
+    },
+    {
+      "date": "2026-03-24",
+      "day_idx": 26,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -6.8,
+          "entry": 1352.1,
+          "trigger_time": "Candle 63",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 1.79,
+          "entry": 2383.26,
+          "trigger_time": "Candle 40",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -22.24,
+          "entry": 755.09,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -4.46,
+          "entry": 1268.33,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 22.16,
+          "entry": 1258.48,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 41.72,
+          "entry": 2149.59,
+          "trigger_time": "Candle 30",
+          "exit_time": "Candle 43"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 25.64,
+          "entry": 1052.49,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 65"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -36.31,
+          "entry": 1806.38,
+          "trigger_time": "Candle 9",
+          "exit_time": "Candle 28"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -4.56,
+          "entry": 291.62,
+          "trigger_time": "Candle 8",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -7.35,
+          "entry": 368.81,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 17"
+        }
+      ],
+      "triggered": 10,
+      "wins": 2,
+      "losses": 4,
+      "win_rate": 33.3,
+      "pnl": 9.59,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-25",
+      "day_idx": 27,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -19.09,
+          "entry": 1352.1,
+          "trigger_time": "Candle 38",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -36.48,
+          "entry": 2383.26,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 61"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -14.39,
+          "entry": 768.53,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -24.47,
+          "entry": 1268.33,
+          "trigger_time": "Candle 41",
+          "exit_time": "Candle 61"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 39.02,
+          "entry": 2149.59,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -4.32,
+          "entry": 1783.16,
+          "trigger_time": "Candle 65",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -4.29,
+          "entry": 291.88,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 62"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -7.64,
+          "entry": 367.43,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 42"
+        }
+      ],
+      "triggered": 8,
+      "wins": 1,
+      "losses": 6,
+      "win_rate": 14.3,
+      "pnl": -71.66,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-27",
+      "day_idx": 28,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -36.17,
+          "entry": 2383.26,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 36"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -23.52,
+          "entry": 1268.33,
+          "trigger_time": "Candle 16",
+          "exit_time": "Candle 36"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 19.09,
+          "entry": 1249.5,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 30.93,
+          "entry": 2056.91,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -28.84,
+          "entry": 1042.08,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -4.82,
+          "entry": 1783.16,
+          "trigger_time": "Candle 40",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -4.18,
+          "entry": 291.88,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 37"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -6.99,
+          "entry": 358.22,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 22"
+        }
+      ],
+      "triggered": 8,
+      "wins": 2,
+      "losses": 5,
+      "win_rate": 28.6,
+      "pnl": -54.5,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-03-30",
+      "day_idx": 29,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -22.23,
+          "entry": 1352.1,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 45"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -38.42,
+          "entry": 2409.17,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 1.98,
+          "entry": 1302.59,
+          "trigger_time": "Candle 66",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 29.97,
+          "entry": 2056.91,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -20.44,
+          "entry": 998.6,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 28"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -30.32,
+          "entry": 1783.16,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 4.32,
+          "entry": 293.66,
+          "trigger_time": "Candle 18",
+          "exit_time": "Candle 42"
+        }
+      ],
+      "triggered": 7,
+      "wins": 2,
+      "losses": 4,
+      "win_rate": 33.3,
+      "pnl": -75.14,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-01",
+      "day_idx": 30,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -29.05,
+          "entry": 1323.74,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 49"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 14.74,
+          "entry": 744.21,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 23.61,
+          "entry": 1219.06,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -29.6,
+          "entry": 2056.91,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -23.38,
+          "entry": 1001.74,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 6"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -27.89,
+          "entry": 1783.16,
+          "trigger_time": "Candle 10",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -1.63,
+          "entry": 293.66,
+          "trigger_time": "Candle 64",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -9.01,
+          "entry": 351.35,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 8,
+      "wins": 2,
+      "losses": 4,
+      "win_rate": 33.3,
+      "pnl": -82.21,
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-02",
+      "day_idx": 31,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -31.88,
+          "entry": 2514.46,
+          "trigger_time": "Candle 49",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -11.96,
+          "entry": 745.41,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -22.22,
+          "entry": 1307.08,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 48"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -12.76,
+          "entry": 1237.72,
+          "trigger_time": "Candle 59",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -27.06,
+          "entry": 2064.46,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -9.3,
+          "entry": 1023.15,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -25.85,
+          "entry": 1789.51,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 46"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -3.77,
+          "entry": 293.66,
+          "trigger_time": "Candle 39",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -6.1,
+          "entry": 354.44,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 33"
+        }
+      ],
+      "triggered": 9,
+      "wins": 0,
+      "losses": 6,
+      "win_rate": 0.0,
+      "pnl": -150.9,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-06",
+      "day_idx": 32,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -10.48,
+          "entry": 1341.41,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -43.88,
+          "entry": 2514.46,
+          "trigger_time": "Candle 24",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -15.67,
+          "entry": 746.95,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 6"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -19.48,
+          "entry": 1237.72,
+          "trigger_time": "Candle 34",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 26.08,
+          "entry": 2175.44,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -21.02,
+          "entry": 1054.09,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 43"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -0.67,
+          "entry": 1864.66,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -3.94,
+          "entry": 293.66,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -6.15,
+          "entry": 374.75,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 9,
+      "wins": 0,
+      "losses": 5,
+      "win_rate": 0.0,
+      "pnl": -95.21,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-07",
+      "day_idx": 33,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 9.62,
+          "entry": 1341.41,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -44.0,
+          "entry": 2514.46,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -11.55,
+          "entry": 783.48,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -19.75,
+          "entry": 1327.54,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -18.84,
+          "entry": 1237.72,
+          "trigger_time": "Candle 9",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 49.6,
+          "entry": 2175.44,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 58"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -19.38,
+          "entry": 1054.09,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 1.23,
+          "entry": 1864.66,
+          "trigger_time": "Candle 18",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -4.17,
+          "entry": 296.16,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -6.53,
+          "entry": 374.75,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 39"
+        }
+      ],
+      "triggered": 10,
+      "wins": 1,
+      "losses": 7,
+      "win_rate": 12.5,
+      "pnl": -63.77,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-08",
+      "day_idx": 34,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -40.75,
+          "entry": 2562.31,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 43"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -22.77,
+          "entry": 1328.65,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -0.16,
+          "entry": 303.81,
+          "trigger_time": "Candle 2",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -2.65,
+          "entry": 376.45,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 4,
+      "wins": 0,
+      "losses": 2,
+      "win_rate": 0.0,
+      "pnl": -66.33,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-09",
+      "day_idx": 35,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 24.72,
+          "entry": 1341.41,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -17.31,
+          "entry": 2482.86,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 34.04,
+          "entry": 1313.47,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -28.14,
+          "entry": 1294.21,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 20"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 24.16,
+          "entry": 2155.68,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -9.08,
+          "entry": 1054.89,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -24.99,
+          "entry": 1864.66,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 53"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.04,
+          "entry": 302.85,
+          "trigger_time": "Candle 13",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.62,
+          "entry": 377.4,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 6"
+        }
+      ],
+      "triggered": 9,
+      "wins": 0,
+      "losses": 4,
+      "win_rate": 0.0,
+      "pnl": -5.26,
+      "params": {
+        "min_score": 78,
+        "rr_ratio": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-10",
+      "day_idx": 36,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -5.38,
+          "entry": 1341.41,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 1.39,
+          "entry": 812.62,
+          "trigger_time": "Candle 45",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 5.84,
+          "entry": 1313.47,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -0.64,
+          "entry": 2155.68,
+          "trigger_time": "Candle 9",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -18.65,
+          "entry": 1054.89,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -22.81,
+          "entry": 1864.66,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 28"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -2.79,
+          "entry": 302.85,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -6.31,
+          "entry": 375.95,
+          "trigger_time": "Candle 10",
+          "exit_time": "Candle 17"
+        }
+      ],
+      "triggered": 8,
+      "wins": 0,
+      "losses": 4,
+      "win_rate": 0.0,
+      "pnl": -49.35,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-13",
+      "day_idx": 37,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -7.08,
+          "entry": 1341.41,
+          "trigger_time": "Candle 39",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -3.72,
+          "entry": 2575.44,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -10.07,
+          "entry": 808.68,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -8.36,
+          "entry": 1313.47,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 11.85,
+          "entry": 1360.07,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 11.36,
+          "entry": 2155.68,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 1.41,
+          "entry": 1070.26,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -25.19,
+          "entry": 1864.66,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 3"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -1.02,
+          "entry": 303.44,
+          "trigger_time": "Candle 50",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 3.42,
+          "entry": 382.98,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 10,
+      "wins": 0,
+      "losses": 2,
+      "win_rate": 0.0,
+      "pnl": -27.4,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-15",
+      "day_idx": 38,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -21.64,
+          "entry": 1344.9,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 49"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 4.33,
+          "entry": 1344.98,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -39.18,
+          "entry": 2175.44,
+          "trigger_time": "Candle 44",
+          "exit_time": "Candle 46"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -25.38,
+          "entry": 1852.7,
+          "trigger_time": "Candle 18",
+          "exit_time": "Candle 31"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 0.42,
+          "entry": 308.03,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 5,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "pnl": -81.45,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-16",
+      "day_idx": 39,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -21.28,
+          "entry": 1344.9,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 24"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -5.62,
+          "entry": 2575.44,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -2.23,
+          "entry": 795.84,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 0.84,
+          "entry": 1313.47,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 18.01,
+          "entry": 1369.56,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 46"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -36.59,
+          "entry": 2175.44,
+          "trigger_time": "Candle 19",
+          "exit_time": "Candle 21"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -7.7,
+          "entry": 1098.5,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -24.83,
+          "entry": 1852.7,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 6"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 2.52,
+          "entry": 308.03,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 2.17,
+          "entry": 382.98,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 47"
+        }
+      ],
+      "triggered": 10,
+      "wins": 1,
+      "losses": 3,
+      "win_rate": 25.0,
+      "pnl": -74.71,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-17",
+      "day_idx": 40,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -3.91,
+          "entry": 1354.5,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -38.21,
+          "entry": 2575.44,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 45"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 9.3,
+          "entry": 796.54,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 33"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -3.76,
+          "entry": 1313.47,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 15.51,
+          "entry": 1369.56,
+          "trigger_time": "Candle 18",
+          "exit_time": "Candle 21"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -15.47,
+          "entry": 1098.5,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 23"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -10.11,
+          "entry": 1848.6,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -2.58,
+          "entry": 308.03,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 47"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -0.02,
+          "entry": 381.41,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 47"
+        }
+      ],
+      "triggered": 9,
+      "wins": 2,
+      "losses": 2,
+      "win_rate": 50.0,
+      "pnl": -49.25,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-20",
+      "day_idx": 41,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 4.79,
+          "entry": 1354.5,
+          "trigger_time": "Candle 21",
+          "exit_time": "Candle 51"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -36.98,
+          "entry": 2575.44,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 24"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 52.79,
+          "entry": 1313.47,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 37"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -17.52,
+          "entry": 1369.56,
+          "trigger_time": "Candle 2",
+          "exit_time": "Candle 15"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -27.09,
+          "entry": 2296.3,
+          "trigger_time": "Candle 25",
+          "exit_time": "Candle 26"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 9.61,
+          "entry": 1083.11,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 1"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -21.94,
+          "entry": 1841.71,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 4"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -4.47,
+          "entry": 381.41,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 51"
+        }
+      ],
+      "triggered": 8,
+      "wins": 2,
+      "losses": 4,
+      "win_rate": 33.3,
+      "pnl": -40.81,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-21",
+      "day_idx": 42,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -15.49,
+          "entry": 1354.5,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 65"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -37.69,
+          "entry": 2575.44,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 14"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -7.61,
+          "entry": 796.99,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 48"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -10.95,
+          "entry": 1239.07,
+          "trigger_time": "Candle 66",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -28.77,
+          "entry": 2296.3,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -26.63,
+          "entry": 1853.3,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 0.18,
+          "entry": 304.56,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -6.0,
+          "entry": 381.41,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 42"
+        }
+      ],
+      "triggered": 8,
+      "wins": 0,
+      "losses": 6,
+      "win_rate": 0.0,
+      "pnl": -132.96,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-22",
+      "day_idx": 43,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -15.16,
+          "entry": 1354.5,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -33.65,
+          "entry": 2425.24,
+          "trigger_time": "Candle 52",
+          "exit_time": "Candle 57"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -8.66,
+          "entry": 796.99,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 25"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -21.87,
+          "entry": 1344.98,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.52,
+          "entry": 304.56,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 65"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.86,
+          "entry": 381.41,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 16"
+        }
+      ],
+      "triggered": 6,
+      "wins": 0,
+      "losses": 5,
+      "win_rate": 0.0,
+      "pnl": -88.72,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-23",
+      "day_idx": 44,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -7.37,
+          "entry": 1365.86,
+          "trigger_time": "Candle 66",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -35.27,
+          "entry": 2425.24,
+          "trigger_time": "Candle 27",
+          "exit_time": "Candle 32"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -19.96,
+          "entry": 1239.07,
+          "trigger_time": "Candle 16",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -9.17,
+          "entry": 1320.64,
+          "trigger_time": "Candle 47",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.16,
+          "entry": 304.56,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 37"
+        }
+      ],
+      "triggered": 5,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "pnl": -74.93,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-24",
+      "day_idx": 45,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -16.08,
+          "entry": 1369.16,
+          "trigger_time": "Candle 46",
+          "exit_time": "Candle 48"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -13.83,
+          "entry": 1320.64,
+          "trigger_time": "Candle 22",
+          "exit_time": "Candle 50"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -19.25,
+          "entry": 1834.42,
+          "trigger_time": "Candle 48",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 1.1,
+          "entry": 304.44,
+          "trigger_time": "Candle 18",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 2.82,
+          "entry": 381.29,
+          "trigger_time": "Candle 45",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 5,
+      "wins": 2,
+      "losses": 2,
+      "win_rate": 50.0,
+      "pnl": -45.24,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-27",
+      "day_idx": 46,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -18.16,
+          "entry": 1369.16,
+          "trigger_time": "Candle 21",
+          "exit_time": "Candle 24"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -41.74,
+          "entry": 2418.15,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 13"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 6.07,
+          "entry": 1158.71,
+          "trigger_time": "Candle 19",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -12.34,
+          "entry": 1288.77,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 14.52,
+          "entry": 1105.14,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -22.16,
+          "entry": 1834.42,
+          "trigger_time": "Candle 23",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -2.98,
+          "entry": 304.44,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 42"
+        }
+      ],
+      "triggered": 7,
+      "wins": 0,
+      "losses": 4,
+      "win_rate": 0.0,
+      "pnl": -76.79,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-28",
+      "day_idx": 47,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -34.93,
+          "entry": 2459.61,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 9"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 6.24,
+          "entry": 766.73,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 16.55,
+          "entry": 1158.71,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 24"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -20.95,
+          "entry": 1288.77,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 15.08,
+          "entry": 2234.46,
+          "trigger_time": "Candle 49",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -12.85,
+          "entry": 1083.11,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 46"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -22.15,
+          "entry": 1834.42,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -2.71,
+          "entry": 304.44,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -4.87,
+          "entry": 381.29,
+          "trigger_time": "Candle 19",
+          "exit_time": "Candle 29"
+        }
+      ],
+      "triggered": 9,
+      "wins": 1,
+      "losses": 6,
+      "win_rate": 14.3,
+      "pnl": -60.59,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-29",
+      "day_idx": 48,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -62.47,
+          "entry": 2485.66,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 55"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 12.04,
+          "entry": 766.73,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -1.36,
+          "entry": 1166.93,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.78,
+          "entry": 1288.77,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 38.02,
+          "entry": 2234.46,
+          "trigger_time": "Candle 24",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -12.33,
+          "entry": 1083.11,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -6.51,
+          "entry": 1830.85,
+          "trigger_time": "Candle 63",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -2.14,
+          "entry": 372.49,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 8,
+      "wins": 2,
+      "losses": 3,
+      "win_rate": 40.0,
+      "pnl": -56.53,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-04-30",
+      "day_idx": 49,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -30.45,
+          "entry": 1414.37,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -37.64,
+          "entry": 2460.07,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 2.72,
+          "entry": 1172.54,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -33.33,
+          "entry": 1830.85,
+          "trigger_time": "Candle 38",
+          "exit_time": "Candle 65"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.98,
+          "entry": 315.28,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 29"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -1.99,
+          "entry": 372.49,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 6,
+      "wins": 0,
+      "losses": 4,
+      "win_rate": 0.0,
+      "pnl": -104.67,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-05-04",
+      "day_idx": 50,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 4.18,
+          "entry": 1431.66,
+          "trigger_time": "Candle 56",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 39.54,
+          "entry": 2454.18,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 61"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 16.1,
+          "entry": 766.73,
+          "trigger_time": "Candle 26",
+          "exit_time": "Candle 62"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -4.48,
+          "entry": 1172.54,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -17.39,
+          "entry": 1074.14,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 22"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -0.71,
+          "entry": 1830.85,
+          "trigger_time": "Candle 13",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -3.96,
+          "entry": 315.28,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 4"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -6.89,
+          "entry": 372.49,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 57"
+        }
+      ],
+      "triggered": 8,
+      "wins": 2,
+      "losses": 3,
+      "win_rate": 40.0,
+      "pnl": 26.39,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-05-05",
+      "day_idx": 51,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 14.56,
+          "entry": 1461.07,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 29"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -9.61,
+          "entry": 2407.81,
+          "trigger_time": "Candle 50",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 10.25,
+          "entry": 766.73,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -8.98,
+          "entry": 1172.54,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -14.23,
+          "entry": 1266.96,
+          "trigger_time": "Candle 37",
+          "exit_time": "Candle 39"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -16.73,
+          "entry": 1078.84,
+          "trigger_time": "Candle 37",
+          "exit_time": "Candle 40"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -33.29,
+          "entry": 1830.85,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 15"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -5.2,
+          "entry": 371.59,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 32"
+        }
+      ],
+      "triggered": 8,
+      "wins": 2,
+      "losses": 4,
+      "win_rate": 33.3,
+      "pnl": -63.23,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-06",
+      "day_idx": 52,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 12.04,
+          "entry": 1431.66,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 12"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -36.02,
+          "entry": 2407.81,
+          "trigger_time": "Candle 25",
+          "exit_time": "Candle 50"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -11.97,
+          "entry": 779.99,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 12"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 5.02,
+          "entry": 1172.54,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -13.77,
+          "entry": 1266.96,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 14"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 41.37,
+          "entry": 2312.37,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 43"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -17.42,
+          "entry": 1078.84,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 15"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -0.01,
+          "entry": 1831.05,
+          "trigger_time": "Candle 19",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 2.01,
+          "entry": 309.88,
+          "trigger_time": "Candle 9",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -4.36,
+          "entry": 371.59,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 7"
+        }
+      ],
+      "triggered": 10,
+      "wins": 2,
+      "losses": 5,
+      "win_rate": 28.6,
+      "pnl": -23.11,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-07",
+      "day_idx": 53,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -20.54,
+          "entry": 1440.07,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -34.06,
+          "entry": 2407.81,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 23"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -2.26,
+          "entry": 766.73,
+          "trigger_time": "Candle 65",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 1.12,
+          "entry": 1172.54,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -22.83,
+          "entry": 1289.77,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 36.36,
+          "entry": 2312.37,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 15"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -16.89,
+          "entry": 1073.54,
+          "trigger_time": "Candle 35",
+          "exit_time": "Candle 36"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -29.25,
+          "entry": 1786.57,
+          "trigger_time": "Candle 44",
+          "exit_time": "Candle 49"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 3.04,
+          "entry": 309.88,
+          "trigger_time": "Candle 3",
+          "exit_time": "Candle 18"
+        }
+      ],
+      "triggered": 9,
+      "wins": 2,
+      "losses": 5,
+      "win_rate": 28.6,
+      "pnl": -85.31,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-08",
+      "day_idx": 54,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -21.77,
+          "entry": 1403.0,
+          "trigger_time": "Candle 32",
+          "exit_time": "Candle 41"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -11.54,
+          "entry": 766.73,
+          "trigger_time": "Candle 40",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -20.32,
+          "entry": 1172.54,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 42"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -15.43,
+          "entry": 1254.1,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 65"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 36.43,
+          "entry": 2312.37,
+          "trigger_time": "Candle 35",
+          "exit_time": "Candle 64"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -16.25,
+          "entry": 1073.54,
+          "trigger_time": "Candle 10",
+          "exit_time": "Candle 11"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -29.25,
+          "entry": 1786.57,
+          "trigger_time": "Candle 19",
+          "exit_time": "Candle 24"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -2.87,
+          "entry": 305.21,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 44"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 5.02,
+          "entry": 382.98,
+          "trigger_time": "Candle 31",
+          "exit_time": "Candle 56"
+        }
+      ],
+      "triggered": 9,
+      "wins": 2,
+      "losses": 7,
+      "win_rate": 22.2,
+      "pnl": -75.98,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-11",
+      "day_idx": 55,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -20.32,
+          "entry": 1403.0,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -10.64,
+          "entry": 766.73,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -20.22,
+          "entry": 1172.54,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 10.34,
+          "entry": 1229.75,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 54"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 23.95,
+          "entry": 2259.51,
+          "trigger_time": "Candle 48",
+          "exit_time": "Candle 51"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -31.1,
+          "entry": 1769.55,
+          "trigger_time": "Candle 8",
+          "exit_time": "Candle 64"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -2.77,
+          "entry": 305.21,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 3.96,
+          "entry": 376.8,
+          "trigger_time": "Candle 36",
+          "exit_time": "Candle 46"
+        }
+      ],
+      "triggered": 8,
+      "wins": 3,
+      "losses": 5,
+      "win_rate": 37.5,
+      "pnl": -46.8,
+      "params": {
+        "min_score": 82,
+        "rr_ratio": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-12",
+      "day_idx": 56,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -26.38,
+          "entry": 1396.49,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 9"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 16.51,
+          "entry": 1229.75,
+          "trigger_time": "Candle 18",
+          "exit_time": "Candle 31"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -11.12,
+          "entry": 2259.51,
+          "trigger_time": "Candle 23",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -11.7,
+          "entry": 972.55,
+          "trigger_time": "Candle 10",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -29.54,
+          "entry": 1769.55,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 39"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 2.05,
+          "entry": 302.35,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 26"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 4.52,
+          "entry": 376.8,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 21"
+        }
+      ],
+      "triggered": 7,
+      "wins": 3,
+      "losses": 2,
+      "win_rate": 60.0,
+      "pnl": -55.66,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-05-13",
+      "day_idx": 57,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -11.88,
+          "entry": 1348.19,
+          "trigger_time": "Candle 43",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 37.12,
+          "entry": 2290.81,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 13.63,
+          "entry": 753.3,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 26"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -14.39,
+          "entry": 1129.15,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 2.95,
+          "entry": 1239.07,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 8.18,
+          "entry": 2259.51,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -17.75,
+          "entry": 970.06,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 29"
+        },
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -9.91,
+          "entry": 1897.9,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 0.11,
+          "entry": 309.88,
+          "trigger_time": "Candle 56",
+          "exit_time": "Candle 66"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 2.09,
+          "entry": 390.12,
+          "trigger_time": "Candle 46",
+          "exit_time": "Candle 66"
+        }
+      ],
+      "triggered": 10,
+      "wins": 2,
+      "losses": 2,
+      "win_rate": 50.0,
+      "pnl": 10.15,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-05-14",
+      "day_idx": 58,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -18.33,
+          "entry": 1362.02,
+          "trigger_time": "Candle 15",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -75.72,
+          "entry": 2206.88,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 17"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 17.7,
+          "entry": 755.36,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 1"
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -17.07,
+          "entry": 1100.2,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -1.36,
+          "entry": 1243.38,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 41"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": 8.18,
+          "entry": 2259.51,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 41"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -14.31,
+          "entry": 968.16,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 4"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 0.11,
+          "entry": 309.88,
+          "trigger_time": "Candle 31",
+          "exit_time": "Candle 41"
+        },
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 2.09,
+          "entry": 390.12,
+          "trigger_time": "Candle 21",
+          "exit_time": "Candle 41"
+        }
+      ],
+      "triggered": 9,
+      "wins": 1,
+      "losses": 4,
+      "win_rate": 20.0,
+      "pnl": -98.71,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    },
+    {
+      "date": "2026-05-15",
+      "day_idx": 59,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -11.88,
+          "entry": 1348.19,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -5.39,
+          "entry": 773.64,
+          "trigger_time": "Candle 10",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 0.2,
+          "entry": 1247.2,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -0.72,
+          "entry": 2276.04,
+          "trigger_time": "Candle 5",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -9.77,
+          "entry": 969.44,
+          "trigger_time": "Candle 0",
+          "exit_time": "Candle 16"
+        },
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Supply & Demand Zones",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": 0.11,
+          "entry": 309.88,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 16"
+        }
+      ],
+      "triggered": 6,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0.0,
+      "pnl": -27.45,
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      }
+    }
+  ]
+}

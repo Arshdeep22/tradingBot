@@ -3,81 +3,31 @@ Backtester Module
 -----------------
 Tests any trading strategy on historical data.
 
+Delegates trade simulation to core/trade_simulator.py and uses
+models from core/backtester_models.py.
+
 Approach:
 1. Split data into "zone building" period and "testing" period
 2. Ask strategy for trade setups on the building period
 3. Simulate forward through testing period to check if setups get triggered
 4. Track outcomes: Target Hit, SL Hit, Expired, or Cancelled
-
-Trade lifecycle:
-- Limit order placed → waits for price to reach entry
-- If entry NOT reached within max_holding_bars → CANCELLED (no P&L)
-- If entry IS reached → trade is live, monitors SL and Target
-- If neither SL nor Target hit within max_holding_bars from trigger → EXPIRED (close at market)
 """
 
 import pandas as pd
 import numpy as np
-from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List
 from datetime import datetime
 import logging
 
 from strategies.zone_scanner import ZoneScanner
 from strategies.base_strategy import BaseStrategy, TradeSetup
+from .backtester_models import TradeResult, BacktestReport
+from .trade_simulator import simulate_setup
 
 logger = logging.getLogger(__name__)
 
 # 3 trading days on 15m timeframe = ~75 bars (25 bars/day × 3)
 DEFAULT_MAX_HOLDING_BARS = 75
-
-
-@dataclass
-class TradeResult:
-    """Result of a simulated trade"""
-    setup: TradeSetup
-    triggered: bool = False
-    trigger_time: str = ""
-    trigger_price: float = 0.0
-    outcome: str = "CANCELLED"  # "TARGET_HIT", "SL_HIT", "EXPIRED", "CANCELLED"
-    exit_time: str = ""
-    exit_price: float = 0.0
-    pnl: float = 0.0
-    pnl_pct: float = 0.0
-    rr_achieved: float = 0.0
-    candles_to_trigger: int = 0
-    candles_to_exit: int = 0
-
-
-@dataclass
-class BacktestReport:
-    """Summary report of a backtest run"""
-    symbol: str
-    building_start: str
-    building_end: str
-    testing_start: str
-    testing_end: str
-    total_zones_found: int
-    zones_triggered: int
-    targets_hit: int
-    sl_hit: int
-    expired: int
-    cancelled: int
-    pending: int  # kept for backward compat
-    win_rate: float
-    total_pnl: float
-    avg_rr_achieved: float
-    max_win: float
-    max_loss: float
-    trade_results: List[TradeResult] = field(default_factory=list)
-    setups: List[TradeSetup] = field(default_factory=list)
-    building_data: Optional[pd.DataFrame] = None
-    testing_data: Optional[pd.DataFrame] = None
-
-    @property
-    def zones(self):
-        """Backward-compat alias for setups (used by older dashboard code)."""
-        return self.setups
 
 
 class Backtester:
@@ -154,10 +104,22 @@ class Backtester:
         # Step 2: Simulate forward through testing period
         trade_results = []
         for setup in setups:
-            result = self._simulate_setup(setup, testing_data)
+            result = simulate_setup(
+                setup, testing_data, self.max_holding_bars,
+                self.commission_pct, self.slippage_pct
+            )
             trade_results.append(result)
 
         # Step 3: Calculate statistics
+        report = self._build_report(
+            symbol, building_data, testing_data, setups, trade_results
+        )
+        return report
+
+    def _build_report(self, symbol: str, building_data: pd.DataFrame,
+                      testing_data: pd.DataFrame, setups: List[TradeSetup],
+                      trade_results: List[TradeResult]) -> BacktestReport:
+        """Calculate statistics and build the BacktestReport."""
         triggered = [r for r in trade_results if r.triggered]
         targets_hit = [r for r in triggered if r.outcome == "TARGET_HIT"]
         sl_hit = [r for r in triggered if r.outcome == "SL_HIT"]
@@ -169,7 +131,7 @@ class Backtester:
         wins = len(targets_hit) + len([r for r in expired if r.pnl > 0])
         win_rate = (wins / len(resolved) * 100) if resolved else 0.0
 
-        # P&L only from resolved trades (triggered ones with definitive outcome)
+        # P&L only from resolved trades
         total_pnl = sum(r.pnl for r in resolved)
 
         rr_values = [r.rr_achieved for r in resolved if r.rr_achieved != 0]
@@ -203,175 +165,8 @@ class Backtester:
             testing_data=testing_data
         )
 
-    def _simulate_setup(self, setup: TradeSetup, testing_data: pd.DataFrame) -> TradeResult:
-        """
-        Simulate a single trade setup through the testing period.
-
-        For BUY setups:  triggered when price drops to entry, exits at SL or target.
-        For SELL setups: triggered when price rises to entry, exits at SL or target.
-
-        Applies realistic commission (0.1%) and slippage (0.2%) to every trade.
-
-        Holding rules:
-        - If entry not reached within max_holding_bars → CANCELLED
-        - If triggered but no SL/Target within max_holding_bars from trigger → EXPIRED
-        """
-        result = TradeResult(setup=setup)
-
-        testing_data_reset = testing_data.reset_index()
-
-        is_buy = setup.side == "BUY"
-
-        # Effective entry after slippage (assume worse fill on entry)
-        effective_entry = setup.entry * (1 + self.slippage_pct) if is_buy else setup.entry * (1 - self.slippage_pct)
-
-        # Commission cost: charged on entry + exit (both legs)
-        commission_cost = setup.entry * self.commission_pct * 2
-
-        triggered = False
-        trigger_idx = -1
-
-        for i in range(len(testing_data_reset)):
-            candle_high = testing_data_reset['High'].iloc[i]
-            candle_low = testing_data_reset['Low'].iloc[i]
-
-            if not triggered:
-                # Check if we've exceeded max holding bars waiting for entry
-                if i >= self.max_holding_bars:
-                    # Order expired without being triggered → CANCELLED
-                    result.outcome = "CANCELLED"
-                    result.pnl = 0.0
-                    return result
-
-                # Check if entry is hit
-                if is_buy and candle_low <= setup.entry:
-                    triggered = True
-                elif not is_buy and candle_high >= setup.entry:
-                    triggered = True
-
-                if triggered:
-                    trigger_idx = i
-                    result.triggered = True
-                    result.trigger_price = effective_entry
-                    result.candles_to_trigger = i
-                    if 'index' in testing_data_reset.columns:
-                        result.trigger_time = str(testing_data_reset['index'].iloc[i])
-                    else:
-                        result.trigger_time = "Candle %d" % i
-            else:
-                # Check if max holding period exceeded since trigger
-                bars_since_trigger = i - trigger_idx
-                if bars_since_trigger >= self.max_holding_bars:
-                    # Force close at current bar's close → EXPIRED
-                    last_close = testing_data_reset['Close'].iloc[i]
-                    if is_buy:
-                        result.pnl = (last_close - effective_entry) - commission_cost
-                    else:
-                        result.pnl = (effective_entry - last_close) - commission_cost
-                    result.pnl_pct = (result.pnl / effective_entry) * 100
-                    result.outcome = "EXPIRED"
-                    result.exit_price = last_close
-                    result.candles_to_exit = bars_since_trigger
-                    if 'index' in testing_data_reset.columns:
-                        result.exit_time = str(testing_data_reset['index'].iloc[i])
-                    else:
-                        result.exit_time = "Candle %d" % i
-                    # Calculate RR achieved
-                    if is_buy:
-                        risk = effective_entry - setup.stop_loss
-                    else:
-                        risk = setup.stop_loss - effective_entry
-                    result.rr_achieved = result.pnl / risk if risk > 0 else 0
-                    return result
-
-                # Already triggered — check SL then Target
-                if is_buy:
-                    if candle_low <= setup.stop_loss:
-                        result.outcome = "SL_HIT"
-                        result.exit_price = setup.stop_loss
-                        raw_pnl = setup.stop_loss - effective_entry
-                        result.pnl = raw_pnl - commission_cost
-                        result.pnl_pct = (result.pnl / effective_entry) * 100
-                        risk = effective_entry - setup.stop_loss
-                        result.rr_achieved = result.pnl / risk if risk > 0 else 0
-                        result.candles_to_exit = i - trigger_idx
-                        if 'index' in testing_data_reset.columns:
-                            result.exit_time = str(testing_data_reset['index'].iloc[i])
-                        else:
-                            result.exit_time = "Candle %d" % i
-                        return result
-                    elif candle_high >= setup.target:
-                        result.outcome = "TARGET_HIT"
-                        result.exit_price = setup.target
-                        raw_pnl = setup.target - effective_entry
-                        result.pnl = raw_pnl - commission_cost
-                        result.pnl_pct = (result.pnl / effective_entry) * 100
-                        risk = effective_entry - setup.stop_loss
-                        result.rr_achieved = result.pnl / risk if risk > 0 else 0
-                        result.candles_to_exit = i - trigger_idx
-                        if 'index' in testing_data_reset.columns:
-                            result.exit_time = str(testing_data_reset['index'].iloc[i])
-                        else:
-                            result.exit_time = "Candle %d" % i
-                        return result
-                else:  # SELL
-                    if candle_high >= setup.stop_loss:
-                        result.outcome = "SL_HIT"
-                        result.exit_price = setup.stop_loss
-                        raw_pnl = effective_entry - setup.stop_loss
-                        result.pnl = raw_pnl - commission_cost
-                        result.pnl_pct = (result.pnl / effective_entry) * 100
-                        risk = setup.stop_loss - effective_entry
-                        result.rr_achieved = result.pnl / risk if risk > 0 else 0
-                        result.candles_to_exit = i - trigger_idx
-                        if 'index' in testing_data_reset.columns:
-                            result.exit_time = str(testing_data_reset['index'].iloc[i])
-                        else:
-                            result.exit_time = "Candle %d" % i
-                        return result
-                    elif candle_low <= setup.target:
-                        result.outcome = "TARGET_HIT"
-                        result.exit_price = setup.target
-                        raw_pnl = effective_entry - setup.target
-                        result.pnl = raw_pnl - commission_cost
-                        result.pnl_pct = (result.pnl / effective_entry) * 100
-                        risk = setup.stop_loss - effective_entry
-                        result.rr_achieved = result.pnl / risk if risk > 0 else 0
-                        result.candles_to_exit = i - trigger_idx
-                        if 'index' in testing_data_reset.columns:
-                            result.exit_time = str(testing_data_reset['index'].iloc[i])
-                        else:
-                            result.exit_time = "Candle %d" % i
-                        return result
-
-        # Ran out of testing data — force close if triggered, cancel if not
-        if triggered:
-            last_close = testing_data_reset['Close'].iloc[-1]
-            if is_buy:
-                result.pnl = (last_close - effective_entry) - commission_cost
-            else:
-                result.pnl = (effective_entry - last_close) - commission_cost
-            result.pnl_pct = (result.pnl / effective_entry) * 100
-            result.outcome = "EXPIRED"
-            result.exit_price = last_close
-            result.candles_to_exit = len(testing_data_reset) - 1 - trigger_idx
-            if 'index' in testing_data_reset.columns:
-                result.exit_time = str(testing_data_reset['index'].iloc[-1])
-            else:
-                result.exit_time = "Candle %d" % (len(testing_data_reset) - 1)
-            if is_buy:
-                risk = effective_entry - setup.stop_loss
-            else:
-                risk = setup.stop_loss - effective_entry
-            result.rr_achieved = result.pnl / risk if risk > 0 else 0
-        else:
-            result.outcome = "CANCELLED"
-            result.pnl = 0.0
-
-        return result
-
     def _empty_report(self, symbol: str) -> BacktestReport:
-        """Return empty report when data is insufficient"""
+        """Return empty report when data is insufficient."""
         return BacktestReport(
             symbol=symbol,
             building_start="N/A",
