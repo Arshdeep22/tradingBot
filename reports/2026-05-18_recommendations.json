@@ -1,0 +1,260 @@
+{
+  "date": "2026-05-18",
+  "scan_time_ist": "2026-05-18 14:27:54",
+  "total_setups_found": 409,
+  "total_candidates_sent_to_ai": 20,
+  "ai_available": true,
+  "market_context": "In a strong downtrend (Nifty -0.9%, ADX 25), supply zone SELL setups are heavily favored as they align with the prevailing trend. SELL setups on HINDUNILVR, SBIN, RELIANCE, INFY, TCS, ICICIBANK, and ITC offer the highest probability. BUY setups are counter-trend and carry elevated risk, so only the strongest demand zones with exceptional leg-out candles are considered.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.9%",
+    "adx": 25.0,
+    "vix": 20.0,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.9%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1074.2,
+      "stop_loss": 1084.63,
+      "target": 1053.34,
+      "zone_score": 100,
+      "win_probability": 85,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Strongest leg-out candle at 2.4% body indicates massive selling pressure",
+        "Fresh supply zone perfectly aligned with strong downtrend",
+        "SBIN is a high-beta banking stock that tends to sell off aggressively in downtrends"
+      ],
+      "risks": "Banking stocks can bounce sharply on sector-specific news or RBI policy signals",
+      "entry_advice": "Limit order at 1074.2, confirm with bearish candle rejection at zone before full position",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "HINDUNILVR.NS",
+      "side": "SELL",
+      "entry": 2317.0,
+      "stop_loss": 2345.63,
+      "target": 2259.74,
+      "zone_score": 100,
+      "win_probability": 83,
+      "conviction": "HIGH",
+      "reasoning": [
+        "1.4% leg-out candle shows strong institutional selling",
+        "HINDUNILVR is a defensive stock that underperforms in broad market selloffs",
+        "Fresh zone with tight base provides excellent entry precision"
+      ],
+      "risks": "FMCG stocks can attract safe-haven buying during broader market weakness",
+      "entry_advice": "Limit sell at 2317.0 with stop above 2345.63; watch for price to stall at zone before entry",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1177.5,
+      "stop_loss": 1197.86,
+      "target": 1136.78,
+      "zone_score": 100,
+      "win_probability": 82,
+      "conviction": "HIGH",
+      "reasoning": [
+        "IT sector weakening aligns with broader market downtrend",
+        "Fresh supply zone with 0.9% leg-out candle and tight 2-candle base",
+        "INFY tends to trend well once direction is established"
+      ],
+      "risks": "USD/INR movements or global tech sentiment could provide counter-trend support",
+      "entry_advice": "Limit sell at 1177.5; ensure price approaches zone with weakening momentum for confirmation",
+      "order_placed": true
+    },
+    {
+      "rank": 4,
+      "symbol": "TCS.NS",
+      "side": "SELL",
+      "entry": 2430.6,
+      "stop_loss": 2454.03,
+      "target": 2383.74,
+      "zone_score": 100,
+      "win_probability": 81,
+      "conviction": "HIGH",
+      "reasoning": [
+        "TCS supply zone with 1.2% exciting leg-out candle shows strong rejection",
+        "IT sector weakness supports short-side thesis",
+        "Fresh zone never tested with very tight 2-candle base"
+      ],
+      "risks": "Large-cap IT names can stabilize on buyback announcements or deal wins",
+      "entry_advice": "Limit sell at 2430.6; wait for a bearish engulfing or pin bar at zone for added confidence",
+      "order_placed": true
+    },
+    {
+      "rank": 5,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1464.0,
+      "stop_loss": 1474.96,
+      "target": 1442.08,
+      "zone_score": 100,
+      "win_probability": 80,
+      "conviction": "HIGH",
+      "reasoning": [
+        "RELIANCE is a market leader; its supply zone sell aligns perfectly with Nifty downtrend",
+        "Perfect zone score with fresh, untested level and tight base",
+        "0.7% leg-out with 2-candle base gives clean structure"
+      ],
+      "risks": "Reliance can be supported by large institutional flows or energy sector news",
+      "entry_advice": "Limit sell at 1464.0 with strict stop at 1474.96; trail stop once 1:1 R:R achieved",
+      "order_placed": true
+    },
+    {
+      "rank": 6,
+      "symbol": "HINDUNILVR.NS",
+      "side": "SELL",
+      "entry": 2268.0,
+      "stop_loss": 2286.23,
+      "target": 2231.54,
+      "zone_score": 100,
+      "win_probability": 79,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Lower HINDUNILVR supply zone at 2268 with 1.0% leg-out candle",
+        "Multiple overlapping supply zones above confirm heavy selling interest",
+        "Fresh zone in a stock trending down with the market"
+      ],
+      "risks": "If price reaches this zone after already dropping, momentum may be exhausted",
+      "entry_advice": "Limit sell at 2268.0; more relevant if price retraces to this level during intraday bounce",
+      "order_placed": true
+    },
+    {
+      "rank": 7,
+      "symbol": "ICICIBANK.NS",
+      "side": "SELL",
+      "entry": 1249.7,
+      "stop_loss": 1258.92,
+      "target": 1231.26,
+      "zone_score": 100,
+      "win_probability": 78,
+      "conviction": "HIGH",
+      "reasoning": [
+        "ICICIBANK supply zone aligned with bearish market regime",
+        "Fresh zone with tight 2-candle base provides precision",
+        "Banking sector typically amplifies Nifty directional moves"
+      ],
+      "risks": "ICICIBANK is fundamentally strong and may find support from long-term buyers",
+      "entry_advice": "Limit sell at 1249.7; ensure broader banking index (Bank Nifty) is also weak",
+      "order_placed": false
+    },
+    {
+      "rank": 8,
+      "symbol": "ITC.NS",
+      "side": "SELL",
+      "entry": 310.5,
+      "stop_loss": 313.82,
+      "target": 303.86,
+      "zone_score": 100,
+      "win_probability": 77,
+      "conviction": "HIGH",
+      "reasoning": [
+        "ITC supply zone aligned with downtrend, tight 2-candle base",
+        "Defensive stock but not immune in broad selloffs",
+        "Tight stop loss of only 3.32 points makes risk management clean"
+      ],
+      "risks": "ITC is range-bound historically and may not move to full target",
+      "entry_advice": "Limit sell at 310.5; ideal for smaller position sizing given ITC's tendency for low volatility",
+      "order_placed": false
+    },
+    {
+      "rank": 9,
+      "symbol": "HINDUNILVR.NS",
+      "side": "SELL",
+      "entry": 2322.3,
+      "stop_loss": 2345.63,
+      "target": 2275.64,
+      "zone_score": 100,
+      "win_probability": 76,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Another HINDUNILVR supply zone confirming sellers' dominance at this level",
+        "1.4% leg-out with single candle base is powerful",
+        "Slightly higher entry than id:10 gives alternative fill opportunity"
+      ],
+      "risks": "Overlapping zone with id:10 means one may invalidate the other if breached",
+      "entry_advice": "Use as backup if id:10 entry is missed; limit sell at 2322.3",
+      "order_placed": true
+    },
+    {
+      "rank": 10,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1336.0,
+      "stop_loss": 1345.96,
+      "target": 1316.08,
+      "zone_score": 100,
+      "win_probability": 72,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "RELIANCE supply zone at lower level shows continued selling pressure",
+        "Fresh untested zone with tight single-candle base",
+        "Trend-aligned sell in market heavyweight"
+      ],
+      "risks": "Price is far from current levels; may not be triggered today unless significant selloff continues",
+      "entry_advice": "Set as GTC limit sell at 1336.0; only relevant if Reliance sees extended decline to this level",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 8,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1074.2,
+      "stop_loss": 1084.63,
+      "target": 1053.34,
+      "quantity": 95,
+      "win_probability": 85
+    },
+    {
+      "order_id": 9,
+      "symbol": "HINDUNILVR.NS",
+      "side": "SELL",
+      "entry": 2317.0,
+      "stop_loss": 2345.63,
+      "target": 2259.74,
+      "quantity": 34,
+      "win_probability": 83
+    },
+    {
+      "order_id": 10,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1177.5,
+      "stop_loss": 1197.86,
+      "target": 1136.78,
+      "quantity": 49,
+      "win_probability": 82
+    },
+    {
+      "order_id": 11,
+      "symbol": "TCS.NS",
+      "side": "SELL",
+      "entry": 2430.6,
+      "stop_loss": 2454.03,
+      "target": 2383.74,
+      "quantity": 42,
+      "win_probability": 81
+    },
+    {
+      "order_id": 12,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1464.0,
+      "stop_loss": 1474.96,
+      "target": 1442.08,
+      "quantity": 91,
+      "win_probability": 80
+    }
+  ]
+}
