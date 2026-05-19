@@ -1,0 +1,47 @@
+{
+  "date": "2026-05-19",
+  "wins_analysis": "No wins today \u2014 zero targets were hit. The one executed trade (INFY SELL at \u20b91,177.50) is still open and counter-trend in a strong uptrend market, which is concerning. No BUY setups actually triggered despite being the recommended direction.",
+  "losses_analysis": "No formal losses (SL hits) today, but the core problem is execution failure: only 1 of 10 recommendations converted to a trade, and that trade (INFY SELL) contradicts today's own BUY-focused thesis. The 3 pending BUY orders (BHARTIARTL, ICICIBANK, KOTAKBANK) had entry prices too far below market in a trending-up day \u2014 price never pulled back enough to fill limit orders.",
+  "regime_impact": "Strong uptrend (+1.0%, ADX 25) should have helped BUY setups but actually hurt execution because prices were moving up without pullbacks to demand zones. Limit buy orders at demand zones don't work well on strong momentum days \u2014 breakout or market-order entries would have captured the move.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "On trending_up days with ADX>22 and Nifty >+0.7%, place at least 2 orders as market/CMP entries on highest-probability setups (prob>=82%) rather than all limit orders at demand zones",
+      "reason": "3 pending BUY orders never filled because market didn't pull back in a strong uptrend day \u2014 zero execution on the highest-conviction setups",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Close the INFY SELL position at open tomorrow if Nifty remains in uptrend \u2014 it contradicts the regime and was entered against today's own directional thesis",
+      "reason": "Holding a SELL position in a confirmed strong uptrend (ADX 25, Nifty +1.0%) has negative expected value. The open position at \u20b91,177.50 with SL at \u20b91,197.86 risks a full loss if uptrend continues",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Set entry limit prices no more than 0.3% below current market price for BUY setups on trending days (instead of waiting for full demand zone retest which may be 0.8-1.5% away)",
+      "reason": "BHARTIARTL entry at \u20b91,834.20 and ICICIBANK at \u20b91,237.80 were likely too far from CMP to trigger on an up-trending day \u2014 tighter entries would have increased fill rate",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "Do not place orders for SELL setups when market regime is trending_up and AI probability is below 75% \u2014 enforce this as a hard filter",
+      "reason": "SBIN SELL (72%) and HINDUNILVR SELL (70%) were correctly not placed, but the existing INFY SELL open position shows the filter wasn't applied to prior-day entries. Make this a portfolio-level rule",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Limit pending orders to max 3 and require at least 1 to be a 'near-CMP' entry (within 0.2%) to guarantee some execution each day",
+      "reason": "Having 3 pending orders all unfilled means zero alpha generation on a day where the market moved +1% in our predicted direction \u2014 opportunity cost is high",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "If uptrend persists, use aggressive near-market entries on top 2 BUY setups and exit INFY SELL immediately to avoid being caught counter-trend.",
+  "symbol_notes": {
+    "INFY": "Currently holding counter-trend SELL \u2014 exit at open if Nifty gap-up or flat; the \u20b91,146 BUY zone from today's scan is the correct directional play",
+    "BHARTIARTL": "Strong setup at \u20b91,834 but needs tighter entry \u2014 if still near that level tomorrow, enter at market rather than waiting for exact zone touch",
+    "ICICIBANK": "BUY setup valid \u2014 use a shallower entry (within 0.3% of CMP) if market remains bullish",
+    "TCS": "Highest probability (84%) but order wasn't even placed \u2014 prioritize placing orders on top-ranked setups regardless",
+    "KOTAKBANK": "Pending at \u20b9384.90 \u2014 check if still valid tomorrow, adjust entry closer to CMP if uptrend continues"
+  },
+  "confidence": 5
+}
