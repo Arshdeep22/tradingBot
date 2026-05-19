@@ -1,0 +1,240 @@
+{
+  "date": "2026-05-19",
+  "scan_time_ist": "2026-05-19 14:14:15",
+  "total_setups_found": 422,
+  "total_candidates_sent_to_ai": 20,
+  "ai_available": true,
+  "market_context": "Market is in a strong uptrend (Nifty +1.4%, ADX 25.0), making demand zone BUY setups the highest probability plays. Applying yesterday's learnings: limiting to 1 setup per symbol for diversification, prioritizing BUY setups aligned with trend, and selecting zones closest to current price for execution probability. SELL setups are counter-trend and deprioritized unless very compelling.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.4%",
+    "adx": 25.0,
+    "vix": 18.5,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.4%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TCS.NS",
+      "side": "BUY",
+      "entry": 2292.9,
+      "stop_loss": 2262.4,
+      "target": 2353.9,
+      "zone_score": 100,
+      "win_probability": 84,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Perfect 100/100 zone score with 2.2% exciting leg-out candle - strongest momentum departure of all TCS zones",
+        "BUY aligned with trending_up regime",
+        "Closest TCS demand zone to current price, highest execution probability"
+      ],
+      "risks": "TCS may gap up past this zone making fill unlikely if momentum continues without pullback",
+      "entry_advice": "Place limit order at 2292.9; if not filled by 11:30 AM, look for nearest intraday 15-min demand zone within 0.3% of current price",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1834.2,
+      "stop_loss": 1820.03,
+      "target": 1862.54,
+      "zone_score": 100,
+      "win_probability": 83,
+      "conviction": "HIGH",
+      "reasoning": [
+        "BHARTIARTL highest demand zone (1834.2) - closest to current price for execution in uptrend",
+        "1.1% exciting leg-out candle with fresh untested zone",
+        "BUY aligned with strong uptrend regime"
+      ],
+      "risks": "If BHARTIARTL opens with a gap up above 1862, the target is already achieved and setup becomes irrelevant",
+      "entry_advice": "Limit order at 1834.2; confirm zone is within yesterday's high-low range before placing",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1237.8,
+      "stop_loss": 1228.11,
+      "target": 1257.18,
+      "zone_score": 100,
+      "win_probability": 82,
+      "conviction": "HIGH",
+      "reasoning": [
+        "ICICIBANK was noted from yesterday as valid setup if zone intact - now confirmed with 100/100 score",
+        "BUY aligned with uptrend, fresh untested demand zone",
+        "Yesterday's learning specifically flagged this for placement today"
+      ],
+      "risks": "0.7% leg-out body is on the smaller side, suggesting moderate institutional interest",
+      "entry_advice": "Limit order at 1237.8; verify pre-market price is within proximity of this level",
+      "order_placed": true
+    },
+    {
+      "rank": 4,
+      "symbol": "INFY.NS",
+      "side": "BUY",
+      "entry": 1146.1,
+      "stop_loss": 1132.73,
+      "target": 1172.84,
+      "zone_score": 100,
+      "win_probability": 81,
+      "conviction": "HIGH",
+      "reasoning": [
+        "INFY demand zone with massive 2.5% leg-out candle indicating strong institutional buying",
+        "Fresh untested zone perfectly aligned with trending_up market",
+        "Higher zone (1146.1) more likely to be reached than deeper 1097.5 level"
+      ],
+      "risks": "If INFY has stock-specific weakness, broad market uptrend may not support it",
+      "entry_advice": "Limit order at 1146.1; check if within prior day's range before committing",
+      "order_placed": false
+    },
+    {
+      "rank": 5,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 384.9,
+      "stop_loss": 378.86,
+      "target": 396.98,
+      "zone_score": 100,
+      "win_probability": 80,
+      "conviction": "HIGH",
+      "reasoning": [
+        "KOTAKBANK demand zone with 1.3% exciting leg-out and tight 2-candle base",
+        "BUY setup aligned with uptrend regime",
+        "Higher zone (384.9) is closer to current action for better execution"
+      ],
+      "risks": "Banking sector may underperform if rate-sensitive news emerges intraday",
+      "entry_advice": "Limit order at 384.9; banking stocks tend to move early so monitor first 30 minutes",
+      "order_placed": true
+    },
+    {
+      "rank": 6,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 310.65,
+      "stop_loss": 306.57,
+      "target": 318.81,
+      "zone_score": 100,
+      "win_probability": 79,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "ITC highest demand zone (310.65) - nearest to price for best execution probability",
+        "Fresh zone aligned with uptrend, defensive stock benefits in strong market",
+        "All ITC zones score 100/100 but this one is most proximate"
+      ],
+      "risks": "ITC's 0.6% leg-out body is relatively small indicating moderate momentum",
+      "entry_advice": "Limit order at 310.65; ITC moves slowly so be patient with fills",
+      "order_placed": false
+    },
+    {
+      "rank": 7,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 751.8,
+      "stop_loss": 744.14,
+      "target": 767.12,
+      "zone_score": 100,
+      "win_probability": 78,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "HDFCBANK fresh demand zone with 100/100 score, aligned with uptrend",
+        "Banking heavyweight likely to participate in Nifty +1.4% move",
+        "0.8% leg-out candle is reasonable for a large-cap bank"
+      ],
+      "risks": "Zone at 751.8 may be too deep a pullback if HDFCBANK gaps up significantly",
+      "entry_advice": "Limit order at 751.8; check proximity to opening price before placing",
+      "order_placed": false
+    },
+    {
+      "rank": 8,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1759.2,
+      "stop_loss": 1737.13,
+      "target": 1803.34,
+      "zone_score": 100,
+      "win_probability": 77,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "BHARTIARTL deeper demand zone with 1.2% leg-out candle",
+        "Diversifies BHARTIARTL exposure as backup if id:14 doesn't fill",
+        "Fresh untested zone in trending market"
+      ],
+      "risks": "At 1759.2, this is a deeper pullback zone that may not be reached in a strong uptrend day",
+      "entry_advice": "Place as secondary order only if id:14 gets filled and price continues to pull back",
+      "order_placed": true
+    },
+    {
+      "rank": 9,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1074.2,
+      "stop_loss": 1084.13,
+      "target": 1054.34,
+      "zone_score": 100,
+      "win_probability": 72,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "SBIN supply zone at 1074.2 was flagged yesterday as still valid with 85% conviction",
+        "Massive 2.4% leg-out candle shows strong selling pressure from this zone",
+        "Fresh untested zone - if SBIN rallies into this in uptrend, could provide counter-trend fade"
+      ],
+      "risks": "Counter-trend SELL in an uptrend regime - lower base probability; only works if SBIN shows relative weakness",
+      "entry_advice": "Only place if SBIN opens near 1074 level as noted in yesterday's learnings; otherwise skip",
+      "order_placed": false
+    },
+    {
+      "rank": 10,
+      "symbol": "HINDUNILVR.NS",
+      "side": "SELL",
+      "entry": 2312.6,
+      "stop_loss": 2331.0,
+      "target": 2275.8,
+      "zone_score": 100,
+      "win_probability": 70,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "HINDUNILVR supply zone - limiting to single best setup per yesterday's learning (max 1 per symbol)",
+        "Perfect 100/100 score with fresh zone and tight base",
+        "HINDUNILVR often shows relative weakness in broad rallies making SELL feasible"
+      ],
+      "risks": "Counter-trend SELL in uptrend; price may blast through supply zone if broad market momentum is strong",
+      "entry_advice": "Only place if HINDUNILVR opens within 0.5% of 2312.6; requires bearish confirmation candle at zone",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 13,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1834.2,
+      "stop_loss": 1820.03,
+      "target": 1862.54,
+      "quantity": 70,
+      "win_probability": 83
+    },
+    {
+      "order_id": 14,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1237.8,
+      "stop_loss": 1228.11,
+      "target": 1257.18,
+      "quantity": 103,
+      "win_probability": 82
+    },
+    {
+      "order_id": 15,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 384.9,
+      "stop_loss": 378.86,
+      "target": 396.98,
+      "quantity": 165,
+      "win_probability": 80
+    }
+  ]
+}
