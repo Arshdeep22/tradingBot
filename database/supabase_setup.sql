@@ -22,8 +22,28 @@ CREATE TABLE IF NOT EXISTS trades (
     status TEXT DEFAULT 'OPEN',
     entry_time TIMESTAMPTZ DEFAULT NOW(),
     exit_time TIMESTAMPTZ,
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    -- Trade management columns (bot_runner)
+    current_sl DOUBLE PRECISION,
+    breakeven_applied INTEGER DEFAULT 0,
+    partial_taken INTEGER DEFAULT 0,
+    high_since_entry DOUBLE PRECISION DEFAULT 0.0,
+    low_since_entry DOUBLE PRECISION DEFAULT 0.0,
+    base_candles INTEGER DEFAULT 2,
+    entry_candle_index INTEGER DEFAULT 0,
+    trail_method TEXT DEFAULT 'ATR'
 );
+
+-- Migration: add management columns to existing trades table
+-- Run this if your trades table already exists:
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS current_sl DOUBLE PRECISION;
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS breakeven_applied INTEGER DEFAULT 0;
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS partial_taken INTEGER DEFAULT 0;
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS high_since_entry DOUBLE PRECISION DEFAULT 0.0;
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS low_since_entry DOUBLE PRECISION DEFAULT 0.0;
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS base_candles INTEGER DEFAULT 2;
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS entry_candle_index INTEGER DEFAULT 0;
+ALTER TABLE trades ADD COLUMN IF NOT EXISTS trail_method TEXT DEFAULT 'ATR';
 
 -- Pending orders table
 CREATE TABLE IF NOT EXISTS pending_orders (

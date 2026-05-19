@@ -1,44 +1,42 @@
 """
-Zone Scoring
-------------
-Scoring logic for supply and demand zones.
-Handles score calculation, trade level computation, and reasoning generation.
+Zone Scoring — LEGACY REDIRECT
+-------------------------------
+This file is kept for backwards compatibility.
+The scoring system has been moved to the `strategies.zone_scoring` package.
 
-Scoring Criteria:
-- Freshness: 40 points (zone never tested)
-- Leg-out Strength: 30 points (big exciting candle)
-- Base Candles: 30 points (1-2 candles = max)
+Old 100-point system (freshness 40 + legout 30 + base 30) is preserved here
+for any code still importing from this module directly.
+
+New code should import from `strategies.zone_scoring` package:
+    from strategies.zone_scoring import score_zone, score_zones, generate_reasoning
 """
 
-from .zone_models import Zone
+# ─── Legacy imports from old module (preserved for zone_scanner.py compatibility) ───
+
+from strategies.zone_models import Zone
 
 
 def score_zone(zone: Zone, exciting_threshold: float,
                stronger_threshold: float, strong_threshold: float) -> Zone:
     """
-    Score a zone based on freshness, leg-out strength, and base tightness.
+    LEGACY: Score a zone using the old 100-point system.
     
-    Args:
-        zone: Zone to score
-        exciting_threshold: Body % threshold for 30-point leg-out
-        stronger_threshold: Body % threshold for 20-point leg-out
-        strong_threshold: Body % threshold for 10-point leg-out
-    
-    Returns:
-        Zone with scores populated
+    Kept for backwards compatibility with zone_scanner.py until Plan 6 update.
+    New code should use `strategies.zone_scoring.score_zone()` (6-dimension system).
     """
     # 1. Freshness Score (max 40)
     zone.freshness_score = 40 if zone.is_fresh else 0
 
     # 2. Leg-out Strength Score (max 30)
-    if zone.leg_out_pct >= exciting_threshold:
-        zone.legout_score = 30  # Strongest/Exciting
-    elif zone.leg_out_pct >= stronger_threshold:
-        zone.legout_score = 20  # Stronger
-    elif zone.leg_out_pct >= strong_threshold:
-        zone.legout_score = 10  # Strong
+    leg_out_pct = getattr(zone, 'leg_out_pct', zone.leg_out_body_pct)
+    if leg_out_pct >= exciting_threshold:
+        legout_score = 30
+    elif leg_out_pct >= stronger_threshold:
+        legout_score = 20
+    elif leg_out_pct >= strong_threshold:
+        legout_score = 10
     else:
-        zone.legout_score = 0  # Weak
+        legout_score = 0
 
     # 3. Base Candles Score (max 30)
     if zone.base_candles <= 2:
@@ -50,96 +48,70 @@ def score_zone(zone: Zone, exciting_threshold: float,
     else:
         zone.base_score = 0
 
-    # Total Score
-    zone.score = zone.freshness_score + zone.legout_score + zone.base_score
+    # Total Score (old system: /100)
+    zone.score = zone.freshness_score + legout_score + zone.base_score
 
     return zone
 
 
 def calculate_trade_levels(zone: Zone, rr_ratio: float, atr_val: float) -> Zone:
     """
-    Calculate entry, stop loss, and target for a zone.
-    Uses ATR-based buffer (1.5 x ATR) instead of fixed percentage
-    to adapt to each stock's volatility.
-    
-    Args:
-        zone: Zone to calculate levels for
-        rr_ratio: Risk-reward ratio for target calculation
-        atr_val: Current ATR value for SL buffer
-    
-    Returns:
-        Zone with entry/stop_loss/target populated
+    LEGACY: Calculate entry, stop loss, and target for a zone.
+    Kept for backwards compatibility until Plan 5 replaces this.
     """
     if atr_val <= 0:
         atr_val = zone.zone_bottom * 0.004
 
-    # Use 1.5x ATR as the buffer below/above zone
     sl_buffer = atr_val * 1.5
 
     if zone.zone_type == "DEMAND":
-        # Buy at top of demand zone
         zone.entry = zone.zone_top
-        # SL below bottom of zone with ATR-based buffer
         zone.stop_loss = round(zone.zone_bottom - sl_buffer, 2)
-        # Target = Entry + rr_ratio * Risk
         risk = zone.entry - zone.stop_loss
-        zone.target = round(zone.entry + (rr_ratio * risk), 2)
-
+        zone.target_1 = round(zone.entry + (1.0 * risk), 2)
+        zone.target_2 = round(zone.entry + (rr_ratio * risk), 2)
     elif zone.zone_type == "SUPPLY":
-        # Sell at bottom of supply zone
         zone.entry = zone.zone_bottom
-        # SL above top of zone with ATR-based buffer
         zone.stop_loss = round(zone.zone_top + sl_buffer, 2)
-        # Target = Entry - rr_ratio * Risk
         risk = zone.stop_loss - zone.entry
-        zone.target = round(zone.entry - (rr_ratio * risk), 2)
+        zone.target_1 = round(zone.entry - (1.0 * risk), 2)
+        zone.target_2 = round(zone.entry - (rr_ratio * risk), 2)
 
     return zone
 
 
 def generate_reasoning(zone: Zone) -> Zone:
-    """Generate human-readable reasoning for the zone."""
+    """
+    LEGACY: Generate human-readable reasoning (old format).
+    Kept for backwards compatibility until Plan 6 update.
+    """
+    legout_score = zone.score - zone.freshness_score - zone.base_score
+    leg_out_pct = getattr(zone, 'leg_out_pct', zone.leg_out_body_pct)
 
-    # Leg-out description
-    if zone.legout_score == 30:
-        leg_desc = f"EXCITING leg-out candle ({zone.leg_out_pct:.1f}% body)"
-    elif zone.legout_score == 20:
-        leg_desc = f"STRONGER leg-out candle ({zone.leg_out_pct:.1f}% body)"
+    if legout_score >= 30:
+        leg_desc = f"EXCITING leg-out ({leg_out_pct:.1f}% body)"
+    elif legout_score >= 20:
+        leg_desc = f"STRONGER leg-out ({leg_out_pct:.1f}% body)"
     else:
-        leg_desc = f"STRONG leg-out candle ({zone.leg_out_pct:.1f}% body)"
+        leg_desc = f"STRONG leg-out ({leg_out_pct:.1f}% body)"
 
-    # Base description
-    if zone.base_score == 30:
+    if zone.base_score >= 30:
         base_desc = f"Very tight base ({zone.base_candles} candles)"
-    elif zone.base_score == 20:
+    elif zone.base_score >= 20:
         base_desc = f"Compact base ({zone.base_candles} candles)"
     else:
         base_desc = f"Wider base ({zone.base_candles} candles)"
 
-    # Freshness description
-    fresh_desc = "FRESH zone (never tested)" if zone.is_fresh else "Zone has been tested"
+    fresh_desc = "FRESH (never tested)" if zone.is_fresh else "Tested"
 
-    # Zone type description
-    if zone.zone_type == "DEMAND":
-        type_desc = "DEMAND zone (Buy opportunity)"
-        action = "BUY"
-    else:
-        type_desc = "SUPPLY zone (Sell opportunity)"
-        action = "SELL"
-
-    # Risk/Reward
-    risk = abs(zone.entry - zone.stop_loss)
-    reward = abs(zone.target - zone.entry)
-    rr = reward / risk if risk > 0 else 0
+    type_desc = f"{zone.zone_type} zone"
 
     zone.reasoning = (
         f"{type_desc} | Score: {zone.score}/100\n"
         f"• {fresh_desc} (+{zone.freshness_score} pts)\n"
-        f"• {leg_desc} (+{zone.legout_score} pts)\n"
+        f"• {leg_desc} (+{legout_score} pts)\n"
         f"• {base_desc} (+{zone.base_score} pts)\n"
-        f"• Zone: {zone.zone_bottom} - {zone.zone_top}\n"
-        f"• {action} @ {zone.entry} | SL: {zone.stop_loss} | Target: {zone.target}\n"
-        f"• Risk:Reward = 1:{rr:.1f}"
+        f"• Zone: {zone.zone_bottom:.2f} - {zone.zone_top:.2f}"
     )
 
     return zone

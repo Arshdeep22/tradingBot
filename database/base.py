@@ -64,7 +64,10 @@ class BaseDB:
 
         if not self.use_supabase:
             self._create_tables_sqlite()
+            self._run_sqlite_migrations()
             logger.info(f"Using SQLite: {self.db_path}")
+        else:
+            self._warn_supabase_schema()
 
     def _get_connection(self):
         conn = sqlite3.connect(self.db_path)
@@ -99,5 +102,41 @@ class BaseDB:
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             balance REAL, portfolio_value REAL,
             open_positions INTEGER, total_pnl REAL)""")
+        conn.commit()
+        conn.close()
+
+    def _warn_supabase_schema(self):
+        """Check if management columns exist on Supabase and warn if not."""
+        _mgmt_cols = {"current_sl", "breakeven_applied", "base_candles"}
+        try:
+            res = self.supabase_client.table("trades").select(
+                "current_sl,breakeven_applied,base_candles"
+            ).limit(1).execute()
+            _ = res.data  # no error = columns exist
+        except Exception:
+            logger.warning(
+                "Supabase trades table is missing bot_runner management columns. "
+                "Run the ALTER TABLE statements from database/supabase_setup.sql "
+                "in your Supabase SQL Editor."
+            )
+        """Add new columns to existing tables without dropping data."""
+        new_trade_columns = [
+            ("current_sl", "REAL"),
+            ("breakeven_applied", "INTEGER DEFAULT 0"),
+            ("partial_taken", "INTEGER DEFAULT 0"),
+            ("high_since_entry", "REAL DEFAULT 0.0"),
+            ("low_since_entry", "REAL DEFAULT 0.0"),
+            ("base_candles", "INTEGER DEFAULT 2"),
+            ("entry_candle_index", "INTEGER DEFAULT 0"),
+            ("trail_method", "TEXT DEFAULT 'ATR'"),
+        ]
+        conn = self._get_connection()
+        c = conn.cursor()
+        c.execute("PRAGMA table_info(trades)")
+        existing = {row["name"] for row in c.fetchall()}
+        for col_name, col_def in new_trade_columns:
+            if col_name not in existing:
+                c.execute(f"ALTER TABLE trades ADD COLUMN {col_name} {col_def}")
+                logger.info(f"Migration: added trades.{col_name}")
         conn.commit()
         conn.close()
