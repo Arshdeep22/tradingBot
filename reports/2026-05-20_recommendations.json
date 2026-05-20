@@ -1,0 +1,50 @@
+{
+  "date": "2026-05-20",
+  "scan_time_ist": "2026-05-20 14:11:01",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup available (TATASTEEL SELL), which directly contradicts the trending_up market regime (Nifty +1.0%, ADX 25). Yesterday's learnings explicitly state: do not place SELL setups when market regime is trending_up and AI probability is below 75%. This setup has a zone score of 48/60 but goes against the dominant trend, making it a low-probability trade in current conditions.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.0%",
+    "adx": 25.0,
+    "vix": 18.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.0%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 208.92,
+      "stop_loss": 210.39,
+      "target": 204.51,
+      "zone_score": 48,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "SELL setup in a trending_up regime (Nifty +1.0%, ADX 25) is counter-trend and high risk",
+        "Zone score of 48/60 is decent with strong departure (gap away) and pristine freshness",
+        "R:R of 3.0 is attractive but meaningless if probability is low due to regime mismatch",
+        "Yesterday's learnings explicitly warn against SELL setups in uptrend with probability below 75%"
+      ],
+      "risks": "Counter-trend SELL in a strong uptrend market \u2014 price likely to break through supply zone rather than reverse",
+      "entry_advice": "DO NOT TRADE \u2014 this violates the hard filter rule from yesterday's learnings (no SELL when trending_up and probability <75%). Wait for demand zone BUY setups aligned with the uptrend instead.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 16,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 208.92,
+      "stop_loss": 210.39,
+      "target": 204.51,
+      "quantity": 680,
+      "win_probability": 38
+    }
+  ]
+}
