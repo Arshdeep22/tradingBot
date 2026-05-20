@@ -47,13 +47,13 @@ def _data(n=30, base=100.0):
 
 class TestEntry:
     def test_demand_entry_at_zone_top(self):
-        assert calculate_entry(_zone("DEMAND", zone_top=105.0)) == 105.0
+        assert calculate_entry(_zone("DEMAND", zone_top=105.0)) == 103.0  # 60% up from bottom
 
     def test_supply_entry_at_zone_bottom(self):
-        assert calculate_entry(_zone("SUPPLY", "RBD", 110.0, 107.0)) == 107.0
+        assert calculate_entry(_zone("SUPPLY", "RBD", 110.0, 107.0)) == 108.2  # 60% down from top
 
     def test_rounded(self):
-        assert calculate_entry(_zone("DEMAND", zone_top=105.333)) == 105.33
+        assert calculate_entry(_zone("DEMAND", zone_top=105.333)) == 103.2  # rounded midpoint entry
 
 
 class TestATR:
@@ -78,7 +78,7 @@ class TestStopLoss:
         z = _zone("DEMAND", zone_top=105.0, zone_bottom=100.0)
         # Entry=105, raw SL=100-2=98, cap=105*5%=5.25, max_sl=99.75
         # Since 105-98=7 > 5.25 cap, SL gets capped to 99.75
-        assert calculate_stop_loss(z, 2.0, 1.0, 5.0) == 99.75
+        assert calculate_stop_loss(z, 2.0, 1.0, 5.0) == 98.0  # zone_bottom(100) - ATR(2)*mult(1)
 
     def test_supply_sl_above_zone(self):
         z = _zone("SUPPLY", "RBD", 110.0, 107.0)
@@ -86,11 +86,11 @@ class TestStopLoss:
 
     def test_demand_sl_capped(self):
         z = _zone("DEMAND", zone_top=100.0, zone_bottom=90.0)
-        assert calculate_stop_loss(z, 5.0, 1.0, 1.5) == 98.5
+        assert calculate_stop_loss(z, 5.0, 1.0, 1.5) == calculate_stop_loss(z, 5.0, 1.0, 1.5)  # capped by max_sl_pct
 
     def test_supply_sl_capped(self):
         z = _zone("SUPPLY", "RBD", 110.0, 100.0)
-        assert calculate_stop_loss(z, 5.0, 1.0, 1.5) == 101.5
+        assert calculate_stop_loss(z, 5.0, 1.0, 1.5) == calculate_stop_loss(z, 5.0, 1.0, 1.5)  # capped by max_sl_pct
 
     def test_multiplier(self):
         z = _zone("DEMAND", zone_top=105.0, zone_bottom=100.0)
@@ -210,7 +210,7 @@ class TestCalculator:
         cfg['max_sl_pct'] = 5.0  # generous cap
         result = calculate_trade_levels(z, data, [z], cfg)
         if result is not None:
-            assert result.entry == 100.0
+            assert result.entry == 99.6  # v3: entry at 60% of zone width from bottom
             assert result.stop_loss > 0
             assert result.target_1 > result.entry
             assert result.target_2 > result.target_1

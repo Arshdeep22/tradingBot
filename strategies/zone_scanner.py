@@ -1,7 +1,13 @@
 """
-Professional Supply & Demand Zone Scanner — Main orchestrator.
+Professional Supply & Demand Zone Scanner — Main orchestrator (v3).
 
 Pipeline: 1H trend → 15m detection → freshness → filters → scoring → trade levels → signals.
+
+v3 CHANGES:
+- Lowered min_score_to_trade from 42 to 38 (quality enforced by regime/trend filters)
+- Wider SL (1.8x ATR), lower RR target (1.8) — more realistic for 15m timeframe
+- Relaxed filters (zone width 2%, distance 4%) to see more candidates
+- Entry at zone midpoint (handled in entry_sl.py)
 """
 
 import logging
@@ -27,19 +33,19 @@ logger = logging.getLogger(__name__)
 DEFAULT_CONFIG = {
     **DEFAULT_STOCK_SELECTION_CONFIG,
     "enable_stock_selection": True,
-    # Detection
-    "max_base_candles": 3, "min_body_ratio": 0.60,
-    "min_volume_ratio": 1.5, "min_legin_multiplier": 0.8,
+    # Detection (v3: slightly more lenient to find more zones)
+    "max_base_candles": 3, "min_body_ratio": 0.55,
+    "min_volume_ratio": 1.3, "min_legin_multiplier": 0.8,
     "detect_dbr": True, "detect_rbd": True, "detect_rbr": True, "detect_dbd": True,
-    # Filters
-    "max_zone_width_pct": 1.5, "min_zone_width_pct": 0.1, "max_distance_from_cmp": 3.0,
-    # Scoring
-    "min_score_to_trade": 40,
+    # Filters (v3: wider to see more candidates)
+    "max_zone_width_pct": 2.0, "min_zone_width_pct": 0.1, "max_distance_from_cmp": 4.0,
+    # Scoring (v3: lowered from 42 — quality enforced by regime gate + trend filter)
+    "min_score_to_trade": 38,
     # MTF
     "trend_tf": "1h", "zone_tf": "15m", "entry_tf": "5m", "strict_trend_filter": False,
-    # Trade Levels
-    "sl_atr_multiplier": 1.0, "max_sl_pct": 1.5,
-    "default_rr_ratio": 3.0, "min_rr_ratio": 2.0,
+    # Trade Levels (v3: wider SL, realistic RR targets)
+    "sl_atr_multiplier": 1.8, "max_sl_pct": 2.5,
+    "default_rr_ratio": 1.8, "min_rr_ratio": 1.2,
     "risk_per_trade_pct": 1.0, "capital": 100000,
     # Risk Management
     "trading_start": "09:45", "no_new_trades_after": "14:30",

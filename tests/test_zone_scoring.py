@@ -39,6 +39,7 @@ def _make_zone(**kwargs) -> Zone:
         leg_out_body_ratio=0.75,
         leg_out_volume_ratio=2.0,
         has_gap=False,
+        mean_body_pct=0.5,  # Needed for departure score: size_mult = leg_out_body_pct / mean
         leg_in_body_pct=1.2,
         leg_in_candle_count=1,
         is_fresh=True,
@@ -96,9 +97,9 @@ class TestScoreDeparture:
         zone = _make_zone(has_gap=False, leg_out_count=3, leg_out_body_ratio=0.8, leg_out_volume_ratio=0.0)
         assert score_departure(zone) == 10
 
-    def test_two_candles_high_vol_gives_8(self):
+    def test_two_candles_high_vol_gives_9(self):
         zone = _make_zone(has_gap=False, leg_out_count=2, leg_out_body_ratio=0.75, leg_out_volume_ratio=1.8)
-        assert score_departure(zone) == 8
+        assert score_departure(zone) == 9
 
     def test_two_candles_no_vol_gives_8(self):
         # 2 strong candles = 8 regardless of volume
@@ -114,12 +115,16 @@ class TestScoreDeparture:
         assert score_departure(zone) == 5
 
     def test_one_candle_decent_body_gives_4(self):
-        zone = _make_zone(has_gap=False, leg_out_count=1, leg_out_body_ratio=0.65, leg_out_volume_ratio=1.0)
+        # size_mult >= 1.5 but body_ratio < 0.7 → 4
+        zone = _make_zone(has_gap=False, leg_out_count=1, leg_out_body_pct=0.8,
+                          mean_body_pct=0.5, leg_out_body_ratio=0.65, leg_out_volume_ratio=1.0)
         assert score_departure(zone) == 4
 
-    def test_weak_departure_gives_2(self):
-        zone = _make_zone(has_gap=False, leg_out_count=1, leg_out_body_ratio=0.4, leg_out_volume_ratio=0.8)
-        assert score_departure(zone) == 2
+    def test_weak_departure_gives_3(self):
+        # size_mult < 1.5 → 2
+        zone = _make_zone(has_gap=False, leg_out_count=1, leg_out_body_pct=0.6,
+                          mean_body_pct=0.5, leg_out_body_ratio=0.4, leg_out_volume_ratio=0.8)
+        assert score_departure(zone) == 3
 
 
 # ─── Dimension 2: Base Quality ────────────────────────────────────────────────
@@ -163,17 +168,17 @@ class TestScoreFreshness:
         zone = _make_zone(is_fresh=True, age_candles=20)
         assert score_freshness(zone) == 10
 
-    def test_fresh_at_boundary_50_gives_10(self):
+    def test_fresh_at_boundary_50_gives_8(self):
         zone = _make_zone(is_fresh=True, age_candles=50)
-        assert score_freshness(zone) == 10
+        assert score_freshness(zone) == 8
 
-    def test_fresh_under_100_gives_10(self):
+    def test_fresh_under_100_gives_6(self):
         zone = _make_zone(is_fresh=True, age_candles=75)
-        assert score_freshness(zone) == 10
+        assert score_freshness(zone) == 6
 
-    def test_fresh_over_100_gives_7(self):
+    def test_fresh_over_100_gives_4(self):
         zone = _make_zone(is_fresh=True, age_candles=150)
-        assert score_freshness(zone) == 7
+        assert score_freshness(zone) == 4
 
     def test_not_fresh_gives_0(self):
         zone = _make_zone(is_fresh=False, age_candles=10)
@@ -242,9 +247,9 @@ class TestScoreTime:
         zone = _make_zone(age_candles=5)
         assert score_time(zone) == 10
 
-    def test_boundary_20_gives_10(self):
+    def test_boundary_20_gives_9(self):
         zone = _make_zone(age_candles=20)
-        assert score_time(zone) == 10
+        assert score_time(zone) == 9
 
     def test_recent_gives_8(self):
         zone = _make_zone(age_candles=35)
@@ -254,13 +259,13 @@ class TestScoreTime:
         zone = _make_zone(age_candles=80)
         assert score_time(zone) == 6
 
-    def test_aging_gives_4(self):
+    def test_aging_gives_2(self):
         zone = _make_zone(age_candles=130)
-        assert score_time(zone) == 4
-
-    def test_old_gives_2(self):
-        zone = _make_zone(age_candles=200)
         assert score_time(zone) == 2
+
+    def test_old_gives_1(self):
+        zone = _make_zone(age_candles=200)
+        assert score_time(zone) == 1
 
     def test_ancient_gives_1(self):
         zone = _make_zone(age_candles=210)
@@ -281,21 +286,23 @@ class TestScoreTrend:
         zone = _make_zone(zone_type="SUPPLY", pattern="RBD")
         assert score_trend(zone, "DOWNTREND") == 10
 
-    def test_demand_in_downtrend_gives_3(self):
+    def test_demand_in_downtrend_gives_0(self):
+        """Counter-trend trades now score 0 to block them from passing min_score."""
         zone = _make_zone(zone_type="DEMAND")
-        assert score_trend(zone, "DOWNTREND") == 3
+        assert score_trend(zone, "DOWNTREND") == 0
 
-    def test_supply_in_uptrend_gives_3(self):
+    def test_supply_in_uptrend_gives_0(self):
+        """Counter-trend trades now score 0 to block them from passing min_score."""
         zone = _make_zone(zone_type="SUPPLY", pattern="RBD")
-        assert score_trend(zone, "UPTREND") == 3
+        assert score_trend(zone, "UPTREND") == 0
 
-    def test_sideways_gives_5(self):
+    def test_sideways_gives_4(self):
         zone = _make_zone(zone_type="DEMAND")
-        assert score_trend(zone, "SIDEWAYS") == 5
+        assert score_trend(zone, "SIDEWAYS") == 4
 
-    def test_none_trend_gives_5(self):
+    def test_none_trend_gives_4(self):
         zone = _make_zone(zone_type="DEMAND")
-        assert score_trend(zone, None) == 5
+        assert score_trend(zone, None) == 4
 
     def test_case_insensitive(self):
         zone = _make_zone(zone_type="DEMAND")
@@ -316,7 +323,7 @@ class TestScoreZone:
         data = _make_ohlc_data()
         scored = score_zone(zone, data, "UPTREND")
 
-        assert scored.departure_score == 8
+        assert scored.departure_score == 9
         assert scored.base_score == 10
         assert scored.freshness_score == 10
         assert scored.time_score == 10

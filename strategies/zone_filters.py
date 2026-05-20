@@ -1,8 +1,14 @@
 """
-Zone quality filters for supply/demand zones.
+Zone quality filters for supply/demand zones (v3).
 
 Individual filter functions reject zones that don't meet quality criteria.
 The apply_all_filters() orchestrator chains all filters together.
+
+v3 CHANGES:
+- max_zone_width_pct: 1.5 → 2.0 (allow wider zones, they work on large-caps)
+- max_distance_from_cmp: 3.0 → 4.0 (see more candidates)
+- min_body_ratio: 0.60 → 0.55 (slightly more lenient)
+- max_sl_pct: 1.5 → 2.5 (was rejecting valid setups)
 """
 
 from typing import List
@@ -12,18 +18,18 @@ import pandas as pd
 from strategies.zone_models import Zone
 
 
-# --- Default filter configuration ---
+# --- Default filter configuration (v3: more lenient) ---
 DEFAULT_FILTER_CONFIG = {
-    "max_zone_width_pct": 1.5,
+    "max_zone_width_pct": 2.0,      # Was 1.5 — allow wider zones
     "min_zone_width_pct": 0.1,
-    "max_distance_from_cmp": 3.0,
-    "min_body_ratio": 0.60,
+    "max_distance_from_cmp": 4.0,   # Was 3.0 — see more candidates
+    "min_body_ratio": 0.55,          # Was 0.60 — slightly more lenient
     "overlap_threshold_pct": 1.0,
-    "max_sl_pct": 1.5,
+    "max_sl_pct": 2.5,              # Was 1.5 — was rejecting valid setups
 }
 
 
-def filter_zone_width(zone: Zone, max_pct: float = 1.5, min_pct: float = 0.1) -> bool:
+def filter_zone_width(zone: Zone, max_pct: float = 2.0, min_pct: float = 0.1) -> bool:
     """
     Reject zones that are too wide or too narrow.
 
@@ -40,7 +46,7 @@ def filter_zone_width(zone: Zone, max_pct: float = 1.5, min_pct: float = 0.1) ->
 
 
 def filter_distance_from_price(
-    zone: Zone, current_price: float, max_distance_pct: float = 3.0
+    zone: Zone, current_price: float, max_distance_pct: float = 4.0
 ) -> bool:
     """
     Reject zones that are too far from current market price.
@@ -58,7 +64,7 @@ def filter_distance_from_price(
 
 
 def filter_sl_cap(
-    zone: Zone, entry: float, stop_loss: float, max_sl_pct: float = 1.5
+    zone: Zone, entry: float, stop_loss: float, max_sl_pct: float = 2.5
 ) -> bool:
     """
     Reject zones where the stop-loss distance exceeds the maximum allowed.
@@ -82,7 +88,7 @@ def filter_freshness(zone: Zone) -> bool:
     return zone.is_fresh
 
 
-def filter_minimum_leg_out(zone: Zone, min_body_ratio: float = 0.60) -> bool:
+def filter_minimum_leg_out(zone: Zone, min_body_ratio: float = 0.55) -> bool:
     """
     Reject zones with weak leg-out candles (insufficient body ratio).
 
@@ -100,12 +106,12 @@ def filter_minimum_leg_out(zone: Zone, min_body_ratio: float = 0.60) -> bool:
 
 def filter_minimum_legout_volume(
     zones: List[Zone],
-    min_volume_ratio: float = 1.5,
+    min_volume_ratio: float = 1.3,
 ) -> List[Zone]:
     """
     Reject zones where leg-out occurred on below-average volume.
 
-    Volume > 1.5x average is a guide prerequisite for institutional zone validity.
+    Volume > 1.3x average is a guide prerequisite for institutional zone validity.
     Zones with volume_ratio == 1.0 exactly are treated as "no data" (preparation.py
     sets this as the default when Volume is absent) and are passed through.
     """
@@ -216,7 +222,7 @@ def apply_all_filters(
         filtered.append(zone)
 
     # Filter 5: Leg-out volume (institutional confirmation)
-    min_vol = cfg.get("min_volume_ratio", 1.5)
+    min_vol = cfg.get("min_volume_ratio", 1.3)
     filtered = filter_minimum_legout_volume(filtered, min_vol)
     if not filtered:
         return []

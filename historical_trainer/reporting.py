@@ -1,5 +1,6 @@
 """
 Report generation: weekly summaries, JSON and Markdown output.
+Aligned with Professional Zone Scanner (6-dimension scoring, 0-60 scale).
 """
 
 import json
@@ -21,9 +22,16 @@ def compute_weekly_summary(all_days: list, daily_results: list) -> list:
             continue
         w_wins = sum(d["wins"] for d in wdays)
         w_losses = sum(d["losses"] for d in wdays)
+        w_expired = sum(d.get("expired", 0) for d in wdays)
         w_pnl = sum(d["pnl"] for d in wdays)
         w_trig = sum(d["triggered"] for d in wdays)
         w_wr = w_wins / (w_wins + w_losses) * 100 if (w_wins + w_losses) > 0 else 0.0
+
+        # Compute avg RR for the week
+        w_rr_vals = [t.get("rr_achieved", 0) for d in wdays for t in d.get("trades", [])
+                     if t.get("rr_achieved", 0) != 0]
+        w_avg_rr = sum(w_rr_vals) / len(w_rr_vals) if w_rr_vals else 0.0
+
         weekly_summary.append({
             "week_num": len(weekly_summary) + 1,
             "start_date": wdays[0]["date"],
@@ -32,7 +40,9 @@ def compute_weekly_summary(all_days: list, daily_results: list) -> list:
             "triggered": w_trig,
             "wins": w_wins,
             "losses": w_losses,
+            "expired": w_expired,
             "win_rate": round(w_wr, 1),
+            "avg_rr": round(w_avg_rr, 2),
             "pnl": round(w_pnl, 2),
         })
     return weekly_summary
@@ -41,6 +51,7 @@ def compute_weekly_summary(all_days: list, daily_results: list) -> list:
 def save_strategy_memory(current_zone_params: dict, overall_wr: float,
                          total_pnl: float, total_triggered: int,
                          total_wins: int, total_losses: int,
+                         avg_rr: float,
                          final_summary: dict, data_dict: dict,
                          all_days: list):
     """Persist learned params to strategy_memory.json."""
@@ -54,10 +65,12 @@ def save_strategy_memory(current_zone_params: dict, overall_wr: float,
             "triggered": total_triggered,
             "targets_hit": total_wins,
             "sl_hit": total_losses,
+            "avg_rr_achieved": avg_rr,
+            "scoring_system": "6-dimension (0-60)",
         },
         analysis=final_summary.get(
             "executive_summary",
-            f"Historical trainer: {overall_wr:.1f}% WR over {len(all_days)} trading days"
+            f"Historical trainer: {overall_wr:.1f}% WR, {avg_rr:.2f} avg RR over {len(all_days)} trading days"
         ),
         symbols=list(data_dict.keys()),
     )
@@ -95,28 +108,34 @@ def _build_markdown(report: dict) -> str:
     final_summary = report["final_summary"]
     total_triggered = report["total_triggered"]
     overall_wr = report["overall_win_rate"]
+    avg_rr = report.get("average_rr", 0.0)
     total_pnl = report["total_pnl"]
     quick = report["quick_mode"]
     all_days_count = report["trading_days"]
 
     lines = []
-    lines.append(f"# Historical Training Report -- {report_id}")
+    lines.append(f"# Historical Training Report — {report_id}")
     lines.append("")
     lines.append("## Summary")
-    lines.append(f"- Strategy: Supply & Demand Zones (Zone Scanner)")
-    lines.append(f"- Period: {report['training_period']['start']} -> {report['training_period']['end']} ({all_days_count} trading days)")
+    lines.append(f"- Strategy: Professional Zone Scanner (6-dimension scoring, 0-60 scale)")
+    lines.append(f"- Period: {report['training_period']['start']} → {report['training_period']['end']} ({all_days_count} trading days)")
     lines.append(f"- Symbols: {len(report['symbols_used'])} | Quick: {quick}")
-    lines.append(f"- Trades simulated: {total_triggered} | WR: {overall_wr:.1f}% | P&L: Rs{total_pnl:+.0f}")
+    lines.append(f"- Trades simulated: {total_triggered} | WR: {overall_wr:.1f}% | Avg RR: {avg_rr:.2f} | P&L: ₹{total_pnl:+.0f}")
     lines.append(f"- Optimizer runs: {report['optimizer_runs']} | Claude synthesis calls: {report['claude_calls']}")
-    lines.append(f"- Final Zone params: {current_zone_params}")
+    lines.append("")
+    lines.append("## Final Zone Parameters")
+    lines.append(f"| Parameter | Value |")
+    lines.append(f"|-----------|-------|")
+    for key, val in current_zone_params.items():
+        lines.append(f"| {key} | {val} |")
     lines.append("")
     lines.append("## Learning Curve (Week by Week)")
-    lines.append("| Week | Dates | Trades | WR | P&L |")
-    lines.append("|------|-------|--------|----|-----|")
+    lines.append("| Week | Dates | Trades | WR | Avg RR | P&L |")
+    lines.append("|------|-------|--------|----|--------|-----|")
     for w in weekly_summary:
         lines.append(
-            f"| {w['week_num']} | {w['start_date']}-{w['end_date']} | "
-            f"{w['triggered']} | {w['win_rate']:.1f}% | Rs{w['pnl']:+.0f} |"
+            f"| {w['week_num']} | {w['start_date']}–{w['end_date']} | "
+            f"{w['triggered']} | {w['win_rate']:.1f}% | {w.get('avg_rr', 0):.2f} | ₹{w['pnl']:+.0f} |"
         )
 
     if final_summary:
@@ -125,13 +144,21 @@ def _build_markdown(report: dict) -> str:
         lines.append(final_summary.get("executive_summary", ""))
         for insight in final_summary.get("key_insights", []):
             lines.append(f"- {insight}")
+        if final_summary.get("best_performing_setup"):
+            lines.append("")
+            lines.append(f"**Best setup:** {final_summary['best_performing_setup']}")
+        if final_summary.get("recommended_live_approach"):
+            lines.append("")
+            lines.append(f"**Recommended approach:** {final_summary['recommended_live_approach']}")
 
     lines.append("")
-    lines.append("## Final Parameters")
-    lines.append(
-        f"Zone: min_score={current_zone_params.get('min_score')}, "
-        f"rr_ratio={current_zone_params.get('rr_ratio')}, "
-        f"max_base_candles={current_zone_params.get('max_base_candles')}"
-    )
+    lines.append("## Scoring System")
+    lines.append("Zones scored on 6 dimensions (0-10 each, max 60):")
+    lines.append("1. **Departure** — Leg-out quality (body size, count, volume)")
+    lines.append("2. **Base** — Base tightness (fewer candles = better)")
+    lines.append("3. **Freshness** — Untested zone (never touched = better)")
+    lines.append("4. **Arrival** — Leg-in quality (gradual arrival = better)")
+    lines.append("5. **Time** — Age of zone (newer = better)")
+    lines.append("6. **Trend** — Alignment with higher-TF trend")
 
     return "\n".join(lines)

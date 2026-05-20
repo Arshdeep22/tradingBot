@@ -1,6 +1,16 @@
 """
 Entry and Stop Loss calculation for zone trading.
-Entry at zone edge, SL with ATR buffer + cap enforcement.
+
+PROFESSIONAL ENTRY LOGIC (v3):
+- Entry at zone MIDPOINT (not edge) — gives better fill and more room
+- SL beyond zone extreme + ATR buffer (wider = fewer stop hunts)
+- Entry confirmation: price must be INSIDE zone, not just touching edge
+
+FIXES:
+- Entry moved from zone_top/zone_bottom (edge) to midpoint
+  This gives price room to "breathe" within the zone before hitting SL
+- SL buffer increased: ATR multiplier applies to the full buffer
+- Max SL cap raised to allow realistic risk per trade
 """
 
 import pandas as pd
@@ -10,14 +20,29 @@ from strategies.zone_models import Zone
 
 def calculate_entry(zone: Zone) -> float:
     """
-    Entry at zone edge.
-    DEMAND: Entry = zone_top (buy when price drops to top of demand zone)
-    SUPPLY: Entry = zone_bottom (sell when price rallies to bottom of supply)
+    Entry at zone midpoint for better probability.
+    
+    PROFESSIONAL LOGIC:
+    - DEMAND: Entry = midpoint of zone (wait for price to drop INTO zone)
+    - SUPPLY: Entry = midpoint of zone (wait for price to rise INTO zone)
+    
+    This is more realistic than edge entry because:
+    1. Gives confirmation that price is actually respecting the zone
+    2. Better average fill price (closer to zone center)
+    3. More room before SL is hit (SL is beyond opposite edge)
     """
+    midpoint = round((zone.zone_top + zone.zone_bottom) / 2.0, 2)
+    
     if zone.zone_type == "DEMAND":
-        return round(zone.zone_top, 2)
+        # For demand, enter slightly above midpoint (price is falling into zone)
+        # Enter at upper 40% of zone — gives room to drop to bottom before SL
+        entry = round(zone.zone_bottom + (zone.zone_top - zone.zone_bottom) * 0.6, 2)
+        return entry
     else:  # SUPPLY
-        return round(zone.zone_bottom, 2)
+        # For supply, enter slightly below midpoint (price is rising into zone)
+        # Enter at lower 40% of zone — gives room to rise to top before SL
+        entry = round(zone.zone_top - (zone.zone_top - zone.zone_bottom) * 0.6, 2)
+        return entry
 
 
 def compute_atr(data: pd.DataFrame, period: int = 14) -> float:
@@ -53,13 +78,18 @@ def compute_atr(data: pd.DataFrame, period: int = 14) -> float:
 
 
 def calculate_stop_loss(zone: Zone, atr_value: float,
-                        atr_multiplier: float = 1.0,
-                        max_sl_pct: float = 1.5) -> float:
+                        atr_multiplier: float = 1.5,
+                        max_sl_pct: float = 2.0) -> float:
     """
     SL beyond zone extreme + ATR buffer, capped at max %.
 
-    DEMAND: SL = zone_bottom - (ATR * multiplier), capped at max_sl_pct from entry
-    SUPPLY: SL = zone_top + (ATR * multiplier), capped at max_sl_pct from entry
+    PROFESSIONAL LOGIC:
+    - DEMAND: SL = zone_bottom - (ATR * multiplier)
+      Price must break the ENTIRE zone + buffer to prove zone invalid
+    - SUPPLY: SL = zone_top + (ATR * multiplier)
+    
+    The ATR buffer accounts for stop-hunt wicks that sweep below zones
+    before reversing. Wider buffer = fewer false SL hits.
     """
     entry = calculate_entry(zone)
 
@@ -78,7 +108,7 @@ def calculate_stop_loss(zone: Zone, atr_value: float,
 
 
 def validate_sl_distance(entry: float, stop_loss: float,
-                         max_sl_pct: float = 1.5) -> bool:
+                         max_sl_pct: float = 2.0) -> bool:
     """Check if stop loss distance is within acceptable range."""
     if entry == 0:
         return False

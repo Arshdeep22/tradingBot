@@ -1,0 +1,2160 @@
+{
+  "run_id": "2026-05-19T1334",
+  "run_timestamp": "2026-05-19T13:34:06.719212+00:00",
+  "training_period": {
+    "start": "2026-02-18",
+    "end": "2026-05-19"
+  },
+  "trading_days": 59,
+  "symbols_used": [
+    "RELIANCE.NS",
+    "TCS.NS",
+    "HDFCBANK.NS",
+    "INFY.NS",
+    "ICICIBANK.NS",
+    "HINDUNILVR.NS",
+    "SBIN.NS",
+    "BHARTIARTL.NS",
+    "ITC.NS",
+    "KOTAKBANK.NS"
+  ],
+  "quick_mode": true,
+  "no_ai": false,
+  "strategy": "Professional Zone Scanner",
+  "scoring_range": "0-60 (6 dimensions \u00d7 10)",
+  "total_setups_found": 25,
+  "total_triggered": 25,
+  "total_wins": 10,
+  "total_losses": 13,
+  "total_expired": 2,
+  "overall_win_rate": 43.5,
+  "average_rr": -0.0,
+  "total_pnl": 28.59,
+  "optimizer_runs": 11,
+  "claude_calls": 5,
+  "final_zone_params": {
+    "min_score_to_trade": 45,
+    "default_rr_ratio": 2.0,
+    "min_rr_ratio": 1.5,
+    "sl_atr_multiplier": 1.5,
+    "max_sl_pct": 2.0,
+    "max_base_candles": 3
+  },
+  "weekly_summary": [
+    {
+      "week_num": 1,
+      "start_date": "2026-02-18",
+      "end_date": "2026-02-24",
+      "trading_days": 5,
+      "triggered": 1,
+      "wins": 1,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "avg_rr": 1.52,
+      "pnl": 20.38
+    },
+    {
+      "week_num": 2,
+      "start_date": "2026-02-25",
+      "end_date": "2026-03-04",
+      "trading_days": 5,
+      "triggered": 5,
+      "wins": 4,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 80.0,
+      "avg_rr": 1.03,
+      "pnl": 68.11
+    },
+    {
+      "week_num": 3,
+      "start_date": "2026-03-05",
+      "end_date": "2026-03-11",
+      "trading_days": 5,
+      "triggered": 2,
+      "wins": 1,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 50.0,
+      "avg_rr": 0.05,
+      "pnl": -6.16
+    },
+    {
+      "week_num": 4,
+      "start_date": "2026-03-12",
+      "end_date": "2026-03-18",
+      "trading_days": 5,
+      "triggered": 5,
+      "wins": 2,
+      "losses": 3,
+      "expired": 0,
+      "win_rate": 40.0,
+      "avg_rr": 0.06,
+      "pnl": -12.61
+    },
+    {
+      "week_num": 5,
+      "start_date": "2026-03-19",
+      "end_date": "2026-03-25",
+      "trading_days": 5,
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "avg_rr": 0.0,
+      "pnl": 0
+    },
+    {
+      "week_num": 6,
+      "start_date": "2026-03-27",
+      "end_date": "2026-04-06",
+      "trading_days": 5,
+      "triggered": 2,
+      "wins": 1,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 50.0,
+      "avg_rr": 0.22,
+      "pnl": 3.49
+    },
+    {
+      "week_num": 7,
+      "start_date": "2026-04-07",
+      "end_date": "2026-04-13",
+      "trading_days": 5,
+      "triggered": 1,
+      "wins": 0,
+      "losses": 0,
+      "expired": 1,
+      "win_rate": 0.0,
+      "avg_rr": -0.4,
+      "pnl": -6.98
+    },
+    {
+      "week_num": 8,
+      "start_date": "2026-04-15",
+      "end_date": "2026-04-21",
+      "trading_days": 5,
+      "triggered": 2,
+      "wins": 0,
+      "losses": 2,
+      "expired": 0,
+      "win_rate": 0.0,
+      "avg_rr": -1.25,
+      "pnl": -20.21
+    },
+    {
+      "week_num": 9,
+      "start_date": "2026-04-22",
+      "end_date": "2026-04-28",
+      "trading_days": 5,
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "avg_rr": 0.0,
+      "pnl": 0
+    },
+    {
+      "week_num": 10,
+      "start_date": "2026-04-29",
+      "end_date": "2026-05-06",
+      "trading_days": 5,
+      "triggered": 4,
+      "wins": 0,
+      "losses": 3,
+      "expired": 1,
+      "win_rate": 0.0,
+      "avg_rr": -1.0,
+      "pnl": -48.62
+    },
+    {
+      "week_num": 11,
+      "start_date": "2026-05-07",
+      "end_date": "2026-05-13",
+      "trading_days": 5,
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "avg_rr": 0.0,
+      "pnl": 0
+    },
+    {
+      "week_num": 12,
+      "start_date": "2026-05-14",
+      "end_date": "2026-05-19",
+      "trading_days": 4,
+      "triggered": 3,
+      "wins": 1,
+      "losses": 2,
+      "expired": 0,
+      "win_rate": 33.3,
+      "avg_rr": -0.21,
+      "pnl": 31.19
+    }
+  ],
+  "params_history": [
+    {
+      "day_idx": 5,
+      "date": "2026-02-24",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 10,
+      "date": "2026-03-04",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 10,
+      "date": "2026-03-04",
+      "trigger": "claude_synthesis",
+      "analysis": "83.3% win rate with avg RR of 1.11 across 6 trades suggests the zone scoring is solid but actual RR achieved (1.11) is far below the default_rr_ratio (2.5), indicating targets are likely being manually adjusted or the min_rr_ratio is being used. All winning trades had RR between 1.44-1.72, well below the 2.0 min_rr_ratio setting, suggesting the min_rr_ratio param is not being enforced or zones are being entered with tighter targets. The single loss occurred in a volatile regime with a high-scoring zone (52/60), indicating volatile conditions may need wider stops.",
+      "zone_params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 1.8,
+        "min_rr_ratio": 1.4,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 15,
+      "date": "2026-03-11",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 20,
+      "date": "2026-03-18",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 20,
+      "date": "2026-03-18",
+      "trigger": "claude_synthesis",
+      "analysis": "Win rate of 42.9% with avg RR of 0.05 indicates the strategy is barely breaking even. Winning trades averaged score 48.7/60 and achieved RR 1.72 avg, while losing trades averaged score 48.5/60 with full SL hits. BUY trades in trending_up regime went 1W/3L (25% WR) which is counterintuitive, while SELL trades in ranging regime went 2W/1L (67% WR).",
+      "zone_params": {
+        "min_score_to_trade": 49,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 25,
+      "date": "2026-03-25",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 30,
+      "date": "2026-04-06",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 30,
+      "date": "2026-04-06",
+      "trigger": "claude_synthesis",
+      "analysis": "Only 2 trades in 10 days with a 50% win rate and net P&L of \u20b93. The winning trade scored 47/60 while the losing trade scored 41/60, suggesting a higher min_score threshold around 45 could have filtered the loss. Both trades were SELL-side; the winner paradoxically occurred in a trending_up regime (counter-trend) while the loser failed in trending_down (with-trend), indicating regime alignment alone isn't predictive with this small sample.",
+      "zone_params": {
+        "min_score_to_trade": 44,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.2,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 35,
+      "date": "2026-04-13",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 40,
+      "date": "2026-04-21",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 40,
+      "date": "2026-04-21",
+      "trigger": "claude_synthesis",
+      "analysis": "All 3 trades were SELL-side with scores 46-48/60 and all lost, yielding 0% win rate and avg RR of -0.97. Two SL_HIT trades occurred in trending_up and ranging regimes where sell pressure was insufficient, suggesting a critical regime-alignment issue. The current 1.0x ATR stop is too tight given adverse moves of 1.18-1.32 RR against, and the 3.0 default RR target appears too ambitious for zones that cannot hold.",
+      "zone_params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 45,
+      "date": "2026-04-28",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 50,
+      "date": "2026-05-06",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 50,
+      "date": "2026-05-06",
+      "trigger": "claude_synthesis",
+      "analysis": "All 4 trades resulted in losses with 0% win rate and avg RR of -1.00. The lowest score trade (HINDUNILVR at 35/60) produced the largest loss (\u20b9-24), while even higher-scored zones (50-52/60) failed, suggesting the SL is too tight at 1.0 ATR causing premature stops. Average zone score of 45.8 is reasonable but the consistent -1.2x RR losses indicate price is reversing just past the stop level before potentially moving in the intended direction.",
+      "zone_params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "day_idx": 55,
+      "date": "2026-05-13",
+      "trigger": "mini_optimizer",
+      "zone_params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    }
+  ],
+  "final_summary": {
+    "executive_summary": "The walk-forward simulation revealed a sharp performance degradation after the initial 2 weeks (80-100% WR) dropping to near 0% in weeks 7-10, resulting in an overall 43.5% win rate and breakeven avg RR. The 1.0x ATR stop-loss was consistently too tight, with price reversing just past the stop before moving in the intended direction. Parameters never converged\u2014the optimizer oscillated between tight filters (score 50) and loose filters (score 35)\u2014indicating the strategy needs structural improvements beyond parameter tuning, particularly in regime-aware stop placement and trade direction filtering.",
+    "key_insights": [
+      "Stop-loss at 1.0x ATR is systematically too tight: repeated analysis showed losses clustering at exactly -1.0 to -1.25 RR, suggesting price probes past the zone boundary before reversing, requiring at minimum 1.5x ATR stops to survive normal zone retests",
+      "Early success (weeks 1-2, 80%+ WR) occurred in what appears to be a trending market favorable to the strategy, while later weeks saw regime shifts that destroyed edge\u2014regime alignment scoring alone (the Trend dimension) was insufficient to prevent counter-trend losses",
+      "Higher score thresholds (45-50) reduced trade frequency but did NOT improve win rate in adverse conditions\u2014even 50-52/60 scored zones produced losses, indicating zone quality scoring cannot compensate for poor market timing or inadequate stop width",
+      "The SELL-side bias was problematic: most losses came from short trades in trending_up or ranging regimes, suggesting the strategy needs explicit directional filtering beyond the existing trend dimension score",
+      "A default RR target of 3.0 was too ambitious and rarely hit; the single best profitable period used 2.5 RR, while winning trades averaged approximately 1.0-1.5 actual RR achieved"
+    ],
+    "best_performing_setup": "Weeks 1-2 produced 6 trades with 83% win rate and +\u20b988 P&L using moderate parameters (min_score 35, RR 2.5, SL 1.0 ATR). The common pattern was fresh zones with tight bases (\u22643 candles) scored 40+ in clearly trending markets where trade direction aligned with the dominant trend. The single best trade scored 47/60 and captured 1.52R profit, suggesting zones scoring 45+ in strongly trending environments with first-touch (fresh) status represent the highest probability setup.",
+    "recommended_live_approach": "Deploy with conservative parameters emphasizing survival over frequency: use wider stops (1.5x ATR) to avoid premature stop-outs, moderate RR targets (2.0-2.5) that are actually achievable, and a high score threshold (45+) to ensure only institutional-quality zones are traded. Critically, add a hard rule to ONLY trade in the direction of the higher-timeframe trend\u2014no counter-trend zone trades regardless of score. Start with minimum position sizing and require 20+ trades before adjusting parameters. Monitor the stop-hunt pattern closely: if price consistently reverses within 0.5 ATR past the stop level, the zone thesis is correct but execution needs refinement via wider stops or limit orders deeper in the zone.",
+    "recommended_params": {
+      "min_score_to_trade": 45,
+      "default_rr_ratio": 2.0,
+      "min_rr_ratio": 1.5,
+      "sl_atr_multiplier": 1.5,
+      "max_sl_pct": 2.0,
+      "max_base_candles": 3
+    },
+    "confidence_in_params": 4
+  },
+  "daily_results": [
+    {
+      "date": "2026-02-18",
+      "day_idx": 1,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3,
+        "min_body_ratio": 0.6,
+        "min_volume_ratio": 1.5,
+        "max_zone_width_pct": 1.5,
+        "max_distance_from_cmp": 3.0
+      }
+    },
+    {
+      "date": "2026-02-19",
+      "day_idx": 2,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3,
+        "min_body_ratio": 0.6,
+        "min_volume_ratio": 1.5,
+        "max_zone_width_pct": 1.5,
+        "max_distance_from_cmp": 3.0
+      }
+    },
+    {
+      "date": "2026-02-20",
+      "day_idx": 3,
+      "trades": [
+        {
+          "symbol": "BHARTIARTL.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 20.38,
+          "entry": 1988.52,
+          "stop_loss": 2001.95,
+          "target": 1964.15,
+          "score": 44,
+          "rr_achieved": 1.52,
+          "trigger_time": "Candle 1",
+          "exit_time": "Candle 42",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 40,
+            "default_rr_ratio": 3.0,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 1,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "pnl": 20.38,
+      "avg_rr": 1.52,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3,
+        "min_body_ratio": 0.6,
+        "min_volume_ratio": 1.5,
+        "max_zone_width_pct": 1.5,
+        "max_distance_from_cmp": 3.0
+      }
+    },
+    {
+      "date": "2026-02-23",
+      "day_idx": 4,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3,
+        "min_body_ratio": 0.6,
+        "min_volume_ratio": 1.5,
+        "max_zone_width_pct": 1.5,
+        "max_distance_from_cmp": 3.0
+      }
+    },
+    {
+      "date": "2026-02-24",
+      "day_idx": 5,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3,
+        "min_body_ratio": 0.6,
+        "min_volume_ratio": 1.5,
+        "max_zone_width_pct": 1.5,
+        "max_distance_from_cmp": 3.0
+      }
+    },
+    {
+      "date": "2026-02-25",
+      "day_idx": 6,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-02-26",
+      "day_idx": 7,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 34.03,
+          "entry": 2668.15,
+          "stop_loss": 2691.39,
+          "target": 2628.78,
+          "score": 43,
+          "rr_achieved": 1.46,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 40",
+          "regime": "trending_down",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 26.3,
+          "entry": 1321.95,
+          "stop_loss": 1337.24,
+          "target": 1293.0,
+          "score": 39,
+          "rr_achieved": 1.72,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 42",
+          "regime": "trending_down",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 2,
+      "wins": 2,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "pnl": 60.33,
+      "avg_rr": 1.59,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-02-27",
+      "day_idx": 8,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-02",
+      "day_idx": 9,
+      "trades": [
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 3.84,
+          "entry": 314.37,
+          "stop_loss": 317.04,
+          "target": 309.9,
+          "score": 47,
+          "rr_achieved": 1.44,
+          "trigger_time": "Candle 12",
+          "exit_time": "Candle 43",
+          "regime": "trending_down",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 1,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "pnl": 3.84,
+      "avg_rr": 1.44,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-04",
+      "day_idx": 10,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -19.58,
+          "entry": 1353.89,
+          "stop_loss": 1370.75,
+          "target": 1321.22,
+          "score": 52,
+          "rr_achieved": -1.16,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 18",
+          "regime": "volatile",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        },
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 23.52,
+          "entry": 1293.78,
+          "stop_loss": 1279.73,
+          "target": 1319.88,
+          "score": 50,
+          "rr_achieved": 1.67,
+          "trigger_time": "Candle 22",
+          "exit_time": "Candle 42",
+          "regime": "volatile",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 2,
+      "wins": 1,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 50.0,
+      "pnl": 3.94,
+      "avg_rr": 0.26,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-05",
+      "day_idx": 11,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 1.8,
+        "min_rr_ratio": 1.4,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-06",
+      "day_idx": 12,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 25.85,
+          "entry": 1393.58,
+          "stop_loss": 1373.35,
+          "target": 1422.21,
+          "score": 49,
+          "rr_achieved": 1.28,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 40",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 40,
+            "default_rr_ratio": 1.8,
+            "sl_atr_multiplier": 1.3
+          }
+        },
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -32.01,
+          "entry": 2565.72,
+          "stop_loss": 2538.83,
+          "target": 2599.79,
+          "score": 52,
+          "rr_achieved": -1.19,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 17",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 40,
+            "default_rr_ratio": 1.8,
+            "sl_atr_multiplier": 1.3
+          }
+        }
+      ],
+      "triggered": 2,
+      "wins": 1,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 50.0,
+      "pnl": -6.16,
+      "avg_rr": 0.05,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 1.8,
+        "min_rr_ratio": 1.4,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-09",
+      "day_idx": 13,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 1.8,
+        "min_rr_ratio": 1.4,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-10",
+      "day_idx": 14,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 1.8,
+        "min_rr_ratio": 1.4,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-11",
+      "day_idx": 15,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 1.8,
+        "min_rr_ratio": 1.4,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-12",
+      "day_idx": 16,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-13",
+      "day_idx": 17,
+      "trades": [
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 19.89,
+          "entry": 1070.65,
+          "stop_loss": 1082.47,
+          "target": 1048.62,
+          "score": 51,
+          "rr_achieved": 1.68,
+          "trigger_time": "Candle 39",
+          "exit_time": "Candle 50",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 45,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 1,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "pnl": 19.89,
+      "avg_rr": 1.68,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-16",
+      "day_idx": 18,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -30.36,
+          "entry": 2381.23,
+          "stop_loss": 2406.82,
+          "target": 2333.95,
+          "score": 51,
+          "rr_achieved": -1.19,
+          "trigger_time": "Candle 11",
+          "exit_time": "Candle 13",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 45,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -30.36,
+      "avg_rr": -1.19,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-17",
+      "day_idx": 19,
+      "trades": [
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -9.86,
+          "entry": 819.99,
+          "stop_loss": 811.76,
+          "target": 834.83,
+          "score": 45,
+          "rr_achieved": -1.2,
+          "trigger_time": "Candle 42",
+          "exit_time": "Candle 43",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 45,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        },
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -14.26,
+          "entry": 1262.22,
+          "stop_loss": 1250.48,
+          "target": 1282.75,
+          "score": 46,
+          "rr_achieved": -1.21,
+          "trigger_time": "Candle 44",
+          "exit_time": "Candle 64",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 45,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 2,
+      "wins": 0,
+      "losses": 2,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -24.12,
+      "avg_rr": -1.21,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-18",
+      "day_idx": 20,
+      "trades": [
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 21.98,
+          "entry": 842.01,
+          "stop_loss": 851.96,
+          "target": 818.35,
+          "score": 46,
+          "rr_achieved": 2.21,
+          "trigger_time": "Candle 10",
+          "exit_time": "Candle 17",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 45,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 1,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "pnl": 21.98,
+      "avg_rr": 2.21,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-19",
+      "day_idx": 21,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 49,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "day_idx": 22,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 49,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-23",
+      "day_idx": 23,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 49,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-24",
+      "day_idx": 24,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 49,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-25",
+      "day_idx": 25,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 49,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.3,
+        "max_sl_pct": 1.8,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-27",
+      "day_idx": 26,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-03-30",
+      "day_idx": 27,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-01",
+      "day_idx": 28,
+      "trades": [
+        {
+          "symbol": "SBIN.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "TARGET_HIT",
+          "pnl": 18.06,
+          "entry": 1025.84,
+          "stop_loss": 1036.77,
+          "target": 1005.73,
+          "score": 47,
+          "rr_achieved": 1.65,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 17",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 1,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "pnl": 18.06,
+      "avg_rr": 1.65,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-02",
+      "day_idx": 29,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-06",
+      "day_idx": 30,
+      "trades": [
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -14.57,
+          "entry": 1237.72,
+          "stop_loss": 1249.81,
+          "target": 1216.18,
+          "score": 41,
+          "rr_achieved": -1.21,
+          "trigger_time": "Candle 34",
+          "exit_time": "Candle 41",
+          "regime": "trending_down",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -14.57,
+      "avg_rr": -1.21,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-07",
+      "day_idx": 31,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 44,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.2,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-08",
+      "day_idx": 32,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 44,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.2,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-09",
+      "day_idx": 33,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 44,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.2,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-10",
+      "day_idx": 34,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 44,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.2,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-13",
+      "day_idx": 35,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "EXPIRED",
+          "pnl": -6.98,
+          "entry": 1341.51,
+          "stop_loss": 1358.84,
+          "target": 1307.6,
+          "score": 46,
+          "rr_achieved": -0.4,
+          "trigger_time": "Candle 39",
+          "exit_time": "Candle 66",
+          "regime": "trending_down",
+          "zone_params": {
+            "min_score_to_trade": 44,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.2
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 0,
+      "expired": 1,
+      "win_rate": 0.0,
+      "pnl": -6.98,
+      "avg_rr": -0.4,
+      "params": {
+        "min_score_to_trade": 44,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.2,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-15",
+      "day_idx": 36,
+      "trades": [
+        {
+          "symbol": "RELIANCE.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -17.68,
+          "entry": 1341.51,
+          "stop_loss": 1356.5,
+          "target": 1307.3,
+          "score": 46,
+          "rr_achieved": -1.18,
+          "trigger_time": "Candle 14",
+          "exit_time": "Candle 49",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 45,
+            "default_rr_ratio": 3.0,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -17.68,
+      "avg_rr": -1.18,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-16",
+      "day_idx": 37,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-17",
+      "day_idx": 38,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-20",
+      "day_idx": 39,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-21",
+      "day_idx": 40,
+      "trades": [
+        {
+          "symbol": "ITC.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -2.53,
+          "entry": 305.54,
+          "stop_loss": 307.46,
+          "target": 302.22,
+          "score": 48,
+          "rr_achieved": -1.32,
+          "trigger_time": "Candle 4",
+          "exit_time": "Candle 12",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 45,
+            "default_rr_ratio": 3.0,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -2.53,
+      "avg_rr": -1.32,
+      "params": {
+        "min_score_to_trade": 45,
+        "default_rr_ratio": 3.0,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-22",
+      "day_idx": 41,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-23",
+      "day_idx": 42,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-24",
+      "day_idx": 43,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-27",
+      "day_idx": 44,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-28",
+      "day_idx": 45,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-29",
+      "day_idx": 46,
+      "trades": [
+        {
+          "symbol": "HINDUNILVR.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "SL_HIT",
+          "pnl": -23.85,
+          "entry": 2263.82,
+          "stop_loss": 2244.49,
+          "target": 2296.33,
+          "score": 35,
+          "rr_achieved": -1.23,
+          "trigger_time": "Candle 22",
+          "exit_time": "Candle 23",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -23.85,
+      "avg_rr": -1.23,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-04-30",
+      "day_idx": 47,
+      "trades": [
+        {
+          "symbol": "HDFCBANK.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -7.47,
+          "entry": 775.95,
+          "stop_loss": 781.86,
+          "target": 766.6,
+          "score": 50,
+          "rr_achieved": -1.26,
+          "trigger_time": "Candle 9",
+          "exit_time": "Candle 17",
+          "regime": "trending_down",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -7.47,
+      "avg_rr": -1.26,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-04",
+      "day_idx": 48,
+      "trades": [
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "EXPIRED",
+          "pnl": -3.38,
+          "entry": 1171.44,
+          "stop_loss": 1160.1,
+          "target": 1191.6,
+          "score": 52,
+          "rr_achieved": -0.3,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 66",
+          "regime": "trending_up",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 0,
+      "expired": 1,
+      "win_rate": 0.0,
+      "pnl": -3.38,
+      "avg_rr": -0.3,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-05",
+      "day_idx": 49,
+      "trades": [
+        {
+          "symbol": "ICICIBANK.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -13.92,
+          "entry": 1251.69,
+          "stop_loss": 1263.1,
+          "target": 1231.95,
+          "score": 46,
+          "rr_achieved": -1.22,
+          "trigger_time": "Candle 7",
+          "exit_time": "Candle 17",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 35,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -13.92,
+      "avg_rr": -1.22,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-06",
+      "day_idx": 50,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 35,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-07",
+      "day_idx": 51,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-08",
+      "day_idx": 52,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-11",
+      "day_idx": 53,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-12",
+      "day_idx": 54,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-13",
+      "day_idx": 55,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 50,
+        "default_rr_ratio": 2.0,
+        "min_rr_ratio": 1.5,
+        "sl_atr_multiplier": 1.5,
+        "max_sl_pct": 2.0,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-14",
+      "day_idx": 56,
+      "trades": [
+        {
+          "symbol": "INFY.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -14.05,
+          "entry": 1118.76,
+          "stop_loss": 1130.57,
+          "target": 1097.08,
+          "score": 46,
+          "rr_achieved": -1.19,
+          "trigger_time": "Candle 17",
+          "exit_time": "Candle 19",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 40,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -14.05,
+      "avg_rr": -1.19,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-15",
+      "day_idx": 57,
+      "trades": [
+        {
+          "symbol": "TCS.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "BUY",
+          "outcome": "TARGET_HIT",
+          "pnl": 49.74,
+          "entry": 2257.91,
+          "stop_loss": 2229.9,
+          "target": 2312.15,
+          "score": 46,
+          "rr_achieved": 1.78,
+          "trigger_time": "Candle 20",
+          "exit_time": "Candle 42",
+          "regime": "trending_down",
+          "zone_params": {
+            "min_score_to_trade": 40,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 1,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 100.0,
+      "pnl": 49.74,
+      "avg_rr": 1.78,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-18",
+      "day_idx": 58,
+      "trades": [
+        {
+          "symbol": "KOTAKBANK.NS",
+          "strategy": "Professional Zone Scanner",
+          "side": "SELL",
+          "outcome": "SL_HIT",
+          "pnl": -4.5,
+          "entry": 388.37,
+          "stop_loss": 392.09,
+          "target": 373.5,
+          "score": 49,
+          "rr_achieved": -1.21,
+          "trigger_time": "Candle 6",
+          "exit_time": "Candle 8",
+          "regime": "ranging",
+          "zone_params": {
+            "min_score_to_trade": 40,
+            "default_rr_ratio": 2.5,
+            "sl_atr_multiplier": 1.0
+          }
+        }
+      ],
+      "triggered": 1,
+      "wins": 0,
+      "losses": 1,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": -4.5,
+      "avg_rr": -1.21,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    },
+    {
+      "date": "2026-05-19",
+      "day_idx": 59,
+      "trades": [],
+      "triggered": 0,
+      "wins": 0,
+      "losses": 0,
+      "expired": 0,
+      "win_rate": 0.0,
+      "pnl": 0,
+      "avg_rr": 0.0,
+      "params": {
+        "min_score_to_trade": 40,
+        "default_rr_ratio": 2.5,
+        "min_rr_ratio": 2.0,
+        "sl_atr_multiplier": 1.0,
+        "max_sl_pct": 1.5,
+        "max_base_candles": 3
+      }
+    }
+  ]
+}
