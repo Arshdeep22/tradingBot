@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-20",
+  "wins_analysis": "No wins today \u2014 no targets were hit. The two open BUY positions (ICICIBANK, KOTAKBANK) are aligned with the trending_up regime and may still reach target tomorrow if the uptrend continues.",
+  "losses_analysis": "No losses today either. However, the system placed a SELL order on TATASTEEL (38% AI probability) against a strong trending_up regime, which is a process error even though it hasn't triggered yet. The pre-trade filter logic correctly identified this contradiction but still placed the order.",
+  "regime_impact": "The trending_up regime (+1.1%, ADX 25) strongly favored BUY setups. The two open BUY positions (ICICIBANK, KOTAKBANK) are correctly aligned. The only new recommendation was a counter-trend SELL which the system should have hard-blocked. Strategy type that fits best: demand zone BUY setups with trend confirmation.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Hard-block all SELL orders when market regime is trending_up AND AI probability is below 65%. Do not place them as pending \u2014 reject at order generation stage.",
+      "reason": "TATASTEEL SELL (38% prob) was placed despite the report narrative explicitly noting it contradicts the regime. The filter logic identified the issue but did not prevent order placement.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "When only 1 setup is found and it contradicts the regime, place ZERO new orders. Accept a no-trade day rather than forcing a low-probability counter-trend trade.",
+      "reason": "Today had only 1 setup available (TATASTEEL SELL) which went against the dominant uptrend. Forcing this trade adds risk with no statistical edge.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "For open positions ICICIBANK and KOTAKBANK, trail stops to breakeven if they gain +0.5% from entry tomorrow morning. Lock in the regime-aligned trades.",
+      "reason": "Both are BUY positions in a trending_up regime. Protecting capital while letting winners run is critical since we had no closed P&L today.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "Expand scan to include Nifty Next 50 stocks when Nifty 50 yields fewer than 3 regime-aligned setups, to avoid forcing counter-trend trades.",
+      "reason": "Only 1 Nifty 50 setup was found today and it was counter-trend. Broader scan universe would provide more aligned opportunities on strong trend days.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Set minimum AI probability threshold to 55% for any order placement regardless of zone score. A 38% probability should never result in an order.",
+      "reason": "TATASTEEL had 38% AI probability \u2014 well below coinflip odds. Even a high zone score (48/60) cannot compensate for such low directional confidence.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Monitor ICICIBANK and KOTAKBANK open BUY positions for target hits; only take new BUY setups with AI prob >55% aligned with the uptrend; cancel the pending TATASTEEL SELL if still active.",
+  "symbol_notes": {
+    "ICICIBANK": "BUY position aligned with regime \u2014 trail stop to breakeven if it opens above \u20b91,244. High priority to manage for profit.",
+    "KOTAKBANK": "BUY position aligned with regime \u2014 trail stop to breakeven if it opens above \u20b9387. Watch for banking sector momentum continuation.",
+    "TATASTEEL": "Counter-trend SELL at 38% probability \u2014 cancel this pending order immediately at market open. Do not re-enter SELL unless regime flips."
+  },
+  "confidence": 6
+}
