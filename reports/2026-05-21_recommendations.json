@@ -1,0 +1,70 @@
+{
+  "date": "2026-05-21",
+  "scan_time_ist": "2026-05-21 14:17:09",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Market regime is trending_down (Nifty -0.2%, ADX 25.0), which means BUY setups are counter-trend and carry elevated risk. Only 2 setups were found, both BUY-side, which contradicts the bearish regime. Per yesterday's learnings, when setups contradict the regime, we should be extremely selective. TATASTEEL has a higher zone score (50) and trend alignment on its local timeframe, but both are counter-trend to the broader market. Neither setup meets ideal conditions for high-conviction trades in a downtrending market.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.2%",
+    "adx": 25.0,
+    "vix": 17.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.2%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 204.12,
+      "stop_loss": 202.96,
+      "target": 207.6,
+      "zone_score": 50,
+      "win_probability": 45,
+      "conviction": "LOW",
+      "reasoning": [
+        "Zone score 50/60 is decent with pristine freshness and tight base structure",
+        "Local trend alignment (10/10) but contradicts broader market regime (trending_down)",
+        "R:R of 3.0 is favorable, but counter-trend BUYs in a downtrend reduce actual win probability significantly",
+        "Yesterday's note on TATASTEEL was to cancel SELL \u2014 BUY side is less problematic but still counter-regime"
+      ],
+      "risks": "Broader market trending down with ADX 25 \u2014 demand zones are more likely to fail when selling pressure dominates",
+      "entry_advice": "Wait for a strong bullish confirmation candle (engulfing or pin bar) at the demand zone before entry. Consider half-size position given counter-regime context.",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 750.4,
+      "stop_loss": 744.72,
+      "target": 767.44,
+      "zone_score": 43,
+      "win_probability": 35,
+      "conviction": "LOW",
+      "reasoning": [
+        "Strong departure (10/10) and instant reversal base (10/10) show powerful demand historically",
+        "Zone is aging at 135 candles old \u2014 freshness score only 4/10, reducing reliability",
+        "Sideways trend context (5/10) plus bearish market regime makes this a low-probability BUY",
+        "R:R of 3.0 is attractive but doesn't compensate for regime misalignment and zone age"
+      ],
+      "risks": "Aging zone (135 candles) in a downtrending market \u2014 high likelihood of zone being broken through rather than respected",
+      "entry_advice": "Avoid this trade today. If regime flips to neutral/bullish, revisit with a confirmation candle approach. Do not place as pending order.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 17,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 750.4,
+      "stop_loss": 744.72,
+      "target": 767.44,
+      "quantity": 176,
+      "win_probability": 35
+    }
+  ]
+}
