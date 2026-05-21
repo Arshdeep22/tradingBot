@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-21",
+  "wins_analysis": "No wins today. No trades were executed as the single pending order (HDFCBANK BUY at 750.40) was never triggered, and the higher-ranked TATASTEEL setup was correctly skipped due to low probability and counter-trend conditions.",
+  "losses_analysis": "No losses today. The system correctly avoided placing the TATASTEEL order given its 45% probability in a down-trending regime. The HDFCBANK order at 750.40 remained pending, suggesting price never pulled back to the demand zone entry \u2014 the entry was set too far from market price or the zone was stale.",
+  "regime_impact": "The trending_down regime correctly discouraged BUY-side entries. The system's caution was validated \u2014 no capital was lost. However, no SELL setups were generated despite a bearish regime, indicating the scan logic may not be surfacing short opportunities effectively.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Enable and prioritize SELL/SHORT setups in the scanner when regime is trending_down with ADX >= 22. Ensure supply zone detection logic is active and properly ranking short candidates.",
+      "reason": "Today's regime was bearish (ADX 25, Nifty -0.1% to -0.2%) but zero SELL setups were found across all 50 stocks. This is a scanning gap \u2014 we should be finding supply zone rejections in a downtrend.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Do not place BUY orders when AI probability is below 40% AND regime is trending_down. Raise the minimum probability threshold for counter-trend trades from 35% to 50%.",
+      "reason": "HDFCBANK was placed with only 35% probability in a bearish regime. This is capital tied up in a low-conviction counter-trend trade that had little chance of triggering or succeeding.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Set pending order expiry to intraday only (cancel at 14:30 IST) when the setup probability is below 45%. Do not carry overnight pending orders for weak setups.",
+      "reason": "HDFCBANK pending order sat all day without triggering, indicating the entry zone was too far from current price action. Stale orders in a shifting regime create unnecessary exposure risk if triggered in after-hours or next-day gap.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "When only 2 or fewer setups are found and all contradict the regime, skip placing any orders and log as 'no-trade day'. Preserve capital for higher-conviction opportunities.",
+      "reason": "Today had only 2 setups, both BUY in a downtrend. The report narrative correctly identified the contradiction but still placed 1 order. The decision logic should enforce a hard rule: contradicting-regime + low setup count = sit out.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Add stocks with strong bearish momentum (e.g., breaking below 20-EMA with volume) to a SELL watchlist. Focus tomorrow on TATASTEEL, HINDALCO, ADANIENT for potential supply zone shorts if they rally into resistance.",
+      "reason": "Metals and high-beta names tend to offer clean supply zones in downtrends. TATASTEEL was flagged but only for BUY \u2014 it should be monitored for short entries on bounces into overhead supply.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "Prioritize SELL setups at supply zones in the ongoing downtrend (ADX 25); if VIX stays below 18, look for mean-reversion shorts on stocks that bounce into resistance with declining volume.",
+  "symbol_notes": {
+    "HDFCBANK": "Pending BUY at 750.40 never triggered \u2014 zone may be too deep. Cancel stale order tomorrow and reassess only if price forms a higher low near 748-752 with bullish candle confirmation.",
+    "TATASTEEL": "Monitor for SELL setup if price rallies toward 206-208 supply zone. Do not attempt BUY unless regime flips or price holds 202 with strong demand volume.",
+    "HINDALCO": "Watch for supply zone rejection near recent swing highs \u2014 potential short candidate aligned with bearish regime."
+  },
+  "confidence": 5
+}
