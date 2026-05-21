@@ -112,7 +112,32 @@ def _blend_params(current: dict, new: dict, blend_factor: float = 0.6) -> dict:
     return blended
 
 
-def run_training(quick=False, no_ai=False, progress_cb=None):
+def _write_json_result(report: dict) -> None:
+    """Write a simplified BacktestResult-compatible JSON to reports/training/latest_backtest_result.json."""
+    import json as _json
+    out_dir = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "reports", "training"
+    )
+    os.makedirs(out_dir, exist_ok=True)
+    weekly_summaries = [
+        {"pnl": w.get("pnl", 0.0), "win_rate": w.get("win_rate", 0.0)}
+        for w in report.get("weekly_summary", [])
+    ]
+    result = {
+        "overall_win_rate": report.get("overall_win_rate", 0.0),
+        "total_pnl": report.get("total_pnl", 0.0),
+        "total_triggered": report.get("total_triggered", 0),
+        "days_run": report.get("trading_days", 0),
+        "weekly_summaries": weekly_summaries,
+    }
+    out_path = os.path.join(out_dir, "latest_backtest_result.json")
+    with open(out_path, "w") as f:
+        _json.dump(result, f, indent=2)
+    logger.info("JSON result written to %s", out_path)
+
+
+def run_training(quick=False, no_ai=False, progress_cb=None, last_n_days: Optional[int] = None):
     """
     Run the full walk-forward historical training (Professional Zone Scanner).
 
@@ -151,6 +176,8 @@ def run_training(quick=False, no_ai=False, progress_cb=None):
 
     # Extract trading days
     all_days = extract_trading_days(data_dict)
+    if last_n_days:
+        all_days = all_days[-last_n_days:]
     if len(all_days) < 5:
         raise RuntimeError("Only %d trading days in data. Need at least 5." % len(all_days))
     _progress(13, "Data ready: %d symbols, %d trading days (%s -> %s)" % (
@@ -297,6 +324,12 @@ def main():
     """CLI entry point."""
     quick = "--quick" in sys.argv
     no_ai = "--no-ai" in sys.argv
+    json_output = "--json-output" in sys.argv
+
+    days_arg = None
+    for arg in sys.argv[1:]:
+        if arg.startswith("--days="):
+            days_arg = int(arg.split("=")[1])
 
     logger.info("=" * 60)
     logger.info("Historical Walk-Forward Trainer (Professional Zone Scanner v2)")
@@ -304,13 +337,17 @@ def main():
         logger.info("  Mode: QUICK (10 symbols, reduced grid)")
     if no_ai:
         logger.info("  Mode: NO-AI (skipping Claude calls)")
+    if days_arg:
+        logger.info("  Days: last %d trading days", days_arg)
     logger.info("=" * 60)
 
     try:
-        report = run_training(quick=quick, no_ai=no_ai)
+        report = run_training(quick=quick, no_ai=no_ai, last_n_days=days_arg)
         logger.info("Training complete. WR=%.1f%% avg_RR=%.2f",
                     report["overall_win_rate"], report["average_rr"])
         logger.info("Report: reports/training/%s_training_report.json", report["run_id"])
+        if json_output:
+            _write_json_result(report)
     except Exception as e:
         logger.error("Training failed: %s", e, exc_info=True)
         sys.exit(1)
