@@ -1,0 +1,39 @@
+{
+  "date": "2026-05-22",
+  "scan_time_ist": "2026-05-22 14:07:34",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup detected today. TATASTEEL BUY aligns with the current trending_up regime (ADX 25.0, Nifty +0.5%). Yesterday's notes flagged TATASTEEL as a SELL candidate if it rallied to 206-208, but today's regime has flipped bullish. The demand zone at 204.12 with 3:1 R:R and 52/60 score is reasonable, though yesterday's caution on TATASTEEL remains relevant. With only 1 setup available, we proceed cautiously with this single recommendation.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.5%",
+    "adx": 25.0,
+    "vix": 17.8,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.5%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 204.12,
+      "stop_loss": 203.02,
+      "target": 207.42,
+      "zone_score": 52,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Regime has flipped to trending_up (ADX 25.0, Nifty +0.5%) \u2014 BUY setups now aligned with market direction",
+        "Zone score 52/60 with pristine freshness (untested), tight 2-candle base, and trend alignment scoring 10/10",
+        "Excellent R:R of 3.0 with tight stop at 203.02 \u2014 risk well-defined at ~1.10 points for 3.30 target",
+        "Departure volume 1.6x confirms institutional interest at this demand level"
+      ],
+      "risks": "Target at 207.42 approaches the 206-208 supply zone identified yesterday \u2014 price may stall before full target is reached",
+      "entry_advice": "Place limit BUY at 204.12 with intraday expiry (cancel at 14:30 IST). Consider taking partial profits near 206.00 given the overhead supply zone. Wait for a bullish confirmation candle (engulfing or pin bar) at zone if price approaches slowly.",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
