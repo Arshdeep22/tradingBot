@@ -1,0 +1,43 @@
+{
+  "date": "2026-05-22",
+  "wins_analysis": "The TATASTEEL SELL from a prior day (entry \u20b9208.92, target \u20b9204.51) hit target perfectly as the stock pulled back to demand zone levels around 204. This short trade captured the mean-reversion move before the regime flipped bullish, demonstrating that entries placed in prior regimes can still close profitably if the target is reached quickly.",
+  "losses_analysis": "No losses today. Zero SL hits across all executed trades.",
+  "regime_impact": "The trending_up regime (ADX 25.0, Nifty +0.3%) helped the open TATASTEEL SELL close at target early in the session before the bullish momentum fully kicked in. The regime shift from yesterday's sell bias to today's buy bias created a brief window where the short target was reached. However, the new BUY recommendation at 204.12 was not placed as an order, missing potential alignment with the new uptrend.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When AI recommends a setup with 62% probability and the regime confirms direction, place the pending order even if only 1 setup is found \u2014 the TATASTEEL BUY at 204.12 was not placed despite regime alignment",
+      "reason": "Today's only AI recommendation was skipped (order not placed), yet TATASTEEL actually traded near 204 when the prior SELL target hit. The BUY entry zone was live and actionable.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Resolve conflicting signals explicitly: when an open SELL position has a target near a new BUY recommendation's entry, close the SELL at target AND place the BUY as a reversal, capturing both legs",
+      "reason": "TATASTEEL SELL target was 204.51 and BUY entry was 204.12 \u2014 these are nearly identical levels, creating a natural reversal opportunity that was missed",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "On trending_up days with ADX \u2265 25, override the minimum setup count threshold \u2014 execute even single BUY setups if AI probability \u2265 60% and R:R \u2265 2.5:1",
+      "reason": "Only 1 setup was found today but it was regime-aligned. The conservative approach of not placing orders when few setups exist cost a potential entry in a confirmed uptrend.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Track regime transitions explicitly: when regime flips from neutral/down to trending_up, immediately close or tighten stops on counter-trend positions (SELLs) rather than waiting for full target",
+      "reason": "The SELL happened to hit target today, but in a stronger trending_up day the open SELL could have been stopped out. Proactive management in regime flips reduces risk.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "For TATASTEEL specifically tomorrow: if still in the BUY zone 203.5-205.0, enter long with SL at 202.5 and target 208-209, as the stock bounced off this demand zone today and regime supports continuation",
+      "reason": "204 level proved to be a strong demand zone (prior SELL target hit there, new BUY recommended there). Trending_up regime supports a long bias continuation.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "Watch TATASTEEL for continuation above 205 in the trending_up regime \u2014 if it holds above today's demand zone at 204, the BUY setup to 207-209 is still valid with strong regime support.",
+  "symbol_notes": {
+    "TATASTEEL": "204 demand zone confirmed as strong support (SELL target hit here + AI flagged BUY entry here). Tomorrow favor BUY if price holds above 204 with target 207-209. If regime stays trending_up and stock opens above 205, consider market entry rather than limit order."
+  },
+  "confidence": 7
+}
