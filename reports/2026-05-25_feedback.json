@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-25",
+  "wins_analysis": "No wins today as no orders were executed. The single pending order (HDFCBANK BUY at 769.10) did not trigger, meaning price never pulled back to the demand zone entry despite a strong +1.6% trending up day.",
+  "losses_analysis": "No losses today. However, the core issue is that in a strong uptrend day, price moved away from demand zones without pulling back, resulting in zero fills. The strategy's requirement for price to revisit zones is causing missed opportunities on strong trending days.",
+  "regime_impact": "The strong uptrend regime (+1.6%, ADX 25) actually hurt execution because price gapped up and trended higher without retesting demand zones. In this regime, breakout or momentum entries would have been far more effective than waiting for pullbacks to demand zones.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "On trending_up days with Nifty >+1%, add limit orders 0.3-0.5% closer to current price rather than at the exact demand zone proximal line. For HDFCBANK, entry at ~772-774 instead of 769.10 would have likely filled.",
+      "reason": "HDFCBANK entry was set at 769.10 but price in a +1.6% Nifty day likely never pulled back that far. Tighter entry offset needed on strong trend days.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Place orders for ALL 3 recommended setups when weekly trade frequency is flagged as too low, not just 1 of 3. Today only HDFCBANK got an order despite the AI narrative explicitly recommending all three be considered.",
+      "reason": "Only 1 of 3 recommendations got an order placed. With only 3 setups found across Nifty 50, every viable setup should have a pending order to maximize fill probability.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a momentum/breakout entry mode for trending_up days (ADX>22, Nifty>+1%): enter on break above prior candle high rather than waiting for demand zone retest.",
+      "reason": "Zero fills on a strong trend day demonstrates that demand-zone-only entries systematically underperform when momentum is strong. A dual-mode approach would capture trending days.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "For KOTAKBANK, lower the entry threshold by placing order at 386.00-386.50 (slightly above zone) given its rank-1 score of 72% and pristine zone status.",
+      "reason": "KOTAKBANK was ranked #1 with highest probability but no order was placed at all. Pristine zones with high AI probability should get aggressive entries.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Set morning scan to run by 9:20 AM and place all orders before 9:30 AM so that any opening pullback into demand zones can be captured in the first 15 minutes.",
+      "reason": "Scan time was 14:41 \u2014 most intraday pullbacks to demand zones happen in the first 30 minutes. Late scanning misses the best fill window.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "If uptrend continues, prioritize placing orders on ALL high-probability setups with entries adjusted 0.3% closer to market price, and scan before 9:30 AM to catch early pullbacks.",
+  "symbol_notes": {
+    "HDFCBANK": "Pending order at 769.10 unfilled \u2014 if still valid tomorrow, raise entry to 772-774 range for better fill probability in continuation trend.",
+    "KOTAKBANK": "Highest ranked setup (72%) with pristine zone \u2014 must place order tomorrow if zone is still intact, consider slightly aggressive entry.",
+    "TATASTEEL": "Weakest setup at 58% with older zone \u2014 deprioritize unless sector rotates into metals."
+  },
+  "confidence": 5
+}
