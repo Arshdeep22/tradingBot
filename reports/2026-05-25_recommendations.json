@@ -1,0 +1,87 @@
+{
+  "date": "2026-05-25",
+  "scan_time_ist": "2026-05-25 14:41:54",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "In a trending up market (Nifty +1.5%, ADX 25), demand zone BUY setups are well-aligned with the prevailing trend. KOTAKBANK and HDFCBANK both score highly with pristine zones, strong departures, and excellent R:R ratios. Given the weekly insight that trade frequency is too low, all three setups should be considered, but KOTAKBANK edges ahead with the highest zone score. TATASTEEL's lower score (42) and older zone make it the weakest of the three.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.5%",
+    "adx": 25.0,
+    "vix": 16.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.5%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 385.25,
+      "stop_loss": 382.93,
+      "target": 392.21,
+      "zone_score": 55,
+      "win_probability": 72,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Highest zone score (55/60) with perfect departure, freshness, arrival, and time scores",
+        "Pristine RBR demand zone formed same session \u2014 maximum reliability",
+        "3.0 R:R ratio with tight stop loss of only \u20b92.32 in a trending up market favoring demand zones"
+      ],
+      "risks": "Individual stock trend marked as sideways/neutral despite broad market uptrend \u2014 watch for sector rotation away from banking",
+      "entry_advice": "Place limit order at 385.25; zone is pristine and fresh so price may bounce immediately on touch",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 769.1,
+      "stop_loss": 763.25,
+      "target": 786.65,
+      "zone_score": 53,
+      "win_probability": 70,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Strong zone score (53/60) with near-perfect marks across all criteria",
+        "HDFCBANK is a heavyweight that tends to benefit in broad market uptrends \u2014 high liquidity reduces slippage",
+        "Pristine fresh zone with controlled arrival and gap departure signals institutional buying"
+      ],
+      "risks": "Slightly wider stop loss (\u20b95.85) increases position risk; stock-level trend is neutral which could delay the move",
+      "entry_advice": "Limit order at 769.10; consider partial entry with add-on if a bullish engulfing forms at zone",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 204.12,
+      "stop_loss": 203.18,
+      "target": 206.94,
+      "zone_score": 42,
+      "win_probability": 58,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "3.0 R:R with very tight stop (\u20b90.94) makes it capital-efficient even with lower conviction",
+        "Controlled arrival (10/10) suggests supply is exhausted as price approaches the demand zone",
+        "Metal sector could benefit from trending market if risk-on sentiment persists"
+      ],
+      "risks": "Zone is 76 candles old (moderate freshness), lower departure score (6/10) suggests less institutional urgency, and DBR pattern is inherently weaker than RBR in uptrends",
+      "entry_advice": "Wait for a bullish confirmation candle (hammer or engulfing) at 204.12 before entering \u2014 do not blindly buy at zone given lower score",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 18,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 769.1,
+      "stop_loss": 763.25,
+      "target": 786.65,
+      "quantity": 170,
+      "win_probability": 70
+    }
+  ]
+}
