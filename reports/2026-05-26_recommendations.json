@@ -1,0 +1,87 @@
+{
+  "date": "2026-05-26",
+  "scan_time_ist": "2026-05-26 14:20:03",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "In a trending_up regime (Nifty +1.3%, ADX 25), demand zones aligned with trend are preferred. HDFCBANK has the highest zone score (49) with a pristine demand zone and strong 3:1 R:R, making it the top pick. COALINDIA SELL is counter-trend and less favorable. TATASTEEL has a weaker zone score and was deprioritized per yesterday's learnings. Only 3 setups available so ranking all 3.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.3%",
+    "adx": 25.0,
+    "vix": 16.1,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.3%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 769.1,
+      "stop_loss": 763.03,
+      "target": 787.31,
+      "zone_score": 49,
+      "win_probability": 62,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Highest zone score (49/60) with pristine RBR demand zone and gap departure (10/10)",
+        "Aligned with trending_up regime - buying demand in uptrend is optimal strategy",
+        "3:1 R:R ratio with tight 2-candle base and slow arrival indicating institutional accumulation",
+        "Yesterday's learning confirms this zone is valid; raising entry slightly for better fill probability"
+      ],
+      "risks": "Zone at 769.10 may not get retested again in strong uptrend, same unfilled issue as yesterday",
+      "entry_advice": "Per yesterday's learning, place limit order at 772-774 range (0.3-0.5% above zone proximal line) for better fill probability on trending day. If price pulls back to 769-770, add second tranche.",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 204.12,
+      "stop_loss": 203.2,
+      "target": 206.88,
+      "zone_score": 42,
+      "win_probability": 45,
+      "conviction": "LOW",
+      "reasoning": [
+        "DBR demand zone with very slow controlled approach (10/10 arrival) suggests genuine demand",
+        "Tight stop loss of \u20b90.92 makes position sizing favorable",
+        "3:1 R:R maintained despite small absolute move"
+      ],
+      "risks": "Lower zone score (42/60), sideways trend context, older zone (100 candles), and metals sector not currently in rotation per weekly notes",
+      "entry_advice": "Deprioritize per yesterday's learning unless metals sector shows strength. If placing order, use limit at 204.12 exact zone level given tight stop.",
+      "order_placed": false
+    },
+    {
+      "rank": 3,
+      "symbol": "COALINDIA.NS",
+      "side": "SELL",
+      "entry": 472.7,
+      "stop_loss": 477.82,
+      "target": 457.34,
+      "zone_score": 42,
+      "win_probability": 35,
+      "conviction": "LOW",
+      "reasoning": [
+        "Very recent pristine supply zone (9 candles) with same-session formation",
+        "Strong volume confirmation (1.7x) on departure candle"
+      ],
+      "risks": "SELL setup is counter-trend in a trending_up regime (Nifty +1.3%) which significantly reduces probability; sideways trend score only 5/10",
+      "entry_advice": "Avoid this trade - selling against a strong uptrend regime contradicts the primary strategy. Only consider if Nifty reverses intraday below previous day's low.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 19,
+      "symbol": "COALINDIA.NS",
+      "side": "SELL",
+      "entry": 472.7,
+      "stop_loss": 477.82,
+      "target": 457.34,
+      "quantity": 195,
+      "win_probability": 35
+    }
+  ]
+}
