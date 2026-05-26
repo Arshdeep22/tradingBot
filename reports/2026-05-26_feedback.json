@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-26",
+  "wins_analysis": "No wins today. Zero trades were executed as the top-ranked setups (HDFCBANK, TATASTEEL) were not placed as orders and the one order placed (COALINDIA SELL) remained pending without triggering.",
+  "losses_analysis": "No losses today. The primary issue is lack of execution: the best setup (HDFCBANK, 62% probability, zone score 49) was not converted to a pending order despite being rank 1. The only order placed was a counter-trend SELL (COALINDIA) with the lowest probability (35%), contradicting the trending_up regime logic.",
+  "regime_impact": "The trending_up regime should have strongly favored BUY setups (HDFCBANK, TATASTEEL), but the bot placed the only order on a counter-trend SELL. The regime filter logic identified the correct priorities in the commentary but failed to translate into order placement decisions. The strong uptrend (+1.3%) likely moved prices away from demand zones quickly, explaining why BUY entries weren't reached.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Always place pending orders for rank 1 and rank 2 setups when AI probability >= 45% and alignment with regime is confirmed. Do not skip order placement for top-ranked trend-aligned setups.",
+      "reason": "HDFCBANK (rank 1, 62% prob, trend-aligned) had no order placed. The bot's commentary correctly identified it as the top pick but failed to act on it.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Block counter-trend orders (SELL in trending_up regime) when AI probability is below 50% and zone score is not in top 2. Remove the COALINDIA SELL pending order at open tomorrow if still active.",
+      "reason": "COALINDIA SELL at 35% probability was the only order placed despite being counter-trend. This contradicts the regime-based prioritization logic that was correctly articulated.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "In trending_up regime with Nifty >+1%, widen entry tolerance by 0.15% for BUY demand zones to account for momentum-driven price action that may not fully retrace to pristine zone levels.",
+      "reason": "HDFCBANK entry at 769.10 was likely not reached because the uptrend prevented deep pullbacks. A slightly higher entry (e.g., 770.25) with adjusted R:R could have triggered.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Set minimum zone score threshold of 40 for order placement. Only setups with zone score >= 40 should receive pending orders to improve capital allocation.",
+      "reason": "Only 3 setups were found across Nifty 50 and the highest zone score was 49. With limited setups, concentrating on the strongest zone (HDFCBANK at 49) rather than spreading to weaker/counter-trend setups is essential.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Add a pre-market check: if fewer than 5 setups are found, place orders on ALL trend-aligned setups with probability >= 50% regardless of other filters.",
+      "reason": "With only 3 total setups today and 0 executions, the bot was too restrictive. Low setup count days require more aggressive order placement on qualifying setups.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Cancel the pending COALINDIA SELL if still active, prioritize BUY setups in trend-aligned demand zones with widened entry tolerance, and ensure rank 1-2 setups always get orders placed.",
+  "symbol_notes": {
+    "HDFCBANK": "Pristine demand zone at 769 with 62% probability was the correct top pick but not ordered. Monitor if zone is still valid tomorrow \u2014 if price held above 769, zone remains untested and actionable.",
+    "COALINDIA": "Counter-trend SELL at 35% probability should be cancelled. Avoid SELL setups in this stock while Nifty regime remains trending_up.",
+    "TATASTEEL": "Tight SL (0.92 pts) creates unfavorable risk profile. Only consider if zone score improves above 45 and R:R improves beyond 3:1."
+  },
+  "confidence": 5
+}
