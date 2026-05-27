@@ -1,0 +1,65 @@
+{
+  "date": "2026-05-27",
+  "scan_time_ist": "2026-05-27 14:22:28",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "In a trending_up regime with Nifty +1.0%, TATASTEEL BUY is the clear top pick with a pristine demand zone scoring 56/60 and perfect trend alignment. COALINDIA SELL is counter-trend and should be blocked per yesterday's learnings (probability below 50%, counter-trend in trending_up regime). Only 1 setup qualifies for order placement.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.0%",
+    "adx": 25.0,
+    "vix": 15.2,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.0%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 214.47,
+      "stop_loss": 212.57,
+      "target": 220.17,
+      "zone_score": 56,
+      "win_probability": 68,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Pristine RBR demand zone with score 56/60 exceeds minimum threshold of 40, with perfect trend alignment (10/10) in a trending_up regime",
+        "R:R of 3.0:1 meets the improved criteria from yesterday's TATASTEEL note (R:R >= 3:1 required), and zone score of 56 exceeds the 45 threshold",
+        "Instant reversal base, very recent formation (15 candles), 5.3x volume on departure confirms strong institutional interest at this level",
+        "Per yesterday's learnings, this is the rank 1 trend-aligned setup with probability >= 45% \u2014 must place pending order"
+      ],
+      "risks": "SL of 1.90 pts (0.89%) is relatively tight; in momentum-driven trending_up regime, price may briefly wick below zone before reversing",
+      "entry_advice": "Place limit BUY order at 214.47 with 0.15% tolerance widened to ~214.15 to account for momentum-driven retracement per yesterday's entry_timing learning. If price gaps above zone at open, wait for pullback rather than chasing.",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "COALINDIA.NS",
+      "side": "SELL",
+      "entry": 458.4,
+      "stop_loss": 463.56,
+      "target": 442.92,
+      "zone_score": 43,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 20,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 214.47,
+      "stop_loss": 212.57,
+      "target": 220.17,
+      "quantity": 526,
+      "win_probability": 68
+    }
+  ]
+}
