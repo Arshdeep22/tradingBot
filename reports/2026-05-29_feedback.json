@@ -1,0 +1,43 @@
+{
+  "date": "2026-05-29",
+  "wins_analysis": "No wins today. Zero targets were hit despite a trending_down regime that should have favored SELL setups.",
+  "losses_analysis": "Both executed trades hit stop loss, indicating entries were placed at weak supply zones that got swept before price moved in the intended direction. The AI was unavailable (0% probability shown) and zone score fallback produced low-conviction setups that lacked proper confirmation. With only 1 setup found across all 50 stocks, the system forced a trade in suboptimal conditions rather than staying flat.",
+  "regime_impact": "The trending_down regime with ADX=25 should have helped SELL-side trades, but the execution failed \u2014 likely because entry levels were too close to recent swing highs, allowing normal pullback volatility to trigger stops before continuation. The regime was favorable but zone selection was poor.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Do NOT place orders when AI is unavailable and zone score fallback produces fewer than 3 setups across Nifty 50. Require minimum 3 qualifying setups to confirm broad alignment before committing capital.",
+      "reason": "Today only 1 setup was found with 0% AI probability \u2014 this is effectively a no-signal day but 2 trades still executed and both lost.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Widen the buffer between entry and stop loss to minimum 1.0% for SELL setups in trending regimes. Today's RELIANCE setup had only 0.61% SL distance (8.23/1349), which is easily swept by intraday noise.",
+      "reason": "Both trades hit SL suggesting entries were too tight relative to intraday volatility. With VIX at 16.2, a 0.6% stop is insufficient.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "On AI-unavailable days, require price to confirm direction with a 15-min close below the supply zone before activating SELL limit orders, rather than placing pending orders preemptively.",
+      "reason": "Pending orders got filled and immediately reversed \u2014 waiting for confirmation candle would have filtered out the false breakdowns.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Cap maximum daily loss at \u20b91,500 (1 trade loss) on fallback/low-conviction days. If first trade hits SL, cancel all remaining pending orders for the day.",
+      "reason": "Two losses of ~\u20b91,000 each compounded to \u20b9-1,997. Cutting after first loss would have saved ~\u20b91,000.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "When AI is offline, prioritize only stocks with ATR-normalized zone strength above 2.0 (zone width relative to daily ATR). Avoid symbols where the zone is thinner than 1x ATR.",
+      "reason": "RELIANCE target was 24.69 points away but stop was only 8.23 \u2014 the R:R looked good on paper but the zone was likely too thin relative to RELIANCE's daily range, causing premature stop hits.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "If AI remains unavailable, stay completely flat unless 3+ high-quality supply zones align with continuation of the downtrend confirmed by first 30-min price action.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Supply zone at 1349 failed \u2014 price swept above 1357 before any meaningful drop. Mark 1357-1360 as a stronger supply level; only re-enter SELL if price retests and rejects from 1360+ with volume confirmation."
+  },
+  "confidence": 4
+}
