@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-29",
+  "scan_time_ist": "2026-05-29 14:26:12",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": false,
+  "market_context": "",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.4%",
+    "adx": 25.0,
+    "vix": 15.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.4%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1349.0,
+      "stop_loss": 1357.23,
+      "target": 1324.31,
+      "zone_score": 44,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 21,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1349.0,
+      "stop_loss": 1357.23,
+      "target": 1324.31,
+      "quantity": 121,
+      "win_probability": 0
+    }
+  ]
+}
