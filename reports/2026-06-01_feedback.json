@@ -1,0 +1,43 @@
+{
+  "date": "2026-06-01",
+  "wins_analysis": "No wins today. Zero AI recommendations were generated due to AI being unavailable, and the system fell back to zone score logic which did not produce actionable setups in the top 10.",
+  "losses_analysis": "One loss was triggered from a previously pending order that executed today. In a strong downtrend (Nifty -1.4%), the trade likely was a BUY setup from a prior session that got caught against the prevailing trend direction, hitting its stop loss as selling pressure dominated. The fallback system lacked the AI probability filter to screen out low-conviction trades in adverse regimes.",
+  "regime_impact": "The trending_down regime with ADX=25 and Nifty falling 1.4% hurt any long-biased positions. SHORT/supply-zone strategies aligned with the downtrend would have been the only appropriate plays today. The executed trade was likely a counter-trend long that had no chance in this environment.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Add a regime gate: when regime=trending_down AND Nifty change < -1.0%, automatically cancel all pending BUY orders from prior sessions before market open",
+      "reason": "Today's loss came from a stale pending BUY order executing into a -1.4% downtrend day \u2014 it was immediately offside",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "When AI is unavailable, do NOT execute any zone-score fallback trades if ADX > 22 and trend is against the trade direction; require AI confirmation for counter-trend setups",
+      "reason": "The fallback system executed a trade without AI probability scoring, resulting in a blind entry with no edge assessment",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "Implement a stale-order expiry: any pending order older than 1 session should be re-evaluated against current regime before allowing execution",
+      "reason": "The executed trade was likely placed in a different regime context and became invalid when market shifted to strong downtrend",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "On trending_down days with VIX 15-18, only place SHORT setups at supply zones; set min_zone_score to 75+ for shorts and disable longs entirely",
+      "reason": "ADX=25 with clear downtrend means only supply-zone shorts have statistical edge; VIX at 16.5 is moderate so moves are directional not choppy",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "If AI module is unavailable at scan time, reduce position sizing by 50% on any fallback trades to limit damage from unscored entries",
+      "reason": "Today showed that no-AI execution carries higher risk; halving size preserves capital on uncertain setups",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Watch if downtrend continues (check if Nifty holds below today's close and VIX expands above 17) \u2014 if so, focus exclusively on SHORT setups at supply zones in weak sectors like IT and banking names that led today's decline.",
+  "symbol_notes": {
+    "UNKNOWN_LOSS": "Identify which symbol hit SL today and blacklist it for BUY setups while downtrend persists; look for it as a SHORT candidate at the next supply zone instead"
+  },
+  "confidence": 4
+}
