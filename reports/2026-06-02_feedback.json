@@ -1,0 +1,44 @@
+{
+  "date": "2026-06-02",
+  "wins_analysis": "No wins today. Zero trades executed as both pending SELL orders were not filled \u2014 price did not retrace up to the supply zone entry levels during the session, which is common in strong selloffs where price gaps down and continues lower without retracement.",
+  "losses_analysis": "No losses today. The core issue is zero execution: in a -2.3% trending down day, placing limit sell orders at supply zones above current price assumes a retracement that never came. The strategy correctly identified direction but entry mechanism failed to adapt to momentum-driven moves.",
+  "regime_impact": "The strong downtrend regime correctly filtered out BUY setups, which was appropriate. However, the regime hurt execution because in a -2.3% crash day, prices typically don't retrace to supply zones \u2014 they waterfall. The limit-order-at-zone approach is better suited for mild trending or ranging regimes, not crash days.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When Nifty drops > 1.5% intraday AND ADX > 22, switch SELL entries from limit-at-zone to breakout entries (sell below prior 15min low or VWAP) instead of waiting for retracement to supply zones",
+      "reason": "Both RELIANCE and BAJFINANCE SELL orders went unfilled because price never retraced to supply zone entries during the strong selloff \u2014 missed the entire move",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the min_zone_score threshold from 75 to 68 for SELL setups when regime is trending_down with ADX >= 25, since trend alignment compensates for weaker zone scores",
+      "reason": "RELIANCE had 10/10 trend alignment but was flagged as sub-threshold on zone_score, creating hesitation. In a strong trend, alignment matters more than zone perfection",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a market-order fallback rule: if a pending SELL order is unfilled after 60 minutes AND price is already 0.5%+ below entry level AND still trending down, enter at market with tighter SL (0.4% instead of 0.67%)",
+      "reason": "Today's setups were directionally correct but mechanically missed. A time-based fallback would have captured the move on RELIANCE which likely trended lower all day",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Expand scan to include momentum-short candidates (stocks breaking below 20-day low with volume > 1.5x average) on crash days, not just zone-based setups",
+      "reason": "Only 3 setups found across Nifty 50 on a -2.3% day is too few \u2014 the scan is too restrictive for momentum-driven regimes. Breakdown patterns would have generated more actionable shorts",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Remove the BAJFINANCE BUY setup (rank 3) from order placement entirely \u2014 it contradicts the regime filter that explicitly disables BUY setups in strong downtrends",
+      "reason": "A BUY order was placed for BAJFINANCE at \u20b9865.70 despite the regime note stating 'BUY setups are disabled entirely.' This is a logic bug that could result in counter-trend losses",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (watch for gap-down open or Nifty below 21,800), use breakout-short entries on high-ADX stocks rather than limit orders at supply zones; if bounce develops, wait for first 30min range confirmation before acting.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Strong trend alignment (10/10) in downtrend \u2014 if it opens flat or with mild gap-up tomorrow, the \u20b91,349 supply zone becomes a high-probability short entry on retracement; if gap-down continues, use breakdown entry below today's low",
+    "BAJFINANCE.NS": "Weak zone score and contradictory BUY/SELL signals suggest avoid unless one clear level emerges; watch \u20b9865 as potential support bounce only if regime shifts to neutral"
+  },
+  "confidence": 5
+}
