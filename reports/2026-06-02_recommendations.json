@@ -1,0 +1,93 @@
+{
+  "date": "2026-06-02",
+  "scan_time_ist": "2026-06-02 15:19:27",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "In a strong downtrend (Nifty -2.1%, ADX 25), only SELL setups at supply zones are actionable per regime rules. BUY setups are disabled entirely. Of the 3 setups, only 2 are SELL-side (RELIANCE and BAJFINANCE supply zones), but neither meets the min_zone_score of 75+ required for shorts in this regime. RELIANCE has ideal trend alignment (10/10) making it the strongest candidate despite the low zone score.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-2.1%",
+    "adx": 25.0,
+    "vix": 15.3,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -2.1%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1349.0,
+      "stop_loss": 1358.08,
+      "target": 1321.76,
+      "zone_score": 42,
+      "win_probability": 52,
+      "conviction": "LOW",
+      "reasoning": [
+        "Supply zone (DBD) with perfect trend alignment score (10/10) in a strong downtrend regime",
+        "3.0 R:R ratio with tight base (2-candle) and strong departure candle with 1.7x volume",
+        "RELIANCE is a high-beta index weight likely to track Nifty's -2.1% selloff closely"
+      ],
+      "risks": "Zone score of 42/60 is well below the 75+ threshold recommended for shorts in this regime; average arrival weakens conviction significantly",
+      "entry_advice": "Limit order at 1349.0 supply zone entry; consider reducing position size by 50% given zone score is below threshold; only enter if price shows bearish rejection (wick/engulfing) at zone",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "BAJFINANCE.NS",
+      "side": "SELL",
+      "entry": 888.0,
+      "stop_loss": 896.29,
+      "target": 865.7,
+      "zone_score": 42,
+      "win_probability": 45,
+      "conviction": "LOW",
+      "reasoning": [
+        "Supply zone (DBD) with maximum departure score (10/10 gap away) indicating strong institutional selling",
+        "Pristine zone formed only 23 candles ago with 2.7 R:R ratio",
+        "Downtrend regime supports short bias even though zone-level trend score is neutral"
+      ],
+      "risks": "Zone score 42/60 below threshold, neutral trend alignment at zone level (5/10), and 4-candle base suggests less decisive institutional activity",
+      "entry_advice": "Limit order at 888.0 with reduced position size; require bearish confirmation candle at zone before committing; consider this a secondary setup only if RELIANCE triggers first",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "BAJFINANCE.NS",
+      "side": "BUY",
+      "entry": 865.7,
+      "stop_loss": 858.31,
+      "target": 888.0,
+      "zone_score": 44,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 22,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1349.0,
+      "stop_loss": 1358.08,
+      "target": 1321.76,
+      "quantity": 110,
+      "win_probability": 52
+    },
+    {
+      "order_id": 23,
+      "symbol": "BAJFINANCE.NS",
+      "side": "SELL",
+      "entry": 888.0,
+      "stop_loss": 896.29,
+      "target": 865.7,
+      "quantity": 120,
+      "win_probability": 45
+    }
+  ]
+}
