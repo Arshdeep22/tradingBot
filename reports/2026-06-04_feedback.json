@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-04",
+  "wins_analysis": "No wins today \u2014 zero orders were executed as all 3 pending orders remained unfilled. Entry prices were not reached during the session, indicating entry levels were set too conservatively or too far from market action in a fast-moving down day.",
+  "losses_analysis": "No losses either, but the real failure is zero execution. In a -2.1% trending down day, the single aligned SHORT (ITC SELL at 283.00) likely gapped below the entry level at open or moved too fast to fill at the limit price. Counter-trend BUY setups (COALINDIA, ICICIBANK) were never going to reach demand zones in a strong selloff.",
+  "regime_impact": "The strong trending_down regime (-2.1%, ADX 25) made BUY setups completely irrelevant \u2014 they should not have been placed. The regime favored supply zone shorts, but the strategy only identified 1 qualifying SHORT (ITC) and its entry was too tight for a gap-down open scenario. The regime hurt overall by limiting available setups while the system wasn't aggressive enough on the one valid short.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "In trending_down regime (Nifty < -1%), strictly filter out ALL BUY/demand zone setups regardless of zone score. Do not place counter-trend orders.",
+      "reason": "COALINDIA BUY and ICICIBANK BUY had 0% AI probability and were placed against a -2.1% regime \u2014 guaranteed non-execution or losses.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 2,
+      "action": "For SHORT setups on gap-down days, use market-on-open or VWAP-based entries instead of fixed limit prices. Alternatively, set entry 0.3-0.5% above prior close to catch the opening move.",
+      "reason": "ITC SELL at 283.00 likely wasn't filled because price gapped below entry in the strong selloff. The short signal was correct but the limit order mechanism missed the move entirely.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 3,
+      "action": "Expand the scan universe or relax supply zone criteria slightly (e.g., min_score from current threshold down by 3-5 points) on strong trending days to find more regime-aligned setups. Target at least 5 SHORT candidates when ADX > 22 and Nifty < -1%.",
+      "reason": "Only 1 SHORT setup out of Nifty 50 universe in a strong downtrend is too few. Broader scan would increase execution probability.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Add a pre-market gap check: if Nifty futures indicate > -1% gap-down by 9:00 AM, shift SHORT entry limits up by 0.5% from zone level to improve fill probability on opening drives.",
+      "reason": "Today's zero execution on a high-conviction regime day represents a complete missed opportunity. Pre-market data would have signaled the gap.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Do not place orders with 0% AI probability under any circumstance. Set minimum AI probability threshold at 40% for order placement.",
+      "reason": "COALINDIA and ICICIBANK both had 0% AI probability yet orders were placed anyway, wasting capital allocation slots.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "After a -2.1% Nifty drop, watch for either continuation shorts at supply zones (if VIX stays elevated and no reversal candle forms) or a dead-cat bounce into supply zones which would be ideal SHORT entries with tight stops.",
+  "symbol_notes": {
+    "ITC": "Correct SHORT thesis but entry missed \u2014 if price retraces toward 283-285 tomorrow, re-attempt short with wider entry tolerance",
+    "COALINDIA": "Avoid BUY until regime shifts \u2014 likely to test lower demand zones around 470-472 first",
+    "ICICIBANK": "Banking stocks weakest in selloffs \u2014 only consider SHORT on supply zone rallies, avoid BUY until Nifty stabilizes"
+  },
+  "confidence": 5
+}
