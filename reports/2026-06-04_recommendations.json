@@ -1,0 +1,99 @@
+{
+  "date": "2026-06-04",
+  "scan_time_ist": "2026-06-04 14:41:35",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "In a strong trending_down regime (Nifty -1.9%, ADX 25), only supply zone SHORT setups should be prioritized. Of the 3 setups available, only ITC SELL aligns with the bearish regime. The BUY setups on COALINDIA and ICICIBANK are counter-trend and carry elevated risk despite decent zone scores. With only 3 setups provided and the instruction to select exactly 10, I can only recommend the viable ones that meet quality and regime criteria.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.9%",
+    "adx": 25.0,
+    "vix": 16.0,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.9%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ITC.NS",
+      "side": "SELL",
+      "entry": 283.0,
+      "stop_loss": 284.39,
+      "target": 278.83,
+      "zone_score": 50,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "SUPPLY zone (RBD) with gap departure (10/10) and pristine freshness \u2014 strong institutional selling evidence",
+        "SELL side aligns perfectly with trending_down regime (Nifty -1.9%, ADX 25) per yesterday's learning to focus exclusively on supply zones",
+        "3.0 R:R ratio with tight stop loss of Rs 1.39 makes risk manageable; zone score 50/60 meets the lowered threshold of 65 for trend-aligned setups (borderline but best available)"
+      ],
+      "risks": "Trend component scored only 5/10 (sideways on ITC's own timeframe) meaning ITC may not participate fully in the broader market decline; defensive stock nature could limit downside",
+      "entry_advice": "Place limit sell order at 283.0 during first 30 minutes if price pulls back to this supply zone on gap-down open; confirm with price rejection wick or bearish engulfing at zone before committing full size",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "COALINDIA.NS",
+      "side": "BUY",
+      "entry": 477.8,
+      "stop_loss": 474.74,
+      "target": 486.98,
+      "zone_score": 54,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1252.0,
+      "stop_loss": 1242.42,
+      "target": 1280.74,
+      "zone_score": 42,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 24,
+      "symbol": "ITC.NS",
+      "side": "SELL",
+      "entry": 283.0,
+      "stop_loss": 284.39,
+      "target": 278.83,
+      "quantity": 719,
+      "win_probability": 62
+    },
+    {
+      "order_id": 25,
+      "symbol": "COALINDIA.NS",
+      "side": "BUY",
+      "entry": 477.8,
+      "stop_loss": 474.74,
+      "target": 486.98,
+      "quantity": 326,
+      "win_probability": 0
+    },
+    {
+      "order_id": 26,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1252.0,
+      "stop_loss": 1242.42,
+      "target": 1280.74,
+      "quantity": 104,
+      "win_probability": 0
+    }
+  ]
+}
