@@ -1,0 +1,68 @@
+{
+  "date": "2026-06-05",
+  "scan_time_ist": "2026-06-05 14:26:48",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "In a trending_down regime (Nifty -0.9%, ADX 25.0), only SHORT/supply zone setups are valid. TATASTEEL scores significantly higher (53/60) with perfect trend alignment and freshness, while ITC (46/60) is a re-attempt from yesterday's missed entry but has weaker trend alignment (sideways). With only 2 setups available, both are regime-aligned SHORTs but quality varies significantly.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.9%",
+    "adx": 25.0,
+    "vix": 16.1,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.9%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 207.37,
+      "stop_loss": 208.89,
+      "target": 202.81,
+      "zone_score": 53,
+      "win_probability": 72,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Zone score 53/60 with perfect trend alignment (10/10) in a strong downtrend regime \u2014 ideal setup",
+        "Pristine fresh zone formed same session (14 candles ago) with instant reversal base and 1.8x volume departure",
+        "R:R of 3.0 with tight stop (1.52 points) allows excellent risk management; target ~4.56 points downside"
+      ],
+      "risks": "Steel stocks can be volatile on commodity news; zone only 14 candles old so limited validation of its strength",
+      "entry_advice": "Set limit at 207.37 but per yesterday's learning, if pre-market indicates gap-down, shift entry up to ~208.00 (0.3% above) to improve fill probability on opening drive",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "ITC.NS",
+      "side": "SELL",
+      "entry": 283.0,
+      "stop_loss": 284.31,
+      "target": 279.07,
+      "zone_score": 46,
+      "win_probability": 55,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Re-attempt of yesterday's missed ITC SHORT at same 283.00 level \u2014 zone still valid with gap-away departure (10/10)",
+        "R:R of 3.0 remains attractive; ITC noted in yesterday's learnings as correct thesis if price retraces to 283-285 range",
+        "Fresh zone (7/10) with slow approach arrival pattern suggests institutional selling interest at this level"
+      ],
+      "risks": "Trend alignment only 5/10 (sideways) not fully with downtrend; same entry that failed to fill yesterday may repeat non-execution",
+      "entry_advice": "Widen entry tolerance to 283.50-284.00 range per yesterday's learning on ITC; if price approaches zone, enter at first rejection candle rather than waiting for exact 283.00 touch",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 27,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 207.37,
+      "stop_loss": 208.89,
+      "target": 202.81,
+      "quantity": 657,
+      "win_probability": 72
+    }
+  ]
+}
