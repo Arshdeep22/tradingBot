@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-05",
+  "wins_analysis": "No wins today. Zero targets were hit despite the regime being correctly identified as trending_down and both setups being regime-aligned SHORT trades.",
+  "losses_analysis": "The SL hit was likely on BAJFINANCE (carried from a prior day), which had an unrealized loss and tight stop of ~\u20b98.29 on a \u20b9888 entry. The stop was too tight relative to intraday volatility \u2014 a -0.8% Nifty day likely caused whipsaw before continuation. With only 2 fresh setups found and one not even triggering (ITC), the system is overly selective yet still losing on the trades it takes.",
+  "regime_impact": "The trending_down regime was correctly identified and the system filtered for SHORT-only setups which is appropriate. However, it hurt execution: TATASTEEL's pending order never filled (price didn't reach \u20b9207.37), and the carried BAJFINANCE position got stopped out despite the favorable regime \u2014 suggesting entry/SL calibration issues rather than directional issues.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Widen SL for SELL trades to at least 1.2x ATR(14) instead of fixed tight stops \u2014 BAJFINANCE had only 0.93% SL width which is too tight for a stock with typical 1.5% daily range",
+      "reason": "BAJFINANCE was stopped out at \u20b9896.29 (0.93% from entry) in a favorable down-trending regime, suggesting premature stop-out before the move could develop",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "For pending SELL orders, set limit entry 0.1-0.2% above the supply zone midpoint rather than at exact zone level to increase fill probability",
+      "reason": "TATASTEEL SELL at \u20b9207.37 never triggered despite a down day \u2014 the entry was too precise and missed a potential winning trade in a 72% probability setup",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 3,
+      "action": "When only 2 setups are found in a strong regime, lower the entry precision threshold rather than missing trades entirely \u2014 consider market orders within 0.3% of zone for top-ranked setups scoring >50/60",
+      "reason": "Only 2 setups identified, one never triggered, one wasn't placed \u2014 net result was zero new exposure in a correctly identified trending regime",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Do not carry SHORT positions from prior days if the stock has already moved >1.5% in favor \u2014 trail stop to breakeven or lock in partial profit to avoid giving back gains",
+      "reason": "BAJFINANCE was an open position that ended in a \u20b9997.56 loss; a trailing mechanism would have either locked profit or reduced loss size",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Skip re-attempt setups (like ITC rank 2 with 55% probability and sideways trend alignment) \u2014 require minimum 65% AI probability for any order placement",
+      "reason": "ITC was flagged as weaker trend alignment (sideways) and scored only 46/60 with 55% probability, correctly not placed, but formalizing this threshold prevents future mistakes",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (ADX >25, Nifty red), prioritize fresh supply zone SHORTs with >65% probability and use slightly aggressive entries (0.1-0.2% above zone) to ensure fills on high-conviction setups like TATASTEEL.",
+  "symbol_notes": {
+    "TATASTEEL": "Scored 53/60 with 72% probability but never filled \u2014 if still at supply zone tomorrow, use market order or aggressive limit; this is a high-quality setup that should not be missed twice",
+    "BAJFINANCE": "Stop loss hit despite correct direction \u2014 if re-entering, widen SL to \u20b910-12 range (1.2-1.4%) and trail once \u20b910 in profit",
+    "ITC": "Sideways trend alignment in a trending market is a mismatch \u2014 avoid unless it clearly breaks down and aligns with regime"
+  },
+  "confidence": 5
+}
