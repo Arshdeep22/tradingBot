@@ -1,0 +1,51 @@
+{
+  "week": "2026-W23",
+  "executive_summary": "Zero wins across 4 trades with persistent trending_down regime. The Supply & Demand Zone strategy is fundamentally unsuitable for sustained downtrends \u2014 it keeps buying demand zones that break down. The core issue is not parameter tuning but strategy-regime mismatch: the bot has no mechanism to either short or sit out extended bearish regimes.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "declining",
+  "target_progress": "0% \u2014 70% below 70% target",
+  "regime_assessment": "Regime detection appears accurate (6 of 7 days trending_down matches the losing long trades), but the bot takes NO action on regime signals. Detection without adaptation is useless \u2014 the strategy still enters long demand-zone trades into a downtrend.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol-level data available to make removal decisions. Need per-symbol tracking urgently.",
+    "focus_list": [],
+    "focus_reason": "Cannot identify winners without symbol-level P&L logging."
+  },
+  "dow_pattern": "Fridays account for both realized losses (\u20b9-2995 combined). With only 4 trades total, sample is too small for statistical significance, but avoid Fridays in downtrends as end-of-week selling pressure compounds zone failures.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      78,
+      90
+    ],
+    "zone_rr_range": [
+      2.5,
+      3.5
+    ],
+    "reasoning": "In W22, loosening min_score destroyed win rate. In W23, current 75 still produced 0% wins. The zones being traded are simply not high-quality enough in a downtrend. Raise floor significantly and demand higher reward-to-risk to compensate for lower base rate in bearish conditions."
+  },
+  "structural_recommendations": [
+    {
+      "change": "Implement regime-gated trade suppression: when regime is trending_down for 3+ consecutive days, disable all long demand-zone entries entirely. Only allow supply-zone shorts or no trades.",
+      "expected_impact": "Would have prevented all 4 losing trades this week (saving \u20b92995). Expected to reduce losses by 80%+ in sustained downtrends.",
+      "priority": "high"
+    },
+    {
+      "change": "Add per-symbol P&L tracking to the logging pipeline. Every trade must record symbol, entry zone score, regime at entry, and outcome.",
+      "expected_impact": "Enables data-driven symbol filtering within 2-3 weeks. Currently flying blind on symbol selection.",
+      "priority": "high"
+    },
+    {
+      "change": "Add a supply-zone short strategy for trending_down regimes. Mirror the demand-zone logic but sell rallies into supply zones with trend confirmation.",
+      "expected_impact": "Converts bearish weeks from forced inactivity/losses into potential profit. Could add 2-3 valid short setups per week in downtrends.",
+      "priority": "medium"
+    },
+    {
+      "change": "Implement a weekly max-loss circuit breaker at \u20b9-2000. Once hit, bot stops trading for the remainder of the week.",
+      "expected_impact": "Would have capped this week's loss at \u20b9-2000 instead of \u20b9-2995. Protects capital during regime mismatches until structural fixes are deployed.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Supply & Demand Zones",
+  "confidence": 3,
+  "apply_to_memory": false
+}
