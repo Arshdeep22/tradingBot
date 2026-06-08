@@ -1,0 +1,46 @@
+{
+  "date": "2026-06-08",
+  "wins_analysis": "No wins today as the system generated zero recommendations. The AI model was unavailable and the zone score fallback produced no setups meeting minimum thresholds.",
+  "losses_analysis": "No losses today, but the complete absence of trades represents an opportunity cost. The fallback system failed to identify any actionable setups despite a clear trending_down regime with ADX=25 which should have produced short-side opportunities at supply zones.",
+  "regime_impact": "Today's trending_down regime with ADX=25 and Nifty -1.1% was ideal for short/supply-zone strategies. The system completely missed this opportunity because the AI was unavailable and the fallback zone score logic appears too restrictive or misconfigured for bearish conditions.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Lower the zone score fallback threshold from current level to 65 (or whatever minimum is blocking) specifically when regime is trending_down and ADX >= 22, to allow SHORT setups at supply zones to pass through",
+      "reason": "Zero setups found on a clean downtrend day with ADX=25 means the fallback filter is too aggressive. Strong downtrend days are high-probability SHORT environments.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Add a regime-aware bias to the fallback scanner: when regime=trending_down, scan ONLY supply zones and SHORT setups rather than requiring both demand and supply zones to score highly",
+      "reason": "The fallback system likely evaluated both long and short setups equally, diluting focus. In a -1.1% Nifty day, only short setups should be prioritized.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "Pre-identify 5-7 Nifty 50 stocks with the weakest relative strength (e.g., TATAMOTORS, HDFCBANK, INFY) and hardcode them as priority symbols for the fallback scanner during down-regime days",
+      "reason": "Without AI probability scores, narrowing the universe to the weakest stocks in a downtrend increases the chance of finding valid supply zone setups.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Implement an alert/log when zero setups are generated so the system can re-scan at 10:30 AM with relaxed parameters (e.g., zone score threshold reduced by 10 points) rather than staying idle all day",
+      "reason": "Today the system sat idle from open to close. A midday re-scan with slightly relaxed criteria could have captured afternoon breakdown setups.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "If AI model remains unavailable tomorrow, manually override with at least 3 SHORT pending orders at nearest supply zones on high-beta stocks (TATAMOTORS, BAJFINANCE, ADANIENT) with 1:1.5 RR ratio",
+      "reason": "Consecutive zero-trade days destroy system credibility and miss compounding. Even conservative manual entries in a confirmed downtrend are better than complete inaction.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (watch Nifty 50 holding below today's close and VIX staying above 16), aggressively scan for SHORT entries at supply zones on weak-RS stocks, ensuring the fallback system actually generates at least 3-5 recommendations.",
+  "symbol_notes": {
+    "TATAMOTORS.NS": "Typically high-beta, likely broke support today \u2014 check for supply zone SHORT setup near today's breakdown level",
+    "BAJFINANCE.NS": "Financials tend to lead downtrends \u2014 scan for rejection at intraday supply zones",
+    "ADANIENT.NS": "High volatility name, likely offered large range candles today \u2014 look for continuation SHORT below today's low",
+    "HDFCBANK.NS": "Heavyweight drags Nifty \u2014 if it closed weak, supply zone SHORT is high conviction"
+  },
+  "confidence": 3
+}
