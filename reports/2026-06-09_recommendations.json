@@ -1,0 +1,49 @@
+{
+  "date": "2026-06-09",
+  "scan_time_ist": "2026-06-09 14:16:53",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup was detected today. Despite ICICIBANK having a high zone score of 58/60 with excellent technical characteristics, it is a BUY setup in a trending_down regime (Nifty -1.2%, ADX 25). Weekly insights confirm that buying demand zones in sustained downtrends has produced zero wins across 4 trades. Yesterday's learnings explicitly state we should focus ONLY on supply zones and SHORT setups during down-regime days. This BUY setup contradicts the regime and has low win probability.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.2%",
+    "adx": 25.0,
+    "vix": 15.8,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.2%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1250.9,
+      "stop_loss": 1244.45,
+      "target": 1270.25,
+      "zone_score": 58,
+      "win_probability": 32,
+      "conviction": "LOW",
+      "reasoning": [
+        "Zone score 58/60 is technically excellent with gap departure, pristine freshness, and instant reversal base",
+        "However, this is a BUY in a confirmed trending_down regime (Nifty -1.2%, ADX=25) which directly contradicts regime alignment",
+        "Weekly insights show 0/4 win rate buying demand zones in sustained downtrends \u2014 strategy-regime mismatch is the core issue"
+      ],
+      "risks": "Buying demand zones in strong downtrends has consistently failed; demand zones tend to break down in sustained bearish regimes",
+      "entry_advice": "AVOID this trade. If taken despite low conviction, wait for a strong bullish engulfing confirmation candle at zone with volume spike, and reduce position size to 25% of normal. Preferably skip and wait for SHORT setups at supply zones.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 28,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1250.9,
+      "stop_loss": 1244.45,
+      "target": 1270.25,
+      "quantity": 155,
+      "win_probability": 32
+    }
+  ]
+}
