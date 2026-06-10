@@ -1,0 +1,85 @@
+{
+  "date": "2026-06-10",
+  "scan_time_ist": "2026-06-10 14:35:05",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "Market is in a confirmed trending_down regime (Nifty -0.7%, ADX 25). All 3 detected setups are BUY/demand-zone trades, which directly conflict with the regime. Yesterday's learnings explicitly hard-block all BUY orders when regime is trending_down AND Nifty change < -0.5%. No supply zone SHORT setups were detected. This should be declared a NO-TRADE day per the rules.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.7%",
+    "adx": 25.0,
+    "vix": 15.5,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.7%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 280.3,
+      "stop_loss": 278.83,
+      "target": 284.71,
+      "zone_score": 56,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1276.2,
+      "stop_loss": 1267.74,
+      "target": 1301.58,
+      "zone_score": 51,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    },
+    {
+      "rank": 3,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 382.4,
+      "stop_loss": 379.69,
+      "target": 390.53,
+      "zone_score": 50,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 29,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 280.3,
+      "stop_loss": 278.83,
+      "target": 284.71,
+      "quantity": 680,
+      "win_probability": 0
+    },
+    {
+      "order_id": 30,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 382.4,
+      "stop_loss": 379.69,
+      "target": 390.53,
+      "quantity": 369,
+      "win_probability": 0
+    }
+  ]
+}
