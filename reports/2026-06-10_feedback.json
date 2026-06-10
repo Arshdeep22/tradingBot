@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-10",
+  "wins_analysis": "No wins today. Zero targets were hit, consistent with taking counter-trend BUY trades in a confirmed downtrend regime.",
+  "losses_analysis": "The 1 executed trade (likely from a prior day's pending order) was a BUY in a trending_down regime with Nifty -0.8%. All 3 AI recommendations had 0% probability scores, indicating the model itself had zero confidence. The system placed 2 orders despite the hard-block rule being explicitly stated, suggesting either the rule was not enforced in code or pending orders from prior days were not cancelled at regime change.",
+  "regime_impact": "The trending_down regime with Nifty -0.8% and ADX 25 made all BUY/demand-zone setups toxic. No supply-zone SHORT setups were available, making this a textbook NO-TRADE day. The regime directly caused the loss \u2014 counter-trend trades in strong downtrends have near-zero edge.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Implement hard code block: if regime == 'trending_down' AND nifty_change < -0.5%, reject ALL BUY order placements and cancel any existing pending BUY orders immediately at scan time",
+      "reason": "Today 2 BUY orders were placed despite the report itself acknowledging the hard-block rule should have prevented them. The rule exists in learnings but is not enforced in execution logic.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Add a minimum AI probability threshold of 40% \u2014 never place orders when AI probability is 0%",
+      "reason": "All 3 recommendations today had 0% AI probability, meaning the model itself predicted zero chance of success. Placing orders on 0% probability signals is guaranteed value destruction.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Implement NO-TRADE day declaration: if all detected setups conflict with regime AND no aligned setups exist, place zero orders and log as forced skip",
+      "reason": "Today's report correctly identified this as a NO-TRADE day in its narrative but still placed 2 orders. The logic must be automated, not advisory.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Add end-of-day cleanup: cancel all pending orders that have not triggered by 14:30 IST, especially if regime has shifted adversely since order placement",
+      "reason": "2 orders remained pending at close, tying up capital allocation and risking gap-down fills tomorrow morning in a continuing downtrend.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow, only scan for SHORT/supply-zone setups on stocks with relative weakness (underperforming Nifty) \u2014 specifically look at banking names like ICICIBANK and KOTAKBANK which showed demand-zone setups today (implying they were falling into demand, meaning supply pressure is dominant)",
+      "reason": "ICICIBANK and KOTAKBANK appearing as BUY candidates in a downtrend suggests they are falling \u2014 flip perspective and look for short entries on bounces to supply zones.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (ADX >22, Nifty negative), only take SHORT/supply-zone setups or declare NO-TRADE; cancel the 2 pending BUY orders on ITC and KOTAKBANK immediately at pre-market.",
+  "symbol_notes": {
+    "ITC": "Pending BUY order at 280.30 must be cancelled pre-market \u2014 counter-trend in downtrend with 0% AI probability",
+    "KOTAKBANK": "Pending BUY order at 382.40 must be cancelled pre-market \u2014 same reasoning, banking sector weak",
+    "ICICIBANK": "Watch for supply-zone SHORT setup if it bounces to resistance near 1,276-1,280 area"
+  },
+  "confidence": 9
+}
