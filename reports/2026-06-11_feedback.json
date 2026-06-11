@@ -1,0 +1,44 @@
+{
+  "date": "2026-06-11",
+  "wins_analysis": "No wins today. Zero trades were executed as pending orders did not trigger. The BPCL SELL order at 294.05 remained unfilled, suggesting price did not retrace to the supply zone entry level during the session.",
+  "losses_analysis": "No losses today either. The lack of execution means the strategy was too passive \u2014 entry prices were set at levels price never reached. The BPCL supply zone score of 40 was moderate, and the 52% AI probability was barely above coin-flip, indicating weak conviction setups.",
+  "regime_impact": "The trending_down regime correctly filtered out BUY setups (ICICIBANK and BPCL BUY were blocked), which was appropriate discipline. However, the regime hurt overall performance because the only qualifying SELL setup had a weak zone score (40) and never triggered, resulting in zero activity on a day where Nifty fell 1.1% \u2014 a day that should have produced bearish profits.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "In strong downtrend days (ADX>=25, Nifty<-0.8%), allow SELL entries via market order or aggressive limit (e.g., entry at current price + 0.1% buffer) instead of waiting for full retracement to supply zone top",
+      "reason": "BPCL fell with the market but our limit sell at 294.05 never triggered \u2014 in strong downtrends, price often doesn't retrace to supply zones before continuing lower",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Raise minimum zone score threshold to 55 for any setup to be traded; if no setup meets this, stay flat rather than placing weak orders",
+      "reason": "BPCL's zone score of 40 and AI probability of 52% are too weak to justify capital allocation \u2014 these marginal setups waste pending order slots",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Expand symbol universe scanning to include all F&O stocks (not just Nifty 50) on days when fewer than 5 qualifying setups are found in Nifty 50",
+      "reason": "Only 3 setups found across entire Nifty 50, and only 1 qualified after regime filter. Broader universe would improve odds of finding high-conviction bearish setups on strong down days",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Add a contradictory order detection rule: never place both BUY and SELL orders on the same symbol simultaneously (BPCL had both Rank 1 SELL and Rank 3 BUY)",
+      "reason": "BPCL appeared as both SELL at 294.05 and BUY at 281.65 \u2014 this is a range trade, not a directional conviction. In a trending regime, only the trend-aligned side should exist",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Track intraday price proximity to pending orders \u2014 if price comes within 0.3% of entry but doesn't fill, cancel and re-enter at market after 2pm to capture remaining move",
+      "reason": "Zero execution on a -1.1% Nifty day is an opportunity cost failure. Need a fallback mechanism to participate in clear trend days even if exact zone levels aren't touched",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (ADX stays above 25), prioritize aggressive SELL entries on high-volume stocks showing breakdown below recent support \u2014 do not wait for full retracement to supply zones.",
+  "symbol_notes": {
+    "BPCL": "Supply zone at 294 did not trigger despite market weakness \u2014 zone may be stale or too far from current action. Monitor if price is already below 290; if so, look for fresh lower supply zones for short entry.",
+    "ICICIBANK": "BUY correctly blocked in downtrend. If regime persists, avoid entirely. Only consider if regime flips to neutral/up."
+  },
+  "confidence": 4
+}
