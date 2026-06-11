@@ -1,0 +1,79 @@
+{
+  "date": "2026-06-11",
+  "scan_time_ist": "2026-06-11 15:20:35",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "Market is in a confirmed trending_down regime (Nifty -1.0%, ADX 25.0). Per yesterday's learnings, ALL BUY setups must be rejected as they are counter-trend. Only the SELL/supply zone setup on BPCL aligns with the bearish regime, though it has a moderate zone score of 40. With only 3 setups available and a hard block on BUY orders in this regime, only 1 setup qualifies.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.0%",
+    "adx": 25.0,
+    "vix": 15.6,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.0%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "BPCL.NS",
+      "side": "SELL",
+      "entry": 294.05,
+      "stop_loss": 296.94,
+      "target": 281.65,
+      "zone_score": 40,
+      "win_probability": 52,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Only setup aligned with trending_down regime - SELL at supply zone matches bearish market direction",
+        "Strong R:R of 4.3 with gap departure (10/10) indicating powerful institutional selling at this level",
+        "BPCL showing relative weakness context; supply zone SHORT aligns with yesterday's learning to focus on supply zones in downtrends"
+      ],
+      "risks": "Zone score is moderate (40/60) with a 4-candle base reducing reliability, and zone is 98 candles old reducing time relevance",
+      "entry_advice": "Wait for price to reach 294.05 area and show bearish rejection (bearish engulfing or pin bar) before entering SHORT. Do not chase if price gaps through the zone. Cancel if not triggered by 14:30 IST.",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1293.7,
+      "stop_loss": 1285.05,
+      "target": 1319.65,
+      "zone_score": 49,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    },
+    {
+      "rank": 3,
+      "symbol": "BPCL.NS",
+      "side": "BUY",
+      "entry": 281.65,
+      "stop_loss": 279.36,
+      "target": 294.05,
+      "zone_score": 49,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 31,
+      "symbol": "BPCL.NS",
+      "side": "SELL",
+      "entry": 294.05,
+      "stop_loss": 296.94,
+      "target": 281.65,
+      "quantity": 346,
+      "win_probability": 52
+    }
+  ]
+}
