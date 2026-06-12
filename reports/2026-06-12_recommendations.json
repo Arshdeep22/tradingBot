@@ -1,0 +1,49 @@
+{
+  "date": "2026-06-12",
+  "scan_time_ist": "2026-06-12 15:12:58",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup available today. HDFCBANK demand zone has a zone score of 46, which is below the minimum threshold of 55 recommended by yesterday's learnings. However, the trending_up regime (Nifty +1.1%, ADX 25) supports demand zone BUY setups. The R:R of 3.0 is attractive but the zone quality is marginal.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.1%",
+    "adx": 25.0,
+    "vix": 14.7,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.1%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 770.75,
+      "stop_loss": 766.12,
+      "target": 784.64,
+      "zone_score": 46,
+      "win_probability": 52,
+      "conviction": "LOW",
+      "reasoning": [
+        "Regime is trending_up which supports demand zone BUY entries \u2014 strategy-regime alignment is favorable unlike last week's downtrend",
+        "R:R ratio of 3.0 is excellent, and the zone is pristine (untested) with very recent formation",
+        "However, zone score of 46 is BELOW the 55 minimum threshold from yesterday's learnings \u2014 this is a weak conviction setup that should ideally be skipped"
+      ],
+      "risks": "Zone score 46 is below the 55 minimum threshold; trend component scored only 5/10 (sideways) despite market regime being up, suggesting HDFCBANK may not be participating in the broader rally",
+      "entry_advice": "Per yesterday's learnings, this setup does NOT meet the minimum zone score of 55. Recommend staying flat. If forced to trade, use limit order at 770.75 with strict stop at 766.12, and only if price shows bullish confirmation candle at the zone level.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 32,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 770.75,
+      "stop_loss": 766.12,
+      "target": 784.64,
+      "quantity": 215,
+      "win_probability": 52
+    }
+  ]
+}
