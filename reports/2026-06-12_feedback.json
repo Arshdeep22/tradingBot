@@ -1,0 +1,44 @@
+{
+  "date": "2026-06-12",
+  "wins_analysis": "No wins today. The single HDFCBANK BUY order remained pending and was not filled, indicating the entry price of \u20b9770.75 was set too aggressively below the market in a trending_up day where prices were moving higher.",
+  "losses_analysis": "No losses today. However, the failure to execute HDFCBANK (still pending at close) represents an opportunity cost \u2014 in a strong uptrend day (+1.1%), waiting for a pullback to a marginal demand zone (score 46) meant missing the move entirely.",
+  "regime_impact": "The trending_up regime (+1.1%, ADX 25) was favorable for demand zone BUY setups, but the bot underperformed by only finding 1 marginal setup with a zone score of 46 (below the 55 threshold). The regime should have been exploited more aggressively with slightly higher entry prices or breakout strategies rather than deep pullback demand zones.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "In trending_up regimes with ADX >= 25, use limit entries within 0.2% of current price rather than waiting for deep demand zone touches \u2014 today's HDFCBANK entry at \u20b9770.75 never filled because the trend carried prices higher",
+      "reason": "HDFCBANK order stayed pending all day in a +1.1% Nifty session, indicating demand zone entries are too deep for strong trending days",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Enforce the zone_score >= 55 threshold strictly \u2014 do NOT place orders on zones scoring 46 even when only 1 setup is available. No trade is better than a marginal trade.",
+      "reason": "HDFCBANK zone score was 46, below the 55 minimum from yesterday's learnings. The system overrode its own rule due to scarcity of setups.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a breakout/momentum strategy for trending_up days (ADX >= 25) \u2014 scan for stocks breaking above previous day high with volume confirmation, targeting 1:2 R:R",
+      "reason": "Only 1 demand zone setup was found in a strong trending day. Demand zones work better in range/mean-reversion contexts; trending days need momentum entries to capture moves.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Monitor BPCL short position closely \u2014 a SELL position in a trending_up regime with Nifty +1.1% is counter-trend. Trail SL to breakeven if unrealized loss exceeds \u20b91.50",
+      "reason": "BPCL SELL is still open and counter to the prevailing uptrend; risk of being stopped out increases if broad market momentum continues tomorrow",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Expand symbol scanning to include top gainers within Nifty 50 showing intraday pullbacks of 0.3-0.5% from day high during trending_up regimes \u2014 these offer better fill probability than deep demand zones",
+      "reason": "Today only 1 of 50 stocks generated a setup; broader scan criteria aligned with regime would increase opportunity set without sacrificing quality",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "If trending_up regime persists, prioritize momentum/breakout entries over deep demand zones, and exit BPCL short at breakeven if Nifty opens strong.",
+  "symbol_notes": {
+    "HDFCBANK": "Demand zone at 770.75 never triggered \u2014 if price revisits tomorrow with zone score improving, consider entry but only if score >= 55; otherwise skip",
+    "BPCL": "Counter-trend short still open \u2014 highest priority is managing this position; consider closing if Nifty gaps up or BPCL shows no weakness in first 30 min"
+  },
+  "confidence": 4
+}
