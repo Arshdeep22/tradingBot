@@ -1,0 +1,51 @@
+{
+  "week": "2026-W24",
+  "executive_summary": "Third consecutive losing week with 0% win rate (0 wins from 2 trades, \u20b9-998 P&L). The bot is effectively inactive \u2014 6 of 7 days in trending_down regime with only 2 trades attempted. The Supply & Demand Zone strategy has now failed for 3 straight weeks in a persistent downtrend, producing 0 wins from the last 6 trades. A fundamental structural change is required: the bot must either switch strategies in downtrends or stop trading entirely during them.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "declining",
+  "target_progress": "0% \u2014 70% below the 70% target, 3-week losing streak",
+  "regime_assessment": "Regime detection is correctly identifying the persistent downtrend (6/7 days trending_down). However, the bot is NOT acting on this information \u2014 it still attempts Supply & Demand long entries in a downtrend. The regime detector works, but the strategy selector ignores it.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol-level data available to make removal decisions",
+    "focus_list": [],
+    "focus_reason": "Cannot identify winners without symbol-level performance data. Priority: add symbol tracking to logs."
+  },
+  "dow_pattern": "Insufficient data \u2014 only 2 trades across 3 weeks. Friday produced the only loss this week. No statistically meaningful day-of-week pattern exists yet.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      78,
+      88
+    ],
+    "zone_rr_range": [
+      1.5,
+      2.5
+    ],
+    "reasoning": "Tightening min_score back up to avoid low-quality zone entries in downtrends. Lowering RR floor to 1.5 to allow tighter targets that can be hit before reversals resume. However, parameter changes are secondary \u2014 the core issue is trading long-only demand zones in a sustained downtrend."
+  },
+  "structural_recommendations": [
+    {
+      "change": "Implement regime-based trade suppression: completely disable long-only Supply & Demand entries when regime = trending_down for 3+ consecutive days. Only resume when regime shifts to ranging or trending_up.",
+      "expected_impact": "Would have prevented all 6 losing trades over the past 3 weeks (\u20b9-3,500+ saved). Eliminates the fundamental mismatch of buying demand zones in downtrends.",
+      "priority": "high"
+    },
+    {
+      "change": "Add a short-side or breakdown strategy for trending_down regimes. Identify supply zones as SHORT entry points, or trade breakdown of demand zones as continuation shorts.",
+      "expected_impact": "Transforms 6 days of forced inactivity into potential trading days. Even at 50% win rate with 1:2 RR, could generate \u20b92,000-4,000/week in downtrends.",
+      "priority": "high"
+    },
+    {
+      "change": "Add per-symbol performance tracking to trade logs. Record symbol, entry zone quality score, and regime at time of entry.",
+      "expected_impact": "Enables data-driven symbol selection within 2-3 weeks. Currently flying blind on which instruments work best.",
+      "priority": "medium"
+    },
+    {
+      "change": "Implement a 3-trade consecutive loss circuit breaker that pauses trading for 48 hours and triggers a parameter re-evaluation.",
+      "expected_impact": "Would have paused the bot mid-W23 and prevented W24 losses. Limits drawdown during strategy-regime mismatches to ~\u20b93,000 max.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Supply & Demand Zones",
+  "confidence": 3,
+  "apply_to_memory": false
+}
