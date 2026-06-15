@@ -1,0 +1,43 @@
+{
+  "date": "2026-06-15",
+  "wins_analysis": "No wins today. Zero targets were hit, so there is nothing positive to extract from today's execution.",
+  "losses_analysis": "The single executed trade hit its stop loss despite a strong trending_up regime (Nifty +3.2%). This suggests the trade was either a counter-trend SHORT, or it was a stale pending order from a previous session that filled into an unfavorable level. The AI was unavailable (zone score fallback mode), meaning entry quality was degraded without proper probability scoring.",
+  "regime_impact": "Today's strong uptrend (+3.2%, ADX 25) should have heavily favoured BUY-side demand zone trades. The loss suggests the executed trade was likely misaligned with the regime \u2014 possibly a SHORT or a BUY at a weak/stale demand zone that had already been swept. The fallback mode without AI clearly hurt performance.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When AI is unavailable (fallback mode), do NOT execute any trades. Set a hard gate: if ai_available == False, skip all order placement and let no pending orders fill.",
+      "reason": "Today's only trade was placed via zone score fallback without AI probability filtering, resulting in a -\u20b91000 loss on a day where the broad market gained 3.2%.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "In trending_up regime (ADX >= 22, Nifty change > +1%), block all SHORT-side orders and only allow BUY setups aligned with the trend.",
+      "reason": "A 3.2% up day should never produce a loss if only long-side trades are taken. The SL hit implies possible counter-trend positioning.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "Cancel all stale pending orders from previous sessions at 9:15 AM before new day scanning begins. No order should carry over more than 1 session.",
+      "reason": "With 0 AI recommendations today but 1 execution, the trade likely originated from a prior-day pending order that filled at an outdated level.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Require minimum zone score of 75 (up from current threshold) when operating in fallback mode, and reduce position size by 50% for any fallback-mode trades if the hard gate in priority 1 is not implemented.",
+      "reason": "Fallback mode has no AI edge; tighter filters and smaller size limit damage on low-confidence setups.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "On strong trending days (Nifty > +2%), use trailing stop or move SL to breakeven after 0.5% move in favor, rather than holding static SL.",
+      "reason": "In a 3.2% rally, even mediocre long entries should have been rescued by momentum if SL management was dynamic.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If AI becomes available, focus exclusively on BUY-side demand zone setups in momentum leaders that participated in today's rally; if AI remains unavailable, stay flat entirely.",
+  "symbol_notes": {
+    "UNKNOWN_LOSS": "Identify which symbol hit SL today and blacklist it for 2 sessions if it was a SHORT in an uptrend; check if it was a carryover pending order"
+  },
+  "confidence": 5
+}
