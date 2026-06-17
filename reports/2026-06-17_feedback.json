@@ -1,0 +1,47 @@
+{
+  "date": "2026-06-17",
+  "wins_analysis": "No wins today as zero trades were placed. The system generated no recommendations due to AI unavailability and the zone score fallback producing no qualifying setups.",
+  "losses_analysis": "No losses today, but the real failure is opportunity cost \u2014 Nifty rallied +3.8% in a strong uptrend and the bot sat completely idle, missing significant long opportunities across the board.",
+  "regime_impact": "Today's trending_up regime with ADX=25 and low VIX=13.2 was ideal for momentum/demand-zone longs. This was a high-probability day that the strategy completely missed due to system fallback producing zero signals.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Implement a fallback scan that uses technical criteria (price near demand zone + RSI>50 + ADX>20) when AI model is unavailable, with minimum 3 setups generated on strong trending days",
+      "reason": "Zero trades on a +3.8% Nifty day is unacceptable \u2014 the fallback system needs to generate actionable signals even without AI probability scores",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the zone score threshold from current level to 60 (or equivalent) when market regime is trending_up with ADX>=22 and VIX<16",
+      "reason": "The zone score fallback was too restrictive on a day where broad market strength meant even moderate-quality demand zones would have worked",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a regime-aware forced scan: when Nifty gap-up >1% at open and ADX>20, automatically scan top 15 Nifty 50 stocks by relative strength for BUY setups near VWAP or previous day high breakout",
+      "reason": "Strong trending days with +3.8% moves are rare and highly profitable \u2014 system must have a mechanism to participate regardless of AI availability",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Pre-compute and cache demand/supply zones for all Nifty 50 stocks daily at 8:30 AM so that even if AI is down, zone-based entries are ready with pending orders at key levels",
+      "reason": "Today's failure was entirely due to no pre-computed setups being available when AI was offline \u2014 pre-caching eliminates this single point of failure",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Focus symbol selection tomorrow on high-beta Nifty 50 stocks that lagged today's rally (potential catch-up trades) \u2014 specifically scan TATAMOTORS, BAJFINANCE, ADANIENT, SBIN for demand zone entries",
+      "reason": "After a +3.8% broad move, laggards often catch up next day while leaders consolidate \u2014 this gives better risk/reward entries",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "With Nifty up 3.8% today on strong ADX, watch for continuation longs on opening dips to demand zones in momentum leaders, and catch-up longs in laggards \u2014 ensure the system generates at minimum 5 BUY setups regardless of AI availability.",
+  "symbol_notes": {
+    "TATAMOTORS.NS": "High-beta stock likely participated in today's rally \u2014 check if near fresh demand zone for continuation long tomorrow",
+    "BAJFINANCE.NS": "Financials tend to lead in trending markets \u2014 scan for demand zone BUY setup near intraday support",
+    "SBIN.NS": "Banking heavyweight \u2014 if it lagged today's rally, watch for catch-up move to demand zone",
+    "RELIANCE.NS": "Heavyweight likely drove Nifty higher \u2014 check if still in buy zone or overextended for profit-taking risk",
+    "HDFCBANK.NS": "Core index mover \u2014 look for pullback to demand zone for trend-following entry"
+  },
+  "confidence": 3
+}
