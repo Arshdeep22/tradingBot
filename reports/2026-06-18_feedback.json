@@ -1,0 +1,44 @@
+{
+  "date": "2026-06-18",
+  "wins_analysis": "No wins today \u2014 zero orders were executed. Both pending limit orders were placed too far from the market price and never triggered during the session.",
+  "losses_analysis": "No losses either, but the real failure is zero execution. RELIANCE entry at \u20b91,325 was likely below the day's trading range in a strong uptrend (stock gapping up), and INFY SELL at \u20b91,155 was counter-trend and also never reached. Only 2 setups found with low conviction (58% and 32%) indicates overly restrictive scanning or poor zone identification.",
+  "regime_impact": "The strong uptrend regime (+4.3%) should have provided excellent BUY opportunities, but our system failed to capitalize. Setting limit orders below market in a gapping-up environment guarantees non-execution. The regime was ideal for momentum/breakout entries rather than pullback-to-demand-zone entries.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "In trending_up regimes with Nifty >+2%, switch BUY entries from demand zone limit orders to breakout entries (e.g., entry = previous day high + 0.1%) or use market orders at open for high-conviction setups",
+      "reason": "RELIANCE BUY at \u20b91,325 never filled because strong uptrend days gap up and don't pull back to demand zones. Zero execution means zero opportunity to profit.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Eliminate SELL setups entirely when regime is trending_up with ADX \u2265 25 and Nifty change > +2%. Hard filter, no exceptions.",
+      "reason": "INFY SELL at 32% probability was a wasted order slot. Counter-trend trades in strong uptrends have minimal edge and consumed capital/attention.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Expand scanning to include momentum/breakout patterns (e.g., stocks breaking 20-day highs with volume > 1.5x average) when only \u22643 demand zone setups are found in an uptrend regime",
+      "reason": "Only 2 setups found across all 50 Nifty stocks in a perfect uptrend environment is too few. The system needs alternative pattern types for trending markets.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Set a maximum distance rule: limit order entry must be within 0.5% of current market price for same-day fills in trending regimes. If demand zone is >0.5% below CMP, skip it or use a higher entry near CMP.",
+      "reason": "Entry prices set too far from where price actually trades in momentum days leads to chronic non-execution. Zero fills = zero alpha.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Require minimum AI probability of 55% for any order placement. Do not place orders with 32% probability under any regime.",
+      "reason": "INFY SELL had only 32% probability \u2014 well below any reasonable threshold. This wastes margin and order capacity.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "Prioritize BUY setups using breakout or near-market entries on stocks showing relative strength, and ensure at least 3-5 actionable setups are generated to avoid another zero-execution day.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Demand zone at \u20b91,325 was too far below market in a strong uptrend \u2014 tomorrow look for breakout entry above \u20b91,344 or near-market pullback within 0.3% of CMP instead.",
+    "INFY.NS": "Counter-trend SELL with 32% probability was correctly avoided by the market. Do not attempt SELL on INFY while Nifty regime is trending_up."
+  },
+  "confidence": 5
+}
