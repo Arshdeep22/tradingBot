@@ -1,0 +1,80 @@
+{
+  "date": "2026-06-18",
+  "scan_time_ist": "2026-06-18 15:23:57",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "With Nifty in a strong uptrend (+4.4%, ADX 25, VIX 12.7), demand zone BUY setups are preferred. Only 2 setups were detected. RELIANCE BUY aligns with the trending_up regime and yesterday's learnings to focus on demand zones, while INFY SELL is counter-trend. Neither setup is ideal \u2014 RELIANCE has a low zone score (44) and INFY is a SELL in an uptrend \u2014 but per yesterday's learnings we should lower thresholds in this regime.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+4.4%",
+    "adx": 25.0,
+    "vix": 12.7,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +4.4%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "RELIANCE.NS",
+      "side": "BUY",
+      "entry": 1325.0,
+      "stop_loss": 1318.67,
+      "target": 1343.99,
+      "zone_score": 44,
+      "win_probability": 58,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "BUY setup aligned with strong trending_up market regime (Nifty +4.4%, ADX 25)",
+        "RELIANCE is a heavyweight index mover likely benefiting from broad rally momentum",
+        "Pristine demand zone formed same session (freshness 10/10) with tight 2-candle base and 4.7x volume departure",
+        "R:R ratio of 3.0 provides favorable risk-reward even with moderate win probability",
+        "Yesterday's learnings explicitly flag RELIANCE for demand zone BUY if still in buy zone"
+      ],
+      "risks": "Zone score of 44 is below normal thresholds; average arrival and neutral trend sub-scores suggest zone may not hold under profit-taking pressure after a big rally day",
+      "entry_advice": "Place limit order at 1325 with tight stop at 1318.67. Wait for a bullish confirmation candle (green 15-min close above 1326) before committing full size. Consider half-position given low zone score.",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1155.0,
+      "stop_loss": 1160.33,
+      "target": 1139.01,
+      "zone_score": 53,
+      "win_probability": 32,
+      "conviction": "LOW",
+      "reasoning": [
+        "High zone score (53/60) with excellent technical characteristics \u2014 gap departure, instant reversal, pristine zone",
+        "3.0 R:R ratio provides good payoff if zone holds",
+        "INFY showing sideways/neutral trend which partially mitigates counter-trend risk"
+      ],
+      "risks": "SELL setup is directly counter-trend in a strong uptrend market regime \u2014 historically this strategy has 0% win rate in recent weeks and selling against +4.4% Nifty momentum is high risk",
+      "entry_advice": "Avoid this trade unless Nifty shows clear intraday weakness. If taking, wait for bearish engulfing or rejection wick at 1155 level with reduced position size (25% max).",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 33,
+      "symbol": "RELIANCE.NS",
+      "side": "BUY",
+      "entry": 1325.0,
+      "stop_loss": 1318.67,
+      "target": 1343.99,
+      "quantity": 157,
+      "win_probability": 58
+    },
+    {
+      "order_id": 34,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1155.0,
+      "stop_loss": 1160.33,
+      "target": 1139.01,
+      "quantity": 187,
+      "win_probability": 32
+    }
+  ]
+}
