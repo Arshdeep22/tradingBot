@@ -1,0 +1,107 @@
+{
+  "date": "2026-06-19",
+  "scan_time_ist": "2026-06-19 15:29:06",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "In a strong trending_up regime (Nifty +1.8%, ADX 25, VIX 12.9), all three setups are BUY-side demand zones aligned with the trend, which is ideal. BAJFINANCE has the highest zone score (48) with maximum departure and trend alignment, followed by BHARTIARTL (46) with pristine freshness, and NTPC (43) with decent but weaker departure. Given yesterday's learning about entry proximity to CMP, entries must be validated against current market price to ensure fills.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.8%",
+    "adx": 25.0,
+    "vix": 12.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.8%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "BAJFINANCE.NS",
+      "side": "BUY",
+      "entry": 942.8,
+      "stop_loss": 936.71,
+      "target": 961.07,
+      "zone_score": 48,
+      "win_probability": 64,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Highest zone score (48/60) with maximum departure (10/10) indicating strong institutional buying",
+        "Perfect trend alignment (10/10) in a trending_up regime with ADX 25",
+        "3:1 R:R ratio with instant reversal base pattern (DBR) showing conviction at zone"
+      ],
+      "risks": "Zone formed 98 candles ago \u2014 moderate age increases risk of zone exhaustion; entry may be too far from CMP requiring proximity check",
+      "entry_advice": "Verify entry at \u20b9942.8 is within 0.5% of CMP; if too far below, consider breakout entry above recent 15-min high or market order on pullback to zone with bullish confirmation candle",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1876.8,
+      "stop_loss": 1863.78,
+      "target": 1915.86,
+      "zone_score": 46,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Pristine zone (freshness 10/10) formed only 23 candles ago \u2014 very recent and untested",
+        "RBR continuation pattern perfectly aligned with trending_up regime",
+        "Strong volume on departure (1.6x average) confirms institutional participation"
+      ],
+      "risks": "Poor arrival score (2/10) \u2014 crashing into zone suggests aggressive selling pressure before the bounce, which weakens zone reliability",
+      "entry_advice": "Set limit order at \u20b91,876.80 but only if within 0.5% of CMP; poor arrival warrants waiting for a bullish engulfing or pin bar confirmation at zone before entry",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "NTPC.NS",
+      "side": "BUY",
+      "entry": 362.7,
+      "stop_loss": 360.07,
+      "target": 370.59,
+      "zone_score": 43,
+      "win_probability": 57,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Pristine and very recent zone (23 candles, freshness 10/10) with perfect trend alignment",
+        "3:1 R:R with tight stop loss (\u20b92.63 risk) suitable for position sizing",
+        "DBR pattern in uptrend regime supports continuation thesis"
+      ],
+      "risks": "Weakest departure score (4/10) among all setups suggests less institutional conviction at this level; compact base is adequate but not exceptional",
+      "entry_advice": "Limit order at \u20b9362.70 if within 0.5% of CMP; given weaker departure, consider scaling in with half position at zone and adding on confirmation of bounce",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 35,
+      "symbol": "BAJFINANCE.NS",
+      "side": "BUY",
+      "entry": 942.8,
+      "stop_loss": 936.71,
+      "target": 961.07,
+      "quantity": 164,
+      "win_probability": 64
+    },
+    {
+      "order_id": 36,
+      "symbol": "BHARTIARTL.NS",
+      "side": "BUY",
+      "entry": 1876.8,
+      "stop_loss": 1863.78,
+      "target": 1915.86,
+      "quantity": 76,
+      "win_probability": 62
+    },
+    {
+      "order_id": 37,
+      "symbol": "NTPC.NS",
+      "side": "BUY",
+      "entry": 362.7,
+      "stop_loss": 360.07,
+      "target": 370.59,
+      "quantity": 380,
+      "win_probability": 57
+    }
+  ]
+}
