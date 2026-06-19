@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-19",
+  "wins_analysis": "No wins today. All three orders remained pending without execution, meaning price never pulled back to the designated demand zone entry levels during the session.",
+  "losses_analysis": "No losses today either. The core issue is that in a strongly trending_up day (Nifty +3.7%), prices moved away from demand zones rather than revisiting them. Entry levels were set too far below CMP, resulting in zero fills on a day where stocks rallied without meaningful pullbacks.",
+  "regime_impact": "The strong trending_up regime (+3.7%) actually hurt execution because limit buy orders at demand zones below CMP never got filled. In such strong momentum days, breakout/momentum entries or tighter proximity entries would have captured the move. The strategy type (pullback to demand zone) is mismatched with aggressive trending days.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When Nifty is trending_up with intraday gain >1.5%, use entry levels within 0.3% of CMP rather than deep demand zone levels. Alternatively, add market-order momentum entries when price breaks above the zone with volume confirmation.",
+      "reason": "All 3 setups had entries 1-3% below CMP on a +3.7% Nifty day, guaranteeing non-execution. BAJFINANCE, BHARTIARTL, NTPC all rallied away from entry levels.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Add a CMP-proximity filter: reject any setup where entry price is more than 0.5% below current CMP when regime is trending_up with ADX>=25. Only place orders that have realistic fill probability given momentum.",
+      "reason": "Three consecutive days of zero fills suggests systematic mis-pricing of entries relative to market conditions. Orders placed at zone bases are too distant in momentum markets.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Introduce a dual-entry mechanism: place limit order at demand zone AND a stop-buy order above CMP (breakout entry) with tighter target. Cancel one when the other fills.",
+      "reason": "On strong trending days the breakout entry would have captured the +3.7% move while the demand zone order acts as insurance if price reverses. Currently we only have one path to fill.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "Increase minimum setups found threshold from 3 to 5 by expanding scan to include breakout setups (supply zone breaks) in addition to demand zone pullbacks during trending_up regimes.",
+      "reason": "Only 3 setups found today, all pullback-style, none suited to the momentum environment. More setup diversity would increase execution probability.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "If by 10:30 AM no orders are filled and Nifty is up >1%, cancel pending demand zone orders and switch to top 3 Nifty 50 stocks by intraday momentum with market-order entries and 1:2 RR trailing stops.",
+      "reason": "Waiting all day for pullbacks that never come in a strong trend wastes the entire session. An adaptive intraday pivot would recover lost opportunity.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "If Nifty continues trending up, prioritize breakout entries or very tight proximity demand zones (within 0.3% of CMP) to ensure actual fills; monitor for potential mean-reversion if VIX spikes from current low of 13.",
+  "symbol_notes": {
+    "BAJFINANCE": "Zone at 942.80 never tested on a +3.7% day \u2014 if tomorrow opens flat or gaps down, this zone becomes high-priority; otherwise skip for momentum entry above today's high.",
+    "BHARTIARTL": "Pristine demand zone still intact at 1876.80 \u2014 valid for a pullback day but useless in another momentum session. Watch for retest only if sector rotates out.",
+    "NTPC": "Weakest zone score (43) with tight RR \u2014 deprioritize unless it gaps down to entry level. In momentum markets, prefer higher-beta names."
+  },
+  "confidence": 5
+}
