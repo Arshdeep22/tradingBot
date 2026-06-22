@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-22",
+  "wins_analysis": "No wins today as zero trades were generated. The system produced no recommendations, meaning the AI signal pipeline was unavailable and the zone score fallback also failed to identify qualifying setups.",
+  "losses_analysis": "No losses today, but the real failure is zero participation in a strongly trending market (+1.0% Nifty with ADX 25). The fallback mechanism clearly has overly restrictive filters or was not triggered properly when AI was unavailable.",
+  "regime_impact": "Today's trending_up regime with low VIX (12.8) was ideal for momentum/demand zone BUY setups. The system completely missed this opportunity \u2014 any long-biased strategy would have profited given broad market strength.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Debug and fix the zone score fallback system \u2014 ensure it generates at least 3-5 recommendations when AI is unavailable, especially when regime is trending_up and VIX < 15",
+      "reason": "AI was unavailable today and the fallback produced zero setups despite ideal market conditions (ADX 25, Nifty +1%, VIX 12.8)",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the minimum zone score threshold from current level to 65 (or whatever produces at least 5 candidates) specifically when the fallback is active and regime is trending_up",
+      "reason": "Zero setups on a +1% trending day means the threshold is too high for the fallback scoring method which likely scores lower than the AI probability model",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a forced scan of top 10 Nifty 50 momentum leaders (highest RSI 14 > 60 with price above 20 EMA) when primary AI is offline and market regime is bullish",
+      "reason": "On trending days, simple momentum filters would have caught multiple long opportunities that the broken fallback missed entirely",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Implement an alert/log when zero recommendations are generated so the issue is flagged before market open, allowing manual intervention or parameter override",
+      "reason": "Today's zero-trade outcome was avoidable if the operator had been notified early that the scan produced nothing despite favorable conditions",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow, pre-identify demand zones on RELIANCE, HDFCBANK, INFY, TCS, ICICIBANK that are within 1% of current price and queue them as BUY candidates with entry at zone + buffer",
+      "reason": "These large-cap names likely participated in today's +1% rally and may offer pullback entries to demand zones tomorrow if the uptrend continues",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Ensure the scanning pipeline is fully operational before market open \u2014 if AI remains unavailable, manually verify fallback is generating candidates from Nifty 50 large-caps showing demand zone proximity in the ongoing uptrend.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Likely rallied with broad market today \u2014 watch for pullback to nearest demand zone for BUY entry tomorrow",
+    "HDFCBANK.NS": "Banking names tend to lead in trending_up regimes with low VIX \u2014 prioritize if near a demand zone",
+    "INFY.NS": "IT sector participation in uptrend \u2014 check if demand zone aligns with 20 EMA support for entry"
+  },
+  "confidence": 3
+}
