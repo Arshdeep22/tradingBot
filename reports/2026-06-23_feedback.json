@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-23",
+  "wins_analysis": "No wins today. The single INFY SELL setup did not execute as price never reached the entry level of \u20b91,062.00 during the session, leaving the order pending at close.",
+  "losses_analysis": "No losses today either. The lack of execution indicates the entry price was set too far from the prevailing market price. With only 1 setup found across all 50 stocks, the scanner's filtering criteria may be overly restrictive, causing missed opportunities in a favorable trending_down regime.",
+  "regime_impact": "The trending_down regime (ADX 25, Nifty -0.7%) was favorable for supply zone shorts, but the system failed to capitalize on it. Only 1 setup was generated despite a strong directional environment \u2014 the regime should have produced more actionable supply zone candidates. The conservative zone score threshold likely filtered out viable setups that would have benefited from trend alignment.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Lower min_zone_score from current threshold (appears ~55+) to 48 specifically when regime is trending_down with ADX >= 23, since trend alignment compensates for slightly weaker zone structure",
+      "reason": "Only 1 setup found in a favorable trending_down regime. INFY had zone score 53 which barely passed \u2014 many potentially profitable supply zones were likely filtered out at scores 45-52",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Set entry price closer to current market price (within 0.3% of last close) rather than at the exact zone boundary when the trend strongly favors the direction. Use limit orders at zone proximity rather than deep inside the zone.",
+      "reason": "INFY entry at \u20b91,062 never triggered \u2014 price likely stayed below this level in a down-trending session. The entry was too aggressive for a stock already selling off.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 3,
+      "action": "Expand scan to include fresh breakdown retests and moving average rejection setups (e.g., price rejecting 20 EMA from below) alongside supply/demand zones during trending regimes",
+      "reason": "Relying solely on pristine supply/demand zones yielded only 1 candidate out of 50 stocks in a clearly directional market. Additional pattern types would increase opportunity set.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Add intraday monitoring to convert pending orders: if price approaches within 0.2% of entry but reverses, consider a market order entry at the nearest support/resistance touch",
+      "reason": "The INFY order sat pending all day without execution. An adaptive approach would have either entered on a partial zone touch or cancelled and redeployed capital elsewhere.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Pre-screen for stocks with highest intraday ATR relative to the distance between current price and zone entry, prioritizing setups where price is within 1 ATR of the zone",
+      "reason": "INFY's zone entry at 1,062 may have been multiple ATRs away from the opening price, making execution unlikely within a single session",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "If trending_down continues (watch for Nifty gap-down or continuation below today's low), aggressively scan for supply zones with price already within 0.5% of zone entry on IT and banking names showing relative weakness.",
+  "symbol_notes": {
+    "INFY.NS": "Supply zone at 1,062 remains untested and pristine \u2014 keep on watchlist if price rallies toward it tomorrow, but consider tighter entry if gap-up occurs near zone",
+    "TCS.NS": "Check for sympathy supply zones given IT sector weakness in trending_down regime \u2014 may offer additional short setups",
+    "HDFCBANK.NS": "Monitor for supply zone setups as banking names often lead Nifty down-moves when ADX is elevated"
+  },
+  "confidence": 4
+}
