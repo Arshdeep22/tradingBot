@@ -1,0 +1,49 @@
+{
+  "date": "2026-06-23",
+  "scan_time_ist": "2026-06-23 14:12:46",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup available today. INFY.NS SELL aligns with the trending_down regime (Nifty -0.3%, ADX 25). The supply zone has strong technical characteristics (DBD pattern, gap departure, pristine zone) but the zone score of 53 is below typical high-confidence thresholds. Given the regime favors supply zones and this is the only candidate, it warrants consideration with careful risk management.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.3%",
+    "adx": 25.0,
+    "vix": 13.8,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.3%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1062.0,
+      "stop_loss": 1069.33,
+      "target": 1040.01,
+      "zone_score": 53,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "SELL setup aligns perfectly with trending_down regime (ADX 25, Nifty -0.3%) \u2014 supply zones are the preferred strategy in this context",
+        "Strong zone structure: DBD pattern with gap departure (10/10), instant reversal base (10/10), and pristine freshness (10/10) \u2014 first touch increases reliability",
+        "Excellent R:R of 3.0 means even at ~62% win probability the expected value is strongly positive; target of 1040 gives meaningful downside capture"
+      ],
+      "risks": "Zone score of 53 is below the typical 65+ threshold and trend component is only 5/10 (sideways), suggesting INFY may not fully participate in broader market weakness",
+      "entry_advice": "Place limit sell order at 1062.0; if price gaps above zone at open, wait for a bearish engulfing or rejection wick within the zone before entering. Tighten stop to 1067 if entry confirms with strong selling volume.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 38,
+      "symbol": "INFY.NS",
+      "side": "SELL",
+      "entry": 1062.0,
+      "stop_loss": 1069.33,
+      "target": 1040.01,
+      "quantity": 136,
+      "win_probability": 62
+    }
+  ]
+}
