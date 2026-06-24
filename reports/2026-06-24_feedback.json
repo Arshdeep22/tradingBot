@@ -1,0 +1,43 @@
+{
+  "date": "2026-06-24",
+  "wins_analysis": "No wins today. The single ICICIBANK BUY setup at \u20b91,364.80 did not get filled, indicating price did not pull back to the demand zone entry level during the session. The logic of placing a limit order at a demand zone was sound but the market did not cooperate.",
+  "losses_analysis": "No losses today. The pending order remained unfilled, so no capital was at risk. However, the opportunity cost of having only 1 setup and 0 executions means another day of zero learning from live trades \u2014 the bot remains effectively paralyzed.",
+  "regime_impact": "The trending_down regime hurt today's single BUY setup since ICICIBANK needed to pull back into the demand zone, but downtrend pressure may have kept it from bouncing or reaching the entry level confidently. The regime called for SELL/supply zone setups but none were found, highlighting a mismatch between strategy filters and available opportunities.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Add SELL/supply zone scanning with equal priority to BUY setups when regime is trending_down. Specifically look for stocks making lower highs near resistance with ADX > 20.",
+      "reason": "Today's regime was trending_down yet no SELL setups were generated. The bot found only 1 BUY setup opposing the trend, which didn't fill. Aligning with regime would have provided more actionable setups.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Lower entry limit price aggressiveness by 0.1-0.2% closer to current market price (e.g., entry at \u20b91,367 instead of \u20b91,364.80) to increase fill probability, accepting slightly worse reward:risk.",
+      "reason": "ICICIBANK order sat unfilled all day. A marginally less aggressive entry would have increased fill odds. With R:R of ~3:1 on this setup, sacrificing 0.2% still yields >2.5:1.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 3,
+      "action": "Expand scan to include second-tier setups with AI probability \u2265 48% when primary scan yields fewer than 3 setups, particularly for regime-aligned direction.",
+      "reason": "Only 1 setup found across 50 stocks is too restrictive. The bot has been paralyzed for multiple sessions. Even slightly lower-probability setups provide learning data and P&L opportunity.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "For BUY setups in a trending_down regime, require relative strength evidence: stock must be flat or positive on a day Nifty is down \u22650.3%, or outperforming Nifty by \u22650.5% over 5 days.",
+      "reason": "ICICIBANK was identified as a relative strength candidate but didn't fill, suggesting it wasn't actually outperforming enough to pull back and bounce from the demand zone. Quantify the relative strength requirement.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "If a pending order is unfilled by 12:30 PM, consider adjusting entry 0.1% closer to market or canceling and reallocating to a fresh afternoon setup scan.",
+      "reason": "The order sat pending from open to close with no fill. An intraday reassessment would have freed capital for a potentially better afternoon opportunity.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Prioritize SELL/supply zone setups aligned with the downtrend regime, scan for stocks showing relative weakness vs Nifty (banking under pressure, IT weak), and use slightly less aggressive limit entries to maximize fill rate.",
+  "symbol_notes": {
+    "ICICIBANK": "Demand zone at \u20b91,364.80 remains untested and valid \u2014 keep on watchlist but only if it shows clear relative strength vs Nifty tomorrow; otherwise deprioritize BUY in favor of trend-aligned SELL setups."
+  },
+  "confidence": 4
+}
