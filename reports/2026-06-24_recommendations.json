@@ -1,0 +1,49 @@
+{
+  "date": "2026-06-24",
+  "scan_time_ist": "2026-06-24 14:09:16",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup detected today. Despite the trending_down regime favoring sell setups, ICICIBANK presents a BUY demand zone with strong structural qualities (pristine, instant reversal, trend-aligned on its own timeframe). Given yesterday's learnings about relaxing filters and the weekly insight about the bot being paralyzed, this setup warrants inclusion even though it opposes the broader Nifty direction. ICICIBANK is a relative strength candidate in banking which can diverge from Nifty.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.2%",
+    "adx": 25.0,
+    "vix": 13.6,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.2%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1364.8,
+      "stop_loss": 1354.98,
+      "target": 1394.26,
+      "zone_score": 51,
+      "win_probability": 52,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Zone score 51 meets the relaxed threshold (48+) per yesterday's learning for trending regimes",
+        "Pristine RBR demand zone with instant reversal base (10/10) and strong departure volume (1.7x)",
+        "R:R of 3.0 is excellent \u2014 even at ~50% win rate this is positive expectancy"
+      ],
+      "risks": "BUY setup opposes the broader Nifty trending_down regime (ADX 25, Nifty -0.2%), banking sector may face selling pressure",
+      "entry_advice": "Place limit order at 1364.80; if price gaps down near 1360 consider waiting for a bullish confirmation candle before entry. If price approaches within 0.2% of entry and shows demand absorption on volume, convert to market order per yesterday's learning.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 39,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1364.8,
+      "stop_loss": 1354.98,
+      "target": 1394.26,
+      "quantity": 101,
+      "win_probability": 52
+    }
+  ]
+}
