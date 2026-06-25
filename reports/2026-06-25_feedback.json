@@ -1,0 +1,44 @@
+{
+  "date": "2026-06-25",
+  "wins_analysis": "No wins today. Zero trades were executed as the ICICIBANK BUY was not placed (likely due to zone score of 47 being below threshold) and the NTPC SELL remained pending without filling.",
+  "losses_analysis": "No losses today either, but the opportunity cost is notable. The bot placed a counter-trend SELL on NTPC (probability 38%) while skipping the regime-aligned ICICIBANK BUY (probability 52%). The regime shifted from trending_up to trending_down intraday, which would have validated the NTPC SELL direction, but the order never filled \u2014 likely because entry was set too far from market price.",
+  "regime_impact": "The regime flipped from trending_up (morning scan) to trending_down (EOD), a -0.5% Nifty day. The NTPC SELL was actually aligned with the eventual regime but was placed based on stale morning analysis. The ICICIBANK BUY that was skipped would have been hurt by the regime shift. The regime change mid-day suggests the bot needs to be more adaptive.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Lower the zone score threshold from 75 to 55 when AI probability is above 50% AND the setup aligns with the current regime direction",
+      "reason": "ICICIBANK had 52% AI probability and regime alignment but was skipped due to zone score of 47. The bot has been paralyzed by over-filtering \u2014 this is the 3rd consecutive day with 0 executed trades",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Do NOT place orders on setups with AI probability below 40% regardless of direction alignment. NTPC at 38% should have been rejected outright",
+      "reason": "NTPC SELL had only 38% AI probability and was placed while the higher-probability ICICIBANK (52%) was skipped. This is an inversion of priority logic",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "Set pending order entries within 0.15% of current market price rather than at distant zone levels. If NTPC was at ~360 and entry was 359.05, tighten to within \u20b90.50 of market",
+      "reason": "NTPC order sat pending all day without filling. Yesterday's learning already flagged this \u2014 entries set too far from market price result in chronic non-execution",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Add a mid-day regime check at 12:00 IST. If regime has flipped from morning scan, cancel contra-trend pending orders and re-evaluate for new setups aligned with updated regime",
+      "reason": "Morning regime was trending_up but EOD was trending_down. A mid-day reassessment would have validated NTPC SELL direction and potentially caught a better entry",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "When only 2 setups are found across Nifty 50, expand scan to include mean-reversion setups on stocks that gapped against the regime (potential snapback plays)",
+      "reason": "Only 2 setups found today indicates the current strategy parameters are too restrictive in low-VIX environments. VIX at 12.9-13.1 means compressed ranges requiring different entry logic",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "With regime now trending_down and VIX still low at 13.1, prioritize SELL setups on weak Nifty 50 names with AI probability above 50%, and ensure entry prices are within 0.15% of market open price to guarantee fills.",
+  "symbol_notes": {
+    "NTPC": "SELL direction was correct given regime shift but entry too distant and AI probability too low at 38% \u2014 only revisit if probability improves above 45% tomorrow",
+    "ICICIBANK": "Was the better setup today but skipped due to zone score filter. If it pulls back toward 1360-1365 in a down regime, it becomes a counter-trend play \u2014 avoid unless regime flips back up"
+  },
+  "confidence": 4
+}
