@@ -1,0 +1,68 @@
+{
+  "date": "2026-06-25",
+  "scan_time_ist": "2026-06-25 14:05:29",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available in a trending_up regime with ADX=25 and low VIX=12.9. ICICIBANK BUY aligns with the uptrend but has a zone score of 47 (below the 75 threshold that has been paralyzing the bot) and yesterday's learning suggests adjusting entry closer to market price. NTPC SELL is counter-trend in a trending_up regime and scores lower at 43. Given the weekly insight about over-tightening, both setups deserve consideration but ICICIBANK is the stronger candidate given regime alignment.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.1%",
+    "adx": 25.0,
+    "vix": 12.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.1%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1364.8,
+      "stop_loss": 1355.28,
+      "target": 1393.36,
+      "zone_score": 47,
+      "win_probability": 52,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "BUY aligns with trending_up regime (ADX=25, Nifty +0.1%), demand zones are preferred in uptrends",
+        "Pristine untested RBR demand zone with strong 3:1 R:R ratio and slow arrival approach",
+        "Yesterday's learning recommends adjusting entry 0.1-0.2% closer to market to improve fill probability \u2014 entry near \u20b91,367 could work"
+      ],
+      "risks": "Same zone was unfilled yesterday suggesting price may not revisit this level; zone score 47/60 is moderate and trend component is only neutral (sideways)",
+      "entry_advice": "Adjust limit order to \u20b91,367-1,368 (0.1-0.2% above zone) to increase fill probability per yesterday's learning. If unfilled by 12:30 PM, reassess or cancel.",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "NTPC.NS",
+      "side": "SELL",
+      "entry": 359.05,
+      "stop_loss": 361.57,
+      "target": 351.49,
+      "zone_score": 43,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "Very recent pristine supply zone (20 candles) with high volume departure (3.7x) suggesting strong institutional selling",
+        "3:1 R:R ratio with tight stop loss of only \u20b92.52",
+        "Zone formed same session indicating fresh institutional interest at this level"
+      ],
+      "risks": "SELL setup is counter-trend in a trending_up regime which significantly reduces win probability; moderate 4-candle base weakens zone quality; sideways trend score suggests no clear directional bias for the stock",
+      "entry_advice": "Only consider if NTPC shows clear relative weakness vs Nifty in morning session. Place limit sell at \u20b9359.05 but size down to 50% given counter-trend nature. Cancel if Nifty breaks to new intraday highs.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 40,
+      "symbol": "NTPC.NS",
+      "side": "SELL",
+      "entry": 359.05,
+      "stop_loss": 361.57,
+      "target": 351.49,
+      "quantity": 396,
+      "win_probability": 38
+    }
+  ]
+}
