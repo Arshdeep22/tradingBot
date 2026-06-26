@@ -1,0 +1,44 @@
+{
+  "date": "2026-06-26",
+  "wins_analysis": "No wins today as zero orders were placed. The system correctly avoided two low-probability setups, preserving capital in a weak opportunity environment.",
+  "losses_analysis": "No losses today. The decision to skip ICICIBANK (38% AI probability, counter-trend BUY in a down regime) and NTPC (43% probability, borderline) avoided potential whipsaws. However, NTPC at 43% was above the 40% threshold and aligned with the regime \u2014 this may have been a missed opportunity.",
+  "regime_impact": "Trending_down regime with ADX 25 provided directional clarity but only surfaced 2 setups across all 50 stocks, indicating weak momentum despite the trend signal. The regime correctly filtered out counter-trend longs but the low setup count suggests we may be in a choppy-to-mild-down environment rather than a strong trend worth trading.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Accept SELL setups with AI probability >= 42% when regime is trending_down AND the setup aligns with the trend direction. NTPC SELL at 43% should have been placed as a pending order.",
+      "reason": "NTPC was regime-aligned SELL with 43% probability (above 40% threshold) and had pristine supply zone with strong departure volume. The system over-filtered by referencing yesterday's 38% flag which was a stale reading \u2014 today's updated 43% crossed the threshold.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "On days with fewer than 3 setups, lower the AI probability threshold by 2 percentage points (to 38%) ONLY for regime-aligned directional trades, to avoid zero-activity days.",
+      "reason": "Zero trades for a second consecutive day risks the system never generating data to learn from. With only 2 setups found across 50 stocks, a slightly relaxed threshold for high-conviction directional alignment is warranted.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a scan at 10:30 AM in addition to the existing scan, specifically for breakdowns below prior day's low in trending_down regimes, to catch fresh supply zone formations intraday.",
+      "reason": "Today's single scan at 14:09 may have missed morning breakdown setups that formed after gap-downs. In a -0.5% Nifty day, early weakness often creates tradeable supply zones by 10:30.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Track NTPC's supply zone at 359-361.50 for tomorrow \u2014 if price retests this zone, place SELL order with SL at 362.50 and target 351.50.",
+      "reason": "The supply zone identified today remains valid if untouched. Carrying forward unfilled zone levels increases tomorrow's actionable setup count.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Strictly reject any BUY setup when regime is trending_down with ADX >= 25, regardless of AI probability or R:R ratio.",
+      "reason": "ICICIBANK BUY was correctly avoided today. Codify this as a hard rule: no counter-trend entries when ADX shows strong trend. This prevents future temptation on high-R:R counter-trend setups.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Watch for continuation SELL setups in NTPC, power/infra sector names, and any Nifty breakdown below today's low with ADX remaining above 25 \u2014 prioritize regime-aligned shorts with AI probability above 42%.",
+  "symbol_notes": {
+    "NTPC": "Supply zone 359-361.50 remains valid and untested. If price approaches from below tomorrow, this becomes a high-priority SELL setup. AI probability was 43% today and may improve with continued downtrend.",
+    "ICICIBANK": "Counter-trend BUY at 38% correctly avoided. Do not revisit until regime shifts to neutral or trending_up."
+  },
+  "confidence": 5
+}
