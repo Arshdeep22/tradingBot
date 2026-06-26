@@ -1,0 +1,58 @@
+{
+  "date": "2026-06-26",
+  "scan_time_ist": "2026-06-26 14:09:19",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available in a trending_down regime (ADX 25, Nifty -0.5%). NTPC SELL aligns with the downtrend regime and has a pristine supply zone with strong volume on departure, making it the stronger directional play. ICICIBANK BUY is counter-trend in current regime and should be avoided per yesterday's learnings despite its higher R:R. However, NTPC's AI probability was flagged at 38% yesterday \u2014 per learnings, setups below 40% should be rejected outright.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.5%",
+    "adx": 25.0,
+    "vix": 13.1,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.5%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "NTPC.NS",
+      "side": "SELL",
+      "entry": 359.05,
+      "stop_loss": 361.51,
+      "target": 351.67,
+      "zone_score": 41,
+      "win_probability": 43,
+      "conviction": "LOW",
+      "reasoning": [
+        "SELL aligns perfectly with trending_down regime (Nifty -0.5%, ADX 25) \u2014 regime-aligned supply zone",
+        "Pristine zone with 3.7x volume on departure candle and slow arrival (8/10) indicating strong institutional selling",
+        "R:R of 3.0 with tight stop of \u20b92.46 \u2014 favorable risk management",
+        "Zone formed only 25 candles ago \u2014 very fresh and untested"
+      ],
+      "risks": "Zone score of 41 is below even the relaxed 55 threshold, and yesterday's learning explicitly flagged NTPC at 38% probability as too low \u2014 only revisit if probability improves above 45%",
+      "entry_advice": "Per yesterday's learning, set entry within 0.15% of current market price rather than at distant zone level. If NTPC is trading near 359-360, place limit sell at 359.50-360.00 rather than waiting for 359.05. Cancel if regime flips at midday check.",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1364.8,
+      "stop_loss": 1354.89,
+      "target": 1394.53,
+      "zone_score": 44,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "Strong RBR demand zone with 1.7x volume departure and instant 1-candle base (10/10)",
+        "Pristine untested zone with good R:R of 3.0",
+        "Zone score of 44 meets the relaxed threshold of 55 only if AI probability exceeds 50% \u2014 it does not here"
+      ],
+      "risks": "Counter-trend BUY in a trending_down regime \u2014 yesterday's notes explicitly warn against ICICIBANK BUY unless regime flips back up. High probability of zone failure when selling pressure dominates.",
+      "entry_advice": "AVOID this setup in current regime. Only consider if regime flips to trending_up at midday check. If taken, wait for strong bullish confirmation candle (engulfing or hammer) at 1364-1365 level before entering.",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
