@@ -1,0 +1,56 @@
+{
+  "week": "2026-W26",
+  "executive_summary": "Fifth consecutive week with zero productive trades. The bot is completely paralyzed \u2014 0 trades across 7 days in both trending_up and trending_down regimes. The Supply & Demand Zone strategy with min_score 75 is filtering out 100% of signals. This is no longer a parameter tuning problem; it is a fundamental architecture failure requiring immediate structural overhaul.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "declining",
+  "target_progress": "0% \u2014 completely stalled, 70% target is unreachable with current architecture",
+  "regime_assessment": "Regime detection appears to be working (correctly identifying trending_up then trending_down), but it provides zero value because no strategy adapts to it. The bot uses the same Supply & Demand Zone strategy regardless of regime, generating no trades in either direction.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol data available \u2014 zero trades means no evidence to act on",
+    "focus_list": [],
+    "focus_reason": "Cannot determine focus symbols without trade data. Need to first solve the zero-trade problem."
+  },
+  "dow_pattern": "No day-of-week pattern discernible \u2014 zero trades across all days for multiple weeks. Day filtering is irrelevant until trade generation is restored.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      45,
+      65
+    ],
+    "zone_rr_range": [
+      1.2,
+      2.0
+    ],
+    "reasoning": "min_score of 75 has produced 0 trades for 2 consecutive weeks. Aggressive reduction to 45-65 range is needed to generate ANY signals. RR ratio lowered to 1.2-2.0 to widen the acceptable trade envelope \u2014 a 2.0+ RR in trending markets rarely presents clean zone entries."
+  },
+  "structural_recommendations": [
+    {
+      "change": "Add regime-adaptive strategy selection: use trend-following (breakout/momentum) in trending regimes instead of mean-reversion Supply & Demand Zones. S&D zones should only activate in ranging/consolidating regimes.",
+      "expected_impact": "Restore trade generation from 0 to 3-5 trades/week minimum. Trending regimes occupied 100% of recent weeks \u2014 a trend strategy would have had entries.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a 'minimum activity threshold' circuit breaker: if zero trades are generated for 2 consecutive days, automatically reduce min_score by 10 points (floor at 40) until at least 1 trade triggers.",
+      "expected_impact": "Prevents indefinite paralysis. Guarantees at least 1-2 trades per week for continuous learning and P&L generation.",
+      "priority": "high"
+    },
+    {
+      "change": "Add short-side capability: allow selling supply zones in trending_down regimes instead of only buying demand zones. The bot has been trying to buy in 4+ weeks of downtrend.",
+      "expected_impact": "Doubles the opportunity set. Previous W23 review identified this exact problem \u2014 demand zones breaking down in downtrends. Short entries at supply zones align with regime direction.",
+      "priority": "high"
+    },
+    {
+      "change": "Replace single-strategy architecture with a strategy ensemble: maintain 2-3 strategies (S&D Zones for range, Momentum for trend, VWAP reversion for intraday) and allocate capital based on regime classification.",
+      "expected_impact": "Eliminates regime-strategy mismatch that has caused 5 weeks of failure. Expected to produce 5-10 trades/week with 50%+ diversification benefit.",
+      "priority": "medium"
+    },
+    {
+      "change": "Add a paper-trade shadow mode: generate and log signals that WOULD have triggered at min_score 50, 60, 70 without executing. Use this data to calibrate optimal min_score with actual market outcomes.",
+      "expected_impact": "Provides data for evidence-based parameter optimization instead of blind adjustments. Would have identified optimal threshold weeks ago.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Momentum/Breakout (trending regime) with Supply & Demand Zones as secondary (only if range develops)",
+  "confidence": 3,
+  "apply_to_memory": false
+}
