@@ -1,0 +1,45 @@
+{
+  "date": "2026-06-29",
+  "wins_analysis": "No wins today as zero trades were generated. The AI module was unavailable and the zone score fallback produced no qualifying setups, meaning the system effectively sat idle.",
+  "losses_analysis": "No losses today since no trades were placed. However, the inability to generate any recommendations in a trending_down market with ADX at 25 represents a missed opportunity \u2014 short-side setups at supply zones should have been identifiable even with fallback logic.",
+  "regime_impact": "Today's trending_down regime with ADX=25 and low VIX=13.6 was favorable for directional short trades at supply zones. The system completely failed to capitalize because the fallback mechanism has overly restrictive filters or is not properly configured for SHORT setups in downtrends.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Debug and fix the zone score fallback to ensure it generates at least SHORT recommendations when regime=trending_down and ADX>=22. Lower the minimum zone score threshold from current level to 65 for SHORT setups aligned with trend direction.",
+      "reason": "Zero setups found across all 50 Nifty stocks in a clear downtrend with ADX=25 indicates the fallback logic is broken or too restrictive \u2014 this should never produce zero candidates in a trending market.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Add a failsafe rule: if AI is unavailable and fallback finds zero setups, auto-scan for top 5 stocks with highest negative momentum (e.g., RSI<40 + price near supply zone) and generate SHORT recommendations with conservative 1:1.5 R:R.",
+      "reason": "Complete inactivity on a tradeable day means zero learning and zero P&L. A secondary heuristic scan prevents total system paralysis.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Pre-identify supply zones on HDFCBANK, RELIANCE, INFY, TCS, ICICIBANK before market open using 15m and 1H timeframes. Place limit SELL orders 0.1% below these zones with SL above zone high and target at next demand zone.",
+      "reason": "In trending_down regimes with low VIX, these high-liquidity stocks tend to respect supply zones cleanly. Pre-identified zones allow order placement even without AI scoring.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Implement an AI availability check at 8:30 AM IST. If AI is down, trigger an alert and immediately switch to the enhanced fallback (rule-based trend-following) rather than waiting for normal scan time.",
+      "reason": "Today's AI unavailability caused complete inaction. Early detection allows time to activate backup strategies before market open at 9:15 AM.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow specifically, if downtrend continues (Nifty below today's close), focus SHORT entries in the first 30 minutes on stocks gapping down with volume >1.5x average, using VWAP as dynamic resistance.",
+      "reason": "Continuation days after mild -0.3% moves with ADX=25 often see follow-through. Early momentum shorts with VWAP as SL reference provide tight risk management.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Monitor if Nifty continues below 2026-06-29 close with VIX staying low \u2014 if yes, aggressively scan for SHORT setups at supply zones on banking and IT heavyweights using the fixed fallback logic.",
+  "symbol_notes": {
+    "HDFCBANK.NS": "Likely approaching supply zone in downtrend \u2014 prioritize for SHORT setup if it rallies into resistance",
+    "INFY.NS": "IT sector weak in trending_down regime \u2014 watch for supply rejection near recent consolidation highs",
+    "RELIANCE.NS": "Heavy index weight, if it breaks recent support look for SHORT continuation entry on retest"
+  },
+  "confidence": 3
+}
