@@ -1,0 +1,99 @@
+{
+  "date": "2026-07-02",
+  "scan_time_ist": "2026-07-02 13:58:45",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "In a trending_up regime with ADX=25 and low VIX=12.5, demand zone BUY setups aligned with trend are optimal. KOTAKBANK BUY stands out with excellent R:R of 5.0, strong zone score of 54, and perfect trend alignment. SBIN BUY offers decent R:R of 3.0 and is a pre-identified stock from yesterday's learnings. The KOTAKBANK SELL is counter-trend and scores poorly, making it unsuitable for current regime.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.5%",
+    "adx": 25.0,
+    "vix": 12.5,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.5%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 398.0,
+      "stop_loss": 395.95,
+      "target": 408.15,
+      "zone_score": 54,
+      "win_probability": 78,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Zone score 54/60 is strong with pristine demand zone formed just 7 candles ago \u2014 maximum freshness",
+        "Exceptional R:R of 5.0 with tight stop loss of only 0.5% and target of 2.5% upside",
+        "Perfect trend alignment (10/10) in a trending_up regime with ADX=25 \u2014 ideal conditions for demand zone longs",
+        "DBR pattern with instant reversal base and 2.0x volume departure confirms institutional interest"
+      ],
+      "risks": "Zone score of 54 is below historical 75 threshold but well above the adjusted 65 threshold for trending days; tight SL may get clipped by intraday volatility",
+      "entry_advice": "Place limit order at 398.0 zone entry; if price gaps above, wait for a pullback to 398-399 area with a bullish confirmation candle before entering",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "SBIN.NS",
+      "side": "BUY",
+      "entry": 1043.0,
+      "stop_loss": 1037.1,
+      "target": 1060.7,
+      "zone_score": 43,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "SBIN is a pre-identified stock from yesterday's learnings \u2014 banking sector benefits from low VIX regime",
+        "Pristine RBR demand zone with controlled approach (10/10 arrival) suggests strong institutional accumulation",
+        "R:R of 3.0 with 0.57% risk and 1.7% reward aligns with recommended entry_timing parameters from learnings",
+        "Fresh zone formed 23 candles ago still untested \u2014 first touch probability is highest"
+      ],
+      "risks": "Zone score of 43/60 is moderate with neutral trend alignment (5/10) suggesting sideways bias on the stock itself despite bullish market regime",
+      "entry_advice": "Set limit buy at 1043.0; given the sideways trend score, consider waiting for a bullish engulfing or hammer candle at the zone before committing full position size",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "KOTAKBANK.NS",
+      "side": "SELL",
+      "entry": 408.15,
+      "stop_loss": 411.35,
+      "target": 398.0,
+      "zone_score": 40,
+      "win_probability": 35,
+      "conviction": "LOW",
+      "reasoning": [
+        "Counter-trend SELL in a trending_up regime scores only 3/10 on trend alignment \u2014 fundamentally misaligned",
+        "Supply zone has moderate age at 92 candles reducing reliability despite gap departure",
+        "Only included for completeness \u2014 does not meet criteria for current regime"
+      ],
+      "risks": "Counter-trend trade in strong uptrend with ADX=25 has high probability of being steamrolled by bullish momentum; not recommended",
+      "entry_advice": "AVOID this trade \u2014 counter-trend sells are inappropriate in trending_up regime with ADX>=22. Do not enter.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 41,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 398.0,
+      "stop_loss": 395.95,
+      "target": 408.15,
+      "quantity": 487,
+      "win_probability": 78
+    },
+    {
+      "order_id": 42,
+      "symbol": "SBIN.NS",
+      "side": "BUY",
+      "entry": 1043.0,
+      "stop_loss": 1037.1,
+      "target": 1060.7,
+      "quantity": 169,
+      "win_probability": 62
+    }
+  ]
+}
