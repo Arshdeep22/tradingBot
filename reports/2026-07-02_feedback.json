@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-02",
+  "wins_analysis": "No wins today as neither pending order was triggered. Entry prices were set too far from current market prices, suggesting demand zones identified were not reached during the session despite an uptrending market.",
+  "losses_analysis": "No losses today either, but the failure to execute is itself a problem. Both KOTAKBANK at \u20b9398 and SBIN at \u20b91,043 had limit entries that the market never pulled back to, indicating entries were placed at zones too deep relative to intraday price action in a trending_up regime.",
+  "regime_impact": "The trending_up regime with ADX=25 and low VIX=12.3 should have favored BUY setups, but the strategy placed entries at deep demand zones expecting pullbacks that never came in a strong uptrend. The regime actually hurt execution because prices kept moving up without retracing to the identified zones.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "In trending_up regimes with ADX>=25, use shallower entry zones \u2014 set BUY limit entries at 0.3-0.5% below current price instead of deep demand zones that require 1%+ pullback",
+      "reason": "Both KOTAKBANK and SBIN entries were never reached because the uptrend did not provide enough pullback; zero fills means zero alpha",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Add a 'market order at open' option for top-ranked setups (AI prob >= 75%) when regime is strongly trending and zone is within 0.5% of previous close",
+      "reason": "KOTAKBANK had 78% probability and perfect trend alignment but produced no trade because of rigid limit order placement",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Remove counter-trend SELL setups entirely when regime is trending_up with ADX>=22; the KOTAKBANK SELL at 35% probability should not have been placed",
+      "reason": "KOTAKBANK SELL was counter-trend with only 35% AI probability \u2014 placing this wastes a pending order slot and contradicts the regime filter logic stated in the report",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Increase minimum number of scanned setups to at least 5-6 by expanding to slightly lower zone scores (>=45) in strong trend regimes where trend alignment compensates for weaker zone structure",
+      "reason": "Only 3 setups found across all Nifty 50 stocks is too restrictive; more candidates increase the probability that at least one entry fills",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Implement a 'convert to market if within 0.2% of entry by 11:00 AM' rule for high-conviction setups to avoid full-day non-execution",
+      "reason": "Two pending orders sat unfilled all day; a time-based escalation would have captured partial moves if price came close but didn't exactly touch the limit",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Prioritize BUY setups with entry prices closer to current market levels (within 0.5% pullback) given the persistent uptrend, and consider market-on-open for any setup with AI probability above 75%.",
+  "symbol_notes": {
+    "KOTAKBANK": "Strong zone score of 54 and 78% AI prob but entry too deep at \u20b9398 \u2014 tomorrow use a shallower entry if zone is retested or price consolidates near \u20b9400-402",
+    "SBIN": "Pre-identified stock from prior learnings with decent R:R of 3.0 \u2014 keep on watchlist but bring entry closer to market; if it opens near \u20b91,048-1,050, consider \u20b91,046 entry instead of \u20b91,043"
+  },
+  "confidence": 4
+}
