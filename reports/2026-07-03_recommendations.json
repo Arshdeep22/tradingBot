@@ -1,0 +1,50 @@
+{
+  "date": "2026-07-03",
+  "scan_time_ist": "2026-07-03 14:04:47",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup available today (WIPRO BUY). Despite only having a zone score of 47/60, the trending_up regime with ADX=25 and low VIX=12 supports demand zone entries aligned with the trend. Per yesterday's learnings, we should accept slightly lower zone scores (>=45) in strong trend regimes where trend alignment compensates for weaker zone structure.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.9%",
+    "adx": 25.0,
+    "vix": 12.0,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.9%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "WIPRO.NS",
+      "side": "BUY",
+      "entry": 174.3,
+      "stop_loss": 172.86,
+      "target": 178.62,
+      "zone_score": 47,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "BUY setup aligned with trending_up regime (Nifty +0.9%, ADX=25) \u2014 no counter-trend risk",
+        "Pristine demand zone (freshness 10/10) with maximum departure score (10/10) indicating strong institutional buying interest",
+        "R:R ratio of 3.0 is excellent, and low VIX of 12.0 supports holding positions for target achievement",
+        "Zone score of 47 meets the relaxed threshold (>=45) per weekly insight that min_score 75 has caused complete paralysis"
+      ],
+      "risks": "Zone score is below average (47/60) with only moderate base structure (4/10) and neutral trend alignment at stock level (5/10 sideways), which may reduce reliability of the zone holding",
+      "entry_advice": "Per yesterday's learnings on shallow entries in trending_up regimes: set limit buy at \u20b9174.30 but if price is within 0.2% of entry by 11:00 AM, convert to market order. If WIPRO opens above \u20b9174.50, consider a shallower entry at \u20b9174.50-174.60 rather than waiting for a deep pullback that may not come in this trending regime.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 43,
+      "symbol": "WIPRO.NS",
+      "side": "BUY",
+      "entry": 174.3,
+      "stop_loss": 172.86,
+      "target": 178.62,
+      "quantity": 694,
+      "win_probability": 62
+    }
+  ]
+}
