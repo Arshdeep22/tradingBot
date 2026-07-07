@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-07",
+  "wins_analysis": "No wins today. Zero AI recommendations were generated, meaning the system operated on fallback logic without proper signal validation, resulting in no high-conviction setups being identified.",
+  "losses_analysis": "The single executed trade hit stop loss despite a strong trending_up regime (Nifty +2.2%). This suggests the trade was likely a carryover pending order from a previous session that executed into an intraday pullback, or was placed via zone score fallback without AI confirmation. Entering without AI probability scoring in a strong trend day means the entry lacked proper zone validation and timing precision.",
+  "regime_impact": "Today's strong uptrend (+2.2%, ADX 25) should have been highly favorable for demand zone BUY setups. The regime was ideal but the system failed to capitalize because AI was unavailable, and the fallback mechanism either entered a weak zone or a SELL-side trade against the trend. This is a clear case where regime-aligned filtering would have prevented the loss.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When AI is unavailable, block all new order placements via zone score fallback \u2014 only allow execution of previously AI-validated pending orders",
+      "reason": "Today's loss came from a non-AI-validated setup. Zero recommendations were generated yet one trade executed, indicating fallback logic placed an unvetted order",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Add a regime-direction filter: when ADX > 20 and Nifty change > +1.5%, reject any SHORT/SELL pending orders and only allow BUY setups aligned with the trend",
+      "reason": "Strong trending_up day with +2.2% move \u2014 any counter-trend trade had high probability of hitting SL. The loss was likely against the prevailing trend",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "Cancel all stale pending orders older than 1 session when market regime shifts significantly (e.g., from sideways to trending_up with >1.5% gap up)",
+      "reason": "The executed trade was likely a carryover order from a different regime context that became invalid in today's strong gap-up environment",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "On strong trend days (ADX \u2265 25, Nifty move > +1.5%), widen stop loss by 0.3% for trend-aligned trades to avoid being shaken out by normal pullbacks in a strong move",
+      "reason": "The \u20b9997 loss suggests a tight SL was hit during an intraday retracement within what was ultimately a strong up day",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Implement a morning gap-up filter: if Nifty opens >1% above previous close, delay order execution by 30 minutes to let initial volatility settle before triggering pending limit orders",
+      "reason": "Strong trending days often have volatile opens that sweep nearby stop losses before continuing the trend direction",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "With VIX at 11.6 and strong uptrend intact, prioritize BUY setups on stocks showing demand zone respect with AI validation \u2014 avoid any trades if AI remains unavailable.",
+  "symbol_notes": {
+    "UNKNOWN_LOSS": "Identify which stock hit SL today and blacklist that specific zone level; if it was a SELL setup, confirm regime filter would have blocked it"
+  },
+  "confidence": 5
+}
