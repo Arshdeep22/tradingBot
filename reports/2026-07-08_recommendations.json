@@ -1,0 +1,64 @@
+{
+  "date": "2026-07-08",
+  "scan_time_ist": "2026-07-08 13:24:10",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available, neither meets the 75 min_score threshold. In a trending_up regime (Nifty +0.9%, ADX 25), the RELIANCE SELL setup conflicts with the bullish market direction despite its higher zone score of 56. The WIPRO BUY aligns with trend direction but has a low zone score of 49 with neutral trend alignment. Given yesterday's learnings about regime-direction filtering and the weekly insight about system non-functionality, I'm recommending the single trend-aligned setup with appropriate caveats.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.9%",
+    "adx": 25.0,
+    "vix": 12.2,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.9%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "WIPRO.NS",
+      "side": "BUY",
+      "entry": 173.1,
+      "stop_loss": 172.3,
+      "target": 175.5,
+      "zone_score": 49,
+      "win_probability": 45,
+      "conviction": "LOW",
+      "reasoning": [
+        "BUY setup aligns with trending_up market regime (Nifty +0.9%, ADX 25) per yesterday's learning to only allow trend-aligned trades",
+        "Pristine demand zone with instant reversal base and 3.1x volume departure, 3.0 R:R ratio",
+        "Very recent formation (15 candles) increases zone relevance for intraday retest"
+      ],
+      "risks": "Zone score of 49/60 is well below the 75 min_score threshold, and trend alignment within the zone itself is only neutral (5/10), suggesting WIPRO may not be participating in the broader market uptrend",
+      "entry_advice": "Place limit order at 173.10 but only if WIPRO shows relative strength vs Nifty in the first 30 minutes; consider widening SL to 172.05 per yesterday's learning about avoiding shakeouts in trending markets",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1314.4,
+      "stop_loss": 1320.56,
+      "target": 1295.92,
+      "zone_score": 56,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 44,
+      "symbol": "RELIANCE.NS",
+      "side": "SELL",
+      "entry": 1314.4,
+      "stop_loss": 1320.56,
+      "target": 1295.92,
+      "quantity": 162,
+      "win_probability": 0
+    }
+  ]
+}
