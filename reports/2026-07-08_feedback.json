@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-08",
+  "wins_analysis": "No wins today. Zero trades were executed as the only placed order (RELIANCE SELL) remained pending and never triggered. The WIPRO BUY recommendation was not even placed as an order.",
+  "losses_analysis": "No losses today either, but the system's failure is in placing a SELL order on RELIANCE when the morning scan identified the regime as trending_up (+0.9%). The order contradicted the regime direction and had 0% AI probability \u2014 it should never have been placed. The regime then shifted to trending_down by EOD, but the order still didn't trigger, suggesting the entry level was poorly calibrated.",
+  "regime_impact": "The regime shifted from trending_up in the morning to trending_down by EOD (Nifty -0.5%). This intraday reversal made both directional setups problematic. The RELIANCE SELL would have eventually aligned with the actual close direction but the entry price was set too far from market action. Neither strategy type worked because the system couldn't adapt to the regime shift.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Do NOT place any order with AI probability of 0% regardless of zone score or regime alignment \u2014 implement a hard minimum AI probability threshold of 40%",
+      "reason": "RELIANCE SELL was placed with 0% AI probability, which means the model itself had zero confidence in the trade. This should be an automatic disqualifier.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Enforce strict regime-direction alignment: never place SELL orders when morning regime is trending_up, and never place BUY orders when regime is trending_down",
+      "reason": "The RELIANCE SELL was placed during a trending_up regime (+0.9% Nifty). Even though the regime shifted later, the morning decision was contradictory. Yesterday's lessons about regime filtering were not applied.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "When fewer than 3 setups meet min_score threshold (75), skip the day entirely \u2014 do not lower standards to force trades",
+      "reason": "Only 2 setups found with scores of 56 and 49, both well below the 75 threshold. Forcing a trade from sub-threshold setups has produced zero results across multiple days.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "Set entry prices within 0.3% of current market price for pending orders to increase fill probability in range-bound or weakly trending days",
+      "reason": "The RELIANCE SELL at \u20b91,314.40 never triggered, suggesting the entry was too far from where price actually traded. Unfilled orders generate zero value.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "If VIX is below 15 and ADX is exactly at 25 (borderline), treat the regime as range-bound rather than directional and look for mean-reversion setups near strong zones only",
+      "reason": "VIX at 14.7 with ADX at exactly 25 and a small move (-0.5%) suggests a choppy market, not a strong trend. Directional trades in this environment are low-probability.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "If fewer than 3 setups score above 75 with AI probability above 40% and regime alignment, sit out completely \u2014 capital preservation over forced trades.",
+  "symbol_notes": {
+    "RELIANCE.NS": "SELL order placed with 0% AI probability and against morning regime \u2014 avoid RELIANCE unless a setup scores above 75 with >50% AI probability and clear regime alignment",
+    "WIPRO.NS": "BUY setup had directional alignment but only 45% probability and 49 zone score \u2014 not worth pursuing unless zone score improves above 70"
+  },
+  "confidence": 3
+}
