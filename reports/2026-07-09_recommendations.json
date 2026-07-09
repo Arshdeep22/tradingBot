@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-09",
+  "scan_time_ist": "2026-07-09 14:20:58",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup detected today. NTPC SELL has regime alignment (trending_down) but a zone score of only 42, far below the 75 minimum threshold. Per yesterday's learnings, when fewer than 3 setups meet the min_score threshold of 75, we should skip the day entirely. Additionally, VIX at 13.2 (below 15) with ADX exactly at 25 suggests treating this as range-bound rather than directional. No setups qualify for recommendation today.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.6%",
+    "adx": 25.0,
+    "vix": 13.2,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.6%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "NTPC.NS",
+      "side": "SELL",
+      "entry": 347.7,
+      "stop_loss": 350.41,
+      "target": 339.57,
+      "zone_score": 42,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 45,
+      "symbol": "NTPC.NS",
+      "side": "SELL",
+      "entry": 347.7,
+      "stop_loss": 350.41,
+      "target": 339.57,
+      "quantity": 369,
+      "win_probability": 0
+    }
+  ]
+}
