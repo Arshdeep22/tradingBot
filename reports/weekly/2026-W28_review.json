@@ -1,0 +1,61 @@
+{
+  "week": "2026-W28",
+  "executive_summary": "The bot finally took 3 trades after weeks of paralysis, but all 3 were losses resulting in \u20b9-2995. The reduced min_score (75) allowed entries but zone quality is clearly insufficient \u2014 every trade hit stop loss. The Supply & Demand Zone strategy is fundamentally broken in its current form: it either takes no trades or takes losing trades. A complete structural overhaul is needed, not parameter tuning.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "declining",
+  "target_progress": "0% \u2014 catastrophically below 70% target",
+  "regime_assessment": "Regime detection appears functional (correctly identified shift from trending_up to trending_down mid-week) but the strategy cannot capitalize on either regime. Losses occurred in both trending_up (Mon/Tue) and trending_down (Thu), suggesting the strategy is regime-agnostic in a bad way \u2014 zones are not aligning with trend direction.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol data available to make informed decisions",
+    "focus_list": [],
+    "focus_reason": "Need symbol-level tracking implemented before any focus list can be established"
+  },
+  "dow_pattern": "Monday and Tuesday losses in trending_up, Thursday loss in trending_down \u2014 insufficient sample size to determine DOW patterns. No days should be excluded yet.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      50,
+      70
+    ],
+    "zone_rr_range": [
+      1.2,
+      1.8
+    ],
+    "reasoning": "Current min_score 75 produces only losing trades \u2014 the scoring model itself may be miscalibrated. Lower RR ratio (1.2-1.8) will allow closer targets that can actually be hit before reversals. The previous 2.0 RR means every trade needs a large move that never materializes."
+  },
+  "structural_recommendations": [
+    {
+      "change": "Add trend-alignment filter: only take demand zones in trending_up, only supply zones in trending_down. Currently the strategy appears to trade counter-trend zones.",
+      "expected_impact": "Should eliminate at least 50% of losing trades by filtering against-trend entries",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a secondary confirmation signal (e.g., price must show rejection candle at zone, or volume spike) before entry. Raw zone touch is insufficient.",
+      "expected_impact": "Reduce false entries by 30-50%, improving win rate from 0% toward 40%+",
+      "priority": "high"
+    },
+    {
+      "change": "Add trailing stop or partial profit-taking at 1R instead of holding for full 2R target. All 3 trades lost ~\u20b91000 each suggesting stops are being hit with no opportunity for partial wins.",
+      "expected_impact": "Even with same entry quality, capturing partial profits could turn some full losses into breakeven or small wins",
+      "priority": "high"
+    },
+    {
+      "change": "Log and track per-symbol performance data. Current system provides no symbol visibility making it impossible to identify which instruments are tradeable.",
+      "expected_impact": "Enable data-driven symbol selection within 2-3 weeks",
+      "priority": "medium"
+    },
+    {
+      "change": "Consider adding a momentum/breakout strategy as secondary strategy for trending regimes. Supply & Demand zones are mean-reversion plays that conflict with strong trends.",
+      "expected_impact": "Diversified strategy set could capture trending moves that S&D zones miss, adding 2-4 trades per week",
+      "priority": "medium"
+    },
+    {
+      "change": "Reduce position size to \u20b9500 risk per trade until win rate exceeds 40% over 10+ trades. Current \u20b91000 risk with 0% win rate is pure capital destruction.",
+      "expected_impact": "Halves weekly drawdown from ~\u20b93000 to ~\u20b91500 during strategy validation phase",
+      "priority": "high"
+    }
+  ],
+  "primary_strategy_next_week": "Supply & Demand Zones",
+  "confidence": 3,
+  "apply_to_memory": false
+}
