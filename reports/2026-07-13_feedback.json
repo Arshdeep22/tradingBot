@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-13",
+  "wins_analysis": "No wins today as none of the 4 pending orders were executed. Entry prices were set too far from market action, meaning price never reached the limit order levels during the session.",
+  "losses_analysis": "No losses either, but the real failure is zero execution \u2014 all 4 orders remained pending. This indicates entry levels were placed at zone extremes that price did not revisit, effectively wasting the entire trading day with no exposure.",
+  "regime_impact": "The trending_down regime (ADX 25, Nifty -0.9%) should have strongly favored the SELL setups (TATASTEEL, HDFCBANK), but entry prices were set too tight/high for sells \u2014 price likely gapped below or moved away without retesting those supply zone entries. The regime was correct but entry placement did not adapt to momentum-driven moves that skip retests.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "For SELL setups in trending_down regime with ADX>=25, use market orders or set limit entries 0.1-0.2% below the ideal supply zone midpoint rather than at zone edge, accepting slightly worse R:R for higher fill probability",
+      "reason": "TATASTEEL at 191.00 and HDFCBANK at 822.95 never filled \u2014 in strong downtrends, price often does not retest supply zones before continuing lower",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Remove BUY setups entirely when regime is trending_down AND ADX>=25 AND weekly insight confirms all recent trades were losses \u2014 the AI probabilities of 28-35% are too low to justify counter-trend risk",
+      "reason": "TCS BUY (35%) and WIPRO BUY (28-30%) were counter-trend with very low probabilities, wasting order slots that could have been used for additional SELL candidates",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "Set a minimum AI probability threshold of 50% for any order to be placed \u2014 today 3 of 5 setups had probability below 50% and none executed or would have been profitable in a down regime",
+      "reason": "WIPRO and TCS BUY setups had 28-35% probability, well below coin-flip odds, and were placed as orders consuming capital allocation",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "Add a 'fill or cancel' timer \u2014 if a pending order is not filled within the first 90 minutes of the session, cancel it and look for fresh setups forming intraday at levels closer to current price",
+      "reason": "All 4 orders sat pending for the entire session with zero fills, indicating stale levels that the market had already moved past",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Expand SELL candidate scan to include other weak Nifty 50 names (e.g., metals, PSU banks) when regime is trending_down \u2014 having only 2 SELL candidates out of 50 stocks in a bearish regime suggests the scan filters are too restrictive",
+      "reason": "Only 5 total setups found across 50 stocks with ADX=25 downtrend \u2014 likely missed SELL opportunities in other declining stocks",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "Prioritize SELL setups with AI probability >55% using aggressive entry placement (closer to market or slight premium to fill), and completely skip BUY setups unless regime reverses or VIX spikes above 16.",
+  "symbol_notes": {
+    "TATASTEEL": "Supply zone at 191 was not retested \u2014 if price is below 191 tomorrow, look for next supply zone or use intraday rally to 189-190 area as fresh short entry",
+    "HDFCBANK": "822.95 entry not reached \u2014 if still trending down, look for a lower supply zone around 815-818 or enter on intraday pullback with market order",
+    "TCS": "Counter-trend BUY at 2167 not triggered \u2014 avoid until regime shifts; stock likely to follow broader market weakness",
+    "WIPRO": "Two BUY setups both unfilled \u2014 low probability (28-30%) in a downtrend means this should be removed from watchlist tomorrow unless it shows relative strength"
+  },
+  "confidence": 5
+}
