@@ -1,0 +1,155 @@
+{
+  "date": "2026-07-13",
+  "scan_time_ist": "2026-07-13 14:02:35",
+  "total_setups_found": 5,
+  "total_candidates_sent_to_ai": 5,
+  "ai_available": true,
+  "market_context": "In a trending down regime (Nifty -0.9%, ADX 25), supply zone SELL setups are strongly favored. TATASTEEL SELL has the highest zone score (53) and aligns perfectly with the bearish regime. BUY setups are counter-trend and carry elevated risk given the weekly insight that all recent trades were losses, suggesting extreme selectivity is needed.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.9%",
+    "adx": 25.0,
+    "vix": 13.3,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.9%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 191.0,
+      "stop_loss": 192.03,
+      "target": 187.91,
+      "zone_score": 53,
+      "win_probability": 62,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Highest zone score (53/60) among all setups with maximum departure (gap away) and instant reversal base",
+        "SELL setup perfectly aligned with trending_down regime \u2014 supply zones are the recommended strategy",
+        "Pristine zone formed same session (18 candles ago) with slow controlled arrival indicating institutional selling"
+      ],
+      "risks": "Weekly insights show all recent trades hit stop loss \u2014 zone quality may still be insufficient despite being the best available",
+      "entry_advice": "Limit order at 191.0 with strict stop at 192.03; consider partial position given recent losing streak and strategy concerns",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 822.95,
+      "stop_loss": 829.95,
+      "target": 801.95,
+      "zone_score": 49,
+      "win_probability": 55,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "SELL setup aligned with bearish regime on a heavyweight banking stock",
+        "Maximum departure score (gap away) and very slow controlled approach (10/10 arrival)",
+        "Pristine supply zone with good R:R of 3.0 in a down-trending market"
+      ],
+      "risks": "Moderate 4-candle base weakens zone quality (4/10), and HDFCBANK tends to be range-bound which may limit downside",
+      "entry_advice": "Wait for price to touch 822.95 zone with a bearish confirmation candle before entry; do not chase",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "TCS.NS",
+      "side": "BUY",
+      "entry": 2167.1,
+      "stop_loss": 2146.65,
+      "target": 2228.45,
+      "zone_score": 49,
+      "win_probability": 35,
+      "conviction": "LOW",
+      "reasoning": [
+        "Pristine demand zone with instant reversal and decent volume (3x)",
+        "Very recent formation (8 candles) suggests fresh institutional interest",
+        "TCS is a defensive stock that may hold up better in a down market"
+      ],
+      "risks": "Counter-trend BUY in a strong downtrend regime \u2014 high probability of failure; weekly learnings suggest avoiding marginal setups",
+      "entry_advice": "Avoid in current regime unless Nifty shows clear reversal signals; if taken, use half position size",
+      "order_placed": true
+    },
+    {
+      "rank": 4,
+      "symbol": "WIPRO.NS",
+      "side": "BUY",
+      "entry": 177.52,
+      "stop_loss": 176.25,
+      "target": 181.33,
+      "zone_score": 46,
+      "win_probability": 30,
+      "conviction": "LOW",
+      "reasoning": [
+        "DBR pattern with instant reversal and strong departure ratio (1.00)",
+        "Very fresh zone (8 candles) still pristine",
+        "Slightly better than ID 3 due to DBR pattern type indicating stronger reversal"
+      ],
+      "risks": "Counter-trend BUY in downtrend on a stock with only average approach score and neutral trend \u2014 high failure probability",
+      "entry_advice": "Skip this trade in current bearish regime; only consider if market regime shifts to sideways or bullish",
+      "order_placed": true
+    },
+    {
+      "rank": 5,
+      "symbol": "WIPRO.NS",
+      "side": "BUY",
+      "entry": 176.21,
+      "stop_loss": 175.16,
+      "target": 179.36,
+      "zone_score": 46,
+      "win_probability": 28,
+      "conviction": "LOW",
+      "reasoning": [
+        "Pristine demand zone with instant reversal base",
+        "Same session formation suggests recent relevance",
+        "3.0 R:R provides adequate reward if it works"
+      ],
+      "risks": "Counter-trend BUY with average approach (5/10) and neutral trend in a bearish market \u2014 lowest conviction setup",
+      "entry_advice": "Do not trade \u2014 counter-trend with weak zone characteristics in a confirmed downtrend",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 46,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 191.0,
+      "stop_loss": 192.03,
+      "target": 187.91,
+      "quantity": 970,
+      "win_probability": 62
+    },
+    {
+      "order_id": 47,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 822.95,
+      "stop_loss": 829.95,
+      "target": 801.95,
+      "quantity": 142,
+      "win_probability": 55
+    },
+    {
+      "order_id": 48,
+      "symbol": "TCS.NS",
+      "side": "BUY",
+      "entry": 2167.1,
+      "stop_loss": 2146.65,
+      "target": 2228.45,
+      "quantity": 48,
+      "win_probability": 35
+    },
+    {
+      "order_id": 49,
+      "symbol": "WIPRO.NS",
+      "side": "BUY",
+      "entry": 177.52,
+      "stop_loss": 176.25,
+      "target": 181.33,
+      "quantity": 787,
+      "win_probability": 30
+    }
+  ]
+}
