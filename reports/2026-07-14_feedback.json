@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-14",
+  "wins_analysis": "No wins today. Zero targets were hit. The system correctly avoided placing the TATASTEEL order (42% AI probability, zone score 48 below threshold), but the existing WIPRO BUY position from a prior day remains open and counter-trend.",
+  "losses_analysis": "No stop losses were hit today, but the WIPRO BUY position is a counter-trend trade in a strong downtrend regime (ADX=25, Nifty -1.4%). This position should not have been entered in the first place given the trending_down regime. The system's pre-trade filter correctly identified both setups as unsuitable today but failed to close the legacy WIPRO position.",
+  "regime_impact": "The trending_down regime with ADX=25 and Nifty falling 1.4% made BUY setups extremely dangerous. The system's decision to place zero new orders was correct. However, holding an existing counter-trend BUY (WIPRO) hurt by exposing capital to adverse trend pressure. SELL-aligned strategies would have been ideal if zone scores and AI probabilities were higher.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Implement forced exit rule: close any open BUY position when regime is trending_down AND ADX >= 25 AND daily Nifty move is worse than -1%. Exit WIPRO BUY at market open tomorrow if regime persists.",
+      "reason": "WIPRO BUY is counter-trend in a confirmed downtrend. Holding it contradicts the regime filter that correctly blocked new BUY entries today. Legacy positions must also respect regime changes.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Raise minimum AI probability threshold to 55% for SELL setups in trending_down regime (currently effectively 50%). TATASTEEL at 42% was correctly skipped but the bar needs to be explicit.",
+      "reason": "TATASTEEL SELL had only 42% AI confidence and zone score of 48. Even trend-aligned trades need conviction. Codify the 55% floor to avoid ambiguity.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Set minimum zone score to 55 (not 50) for any trade entry when only 1-2 setups are found across all 50 stocks. Low setup count signals poor opportunity \u2014 raise quality bar.",
+      "reason": "Only 2 setups found today across Nifty 50, both below quality thresholds. When opportunities are scarce, the temptation to lower standards increases. A higher zone score floor prevents marginal entries.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Add a 'no new BUY orders' hard block when regime=trending_down AND ADX>=22. This was noted yesterday but WIPRO BUY at 0% AI probability still appeared in recommendations \u2014 remove it from the list entirely.",
+      "reason": "WIPRO BUY showed 0% AI probability yet still appeared as rank 2 recommendation. Even without order placement, listing it wastes attention and risks manual override errors.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "If TATASTEEL 191 supply zone is retested tomorrow with fresh candle confirmation (bearish engulfing or strong red close near 191), consider SELL entry only if AI probability rises above 55% and zone score improves above 55.",
+      "reason": "The 191 zone was identified but not triggered today. A genuine retest with momentum confirmation tomorrow could provide a higher-probability trend-aligned entry.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Exit WIPRO BUY at open if downtrend persists, then wait for high-conviction SELL setups (AI>55%, zone>55) aligned with the trending_down regime \u2014 do not force trades if quality is absent.",
+  "symbol_notes": {
+    "WIPRO": "Counter-trend BUY in confirmed downtrend. Exit at market open tomorrow unless overnight gap reverses trend. 0% AI probability confirms this was never a valid setup.",
+    "TATASTEEL": "Supply zone at 191 is valid but needs AI probability above 55% and fresh bearish confirmation on retest. Watch for gap-down open that bypasses the zone entirely, which would invalidate the setup."
+  },
+  "confidence": 6
+}
