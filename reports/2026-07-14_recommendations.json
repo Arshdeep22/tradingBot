@@ -1,0 +1,53 @@
+{
+  "date": "2026-07-14",
+  "scan_time_ist": "2026-07-14 12:54:56",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available in a trending_down regime with ADX=25. Per yesterday's learnings, BUY setups should be removed entirely in this regime, and minimum AI probability threshold of 50% should apply. WIPRO BUY is counter-trend and was explicitly flagged for removal. TATASTEEL SELL aligns with trend direction but zone score of 48 is below the 50 threshold suggested by weekly insights, and yesterday's learning noted this exact zone at 191 was not retested.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.3%",
+    "adx": 25.0,
+    "vix": 13.6,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.3%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 191.0,
+      "stop_loss": 192.08,
+      "target": 187.76,
+      "zone_score": 48,
+      "win_probability": 42,
+      "conviction": "LOW",
+      "reasoning": [
+        "SELL setup aligned with trending_down regime and ADX=25 strong downtrend",
+        "Supply zone has maximum departure score (gap away) and pristine freshness \u2014 best qualities among available setups",
+        "Yesterday's learning suggests using intraday rally to 189-190 area as fresh short entry if price is below 191, improving fill probability"
+      ],
+      "risks": "Zone score 48/60 is below quality threshold; same zone failed to trigger yesterday suggesting price may not revisit 191 again",
+      "entry_advice": "Per yesterday's learning, set limit sell at 190.5-190.8 (0.1-0.2% below zone midpoint) rather than at 191 edge, or use market order on any intraday pullback rally toward 189.5-190.5 area. Apply 90-minute fill-or-cancel rule.",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "WIPRO.NS",
+      "side": "BUY",
+      "entry": 176.21,
+      "stop_loss": 175.22,
+      "target": 179.18,
+      "zone_score": 49,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
