@@ -1,0 +1,39 @@
+{
+  "date": "2026-07-15",
+  "scan_time_ist": "2026-07-15 12:59:13",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup detected across all 50 Nifty stocks. TATASTEEL SELL at 191 supply zone aligns with trending_down regime (ADX=25, Nifty -1.4%), but zone score of 50 fails the minimum threshold of 55 required when only 1-2 setups are found. Yesterday's learnings explicitly state this setup needs AI probability above 55% and zone score above 55 to qualify. No setups meet the quality bar today.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.4%",
+    "adx": 25.0,
+    "vix": 13.6,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.4%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 191.0,
+      "stop_loss": 191.91,
+      "target": 188.27,
+      "zone_score": 50,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "Zone score 50 is below the raised minimum of 55 required when setup count is low (1-2 across all stocks)",
+        "Trend alignment is ideal (trending_down + supply zone SELL), and R:R of 3.0 is attractive",
+        "Yesterday's learning explicitly requires AI probability above 55% and zone score above 55 for this exact TATASTEEL 191 setup \u2014 neither condition is met",
+        "Weekly insights show all 3 recent trades hit stop loss \u2014 strategy is structurally underperforming and needs fresh bearish confirmation candle before entry"
+      ],
+      "risks": "Zone score below quality threshold; gap-down open could bypass 191 zone entirely invalidating setup; strategy has 0% recent win rate",
+      "entry_advice": "DO NOT ENTER \u2014 zone score 50 below minimum 55 threshold. If zone score improves and price retests 191 with bearish engulfing confirmation, reassess. Wait for AI probability to exceed 55% before any entry.",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
