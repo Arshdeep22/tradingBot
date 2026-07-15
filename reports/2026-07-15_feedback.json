@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-15",
+  "wins_analysis": "No wins today. Zero setups met the quality bar, and the system correctly identified that the single available setup (TATASTEEL SELL) had insufficient zone score and AI probability.",
+  "losses_analysis": "The report shows 1 SL hit for -\u20b9999.49 despite the order reportedly not being placed and 0 pending orders. This is a critical discrepancy \u2014 either a stale/carryover trade from a previous day hit its stop loss today, or the reporting pipeline has an inconsistency. The loss likely came from a prior-day position that was still open and got stopped out in today's -1.3% Nifty decline (if it was a BUY) or a whipsaw reversal (if SELL).",
+  "regime_impact": "Trending_down with ADX=25 and Nifty -1.3% should have favoured SELL setups at supply zones, but the only available SELL setup (TATASTEEL at 191) had a zone score of 50 and AI probability of only 38% \u2014 well below thresholds. The regime was correctly identified but no quality setups existed to exploit it. The loss appears to be from a carryover position that was misaligned with today's regime.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Audit all open positions from prior days at pre-market (before 9:15 AM) and close or tighten stops on any position misaligned with the current day's regime. Add a mandatory carryover position check to the morning routine.",
+      "reason": "Today's -\u20b9999 loss came from an untracked or carryover trade that was not part of today's scan decisions, indicating a gap in position management for multi-day holds.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "When zero qualifying setups are found, explicitly set the system to NO-TRADE mode and ensure no new orders can be placed or old pending orders remain active. Cancel all stale pending orders from prior days at 9:00 AM.",
+      "reason": "The report shows 0 pending orders placed but 1 executed trade \u2014 this inconsistency suggests a stale order from a previous session got triggered. All unfilled orders from prior days must be explicitly cancelled.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "In trending_down regimes with ADX\u226525, expand the scan to include stocks with zone scores \u226555 AND AI probability \u226555% but also consider slightly wider entry zones (\u00b10.3%) on high-conviction supply zones to increase the hit rate of qualifying setups.",
+      "reason": "Today had a strong directional regime but zero qualifying setups \u2014 the quality filters are working correctly but we missed opportunities. Consider scanning broader supply zone ranges on strong trend days.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Add a reporting field that explicitly tags each executed trade with its origination date (order_placed_date vs execution_date) to distinguish same-day trades from carryover fills.",
+      "reason": "Today's report is contradictory (0 orders placed, 1 executed) making root cause analysis difficult. Traceability of trade origin is essential for accurate learning.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "For TATASTEEL specifically, mark the 191 supply zone as 'tested but weak' (score 50). Only re-enter a SELL if zone score improves to \u226560 or price reaches a higher supply zone (e.g., 193-195 range) with fresh confirmation.",
+      "reason": "The 191 level was identified but scored poorly (50/100, 38% AI). It should not be retried at the same level without material improvement in scoring.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "Verify no stale pending orders exist from prior sessions before market open; if trending_down persists (check ADX and Nifty futures pre-market), prioritize fresh high-score supply zones on weak sectoral leaders like metals and banking.",
+  "symbol_notes": {
+    "TATASTEEL": "191 supply zone scored 50 with 38% AI prob \u2014 do not retry unless zone score rises above 60 or price approaches a higher supply zone near 193-195.",
+    "NIFTY50": "Strong -1.3% down day with ADX 25 confirms bearish trend; tomorrow look for continuation SELL setups if Nifty futures gap down or show weakness at open."
+  },
+  "confidence": 4
+}
