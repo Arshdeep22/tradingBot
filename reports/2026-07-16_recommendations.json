@@ -1,0 +1,49 @@
+{
+  "date": "2026-07-16",
+  "scan_time_ist": "2026-07-16 13:06:14",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available, both TATASTEEL SELL with zone scores of 49 and 46 \u2014 both below the minimum threshold of 60. Yesterday's learnings explicitly state TATASTEEL 191 supply zone should not be retried unless score rises above 60. Market regime is trending_up (Nifty +0.7%), which conflicts with SELL setups. Neither setup qualifies for execution.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.7%",
+    "adx": 25.0,
+    "vix": 12.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.7%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.75,
+      "stop_loss": 188.74,
+      "target": 184.78,
+      "zone_score": 49,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 191.0,
+      "stop_loss": 191.85,
+      "target": 188.45,
+      "zone_score": 46,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
