@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-17",
+  "wins_analysis": "No wins today. Zero trades executed as both pending orders were not filled, indicating entry prices were set too far from market action or liquidity was insufficient at those levels.",
+  "losses_analysis": "No losses today either, but the day was effectively wasted. Only 2 setups were found across all Nifty 50 stocks, both with zone scores below 50/60, and neither triggered. The TATASTEEL SELL contradicted the trending_up regime, and KOTAKBANK BUY had marginal quality (49/60 zone score, 38% AI probability).",
+  "regime_impact": "The trending_up regime (ADX=25, Nifty +0.5%, VIX=13.1) should have favored demand zone BUY setups, but the scanner failed to identify high-quality opportunities aligned with this regime. Low VIX and steady uptrend suggest breakout-style entries or slightly more aggressive demand zone proximity thresholds could have captured moves.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Do NOT place orders when zone_score < 50/60 AND AI probability < 40%. Set hard minimum: zone_score >= 50 AND AI_prob >= 45% to place any order.",
+      "reason": "Both setups today were below quality thresholds (KOTAKBANK 49/60, 38% prob; TATASTEEL 0% prob) and neither filled. Capital was tied up in low-conviction orders.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "In trending_up regime, completely exclude SELL setups unless zone_score >= 55/60 AND AI probability >= 60%. Today's TATASTEEL SELL at 0% probability should never have been placed.",
+      "reason": "TATASTEEL SELL directly contradicted the uptrend regime and had 0% AI confidence \u2014 a clear waste of margin and order capacity.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "When fewer than 3 quality setups are found, consider widening the entry zone tolerance by 0.1-0.2% to increase fill probability on the best available BUY setup in an uptrend.",
+      "reason": "KOTAKBANK BUY at 381.20 never filled, possibly because price moved away before reaching the exact demand zone. In strong uptrends, price often doesn't revisit deep demand zones.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Add a 'no-trade day' classification: if scan finds <3 setups with zone_score >= 50, declare it a skip day and preserve capital rather than forcing marginal trades.",
+      "reason": "Today's 2 sub-threshold setups resulted in zero execution and zero P&L. Formally recognizing low-opportunity days prevents forced trading.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Expand scanner to include breakout/pullback setups in trending_up regime, not just pure supply/demand zones. Stocks making new highs with shallow pullbacks (2-3%) may offer better entries in strong trends.",
+      "reason": "With ADX=25 and steady uptrend, many Nifty 50 stocks may be trending without revisiting deep demand zones, causing the scanner to miss valid opportunities.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "With VIX at 13.1 and ADX at 25 in uptrend, look for BUY-only setups with zone_score >= 50 and consider slightly aggressive entries (0.1-0.2% above demand zone) to increase fill probability in continuation moves.",
+  "symbol_notes": {
+    "KOTAKBANK": "Regime-aligned BUY but marginal quality (49/60). If zone score improves to 50+ tomorrow with tighter price proximity, worth reconsidering.",
+    "TATASTEEL": "Avoid SELL setups on this stock while market is trending_up. 0% AI probability is a clear rejection signal \u2014 do not revisit unless regime shifts to neutral/down."
+  },
+  "confidence": 4
+}
