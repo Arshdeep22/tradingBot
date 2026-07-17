@@ -1,0 +1,74 @@
+{
+  "date": "2026-07-17",
+  "scan_time_ist": "2026-07-17 13:03:20",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available, both with zone scores below 50 which is well under quality thresholds. The TATASTEEL SELL setup directly contradicts yesterday's learnings and the trending_up regime. KOTAKBANK BUY is regime-aligned but has a very low zone score (49/60) indicating marginal quality. Neither setup meets the minimum quality bar for high-conviction trading.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.3%",
+    "adx": 25.0,
+    "vix": 13.3,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.3%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 381.2,
+      "stop_loss": 378.9,
+      "target": 388.1,
+      "zone_score": 49,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "BUY setup aligned with trending_up regime (Nifty +0.3%, ADX 25)",
+        "Pristine demand zone with instant reversal base and 3.0 R:R ratio",
+        "Zone score of 49 is below minimum threshold of 55 even for regime-aligned setups, indicating poor structural quality"
+      ],
+      "risks": "Zone score too low (49) and trend component only 5/10 (sideways) \u2014 stock not participating in market uptrend, high probability of stop loss hit",
+      "entry_advice": "AVOID this trade \u2014 zone score below minimum quality threshold. If forced, wait for a strong bullish confirmation candle at 381.2 with volume above average before entering",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.75,
+      "stop_loss": 188.69,
+      "target": 184.93,
+      "zone_score": 47,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 50,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 381.2,
+      "stop_loss": 378.9,
+      "target": 388.1,
+      "quantity": 434,
+      "win_probability": 38
+    },
+    {
+      "order_id": 51,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.75,
+      "stop_loss": 188.69,
+      "target": 184.93,
+      "quantity": 1063,
+      "win_probability": 0
+    }
+  ]
+}
