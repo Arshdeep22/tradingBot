@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-20",
+  "wins_analysis": "No wins today. The single ICICIBANK trade remains pending (not yet filled or still open), so no target was hit. KOTAKBANK from a prior day also remains open with no realized gain.",
+  "losses_analysis": "No losses today either. However, the lack of execution clarity is concerning \u2014 ICICIBANK shows as both 'executed' and 'still pending at close' simultaneously, suggesting the entry limit was barely touched but the trade didn't develop momentum toward target within the session.",
+  "regime_impact": "The trending_up regime with ADX=25 and low VIX=13 should favor demand zone buys, but only 1 setup was found across all 50 stocks, indicating the market is extended and fresh demand zones are scarce. The regime is supportive but the lack of quality setups means the trend is already well-priced in.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When only 1 setup is found across Nifty 50, reduce position size by 50% or skip the day entirely unless zone score exceeds 50/60",
+      "reason": "Today's single setup had only 46/60 score and 52% probability \u2014 below threshold for high-conviction trades. Scarce setups in a trending market suggest most stocks are already extended beyond fresh zones.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Set a minimum AI probability threshold of 55% for order placement, especially when weekly insights already flag persistent losses for the strategy",
+      "reason": "ICICIBANK had only 52% probability and the weekly review warned of persistent losses with demand zone buys. The system acknowledged this but still placed the order.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Implement a time-based exit rule: if a trade hasn't moved 50% toward target by 2:00 PM, tighten stop to breakeven",
+      "reason": "ICICIBANK and KOTAKBANK both show no movement toward target by EOD. Holding overnight in range-bound intraday conditions adds risk without evidence of momentum.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Review KOTAKBANK open position \u2014 if it hasn't progressed toward \u20b9388.10 target after multiple sessions, consider closing at market open tomorrow to free capital",
+      "reason": "KOTAKBANK has been open with no reported unrealized P&L, suggesting it's stagnant. Capital tied in non-moving positions misses fresh opportunities.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "On days with fewer than 3 setups, expand scan to include supply zone SELL setups in overbought stocks (RSI>70) even in uptrend \u2014 as mean-reversion hedges",
+      "reason": "With only 1 demand zone found, the market may be too extended for pure trend-following. Adding selective counter-trend setups in clearly overbought names can provide opportunities when fresh demand zones are absent.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "Monitor whether ICICIBANK and KOTAKBANK develop directional movement early; if Nifty continues grinding up with low VIX, expect few fresh demand zones and consider sitting out unless a high-score (>50/60) setup with >55% probability appears.",
+  "symbol_notes": {
+    "ICICIBANK": "Demand zone BUY barely activated with weak 52% confidence \u2014 watch if price holds above 1,424.57 SL tomorrow; exit at breakeven if no upward momentum by 11:00 AM.",
+    "KOTAKBANK": "Multi-day open position with no progress \u2014 set hard deadline to exit if no movement toward 388.10 by tomorrow's close."
+  },
+  "confidence": 4
+}
