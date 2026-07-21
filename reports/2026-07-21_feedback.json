@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-21",
+  "wins_analysis": "No wins today as no orders were placed. The system correctly identified that only 1 setup existed and that ICICIBANK had a 0/5 recent win record, leading to a justified skip decision.",
+  "losses_analysis": "No losses today as no trades were executed. The decision to not place the ICICIBANK order was sound given: (1) AI probability was only 48%, (2) the symbol failed just yesterday, and (3) the weekly track record shows 0 wins in 5 trades indicating the strategy parameters are fundamentally miscalibrated.",
+  "regime_impact": "Trending_up with ADX 25 and low VIX 12.6 should theoretically favor demand zone BUY setups, but the system found only 1 qualifying setup across all 50 stocks. This suggests either zone detection parameters are too tight, or most stocks have already moved away from demand zones in the uptrend \u2014 the regime helps direction but zones may be stale.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Raise minimum AI probability threshold from current implicit 45% to 55% \u2014 do not place any order below 55% regardless of zone score",
+      "reason": "ICICIBANK at 48% probability was correctly skipped but the system still surfaced it as a recommendation. Filtering earlier prevents cognitive load and false signals. Historical data shows sub-50% probability setups have near-zero win rate.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Blacklist ICICIBANK for the next 5 trading sessions \u2014 require a minimum 3-day cooling period after any symbol accumulates 3+ consecutive losses",
+      "reason": "ICICIBANK has 0 wins in 5+ recent trades. Continuing to surface it wastes the single daily opportunity. The symbol may have structural issues (institutional selling, range compression) that make zone-based entries unreliable right now.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "In trending_up regime with ADX>22, expand scan to include breakout/retest setups above supply zones, not just demand zone bounces \u2014 add momentum continuation entries at prior day high breaks",
+      "reason": "Only 1 demand zone setup found across 50 stocks in a strong uptrend. Stocks trending up rarely revisit deep demand zones. The strategy needs a trend-following variant that catches pullbacks to 9/21 EMA rather than waiting for distant demand zones.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "When total setups found is \u22642, deploy capital into a simple Nifty 50 index ETF momentum trade (BUY if Nifty above 9EMA on 15min) rather than forcing individual stock setups",
+      "reason": "Market gained +0.6% today with zero participation from the bot. On low-setup days in uptrending regimes, index-level trades would capture broad market moves without needing individual stock zone confluence.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Reduce required risk:reward from current ~3:1 (\u20b97.73 SL vs \u20b923.19 target on ICICIBANK) to 2:1 with tighter targets \u2014 this increases fill probability and may improve the 0% win rate",
+      "reason": "Consistently targeting 3:1 R:R with wide targets means price rarely reaches TP before reversing. A 2:1 target with partial profit-taking at 1.5:1 would convert more setups into actual wins, building confidence in the system.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If market continues trending_up with ADX>22, prioritize stocks showing fresh demand zone formation from today's session (same-day zones) on large-cap momentum names like RELIANCE, HDFCBANK, TCS rather than recycling stale ICICIBANK zones.",
+  "symbol_notes": {
+    "ICICIBANK": "Blacklisted \u2014 0 wins in 5+ recent attempts, failed again yesterday, barely met threshold today at 48% prob. Avoid for at least 5 sessions.",
+    "RELIANCE": "Monitor for fresh demand zone formation given broad market uptrend \u2014 if it pulled back intraday today, tomorrow's zone may be actionable.",
+    "HDFCBANK": "Large-cap banking peer to ICICIBANK \u2014 check if it offers cleaner demand zone setup as rotation candidate."
+  },
+  "confidence": 3
+}
