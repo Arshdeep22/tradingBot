@@ -1,0 +1,38 @@
+{
+  "date": "2026-07-21",
+  "scan_time_ist": "2026-07-21 13:24:38",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup detected across Nifty 50 stocks today. Per yesterday's learnings, when fewer than 3 setups are found, position size should be reduced by 50% or skipped unless zone score exceeds 50/60. ICICIBANK scores 52/60 which barely meets the threshold, but the weekly insights show 0 wins in 5 trades with this strategy being fundamentally broken. The trending_up regime with ADX 25 does favor demand zone BUY setups, but confidence remains low given persistent losses and the same symbol failing just yesterday.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.5%",
+    "adx": 25.0,
+    "vix": 12.7,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.5%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ICICIBANK.NS",
+      "side": "BUY",
+      "entry": 1433.6,
+      "stop_loss": 1425.87,
+      "target": 1456.79,
+      "zone_score": 52,
+      "win_probability": 48,
+      "conviction": "LOW",
+      "reasoning": [
+        "Zone score 52/60 barely meets the minimum threshold per yesterday's learning; pristine DBR zone with trend alignment scores well technically",
+        "R:R of 3.0 is attractive, and regime is trending_up with ADX 25 supporting demand zone longs",
+        "However, ICICIBANK failed just yesterday with a weak 52% confidence setup \u2014 same symbol repeating suggests price is churning around this zone without conviction"
+      ],
+      "risks": "Strategy has 0 wins in 5 consecutive trades over 3 weeks; ICICIBANK specifically showed no momentum yesterday from nearly the same zone level, suggesting demand exhaustion",
+      "entry_advice": "Per yesterday's learnings, minimum AI probability threshold of 55% is NOT met (48%) \u2014 recommend SKIPPING this trade entirely. If taken, reduce position to 25% size, wait for a bullish confirmation candle above 1435 with volume, and exit at breakeven if no progress by 2:00 PM",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
