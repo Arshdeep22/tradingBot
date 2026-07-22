@@ -1,0 +1,78 @@
+{
+  "date": "2026-07-22",
+  "scan_time_ist": "2026-07-22 13:25:01",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups detected in a trending_down regime with ADX 25. Both setups have zone scores below 45/60 and neither meets the raised 55% minimum AI probability threshold from yesterday's learnings. The weekly insights confirm the S&D strategy is fundamentally broken with 0 wins in 5 trades. Given only \u22642 setups found, yesterday's learning suggests deploying into Nifty 50 ETF momentum trade instead of forcing individual stock setups.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.4%",
+    "adx": 25.0,
+    "vix": 13.3,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.4%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 191.0,
+      "stop_loss": 191.78,
+      "target": 188.66,
+      "zone_score": 41,
+      "win_probability": 42,
+      "conviction": "LOW",
+      "reasoning": [
+        "SELL setup aligned with trending_down regime (Nifty -0.4%), which is the recommended bias",
+        "Strong departure (10/10) with gap away and instant reversal base (10/10) show institutional selling",
+        "Very slow controlled arrival (10/10) suggests weak buyers approaching supply zone"
+      ],
+      "risks": "Zone is 190 candles old (aging significantly), freshness only 4/10, and trend score neutral at 5/10 - probability below 55% threshold making this a NO-TRADE per yesterday's learnings",
+      "entry_advice": "DO NOT TRADE - below 55% probability threshold. If forced, wait for bearish engulfing confirmation at 191.0 level with volume spike before entering short",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 279.45,
+      "stop_loss": 278.41,
+      "target": 282.57,
+      "zone_score": 42,
+      "win_probability": 35,
+      "conviction": "LOW",
+      "reasoning": [
+        "Pristine fresh zone (10/10 freshness) formed same session with tight base structure",
+        "Good departure strength with 5.6x volume confirming institutional participation",
+        "Very recent formation (6 candles) means zone hasn't been tested yet"
+      ],
+      "risks": "Counter-trend BUY in a trending_down regime (trend score only 3/10) directly contradicts regime guidance to focus on supply zones - high probability of failure",
+      "entry_advice": "DO NOT TRADE - counter-trend setup in downtrending market with probability well below 55% threshold. Per weekly insights, strategy is 0/5 wins and should not be forced when only 2 setups exist",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 53,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 191.0,
+      "stop_loss": 191.78,
+      "target": 188.66,
+      "quantity": 1282,
+      "win_probability": 42
+    },
+    {
+      "order_id": 54,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 279.45,
+      "stop_loss": 278.41,
+      "target": 282.57,
+      "quantity": 961,
+      "win_probability": 35
+    }
+  ]
+}
