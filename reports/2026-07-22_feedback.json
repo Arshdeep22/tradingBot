@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-22",
+  "wins_analysis": "No wins today. Zero targets hit out of the single executed trade, continuing the losing streak that now stands at 0 wins in 6 consecutive S&D trades.",
+  "losses_analysis": "The loss occurred despite the system correctly identifying a trending_down regime. Both setups had AI probabilities far below the 55% threshold (42% and 35%), yet orders were still placed \u2014 indicating the threshold filter was not enforced in execution. The strategy continues to fail because zone scores below 45/60 in a weak-signal environment produce entries that lack institutional confluence.",
+  "regime_impact": "The trending_down regime with ADX 25 should have favored SELL-side supply zone plays, but the TATASTEEL sell at 42% probability was too weak to capitalize. The regime alignment was correct in theory but the setup quality was insufficient. Placing a BUY order (ITC) against a downtrend regime was contradictory and should have been filtered out entirely.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Hard-block ALL order placements when AI probability is below 55% \u2014 implement as a pre-submission gate in the order placement code, not just as advisory guidance",
+      "reason": "Today both setups (42% and 35%) were placed despite yesterday's learning explicitly setting 55% minimum. The filter exists on paper but is not enforced in execution logic.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Block BUY-side setups when regime is trending_down with ADX >= 22. Only allow SELL-side entries aligned with the dominant trend.",
+      "reason": "ITC BUY at 35% probability was placed against a confirmed downtrend regime \u2014 this is a contradictory signal that should never generate an order.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 3,
+      "action": "When fewer than 3 qualifying setups exist (after probability and regime filters), deploy capital into Nifty 50 ETF short momentum trade (e.g., short NiftyBees or buy inverse ETF) instead of forcing weak individual setups",
+      "reason": "The report itself noted this learning from yesterday but still placed 2 sub-threshold orders. The ETF fallback must be the DEFAULT action when no qualifying setups exist.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Raise minimum zone score threshold from current effective 0 to 50/60 for any order placement in trending regimes",
+      "reason": "Both setups today had zone scores below 45/60. After 0 wins in 6 trades, zone scores below 50 have demonstrated zero edge.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Pause the S&D individual stock strategy entirely for 2 trading days and only trade regime-aligned ETF momentum until a backtest review is completed on why 0/6 win rate persists",
+      "reason": "0 wins in 6 consecutive trades is statistically significant evidence of a broken strategy. Continuing to trade it without review is capital destruction.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Do NOT place any individual stock S&D trades \u2014 only execute a Nifty 50 ETF short momentum play if ADX remains above 22 and regime stays trending_down, while conducting a full strategy review offline.",
+  "symbol_notes": {
+    "TATASTEEL": "Supply zone at 191 was technically aligned with downtrend but 42% AI probability showed insufficient conviction \u2014 avoid unless probability exceeds 55%",
+    "ITC": "BUY setup at 279.45 was counter-trend in a down regime with only 35% probability \u2014 categorically wrong trade direction, blacklist BUY-side for ITC until regime flips"
+  },
+  "confidence": 3
+}
