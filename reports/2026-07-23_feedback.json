@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-23",
+  "wins_analysis": "No wins today. HDFCBANK SELL setup scored a perfect 60/60 but the pending order was not triggered, indicating price did not reach the supply zone entry at 752.60. The high-probability setup was well-constructed but market didn't cooperate with entry timing.",
+  "losses_analysis": "No losses today either. However, the ICICIBANK BUY position from a prior day remains open \u2014 this is a counter-trend long in a trending_down regime (ADX=25), which is inherently risky and contradicts current regime rules. TATASTEEL was wisely skipped given yesterday's caution flag.",
+  "regime_impact": "The trending_down regime correctly filtered out the ITC BUY (blocked as counter-trend) and prioritized SELL setups. However, the regime hurt execution because the downtrend's momentum pushed prices away from supply zone entries before pending orders could trigger. The existing ICICIBANK long is misaligned with the regime and represents legacy risk.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Close or tighten the ICICIBANK BUY position immediately at open if it hasn't hit target \u2014 it's counter-trend in a confirmed downtrend regime and should not have been carried forward",
+      "reason": "ICICIBANK BUY is a long in a trending_down market (ADX=25, Nifty -0.8%). Regime rules block new BUYs, so existing counter-trend longs should be managed out aggressively",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "For SELL pending orders in trending_down regimes, place entries 0.1-0.2% below the supply zone upper boundary rather than at the exact zone level, to increase fill probability",
+      "reason": "HDFCBANK SELL at 752.60 was never triggered despite a -0.8% Nifty day \u2014 supply zone entries set too high miss the move entirely in strong downtrends where bounces are shallow",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 3,
+      "action": "When ADX >= 25 in trending_down, add a secondary entry method: market order SELL on breakdown of intraday support (e.g., previous 15-min low) if supply zone entry isn't triggered by 10:30 AM",
+      "reason": "Today's only placed order (HDFCBANK) sat pending all day. In strong trends, waiting for perfect supply zone retrace leads to 0 executions \u2014 need a fallback momentum entry",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Increase minimum setups found threshold to 5 before placing orders \u2014 with only 3 setups found today (1 blocked), diversification is too low and single-trade dependency is too high",
+      "reason": "Only 1 order was placed from 3 total setups (1 blocked, 1 skipped due to caution). This leaves no room for the natural miss rate of pending limit orders",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Add BAJFINANCE and SBIN to tomorrow's priority watchlist for SELL setups \u2014 banking/financial sector is leading the downtrend and HDFCBANK's perfect score suggests sector-wide supply pressure",
+      "reason": "HDFCBANK scored 60/60 for SELL, indicating strong supply in banking. Sector correlation suggests other bank/financial names will show similar patterns tomorrow",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "Prioritize SELL setups in banking/financial sector with adjusted entry levels (slightly below supply zone) and have a momentum breakdown fallback if limit orders don't fill by 10:30 AM.",
+  "symbol_notes": {
+    "HDFCBANK": "Perfect 60/60 SELL setup but entry not triggered \u2014 lower entry by 0.15% tomorrow if same zone appears; strong supply pressure confirmed",
+    "ICICIBANK": "Counter-trend BUY position must be resolved urgently \u2014 either exit at open or trail stop to breakeven; do not add to this position",
+    "TATASTEEL": "Wisely avoided per yesterday's caution flag \u2014 keep on cautious watchlist but consider if it retests 187+ supply zone with tighter entry",
+    "ITC": "Correctly blocked as counter-trend BUY \u2014 do not attempt longs until regime shifts"
+  },
+  "confidence": 5
+}
