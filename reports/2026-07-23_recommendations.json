@@ -1,0 +1,85 @@
+{
+  "date": "2026-07-23",
+  "scan_time_ist": "2026-07-23 13:26:49",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "In a trending_down regime with ADX=25, only SELL-side setups aligned with the dominant trend qualify. HDFCBANK supply zone scores a perfect 60/60 with ideal trend alignment and 3:1 R:R, making it the standout setup. TATASTEEL supply zone at 54/60 also qualifies but yesterday's learnings flag caution. ITC BUY is categorically blocked as counter-trend per regime rules and yesterday's blacklist.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.0%",
+    "adx": 25.0,
+    "vix": 13.6,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.0%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 752.6,
+      "stop_loss": 755.41,
+      "target": 744.17,
+      "zone_score": 60,
+      "win_probability": 72,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Perfect 60/60 zone score \u2014 maximum marks across all six criteria indicating strong institutional supply",
+        "SELL-side fully aligned with trending_down regime (ADX=25, Nifty -1.0%), ideal trend confluence",
+        "Pristine RBD zone formed only 15 candles ago with gap departure and instant reversal \u2014 high probability of holding",
+        "3:1 R:R with tight stop loss of only 2.81 points, excellent risk management"
+      ],
+      "risks": "HDFCBANK is a heavyweight that can see sudden demand bursts near round-number support levels; if broader market reverses intraday the zone may fail",
+      "entry_advice": "Place limit sell order at 752.60; zone is pristine and same-session so price should react sharply on first touch \u2014 do not chase if it gaps through",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.04,
+      "stop_loss": 187.89,
+      "target": 184.49,
+      "zone_score": 54,
+      "win_probability": 58,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Zone score 54/60 exceeds the minimum 50/60 threshold for trending regimes",
+        "SELL-side aligned with dominant downtrend, TATASTEEL has been weak and trend continuation is likely",
+        "Pristine zone with instant reversal base and slow controlled arrival \u2014 institutional signature present",
+        "Yesterday's learning flags TATASTEEL needing >55% probability; this setup is marginally qualifying based on improved zone score vs yesterday's 42% probability setup at 191"
+      ],
+      "risks": "TATASTEEL previously failed at a nearby supply zone with only 42% AI probability \u2014 if this setup's real-time probability is below 55% at execution time, it must be hard-blocked",
+      "entry_advice": "Limit sell at 187.04 only if real-time AI probability confirms above 55%; set tight stop at 187.89 and trail aggressively given TATASTEEL's volatile intraday moves",
+      "order_placed": false
+    },
+    {
+      "rank": 3,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 279.45,
+      "stop_loss": 278.11,
+      "target": 283.47,
+      "zone_score": 44,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 55,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 752.6,
+      "stop_loss": 755.41,
+      "target": 744.17,
+      "quantity": 355,
+      "win_probability": 72
+    }
+  ]
+}
