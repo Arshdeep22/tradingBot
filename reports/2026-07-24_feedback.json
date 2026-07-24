@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-24",
+  "wins_analysis": "No wins today. Both top AI recommendations (HDFCBANK and TATASTEEL) were not placed as pending orders, yet somehow one trade was executed and hit stop loss \u2014 indicating a discrepancy between the recommendation list and actual order execution, possibly a stale or manually triggered trade.",
+  "losses_analysis": "The single loss of \u20b9-993.30 was executed but does not correspond to either of the two AI recommendations listed (both show 'Not triggered'). This suggests the bot executed a trade from a different source or a prior-day pending order carried over. The loss likely resulted from entering a position without proper AI-validated zone confirmation, or from a setup that degraded overnight during a strong -2.3% down day.",
+  "regime_impact": "The trending_down regime (ADX=25, Nifty -2.3%) should have favored SELL setups, and the AI correctly identified two sell candidates. However, the regime hurt because the executed trade (origin unclear) hit SL \u2014 possibly a BUY-side legacy position caught in the strong sell-off. The regime was correctly read but not properly exploited.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Audit and cancel all carryover pending orders at start of day if they don't match current session's AI recommendations",
+      "reason": "Today's executed trade doesn't match either AI recommendation, suggesting a stale order from a prior session was filled and stopped out",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "When fewer than 5 setups are detected, place orders only on setups with AI probability >= 70% AND zone score >= 50/60",
+      "reason": "Only HDFCBANK met both thresholds (72% prob, 53/60 score) yet no order was placed for it. In low-setup environments, concentrate capital on the single best opportunity",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Actually place pending orders for qualifying AI recommendations \u2014 HDFCBANK SELL at 752.60 would have yielded ~\u20b99.72/share profit given Nifty dropped 2.3%",
+      "reason": "The best setup was identified but not acted upon. The system failed to convert high-confidence recommendations into orders while simultaneously executing an unvalidated trade",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "On trending_down days with ADX>=25, widen the scan to include stocks with zone scores >= 45/60 if fewer than 5 setups found, focusing exclusively on SELL side",
+      "reason": "Only 2 setups were found despite a strong downtrend \u2014 relaxing thresholds slightly on trend-aligned sides could capture more opportunities like banking and metals sectors that were clearly selling off",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Add a reconciliation check: if orders_executed > 0 but none match top AI recommendations, flag and log as 'unvalidated trade' for immediate review",
+      "reason": "Today's P&L loss came from a phantom trade with no matching AI recommendation, indicating a system integrity issue",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (check if Nifty holds below today's close and ADX remains >25), prioritize SELL setups in HDFCBANK and banking sector; ensure only current-session AI recommendations generate pending orders and purge all stale orders at open.",
+  "symbol_notes": {
+    "HDFCBANK": "Best setup today (72% prob, 53/60 zone score) was not executed \u2014 if supply zone near 752-755 is still intact tomorrow, re-evaluate for SELL entry on any retracement",
+    "TATASTEEL": "Lower conviction (62%) and flagged for caution \u2014 only consider if zone score improves or sector confirms further weakness",
+    "UNKNOWN_LOSS": "Identify which symbol caused the \u20b9-993.30 loss and blacklist or add extra filters for that stock tomorrow"
+  },
+  "confidence": 4
+}
