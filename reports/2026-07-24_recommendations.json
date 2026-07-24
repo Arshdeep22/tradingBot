@@ -1,0 +1,58 @@
+{
+  "date": "2026-07-24",
+  "scan_time_ist": "2026-07-24 13:24:20",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups detected, far below the minimum 5-setup threshold recommended by yesterday's learnings. Both are SELL setups aligned with the trending_down regime (ADX=25, Nifty -2.2%). HDFCBANK remains the strongest candidate with a 53/60 zone score and sector-leading supply pressure, while TATASTEEL is viable but was flagged for caution. Neither setup alone provides adequate diversification.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-2.2%",
+    "adx": 25.0,
+    "vix": 14.2,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -2.2%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 752.6,
+      "stop_loss": 755.84,
+      "target": 742.88,
+      "zone_score": 53,
+      "win_probability": 72,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Supply zone score 53/60 with perfect departure (gap away), instant reversal base, and pristine freshness \u2014 highest quality zone available",
+        "Fully aligned with trending_down regime (ADX=25) and banking sector leading the downtrend as noted in weekly insights",
+        "3:1 R:R ratio with tight stop loss of \u20b93.24 provides excellent risk management",
+        "Yesterday's learning confirms strong supply pressure at this level \u2014 same zone scored 60/60 previously but wasn't triggered, now at 53/60 suggesting slight zone aging but still highly valid"
+      ],
+      "risks": "Same zone failed to trigger yesterday at exact 752.60 level \u2014 price may again fail to reach entry, and weekly insights show 0/5 win rate suggesting systemic execution issues",
+      "entry_advice": "Per yesterday's learning, place limit SELL entry 0.15% below zone upper boundary at ~751.47 to increase fill probability. If not triggered by 10:30 AM, consider market SELL on breakdown of previous 15-min low as secondary entry method.",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.04,
+      "stop_loss": 187.94,
+      "target": 184.34,
+      "zone_score": 51,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Supply zone score 51/60 with excellent arrival (very slow controlled approach) and perfect trend alignment in downtrend regime",
+        "3:1 R:R with very tight stop of \u20b90.90 \u2014 minimal capital at risk per trade",
+        "With-trend SELL in confirmed downtrend with strong ADX supports directional bias"
+      ],
+      "risks": "Yesterday's notes flagged TATASTEEL for caution and advised keeping on cautious watchlist only \u2014 the 187+ supply zone is present but stock was wisely avoided recently, and tight \u20b90.90 stop may get clipped by normal volatility",
+      "entry_advice": "Place limit SELL at 186.76 (0.15% below 187.04 zone level) to improve fill rate. Use tighter position sizing given caution flag. Only enter if price approaches zone with weak/slow momentum confirming supply absorption.",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
