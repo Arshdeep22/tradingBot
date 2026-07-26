@@ -1,0 +1,56 @@
+{
+  "week": "2026-W30",
+  "executive_summary": "Fourth consecutive week of losses with 0% win rate (0 wins from 2 trades, \u20b9-993). The Supply & Demand Zone strategy has now produced 7 trades over 4 weeks with zero wins and \u20b9-5987 cumulative loss. The strategy is fundamentally broken \u2014 zones are being identified but price action consistently invalidates them. The bot needs a complete strategy overhaul, not parameter tuning.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70% below 70% target. No progress in 4 weeks.",
+  "regime_assessment": "Regime detection appears functional (correctly identified trending_up to trending_down transition mid-week) but the strategy cannot capitalize on either regime. All 7 historical trades across trending_up and trending_down regimes have lost, suggesting the strategy is regime-agnostic in its failure.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol data available to make informed decisions. Symbol-level logging must be added.",
+    "focus_list": [],
+    "focus_reason": "Cannot determine without symbol-level trade data. Structural fix needed first."
+  },
+  "dow_pattern": "Only 2 trades taken (Wednesday and Friday), both losses. Insufficient data for day-of-week analysis. No actionable pattern.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      60,
+      75
+    ],
+    "zone_rr_range": [
+      1.2,
+      1.8
+    ],
+    "reasoning": "LOWER the RR ratio from 2.0 to 1.2-1.8 \u2014 current 2:1 targets are never being hit, suggesting zones are valid for smaller moves but targets are too ambitious. Lower min_score to generate more trade candidates for statistical validation. The priority is getting wins on the board even if individual trade size is smaller."
+  },
+  "structural_recommendations": [
+    {
+      "change": "Add a trend-following confirmation filter: only take demand zone longs when price is above 20 EMA in trending_up, and only supply zone shorts when price is below 20 EMA in trending_down. Currently zones are being traded counter-trend.",
+      "expected_impact": "Filter out 50%+ of losing trades by avoiding counter-trend zone entries. Should lift win rate from 0% to 40%+.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a secondary strategy (VWAP mean reversion or Opening Range Breakout) that runs in parallel. The bot cannot depend on a single strategy that has zero wins in 7 consecutive trades.",
+      "expected_impact": "Diversifies signal sources, provides 3-5 additional trade opportunities per week with independent win/loss correlation.",
+      "priority": "high"
+    },
+    {
+      "change": "Add zone freshness validation: only trade zones that have NOT been previously tested. Retested zones have lower probability. Track zone touch count and reject zones with 2+ prior tests.",
+      "expected_impact": "Improve zone quality, potentially lifting win rate by 15-20% on remaining trades.",
+      "priority": "medium"
+    },
+    {
+      "change": "Implement partial profit booking at 1:1 RR (50% position) with remainder trailing to 2:1. Current all-or-nothing approach at 2:1 is generating 100% full losses.",
+      "expected_impact": "Convert some full losses into breakeven or small wins. Expected to reduce average loss by 30-40%.",
+      "priority": "high"
+    },
+    {
+      "change": "Add symbol-level performance logging to enable data-driven watchlist decisions. Current lack of symbol data makes optimization impossible.",
+      "expected_impact": "Enables future symbol filtering decisions. No immediate P&L impact but critical for week-over-week improvement.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Supply & Demand Zones",
+  "confidence": 2,
+  "apply_to_memory": false
+}
