@@ -1,0 +1,107 @@
+{
+  "date": "2026-07-27",
+  "scan_time_ist": "2026-07-27 14:24:50",
+  "total_setups_found": 3,
+  "total_candidates_sent_to_ai": 3,
+  "ai_available": true,
+  "market_context": "Only 3 setups available, so selecting all 3 ranked by probability. In a strong downtrend (Nifty -1.4%, ADX 25), SELL setups aligned with trend are preferred. However, the weekly insights reveal a 0% win rate over 7 trades, suggesting extreme caution is warranted even for trend-aligned setups. ONGC supply zone is freshest and trend-aligned, making it the top pick despite the strategy's poor track record.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.4%",
+    "adx": 25.0,
+    "vix": 12.8,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.4%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ONGC.NS",
+      "side": "SELL",
+      "entry": 241.02,
+      "stop_loss": 242.37,
+      "target": 236.97,
+      "zone_score": 47,
+      "win_probability": 45,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Pristine supply zone formed just 3 candles ago \u2014 maximum freshness and time relevance",
+        "Perfect trend alignment (10/10) in a confirmed downtrend market regime (Nifty -1.4%)",
+        "DBD pattern with 2.4x volume on departure candle confirms institutional selling"
+      ],
+      "risks": "Strategy has 0% win rate over 4 weeks; zone score 47/60 is moderate and base quality is only 4/10 suggesting potential for price to power through",
+      "entry_advice": "Wait for a bearish rejection candle at 241.02 level before entering; do not blindly place limit order given strategy's poor historical performance",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 752.6,
+      "stop_loss": 755.44,
+      "target": 744.08,
+      "zone_score": 46,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "Strong departure (gap away, 10/10) and instant reversal base indicate genuine supply",
+        "Slow approach (8/10) means less momentum to break through zone",
+        "3:1 R:R ratio on HDFC Bank which is a high-liquidity stock with cleaner price action"
+      ],
+      "risks": "Zone is 69 candles old reducing reliability; trend alignment is only neutral (5/10) not confirming the downtrend, and overall strategy has been consistently failing",
+      "entry_advice": "Only enter if price shows clear rejection with a bearish engulfing or pin bar at 752.60; consider reducing position size to 50% given strategy struggles",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 279.45,
+      "stop_loss": 278.44,
+      "target": 282.48,
+      "zone_score": 40,
+      "win_probability": 20,
+      "conviction": "LOW",
+      "reasoning": [
+        "Tight 2-candle base with 5.8x volume departure shows some institutional interest",
+        "3:1 R:R ratio provides decent reward if the zone holds",
+        "ITC is a defensive stock that may show relative strength in a down market"
+      ],
+      "risks": "BUY setup in a strong downtrend is counter-trend trading \u2014 lowest probability; trend score only 5/10 and zone is 85 candles old",
+      "entry_advice": "Strongly recommend SKIPPING this trade \u2014 buying against a confirmed downtrend contradicts regime analysis; if taken, wait for strong bullish confirmation and use minimal position size",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 56,
+      "symbol": "ONGC.NS",
+      "side": "SELL",
+      "entry": 241.02,
+      "stop_loss": 242.37,
+      "target": 236.97,
+      "quantity": 740,
+      "win_probability": 45
+    },
+    {
+      "order_id": 57,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 752.6,
+      "stop_loss": 755.44,
+      "target": 744.08,
+      "quantity": 352,
+      "win_probability": 38
+    },
+    {
+      "order_id": 58,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 279.45,
+      "stop_loss": 278.44,
+      "target": 282.48,
+      "quantity": 990,
+      "win_probability": 20
+    }
+  ]
+}
