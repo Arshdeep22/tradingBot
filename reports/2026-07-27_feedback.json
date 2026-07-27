@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-27",
+  "wins_analysis": "No wins today. All 3 orders remained pending and never triggered, meaning price did not reach any of the identified entry levels during the session.",
+  "losses_analysis": "No losses today either. The core issue is that entry levels were set too far from market price in a session where price action did not extend to those zones. The strategy generated only 3 setups with low probabilities (45%, 38%, 20%), and none were close enough to current price to fill.",
+  "regime_impact": "The strong downtrend regime (ADX 25, Nifty -1.4%) should have favored SELL setups, but price apparently gapped down or moved quickly without retracing to supply zones. The regime was correctly identified but entry placement failed to account for momentum-driven moves that skip retracement zones.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Skip trading entirely when all AI probabilities are below 50% AND the strategy's rolling win rate over the last 7+ trades is 0%. Require at least one setup with probability >= 55% to place any orders.",
+      "reason": "Today's highest probability was only 45%, and the weekly report shows 0% win rate over 7 trades. Placing low-conviction orders wastes capital allocation and attention.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "In strong downtrend days (ADX >= 25, Nifty < -1%), use market orders or limit orders within 0.2% of current price for SELL setups instead of waiting for retracement to distant supply zones.",
+      "reason": "All 3 pending orders never filled because in momentum-driven selloffs, price often doesn't retrace to supply zones. The move happens without giving a clean entry.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 3,
+      "action": "Eliminate BUY setups entirely when Nifty is down more than 1% and ADX > 22. ITC BUY at 20% probability should never have been included.",
+      "reason": "ITC BUY had only 20% probability in a -1.4% market day. Counter-trend setups with sub-30% probability are noise, not signals.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Require minimum 5 setups across Nifty 50 before trading. If only 3 setups are found, treat it as a low-opportunity day and sit out.",
+      "reason": "Only 3 setups across 50 stocks indicates either the scan criteria are too restrictive or market conditions don't offer clean zones. Both scenarios suggest waiting is optimal.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Add a 'proximity filter' \u2014 only place orders where entry price is within 0.5% of the stock's opening price or previous close. Discard zones that require >0.5% retracement to trigger.",
+      "reason": "None of the 3 orders triggered today, suggesting entry levels were too far from where price actually traded. A proximity filter ensures orders have a realistic chance of filling.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If the downtrend continues, look for SELL setups with entry within 0.3% of current price and probability above 55%; if no such setups exist, do not trade.",
+  "symbol_notes": {
+    "ONGC": "Supply zone at 241.02 never reached \u2014 price likely moved below this without retracing. If still bearish tomorrow, look for a lower supply zone or use breakdown entry below today's low.",
+    "HDFCBANK": "Entry at 752.60 not triggered \u2014 in a banking-heavy selloff, HDFCBANK tends to gap down. Consider market-on-open SELL if gap down confirmed with volume.",
+    "ITC": "20% probability BUY in a downtrend is a no-go. Remove from watchlist unless regime flips to neutral/bullish."
+  },
+  "confidence": 3
+}
