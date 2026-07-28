@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-28",
+  "wins_analysis": "No wins today. Zero trades were executed as entry prices were not reached, indicating setups were either too conservative or price didn't pull back sufficiently to limit entries.",
+  "losses_analysis": "No losses today either. The single pending order (TATASTEEL SELL at 187.04) was never filled, suggesting the entry level was set too far from where price was actually trading during the session despite a trending-down regime that should have facilitated short entries.",
+  "regime_impact": "Today's trending-down regime (ADX=25, Nifty -0.8%) should have been ideal for SELL setups, but the system failed to capitalize. The problem was not regime mismatch but rather entry placement \u2014 limit orders were too tight and price never reached them during the decline. Market-order or slightly looser entries on confirmed breakdown would have captured the move.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When AI is unavailable and zone-score fallback is used, widen entry tolerance by 0.1-0.15% toward market price (e.g., place SELL limit 0.1% above current price rather than exactly at zone edge) to increase fill probability",
+      "reason": "TATASTEEL SELL at 187.04 never filled \u2014 price likely traded just above or gapped below without touching. In a confirmed downtrend, waiting for a precise zone touch misses the move.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Place orders on ALL top-3 recommendations when regime aligns (trending_down + SELL setups), not just 1 of 3. Increase max_pending_orders to at least 3 on strong-trend days (ADX >= 25)",
+      "reason": "Only 1 of 3 aligned SELL setups had an order placed. HDFCBANK and ONGC were skipped despite fitting the regime. Diversifying across 3 would have increased odds of at least one fill.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a market-order fallback rule: if a pending SELL order is unfilled by 10:30 AM and price is within 0.2% of entry AND below VWAP, convert to market order",
+      "reason": "In a trending-down session, waiting all day for a precise fill is suboptimal. A time-based escalation would have captured the trend move in TATASTEEL.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Require minimum 3 valid setups (currently got exactly 3) before placing trades. If only 3 found and AI is unavailable, scan broader timeframes (30-min zones in addition to 1H) to find more opportunities",
+      "reason": "Only 3 setups found across all 50 stocks suggests zone parameters are too restrictive or scan timing missed early-session formations. More setups = better selection.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow, if VIX remains low (12-13), tighten targets by 10-15% as compressed volatility means smaller intraday ranges \u2014 e.g., TATASTEEL target should be ~185.0 instead of 184.52 to increase hit probability",
+      "reason": "Low VIX (12.6) means smaller moves. Current R:R math assumes normal volatility. Tighter targets with the same SL gives faster fills on targets even if R:R drops slightly from ~3:1 to ~2.5:1.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (watch for Nifty below today's low and ADX holding >25), aggressively place SELL orders on all qualified setups with slightly relaxed entry levels and ensure orders are live by 9:20 AM.",
+  "symbol_notes": {
+    "TATASTEEL": "Pending SELL never filled \u2014 if it gaps down tomorrow, cancel stale order and look for a fresh breakdown retest entry near 186-187 zone",
+    "HDFCBANK": "Strong SELL candidate that was skipped \u2014 monitor 752-755 supply zone for rejection tomorrow, place order if price retests",
+    "ONGC": "241 supply zone still valid \u2014 place SELL limit at 240.80 (slightly below zone) with SL 242.60 if regime stays bearish"
+  },
+  "confidence": 4
+}
