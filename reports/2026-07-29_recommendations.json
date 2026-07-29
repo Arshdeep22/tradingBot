@@ -1,0 +1,68 @@
+{
+  "date": "2026-07-29",
+  "scan_time_ist": "2026-07-29 13:34:57",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available, well below the minimum 3 required. In a trending_up regime (Nifty +1.1%, ADX 25), the TATASTEEL BUY demand zone aligns with the uptrend and has a strong zone score of 53/60. The HDFCBANK SELL is counter-trend with a weaker score of 41/60 and aging zone, making it lower probability. Given the weekly insight of 0% win rate over 4 weeks, both setups carry significant risk.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.1%",
+    "adx": 25.0,
+    "vix": 12.1,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.1%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 183.0,
+      "stop_loss": 181.84,
+      "target": 186.48,
+      "zone_score": 53,
+      "win_probability": 52,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Demand zone (RBR) with strong 53/60 score \u2014 pristine, fresh (16 candles), instant reversal with gap departure",
+        "Aligned with trending_up regime (Nifty +1.1%, ADX 25) \u2014 buying dips in uptrends is the optimal strategy",
+        "3:1 R:R ratio with tight stop (\u20b91.16) and reasonable target (\u20b93.48) \u2014 good risk management"
+      ],
+      "risks": "TATASTEEL trend score is only 5/10 (sideways locally) which conflicts with broader market uptrend; yesterday's note suggests price was around 187 so a 183 entry requires a ~2% pullback which may not occur in an up-trending market",
+      "entry_advice": "Place limit BUY at 183.15 (slightly above zone edge per yesterday's learning to widen fill tolerance by ~0.1%). If price reaches 183.50 by 10:30 AM and is above VWAP with bullish candle confirmation, consider market order entry. Tighten target by 10% to 186.0 given low VIX (12.1).",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 752.6,
+      "stop_loss": 755.68,
+      "target": 743.36,
+      "zone_score": 41,
+      "win_probability": 30,
+      "conviction": "LOW",
+      "reasoning": [
+        "Supply zone (RBD) with decent departure and base scores, but aging at 116 candles reduces reliability",
+        "Counter-trend setup \u2014 SELL in a trending_up regime significantly reduces win probability",
+        "Yesterday's notes flagged HDFCBANK 752-755 supply zone as valid for rejection monitoring"
+      ],
+      "risks": "Counter-trend SELL in a strong uptrend regime is high-risk; zone is aging (116 candles) and the 4-week 0% win rate on S&D zones suggests fundamental strategy issues that parameter tweaks won't fix",
+      "entry_advice": "Do NOT place this order given counter-trend nature and regime conflict. Only consider if Nifty reverses intraday and HDFCBANK shows clear rejection at 752-755 with bearish engulfing candle below VWAP. If taken, tighten target to 745.0 and use 0.1% tolerance (entry at 752.0).",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 60,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 183.0,
+      "stop_loss": 181.84,
+      "target": 186.48,
+      "quantity": 862,
+      "win_probability": 52
+    }
+  ]
+}
