@@ -27,7 +27,9 @@ class SyntaxValidationError(SyntaxError):
 
 class CodeEditor:
     def read_file(self, path: str) -> str:
-        return Path(path).read_text()
+        # Force UTF-8 so LLM-generated files with unicode (checkmarks, arrows,
+        # emoji, non-ASCII comments) round-trip cleanly on Windows.
+        return Path(path).read_text(encoding="utf-8")
 
     def _check_write_allowed(self, path: str) -> None:
         normalized = str(Path(path)).replace("\\", "/")
@@ -42,7 +44,9 @@ class CodeEditor:
         self.validate_syntax(new_code, source_label=path)
         p = Path(path)
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(new_code)
+        # Force UTF-8; Windows's default cp1252 chokes on unicode chars that
+        # LLM output frequently contains (e.g. '\u2713' checkmarks in docs).
+        p.write_text(new_code, encoding="utf-8")
 
     def validate_syntax(self, code: str, source_label: str = "<generated>") -> None:
         try:
