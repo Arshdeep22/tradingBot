@@ -49,7 +49,10 @@ class AgentConfig:
     stuck_phase_max_iterations: int = 25
 
     # Git
-    agent_branch: str = "agent/optimize"
+    # Operate directly on `main` — the agent commits and reverts on this branch.
+    # (Snapshots + composite-score gate + revert-on-regression still protect
+    #  against bad code.)
+    agent_branch: str = "main"
     repo_root: str = "."                   # override in tests
 
     # Paths
