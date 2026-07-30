@@ -28,7 +28,7 @@ class AgentLLMClient:
 
     def call(self, system_prompt: str, user_message: str,
              expect_json: bool = True, max_retries: int = 3,
-             stage: str = "") -> Any:
+             stage: str = "", max_tokens: int = 4096) -> Any:
         if expect_json:
             system_prompt = system_prompt + "\nRespond ONLY with valid JSON."
 
@@ -44,12 +44,13 @@ class AgentLLMClient:
             user_message[:preview_max] + f"... [+{len(user_message) - preview_max} chars]"
         )
         tag = f"[{stage}] " if stage else ""
-        logger.info("%sLLM PROMPT (%d chars):\n%s", tag, len(user_message), preview)
+        logger.info("%sLLM PROMPT (%d chars, max_tokens=%d):\n%s",
+                    tag, len(user_message), max_tokens, preview)
 
         last_error: Exception | None = None
         for attempt in range(max_retries):
             try:
-                raw = self._llm.chat(messages, max_tokens=4096, temperature=0.2)
+                raw = self._llm.chat(messages, max_tokens=max_tokens, temperature=0.2)
             except Exception as e:
                 last_error = e
                 logger.warning("%sLLM call failed (attempt %d/%d): %s",
@@ -73,10 +74,22 @@ class AgentLLMClient:
         raise LLMError(f"LLM call failed after {max_retries} attempts: {last_error}") from last_error
 
     def _strip_fences(self, text: str) -> str:
+        """
+        Remove markdown code fences from an LLM reply.
+        Handles the case where the closing ``` is missing (e.g. reply was
+        truncated by max_tokens) by stripping the leading fence alone.
+        """
         text = text.strip()
         m = _FENCE_RE.search(text)
         if m:
             return m.group(1).strip()
+        # Fallback: strip leading ```json / ``` and any trailing ``` if present
+        if text.startswith("```json"):
+            text = text[len("```json"):].lstrip("\r\n")
+        elif text.startswith("```"):
+            text = text[len("```"):].lstrip("\r\n")
+        if text.endswith("```"):
+            text = text[:-3].rstrip()
         return text
 
     def _build_llm(self) -> AICoreLLM:

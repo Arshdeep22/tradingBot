@@ -55,7 +55,9 @@ class Coder:
                 )
 
         msg = self._build_user_message(hypothesis, file_contents)
-        data = self._llm.call(_SYSTEM_PROMPT, msg, stage="coder")
+        # Coder returns full file contents (potentially large) — needs more tokens.
+        # Anthropic Claude 4.x supports up to 64K output tokens.
+        data = self._llm.call(_SYSTEM_PROMPT, msg, stage="coder", max_tokens=16384)
 
         if not isinstance(data, dict):
             raise CoderError(f"Expected dict from LLM, got {type(data).__name__}")
