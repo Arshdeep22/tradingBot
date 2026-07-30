@@ -107,7 +107,6 @@ class BaseDB:
 
     def _warn_supabase_schema(self):
         """Check if management columns exist on Supabase and warn if not."""
-        _mgmt_cols = {"current_sl", "breakeven_applied", "base_candles"}
         try:
             res = self.supabase_client.table("trades").select(
                 "current_sl,breakeven_applied,base_candles"
@@ -119,6 +118,8 @@ class BaseDB:
                 "Run the ALTER TABLE statements from database/supabase_setup.sql "
                 "in your Supabase SQL Editor."
             )
+
+    def _run_sqlite_migrations(self):
         """Add new columns to existing tables without dropping data."""
         new_trade_columns = [
             ("current_sl", "REAL"),
