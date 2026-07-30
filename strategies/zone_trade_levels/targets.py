@@ -59,9 +59,10 @@ def calculate_rr_target(entry: float, stop_loss: float,
 
 def calculate_partial_target(entry: float, stop_loss: float) -> float:
     """
-    Target 1 at 1:1 R:R (partial profit, move SL to breakeven).
+    Target 1 at 2:1 R:R (partial profit, move SL to breakeven).
+    Scaled further from entry to enforce asymmetric reward-to-risk.
     """
-    return calculate_rr_target(entry, stop_loss, rr_ratio=1.0)
+    return calculate_rr_target(entry, stop_loss, rr_ratio=2.0)
 
 
 def _compute_rr_ratio(entry: float, stop_loss: float, target: float) -> float:
@@ -78,7 +79,10 @@ def calculate_targets(zone: Zone, all_zones: List[Zone], config: dict) -> dict:
     Determine final targets with priority:
     1. Opposing zone target (if R:R >= min_rr_with_opposing)
     2. Fallback to fixed R:R (default 1:3)
-    Also sets target_1 (partial at 1:1)
+    Also sets target_1 (partial at 2:1 minimum)
+
+    Enforces minimum 2:1 R:R on final target to prevent winners being
+    cut short relative to losers.
 
     Returns dict with target, target_1, rr_ratio, target_source.
     Requires zone.entry and zone.stop_loss to be set already.
@@ -89,6 +93,7 @@ def calculate_targets(zone: Zone, all_zones: List[Zone], config: dict) -> dict:
     use_opposing = config.get('use_opposing_zone_target', True)
     min_rr_opposing = config.get('min_rr_with_opposing', 2.0)
     default_rr = config.get('default_rr_ratio', 3.0)
+    min_rr_final = config.get('min_rr_final', 2.0)
 
     final_target = None
     target_source = "fixed_rr"
@@ -107,7 +112,13 @@ def calculate_targets(zone: Zone, all_zones: List[Zone], config: dict) -> dict:
         final_target = calculate_rr_target(entry, stop_loss, default_rr)
         target_source = "fixed_rr"
 
-    # Partial profit target (1:1 R:R)
+    # Enforce minimum R:R on final target - scale out further if below threshold
+    current_rr = _compute_rr_ratio(entry, stop_loss, final_target)
+    if current_rr < min_rr_final:
+        final_target = calculate_rr_target(entry, stop_loss, min_rr_final)
+        target_source = "min_rr_enforced"
+
+    # Partial profit target (2:1 R:R)
     target_1 = calculate_partial_target(entry, stop_loss)
 
     # Compute final R:R

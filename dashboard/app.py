@@ -11,98 +11,49 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
-from database.db import DatabaseManager
-from config.settings import INITIAL_CAPITAL, SYMBOLS, NIFTY_50
 
-st.set_page_config(page_title="Trading Bot", page_icon="📈", layout="wide")
-db = DatabaseManager()
+st.set_page_config(page_title="Trading Bot Agent", page_icon="🤖", layout="wide")
 
 # === HOME PAGE ===
-st.title("📈 Trading Bot Dashboard")
-st.markdown("### Supply & Demand Zone Trading System")
+st.title("🤖 Autonomous Trading Agent")
+st.markdown("### Monitoring & Debugging Console")
 st.markdown("---")
 
-# Quick Stats
-metrics = db.get_performance_metrics()
-open_trades = db.get_open_trades()
+st.subheader("🧭 Available Pages")
 
-col1, col2, col3, col4, col5 = st.columns(5)
-col1.metric("💰 Capital", f"₹{INITIAL_CAPITAL:,.0f}")
-col2.metric("📊 Total Trades", metrics['total_trades'])
-col3.metric("🏆 Win Rate", f"{metrics['win_rate']:.1f}%")
-col4.metric("💹 Total P&L", f"₹{metrics['total_pnl']:,.2f}")
-col5.metric("📍 Open Positions", len(open_trades))
-
-st.markdown("---")
-
-# Navigation
-st.subheader("🧭 Quick Navigation")
-
-col_a, col_b, col_c = st.columns(3)
+col_a, col_b = st.columns(2)
 
 with col_a:
     st.markdown("""
-    ### 🎯 Zone Scanner
-    Find supply/demand zones across Nifty 50 stocks using multi-timeframe analysis.
-    
-    **→ Go to sidebar → Zone Scanner**
+    ### 🤖 Agent Monitor
+    Live view of the autonomous optimizer:
+    - Current iteration & phase (A / B / C)
+    - Recent runs, decisions, and trades
+    - Streaming runtime logs
+    - Tool-invocation activity
+
+    **→ Open from sidebar → *Agent Monitor***
     """)
 
 with col_b:
     st.markdown("""
-    ### 📋 Trade History
-    View all your paper trades with filters by symbol, strategy, and status.
-    
-    **→ Go to sidebar → Trade History**
-    """)
+    ### 🗄️ Agent DB Explorer
+    Raw access to every table in `database/agent.db`:
+    - Runs, trades, decisions, memory, embeddings
+    - Filter, sort, paginate any table
+    - Inspect trajectories and blocked approaches
 
-with col_c:
-    st.markdown("""
-    ### 📈 Performance
-    Track your equity curve, win rate, profit factor, and drawdown.
-    
-    **→ Go to sidebar → Performance**
+    **→ Open from sidebar → *Agent DB Explorer***
     """)
 
 st.markdown("---")
-
-# Strategy Overview
-st.subheader("📐 Strategy: Supply & Demand Zones")
-st.markdown("""
-| Setting | Value |
-|---------|-------|
-| **Timeframes** | 15m (zones) → 5m (trend) → 2m (entry) |
-| **Risk:Reward** | 1:3 |
-| **Min Score** | 80/100 |
-| **Scoring** | Freshness (40) + Leg-out (30) + Base (30) |
-| **Watchlist** | Nifty 50 (50 stocks) |
-| **Capital** | ₹1,00,000 (paper) |
-""")
-
-st.markdown("---")
-
-# Open Positions
-if open_trades:
-    st.subheader("🟢 Open Positions")
-    import pandas as pd
-    df_open = pd.DataFrame(open_trades)
-    cols = ['symbol', 'side', 'quantity', 'entry_price', 'stop_loss', 'target', 'strategy']
-    available_cols = [c for c in cols if c in df_open.columns]
-    st.dataframe(df_open[available_cols])
 
 # Sidebar
 with st.sidebar:
-    st.markdown("## 📈 Trading Bot")
-    st.markdown(f"**Stocks:** {len(NIFTY_50)} (Nifty 50)")
-    st.markdown(f"**Strategy:** S&D Zones")
-    st.markdown(f"**Mode:** Paper Trading")
+    st.markdown("## 🤖 Trading Agent")
+    st.markdown("**Mode:** Autonomous Optimizer")
+    st.markdown("**DB:** `database/agent.db`")
     st.markdown("---")
     st.markdown("### Pages")
-    st.markdown("- 🎯 Zone Scanner")
-    st.markdown("- 📋 Trade History")
-    st.markdown("- 📈 Performance")
-    st.markdown("---")
-    if st.button("🗑️ Clear All Trades"):
-        db.clear_all_trades()
-        st.success("Cleared!")
-        st.rerun()
+    st.markdown("- 🤖 Agent Monitor")
+    st.markdown("- 🗄️ Agent DB Explorer")
