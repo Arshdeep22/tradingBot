@@ -1,4 +1,7 @@
+import json
 import logging
+import os
+from datetime import datetime, timezone
 
 from autonomous_optimizer.config import AgentConfig
 from autonomous_optimizer.session_manager import SessionManager
@@ -56,7 +59,56 @@ class Agent:
             if self._checker.check_goal_achieved(self._session.state):
                 logger.info("GOAL ACHIEVED — 3 consecutive dual-success runs!")
                 self._git.tag("goal-achieved")
+                self._deploy_winning_params()
                 break
+
+    def _deploy_winning_params(self) -> None:
+        """Write the winning zone params into strategy_memory.json so the live bot picks them up."""
+        result_path = os.path.join(
+            os.path.abspath(self._config.repo_root),
+            "reports", "training", "latest_backtest_result.json",
+        )
+        try:
+            with open(result_path) as f:
+                raw = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            logger.warning("Could not read latest backtest result for deploy: %s", e)
+            return
+
+        zone_params = raw.get("final_zone_params", {})
+        if not zone_params:
+            logger.warning("No final_zone_params in backtest result — skipping deploy")
+            return
+
+        memory_path = os.path.join(
+            os.path.abspath(self._config.repo_root),
+            ".streamlit", "strategy_memory.json",
+        )
+        try:
+            with open(memory_path) as f:
+                memory = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            memory = {"iterations": [], "best_win_rate": 0.0, "best_params": {}}
+
+        memory["best_params"] = zone_params
+        memory["best_win_rate"] = self._session.state.best_win_rate
+        memory["iterations"].append({
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "source": "autonomous_optimizer",
+            "iteration": self._session.state.iteration,
+            "win_rate": self._session.state.best_win_rate,
+            "pnl": self._session.state.best_pnl,
+            "composite": self._session.state.best_composite,
+            "params": zone_params,
+            "analysis": "Goal achieved: 3 consecutive Tier1+Tier2 dual-success runs.",
+        })
+
+        os.makedirs(os.path.dirname(memory_path), exist_ok=True)
+        tmp = memory_path + ".tmp"
+        with open(tmp, "w") as f:
+            json.dump(memory, f, indent=2)
+        os.replace(tmp, memory_path)
+        logger.info("Winning params deployed to %s (WR=%.1f%%)", memory_path, self._session.state.best_win_rate)
 
     def _run_one_iteration(self, n: int) -> None:
         """
@@ -113,12 +165,33 @@ class Agent:
         self._git.create_snapshot(f"pre-iter-{n}")
         self._coder.apply_changes(proposed)
 
-        # Step 8: VALIDATE
+        # Step 8: VALIDATE — always run Tier1 post-change as sanity check
         reverted = False
         tier2_result = None
         prev_score = self._session.state.best_composite
 
-        if reflection.gate_tier2 and self._checker.passes_tier1(tier1_result):
+        try:
+            post_tier1 = self._runner.run_tier1()
+        except BacktestTimeoutError:
+            logger.error(f"[Iteration {n}] Post-change Tier 1 timed out — reverting")
+            self._git.revert_to_snapshot()
+            reverted = True
+            post_tier1 = None
+        except Exception as e:
+            logger.error(f"[Iteration {n}] Post-change Tier 1 failed ({e}) — reverting")
+            self._git.revert_to_snapshot()
+            reverted = True
+            post_tier1 = None
+
+        if not reverted and not self._checker.passes_tier1(post_tier1):
+            logger.info(
+                f"[Iteration {n}] Post-change Tier 1 failed "
+                f"(wr={post_tier1.win_rate:.1f}%, trades={post_tier1.trade_count}) — reverting"
+            )
+            self._git.revert_to_snapshot()
+            reverted = True
+
+        if not reverted and reflection.gate_tier2:
             try:
                 tier2_result = self._runner.run_tier2()
             except BacktestTimeoutError:
@@ -152,6 +225,12 @@ class Agent:
                     )
                 else:
                     self._session.reset_consecutive_success()
+        elif not reverted:
+            # Tier1 passed but Tier2 not gated — revert to keep codebase clean.
+            # Changes are recorded in session history so the hypothesis is credited.
+            logger.info(f"[Iteration {n}] Tier 2 not gated — reverting to keep baseline clean")
+            self._git.revert_to_snapshot()
+            reverted = True
 
         # Step 10: UPDATE STATE
         result_to_record = tier2_result or tier1_result

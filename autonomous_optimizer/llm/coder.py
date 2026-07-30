@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 _SYSTEM_PROMPT = """
 You are the Coder component of an autonomous trading bot optimizer.
-You will receive a hypothesis and the current content of files to modify.
+You will receive a hypothesis and the COMPLETE contents of files to modify.
 
 Rules:
 1. Output ONLY valid Python code for each file — no explanations, no markdown.
@@ -20,10 +20,9 @@ Rules:
 4. Do NOT change anything outside the scope of the hypothesis.
 5. The output must be a JSON object: {"filepath": "new_file_contents", ...}
 6. Only include files that actually need to change.
+7. CRITICAL: Each file's value must be the COMPLETE file contents, not a partial snippet.
+   Never truncate, abbreviate with "..." or "# rest of file unchanged". Return every line.
 """
-
-_MAX_FILE_LINES = 150
-
 
 class CoderError(RuntimeError):
     pass
@@ -52,16 +51,28 @@ class Coder:
 
         valid: dict[str, str] = {}
         for filepath, code in data.items():
+            original = file_contents.get(filepath, "")
             try:
                 self._editor.validate_syntax(code, source_label=filepath)
+                self._check_no_truncation(filepath, original, code)
                 valid[filepath] = code
             except Exception as e:
-                logger.warning("Syntax validation failed for %s: %s", filepath, e)
+                logger.warning("Validation failed for %s: %s", filepath, e)
 
         if not valid:
-            raise CoderError("All generated files failed syntax validation")
+            raise CoderError("All generated files failed validation")
 
         return valid
+
+    def _check_no_truncation(self, filepath: str, original: str, generated: str) -> None:
+        """Reject generated code that is suspiciously shorter than the original."""
+        orig_lines = len(original.splitlines())
+        gen_lines = len(generated.splitlines())
+        if orig_lines > 50 and gen_lines < orig_lines * 0.6:
+            raise CoderError(
+                f"{filepath}: generated code has {gen_lines} lines vs original {orig_lines} "
+                f"— likely truncated. Refusing to overwrite."
+            )
 
     def _build_user_message(self, hypothesis: Hypothesis,
                              file_contents: dict[str, str]) -> str:
@@ -70,21 +81,12 @@ class Coder:
             f"Description: {hypothesis.description}",
             f"Expected delta: {hypothesis.expected_delta}",
             "",
-            "Files to modify:",
+            "Files to modify (COMPLETE file contents — you must return the ENTIRE file):",
         ]
 
         for filepath, content in file_contents.items():
-            lines = content.splitlines()
-            truncated = lines[:_MAX_FILE_LINES]
-            suffix = (
-                f"\n... (truncated, {len(lines) - _MAX_FILE_LINES} more lines)"
-                if len(lines) > _MAX_FILE_LINES else ""
-            )
             parts.append(
-                f"\n### {filepath}\n```python\n"
-                + "\n".join(truncated)
-                + suffix
-                + "\n```"
+                f"\n### {filepath}\n```python\n{content}\n```"
             )
 
         return "\n".join(parts)

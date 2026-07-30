@@ -3,17 +3,14 @@ import json
 import os
 import logging
 import sys
-from pathlib import Path
 
 from autonomous_optimizer.config import AgentConfig
 from autonomous_optimizer.models import BacktestResult
 
 logger = logging.getLogger(__name__)
 
-_LATEST_RESULT_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "reports", "training", "latest_backtest_result.json"
-)
+# Suppress console window on Windows when spawning subprocesses
+_CREATIONFLAGS = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
 
 
 class BacktestTimeoutError(RuntimeError):
@@ -52,6 +49,7 @@ class BacktestRunner:
                 timeout=self._config.backtest_timeout_seconds,
                 capture_output=True,
                 text=True,
+                creationflags=_CREATIONFLAGS,
             )
         except subprocess.TimeoutExpired as exc:
             raise BacktestTimeoutError(
@@ -69,7 +67,7 @@ class BacktestRunner:
 
     def _parse_report(self, report_path: str) -> BacktestResult:
         """Parse the JSON backtest result file into a BacktestResult."""
-        with open(report_path) as f:
+        with open(report_path, encoding="utf-8") as f:
             data = json.load(f)
 
         days_run = data.get("days_run", 0)

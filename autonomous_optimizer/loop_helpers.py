@@ -45,7 +45,7 @@ def _maybe_advance_phase(
 
     if tier2_result is not None:
         if phase == "A":
-            if tier2_result.trade_count >= 30 and tier2_result.win_rate >= 40.0:
+            if tier2_result.trade_count >= 30 and tier2_result.win_rate >= 55.0:
                 logger.info(
                     "Phase A gate passed (trades=%d, wr=%.1f%%) — advancing to B",
                     tier2_result.trade_count, tier2_result.win_rate,

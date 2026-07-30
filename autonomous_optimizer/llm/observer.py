@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 from autonomous_optimizer.config import AgentConfig
@@ -9,6 +10,7 @@ from autonomous_optimizer.models import BacktestResult, Observation
 
 _LATEST_REPORT = os.path.join("reports", "training", "latest_backtest_result.json")
 _TRAINING_DIR = os.path.join("reports", "training")
+_CREATIONFLAGS = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
 
 
 class Observer:
@@ -75,7 +77,7 @@ class Observer:
         if not report_path.exists():
             return "unknown"
         try:
-            with report_path.open() as f:
+            with report_path.open(encoding="utf-8") as f:
                 data = json.load(f)
             return str(data.get("regime", data.get("market_regime", "unknown")))
         except (json.JSONDecodeError, OSError):
@@ -88,7 +90,9 @@ class Observer:
                 cwd=self._config.repo_root,
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
                 check=False,
+                creationflags=_CREATIONFLAGS,
             )
             return [f for f in result.stdout.splitlines() if f.strip()]
         except OSError:

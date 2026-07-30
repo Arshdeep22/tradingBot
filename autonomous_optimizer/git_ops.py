@@ -1,12 +1,16 @@
 import re
 import subprocess
+import sys
 
-from .config import AgentConfig
+from autonomous_optimizer.config import AgentConfig
 
 _COMMIT_RE = re.compile(
     r"\[iter=\d+\]\[phase=[ABC]\]\[wr=[\d.]+\]\[pnl=[-\d.]+\]"
     r"\[trades=\d+\]\[composite=[\d.]+\]\[hyp=[\w-]+\]"
 )
+
+_SNAP_PREFIX = "SNAP:"
+_CREATIONFLAGS = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
 
 
 class GitError(RuntimeError):
@@ -22,7 +26,8 @@ class GitOps:
         try:
             return subprocess.run(
                 args, cwd=self._repo, check=check,
-                capture_output=True, text=True,
+                capture_output=True, text=True, encoding="utf-8",
+                creationflags=_CREATIONFLAGS,
             )
         except subprocess.CalledProcessError as e:
             raise GitError(f"git command failed: {e.stderr.strip()}") from e
@@ -34,9 +39,22 @@ class GitOps:
             self._run(["git", "checkout", branch])
 
     def create_snapshot(self, label: str = "") -> str:
+        """
+        Create a snapshot commit so we can reset to it later.
+        Using git stash is unreliable: it silently no-ops when there are no
+        staged changes, so a later 'stash pop' would restore the wrong state.
+        A snapshot commit is deterministic on all platforms.
+        """
         tag_name = f"snap-{label}" if label else "snap-auto"
-        self._run(["git", "stash", "push", "-m", tag_name])
-        return tag_name
+        self._run(["git", "add", "-A"])
+        result = self._run(["git", "diff", "--cached", "--quiet"], check=False)
+        if result.returncode == 0:
+            # Nothing staged — nothing changed, record current HEAD as snapshot
+            head = self._run(["git", "rev-parse", "HEAD"]).stdout.strip()
+            return head
+        self._run(["git", "commit", "-m", f"{_SNAP_PREFIX} {tag_name}"])
+        head = self._run(["git", "rev-parse", "HEAD"]).stdout.strip()
+        return head
 
     def commit(self, message: str) -> str:
         self._validate_commit_message(message)
@@ -52,10 +70,29 @@ class GitOps:
         self._run(["git", "push", "origin", self._config.agent_branch])
 
     def revert_to_snapshot(self) -> None:
-        self._run(["git", "stash", "pop"])
+        """Hard-reset to the most recent snapshot commit, then remove it."""
+        result = self._run(
+            ["git", "log", "--oneline", "--format=%H %s"],
+            check=False,
+        )
+        snap_sha = None
+        for line in result.stdout.splitlines():
+            sha, _, subject = line.partition(" ")
+            if subject.startswith(_SNAP_PREFIX):
+                snap_sha = sha
+                break
+
+        if snap_sha is None:
+            # No snapshot commit found — nothing to revert
+            return
+
+        # Get the parent of the snapshot commit (the clean state before changes)
+        parent = self._run(["git", "rev-parse", f"{snap_sha}^"]).stdout.strip()
+        self._run(["git", "reset", "--hard", parent])
 
     def tag(self, name: str) -> None:
-        self._run(["git", "tag", name])
+        # Tags can conflict on re-runs — use -f to overwrite silently
+        self._run(["git", "tag", "-f", name])
 
     def query_commits(self, grep: str) -> list[dict]:
         result = self._run(
