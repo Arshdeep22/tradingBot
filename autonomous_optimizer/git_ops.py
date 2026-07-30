@@ -27,6 +27,7 @@ class GitOps:
             return subprocess.run(
                 args, cwd=self._repo, check=check,
                 capture_output=True, text=True, encoding="utf-8",
+                errors="replace",
                 creationflags=_CREATIONFLAGS,
             )
         except subprocess.CalledProcessError as e:
@@ -115,7 +116,7 @@ class GitOps:
         lines = []
         for f in files:
             result = self._run(["git", "blame", "--porcelain", f], check=False)
-            if result.returncode == 0:
+            if result.returncode == 0 and result.stdout:
                 lines.extend(result.stdout.splitlines()[:n_lines])
         return lines
 

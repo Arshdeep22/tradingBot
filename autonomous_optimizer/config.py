@@ -60,7 +60,10 @@ class AgentConfig:
     backtest_timeout_seconds: int = 900    # 15-min hard kill
 
     # LLM
-    llm_model: str = "anthropic--claude-4.6-opus"
+    # NOTE: claude-4.8-opus exists in this tenant but is heavily rate-limited
+    # (429 on almost every call). claude-4.7-opus = same capability tier with
+    # much better throughput → recommended default. Override via AICORE_MODEL.
+    llm_model: str = "anthropic--claude-4.7-opus"
 
 
 DEFAULT_CONFIG = AgentConfig()

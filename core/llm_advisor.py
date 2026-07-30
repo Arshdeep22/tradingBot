@@ -142,7 +142,11 @@ class AICoreLLM:
         return self._token
 
     def _get_deployment_id(self) -> str:
-        """Get deployment ID for the model"""
+        """
+        Find the running deployment that serves self.model.
+        Only considers scenarioId=='foundation-models' (skips 'orchestration'
+        and other non-inference scenarios). Matches on EXACT model name.
+        """
         if self._deployment_id:
             return self._deployment_id
 
@@ -156,26 +160,43 @@ class AICoreLLM:
         response.raise_for_status()
 
         deployments = response.json().get("resources", [])
-        for dep in deployments:
-            # Look for a running deployment with our model
-            if dep.get("status") == "RUNNING":
-                model_name = dep.get("details", {}).get("resources", {}).get("backend_details", {}).get("model", {}).get("name", "")
-                if not model_name:
-                    # Try alternate path for model name
-                    model_name = str(dep.get("details", {}))
-                # Use first running deployment if model matches or as fallback
-                if self.model.lower() in model_name.lower() or self.model.lower() in str(dep).lower():
-                    self._deployment_id = dep["id"]
-                    return self._deployment_id
+        target = self.model.lower().strip()
 
-        # Fallback: use first running deployment
+        matches = []
         for dep in deployments:
-            if dep.get("status") == "RUNNING":
-                self._deployment_id = dep["id"]
-                logger.info(f"Using deployment: {self._deployment_id}")
-                return self._deployment_id
+            if dep.get("status") != "RUNNING":
+                continue
+            if dep.get("scenarioId") != "foundation-models":
+                continue
+            model_name = (
+                dep.get("details", {})
+                   .get("resources", {})
+                   .get("backend_details", {})
+                   .get("model", {})
+                   .get("name", "")
+            )
+            if model_name.lower().strip() == target:
+                matches.append(dep)
 
-        raise ValueError(f"No running deployment found for model '{self.model}' in resource group '{self.resource_group}'")
+        if matches:
+            matches.sort(key=lambda d: d.get("createdAt", ""), reverse=True)
+            self._deployment_id = matches[0]["id"]
+            logger.info(
+                "Using deployment %s for model %s",
+                self._deployment_id, self.model,
+            )
+            return self._deployment_id
+
+        available = sorted({
+            dep.get("details", {}).get("resources", {}).get("backend_details", {}).get("model", {}).get("name", "?")
+            for dep in deployments
+            if dep.get("status") == "RUNNING" and dep.get("scenarioId") == "foundation-models"
+        })
+        raise ValueError(
+            f"No running foundation-model deployment found for model '{self.model}' "
+            f"in resource group '{self.resource_group}'. "
+            f"Available models: {', '.join(available)}"
+        )
 
     def chat(self, messages: List[Dict], max_tokens: int = 4096, temperature: float = 0.3) -> str:
         """
@@ -213,21 +234,39 @@ class AICoreLLM:
             "messages": user_messages,
             "max_tokens": max_tokens,
         }
+        # NOTE: temperature intentionally omitted — Claude 4.7+ deployments in
+        # SAP AI Core reject it with HTTP 400 ("`temperature` is deprecated for
+        # this model."). Model defaults produce deterministic-enough output.
+        _ = temperature
         if system_prompt:
             payload["system"] = system_prompt
 
-        response = requests.post(url, headers=headers, json=payload)
+        logger.info("POST %s  deployment=%s", url, deployment_id)
+        response = requests.post(url, headers=headers, json=payload, timeout=120)
+        logger.info("Response status=%d  body_preview=%.500s",
+                    response.status_code, response.text)
+
         if not response.ok:
             raise Exception(f"HTTP {response.status_code}: {response.text}")
 
         result = response.json()
-        # Handle different response formats
+
+        text = ""
         if "choices" in result:
-            return result["choices"][0]["message"]["content"]
+            text = result["choices"][0]["message"]["content"] or ""
         elif "content" in result:
-            return result["content"][0]["text"]
+            blocks = result["content"]
+            text_blocks = [b.get("text", "") for b in blocks if b.get("type") == "text"]
+            text = "".join(text_blocks)
         else:
-            return str(result)
+            text = json.dumps(result)
+
+        if not text.strip():
+            raise Exception(
+                f"LLM returned empty text. Full response: {json.dumps(result)[:500]}"
+            )
+
+        return text
 
 
 class StrategyAdvisor:

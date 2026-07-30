@@ -38,7 +38,13 @@ class AgentLLMClient:
 
         last_error: Exception | None = None
         for attempt in range(max_retries):
-            raw = self._llm.chat(messages, max_tokens=4096, temperature=0.2)
+            try:
+                raw = self._llm.chat(messages, max_tokens=4096, temperature=0.2)
+            except Exception as e:
+                last_error = e
+                logger.warning("LLM call failed (attempt %d/%d): %s", attempt + 1, max_retries, e)
+                continue
+
             logger.debug("LLM raw response (attempt %d): %.200s", attempt + 1, raw)
 
             if not expect_json:
@@ -52,7 +58,7 @@ class AgentLLMClient:
                 last_error = e
                 logger.warning("JSON parse failed (attempt %d/%d): %s", attempt + 1, max_retries, e)
 
-        raise LLMError(f"LLM returned invalid JSON after {max_retries} attempts: {last_error}") from last_error
+        raise LLMError(f"LLM call failed after {max_retries} attempts: {last_error}") from last_error
 
     def _strip_fences(self, text: str) -> str:
         text = text.strip()

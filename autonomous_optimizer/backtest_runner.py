@@ -49,6 +49,8 @@ class BacktestRunner:
                 timeout=self._config.backtest_timeout_seconds,
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 creationflags=_CREATIONFLAGS,
             )
         except subprocess.TimeoutExpired as exc:

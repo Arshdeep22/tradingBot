@@ -70,15 +70,21 @@ class Analyzer:
         if observation.regime_state:
             parts += ["", f"### Market Regime: {observation.regime_state}"]
 
-        recent = context.get("recent", {})
+        # `recent` is a list of iteration records (WorkingMemory.to_dict()),
+        # not a dict with an "iterations" key.
+        recent = context.get("recent") or []
+        if isinstance(recent, dict):
+            recent = recent.get("iterations") or []
         if recent:
             parts += ["", "### Recent Iteration History (last 10)"]
-            for entry in (recent.get("iterations") or [])[-5:]:
-                r = entry.get("result", {})
+            for entry in recent[-5:]:
+                if not isinstance(entry, dict):
+                    continue
                 parts.append(
                     f"iter={entry.get('iteration','?')}  "
-                    f"wr={r.get('win_rate','?')}  pnl={r.get('total_pnl','?')}  "
-                    f"trades={r.get('trade_count','?')}  hyp={entry.get('hypothesis','?')}"
+                    f"wr={entry.get('win_rate','?')}  pnl={entry.get('pnl','?')}  "
+                    f"trades={entry.get('trade_count','?')}  "
+                    f"hyp={entry.get('hypothesis_slug','?')}"
                 )
 
         learned = context.get("learned", [])
