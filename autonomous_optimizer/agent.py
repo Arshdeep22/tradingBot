@@ -150,13 +150,13 @@ class Agent:
             self._session.long_term.add_hypothesis_embedding(
                 hypothesis.slug, hypothesis.description, "critic_rejected", n
             )
-            self._session.state.approaches_tried.append({
-                "slug": hypothesis.slug,
-                "description": hypothesis.description,
-                "iteration": n,
-                "result": "critic_rejected",
-                "reverted": False,
-            })
+            self._session.record_approach(
+                slug=hypothesis.slug,
+                description=hypothesis.description,
+                iteration=n,
+                result="critic_rejected",
+                reverted=False,
+            )
             self._session.state.iteration += 1
             self._session.save()
             return
@@ -247,13 +247,13 @@ class Agent:
             "degraded" if reverted else
             "neutral"
         )
-        self._session.state.approaches_tried.append({
-            "slug": hypothesis.slug,
-            "description": hypothesis.description,
-            "iteration": n,
-            "result": outcome,
-            "reverted": reverted,
-        })
+        self._session.record_approach(
+            slug=hypothesis.slug,
+            description=hypothesis.description,
+            iteration=n,
+            result=outcome,
+            reverted=reverted,
+        )
         self._session.long_term.add_hypothesis_embedding(
             hypothesis.slug, hypothesis.description, outcome, n
         )

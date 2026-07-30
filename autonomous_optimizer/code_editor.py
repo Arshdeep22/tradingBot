@@ -8,6 +8,8 @@ try:
 except ImportError:
     _LIBCST_AVAILABLE = False
 
+from autonomous_optimizer.storage.agent_db import get_agent_db
+
 logger = logging.getLogger(__name__)
 
 _WRITE_BLACKLIST = [
@@ -26,10 +28,39 @@ class SyntaxValidationError(SyntaxError):
 
 
 class CodeEditor:
+    """Edits repo source files. All operations are traced to the agent DB
+    (`tool_invocations` table) so there's a durable, queryable audit trail
+    of exactly which files the agent touched and when.
+
+    NOTE: The trading-bot source code itself is intentionally NOT stored in
+    the DB — those files ARE the artifact the agent optimises, so they must
+    remain on disk for git / interpreter to pick up. Only *metadata* about
+    each edit (path, action, timing, success/error) is persisted here.
+    """
+
+    def __init__(self):
+        self._db = get_agent_db()
+
+    def _trace(self, action: str, args: dict, ok: bool = True,
+               error: str | None = None, result: dict | None = None) -> None:
+        try:
+            self._db.record_tool(
+                tool_name="code_editor",
+                action=action,
+                args=args,
+                result=result or {},
+                ok=ok,
+                error=error,
+            )
+        except Exception as e:  # never let tracing break the editor
+            logger.debug("code_editor trace failed: %s", e)
+
     def read_file(self, path: str) -> str:
         # Force UTF-8 so LLM-generated files with unicode (checkmarks, arrows,
         # emoji, non-ASCII comments) round-trip cleanly on Windows.
-        return Path(path).read_text(encoding="utf-8")
+        content = Path(path).read_text(encoding="utf-8")
+        self._trace("read_file", {"path": path}, result={"bytes": len(content)})
+        return content
 
     def _check_write_allowed(self, path: str) -> None:
         normalized = str(Path(path)).replace("\\", "/")
@@ -40,13 +71,19 @@ class CodeEditor:
                 )
 
     def write_file(self, path: str, new_code: str) -> None:
-        self._check_write_allowed(path)
-        self.validate_syntax(new_code, source_label=path)
-        p = Path(path)
-        p.parent.mkdir(parents=True, exist_ok=True)
-        # Force UTF-8; Windows's default cp1252 chokes on unicode chars that
-        # LLM output frequently contains (e.g. '\u2713' checkmarks in docs).
-        p.write_text(new_code, encoding="utf-8")
+        try:
+            self._check_write_allowed(path)
+            self.validate_syntax(new_code, source_label=path)
+            p = Path(path)
+            p.parent.mkdir(parents=True, exist_ok=True)
+            # Force UTF-8; Windows's default cp1252 chokes on unicode chars that
+            # LLM output frequently contains (e.g. '\u2713' checkmarks in docs).
+            p.write_text(new_code, encoding="utf-8")
+        except Exception as e:
+            self._trace("write_file", {"path": path}, ok=False, error=str(e))
+            raise
+        self._trace("write_file", {"path": path},
+                    result={"bytes": len(new_code)})
 
     def validate_syntax(self, code: str, source_label: str = "<generated>") -> None:
         try:
@@ -57,16 +94,29 @@ class CodeEditor:
             ) from e
 
     def surgical_replace_function(self, path: str, func_name: str, new_func_src: str) -> None:
-        self.validate_syntax(new_func_src, source_label=f"<new {func_name}>")
-        existing = self.read_file(path)
-        if func_name not in self.list_top_level_functions(path):
-            raise FunctionNotFoundError(f"Function {func_name!r} not found in {path}")
+        try:
+            self.validate_syntax(new_func_src, source_label=f"<new {func_name}>")
+            existing = self.read_file(path)
+            if func_name not in self.list_top_level_functions(path):
+                raise FunctionNotFoundError(f"Function {func_name!r} not found in {path}")
 
-        if _LIBCST_AVAILABLE:
-            self._libcst_replace(path, existing, func_name, new_func_src)
-        else:
-            logger.warning("libcst not available; falling back to AST-based function replacement")
-            self._ast_replace_fallback(path, existing, func_name, new_func_src)
+            if _LIBCST_AVAILABLE:
+                self._libcst_replace(path, existing, func_name, new_func_src)
+            else:
+                logger.warning("libcst not available; falling back to AST-based function replacement")
+                self._ast_replace_fallback(path, existing, func_name, new_func_src)
+        except Exception as e:
+            self._trace(
+                "surgical_replace_function",
+                {"path": path, "func_name": func_name},
+                ok=False, error=str(e),
+            )
+            raise
+        self._trace(
+            "surgical_replace_function",
+            {"path": path, "func_name": func_name},
+            result={"engine": "libcst" if _LIBCST_AVAILABLE else "ast"},
+        )
 
     def list_top_level_functions(self, path: str) -> list[str]:
         tree = ast.parse(Path(path).read_text())

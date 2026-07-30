@@ -1,9 +1,25 @@
 """Entry point: python -m autonomous_optimizer [--dry-run] [--iterations N] [--phase A|B|C]"""
 import argparse
-import sys
 import logging
+import sys
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+from autonomous_optimizer.storage import install_db_logging
+
+# Install DB-backed logging FIRST so every subsequent log line lands in
+# database/agent.db (runtime_logs). A console handler is also attached so
+# operators still see live output — but no *.log files are written to disk.
+#
+# We do NOT pin the handler's agent label — the handler reads
+# `current_agent` from contextvars on every emit, so log lines emitted
+# from inside `agent_scope("trading_bot", run_id=...)` will correctly
+# land tagged as trading_bot even though the process was started as the
+# optimizer. Default agent (outside any scope) is "optimizer".
+install_db_logging(
+    level=logging.INFO,
+    also_console=True,
+    console_prefix="[OPT]",
+)
+
 logger = logging.getLogger(__name__)
 
 

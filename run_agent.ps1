@@ -1,5 +1,10 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # Autonomous Optimizer Agent — SAP AI Core credentials + model selection
+#
+# NOTE: All memories, session state, and runtime logs are now persisted in
+#       database/agent.db (SQLite). This script no longer creates any *.log
+#       files on disk — inspect logs with e.g.:
+#           sqlite3 database/agent.db "SELECT ts,level,message FROM runtime_logs ORDER BY id DESC LIMIT 50"
 # ─────────────────────────────────────────────────────────────────────────────
 
 $env:AICORE_AUTH_URL       = "https://private-cloud-agent-dev-eu12-155585.authentication.eu12.hana.ondemand.com"
@@ -21,18 +26,15 @@ $env:PYTHONUNBUFFERED = "1"
 
 Set-Location "c:\Users\Arshdeep singh\Downloads\TradingBot\tradingBot"
 
-$logFile = "logs/agent_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
-New-Item -ItemType Directory -Force -Path "logs" | Out-Null
-
 Write-Host ""
 Write-Host "==============================================" -ForegroundColor Cyan
 Write-Host " Autonomous Optimizer Agent " -ForegroundColor Cyan
 Write-Host " Branch: main  (agent commits directly here)" -ForegroundColor Cyan
 Write-Host " Model:  $env:AICORE_MODEL" -ForegroundColor Cyan
-Write-Host " Log:    $logFile" -ForegroundColor Cyan
+Write-Host " Logs:   database/agent.db  (table: runtime_logs)" -ForegroundColor Cyan
 Write-Host " Ctrl+C to stop." -ForegroundColor Yellow
 Write-Host "==============================================" -ForegroundColor Cyan
 Write-Host ""
 
-# `-u` + PYTHONUNBUFFERED = live stdout. Tee-Object splits to console + logfile.
-py -3.12 -u -m autonomous_optimizer 2>&1 | Tee-Object -FilePath $logFile
+# `-u` + PYTHONUNBUFFERED = live stdout. No Tee-Object → no log files on disk.
+py -3.12 -u -m autonomous_optimizer

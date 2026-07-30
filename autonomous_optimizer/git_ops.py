@@ -3,6 +3,7 @@ import subprocess
 import sys
 
 from autonomous_optimizer.config import AgentConfig
+from autonomous_optimizer.storage.agent_db import get_agent_db
 
 _COMMIT_RE = re.compile(
     r"\[iter=\d+\]\[phase=[ABC]\]\[wr=[\d.]+\]\[pnl=[-\d.]+\]"
@@ -21,6 +22,21 @@ class GitOps:
     def __init__(self, config: AgentConfig):
         self._config = config
         self._repo = config.repo_root
+        self._db = get_agent_db()
+
+    def _trace(self, action: str, args: dict, ok: bool = True,
+               error: str | None = None, result: dict | None = None) -> None:
+        try:
+            self._db.record_tool(
+                tool_name="git_ops",
+                action=action,
+                args=args,
+                result=result or {},
+                ok=ok,
+                error=error,
+            )
+        except Exception:
+            pass
 
     def _run(self, args: list[str], check: bool = True) -> subprocess.CompletedProcess:
         try:
@@ -39,7 +55,11 @@ class GitOps:
         if result.returncode != 0:
             self._run(["git", "checkout", branch])
 
-    def create_snapshot(self, label: str = "") -> str:
+    def create_snapshot(self, label: str = "") -> str:  # noqa: D401
+        self._trace("create_snapshot", {"label": label})
+        return self._create_snapshot_impl(label)
+
+    def _create_snapshot_impl(self, label: str) -> str:
         """
         Create a snapshot commit so we can reset to it later.
         Using git stash is unreliable: it silently no-ops when there are no
@@ -58,11 +78,17 @@ class GitOps:
         return head
 
     def commit(self, message: str) -> str:
-        self._validate_commit_message(message)
-        self._run(["git", "add", "-u"])
-        self._run(["git", "commit", "-m", message])
-        result = self._run(["git", "rev-parse", "--short", "HEAD"])
-        return result.stdout.strip()
+        try:
+            self._validate_commit_message(message)
+            self._run(["git", "add", "-u"])
+            self._run(["git", "commit", "-m", message])
+            result = self._run(["git", "rev-parse", "--short", "HEAD"])
+        except Exception as e:
+            self._trace("commit", {"message": message}, ok=False, error=str(e))
+            raise
+        sha = result.stdout.strip()
+        self._trace("commit", {"message": message}, result={"sha": sha})
+        return sha
 
     def push(self) -> None:
         result = self._run(["git", "remote"], check=False)
@@ -72,6 +98,7 @@ class GitOps:
 
     def revert_to_snapshot(self) -> None:
         """Hard-reset to the most recent snapshot commit, then remove it."""
+        self._trace("revert_to_snapshot", {})
         result = self._run(
             ["git", "log", "--oneline", "--format=%H %s"],
             check=False,
