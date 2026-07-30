@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-30",
+  "wins_analysis": "No wins today. The only trend-aligned setup (INFY BUY at 68% probability) did not trigger as price did not reach the entry level, suggesting the entry was set too conservatively below market in a strong uptrend day.",
+  "losses_analysis": "ONGC SELL was placed counter to the trending_up regime with only 28% AI probability \u2014 far below any reasonable threshold. In a +1.9% Nifty day, shorting was predictably punished. The system still placed 2 out of 3 executed orders as SELL setups despite the regime being clearly bullish, directly contradicting yesterday's learnings about rejecting counter-trend trades.",
+  "regime_impact": "The strong trending_up regime (ADX 25, Nifty +1.9%, VIX 12.2) crushed all SELL setups. Only BUY setups aligned with the trend had any chance. The system failed to enforce regime-based filtering despite explicit notes recommending it.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Hard-reject ALL SELL orders when regime is trending_up AND Nifty gain > +1.0%. Zero exceptions regardless of zone score.",
+      "reason": "ONGC SELL (28% prob) and COALINDIA SELL (32% prob) were placed in a +1.9% trending_up day. Both were obvious losers. This same mistake has repeated for weeks.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Set hard minimum AI probability threshold at 60% for ANY order placement. Do not place orders below this regardless of other factors.",
+      "reason": "ONGC at 28% and COALINDIA at 32% should never have been placed. HDFCBANK at 25% was correctly skipped but only because it wasn't triggered \u2014 it should have been filtered out entirely.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "For BUY setups in trending_up regime, set entry price at or slightly above current price (chase entries) rather than waiting for pullback to demand zone when ADX > 22 and day gain > 1%.",
+      "reason": "INFY BUY at \u20b91,157.20 never triggered likely because the strong uptrend didn't pull back to the demand zone. In strong trends, waiting for perfect entries means missing trades entirely.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "If fewer than 3 qualifying BUY setups exist in a trending_up regime, place ZERO orders rather than filling slots with counter-trend SELL setups.",
+      "reason": "The system found only 1 valid setup (INFY) but still placed 3 orders by including counter-trend SELLs. Better to have 0 trades than forced losers.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Implement a cumulative loss circuit breaker: after 5 consecutive weeks at 0% win rate, reduce position size by 50% and require AI probability > 70% for any trade.",
+      "reason": "The report explicitly notes '0% win rate over 5 weeks' yet position sizing and thresholds remain unchanged. Capital preservation must take priority over generating trades.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Only place BUY orders with AI probability \u2265 65% that align with the prevailing regime; if regime stays trending_up, use slightly aggressive entries on IT and banking names showing relative strength.",
+  "symbol_notes": {
+    "INFY": "Best setup today at 68% prob and trend-aligned \u2014 if still showing demand zone strength tomorrow, use slightly higher entry to avoid missing the move in strong trend",
+    "ONGC": "Blacklist for SELL setups in trending_up regime \u2014 lost \u20b9999 on obvious counter-trend trade at 28% probability",
+    "COALINDIA": "Pending SELL should be cancelled immediately at open \u2014 counter-trend in bullish regime with only 32% probability",
+    "HDFCBANK": "Avoid SELL setups entirely unless regime flips to trending_down"
+  },
+  "confidence": 3
+}
