@@ -7,18 +7,20 @@ class SuccessChecker:
         self._config = config
 
     def passes_tier1(self, result: BacktestResult) -> bool:
-        """WR >= tier1_min_wr AND trades >= tier1_min_trades."""
+        """WR >= tier1_min_wr AND trades >= tier1_min_trades AND not over-trading."""
         return (
             result.win_rate >= self._config.tier1_min_wr
             and result.trade_count >= self._config.tier1_min_trades
+            and result.trades_per_day <= self._config.max_trades_per_day
         )
 
     def passes_tier2(self, result: BacktestResult) -> bool:
-        """WR >= tier2_min_wr AND trades >= tier2_min_trades AND pnl >= tier2_min_pnl."""
+        """WR >= tier2_min_wr AND trades >= tier2_min_trades AND pnl >= tier2_min_pnl AND not over-trading."""
         return (
             result.win_rate >= self._config.tier2_min_wr
             and result.trade_count >= self._config.tier2_min_trades
             and result.total_pnl >= self._config.tier2_min_pnl
+            and result.trades_per_day <= self._config.max_trades_per_day
         )
 
     def passes_safety_rails(self, result: BacktestResult) -> bool:

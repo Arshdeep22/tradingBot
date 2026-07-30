@@ -78,11 +78,14 @@ def normalize(x: float, min_val: float, max_val: float) -> float:
 
 
 def composite_score(r: BacktestResult) -> float:
+    # trades_per_day is intentionally excluded — rewarding frequency causes
+    # the agent to loosen setup criteria to generate more trades, which
+    # collapses win-rate and produces stat hallucinations.
+    # High-quality setups first: WR 45%, PnL 35%, PF 15%, Sharpe 5%.
     return (
-        0.35 * normalize(r.win_rate, 0, 100)
-      + 0.30 * normalize(r.total_pnl, -50_000, 100_000)
-      + 0.20 * normalize(r.trades_per_day, 0, 5)
-      + 0.10 * normalize(r.profit_factor, 0, 4)
+        0.45 * normalize(r.win_rate, 0, 100)
+      + 0.35 * normalize(r.total_pnl, -50_000, 100_000)
+      + 0.15 * normalize(r.profit_factor, 0, 4)
       + 0.05 * normalize(r.sharpe_ratio, -2, 4)
     )
 

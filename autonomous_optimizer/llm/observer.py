@@ -40,6 +40,12 @@ class Observer:
         if result.win_rate == 0.0:
             flags.append("ALL_LOSSES: win_rate == 0.0")
 
+        if result.trades_per_day > self._config.max_trades_per_day:
+            flags.append(
+                f"OVERTRADING: {result.trades_per_day:.1f} trades/day exceeds "
+                f"max {self._config.max_trades_per_day} — setup criteria too loose"
+            )
+
         if result.pnl_by_week and result.total_pnl != 0.0:
             max_week = max(abs(w) for w in result.pnl_by_week)
             if max_week > 0.8 * abs(result.total_pnl):

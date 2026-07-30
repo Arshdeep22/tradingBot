@@ -16,6 +16,14 @@ Rules:
 3. Explicitly rule out at least 2 alternative causes and explain why.
 4. Set confidence 0.0-1.0 based on how strongly the evidence points to your cause.
 
+IMPORTANT — on trade_frequency:
+- If trade count is low but win-rate is acceptable (≥55%), do NOT flag this as a problem.
+  Fewer high-quality trades is the correct behaviour — the setup filter is working.
+- Only flag trade_frequency as the root cause when the system is missing VALID setups
+  (e.g. a bug skips signals, the symbol universe is too narrow, or the session window
+  is misconfigured) — NOT because the criteria are "too strict".
+- Never imply the solution is to loosen entry thresholds or acceptance criteria.
+
 Respond ONLY with valid JSON matching this schema:
 {
   "category": "<one of the categories above>",

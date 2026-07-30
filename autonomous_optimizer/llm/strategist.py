@@ -21,6 +21,18 @@ Rules:
 5. The slug must be kebab-case, ≤ 5 words, unique (you will be told if it was tried before).
 6. Do NOT propose solutions that are in the blocked list.
 
+HARD CONSTRAINT — setup quality over trade count:
+- NEVER loosen entry filters, scoring thresholds, zone criteria, or confirmation rules
+  to generate more trades. More trades with lower quality destroys win-rate and
+  produces statistical hallucinations.
+- If trade count is low, the correct response is to WAIT for better setups — not to
+  accept weaker ones. Fewer high-quality trades > many low-quality trades.
+- Any hypothesis whose primary effect is increasing trade volume (e.g. "lower min_score
+  from 60 to 50", "remove confirmation filter", "relax zone width requirement") is
+  FORBIDDEN unless win-rate is explicitly expected to hold or improve.
+- Acceptable ways to get more trades: expand the symbol universe, run on more sessions,
+  fix bugs that cause valid setups to be skipped — not soften the setup criteria.
+
 Respond ONLY with valid JSON:
 {
   "slug": "trailing-stop-breakeven",

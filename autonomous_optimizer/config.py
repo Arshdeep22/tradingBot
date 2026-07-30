@@ -16,6 +16,11 @@ class AgentConfig:
     tier2_min_trades: int = 30
     tier2_min_pnl: float = 45_000.0       # rupees
 
+    # Quality guard: reject any result that averaged more than this many trades
+    # per day — prevents the agent from loosening setup criteria just to hit
+    # trade-count minimums. ~3/day ≈ 150 trades over 50 days is already generous.
+    max_trades_per_day: float = 3.0
+
     # Consecutive success requirement
     consecutive_required: int = 3
 
