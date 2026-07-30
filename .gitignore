@@ -13,6 +13,8 @@ eggs/
 venv/
 env/
 .env/
+.venv/
+ENV/
 
 # Database - TRACK trades.db for GitHub Actions persistence
 # database/*.db  (commented out - we need to track trades.db)
@@ -31,7 +33,10 @@ logs/*.log
 .DS_Store
 Thumbs.db
 
-# Secrets
+# Secrets / Env files
 config/secrets.py
+.env
+.env.*
+!.env.example
 *.env
 .streamlit/secrets.toml
