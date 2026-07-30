@@ -27,7 +27,8 @@ class AgentLLMClient:
         self._llm = self._build_llm()
 
     def call(self, system_prompt: str, user_message: str,
-             expect_json: bool = True, max_retries: int = 3) -> Any:
+             expect_json: bool = True, max_retries: int = 3,
+             stage: str = "") -> Any:
         if expect_json:
             system_prompt = system_prompt + "\nRespond ONLY with valid JSON."
 
@@ -36,16 +37,27 @@ class AgentLLMClient:
             {"role": "user", "content": user_message},
         ]
 
+        # Print the input the LLM will see (first ~800 chars of the user message)
+        # so operators can actually understand what the agent is asking the model.
+        preview_max = 800
+        preview = user_message if len(user_message) <= preview_max else (
+            user_message[:preview_max] + f"... [+{len(user_message) - preview_max} chars]"
+        )
+        tag = f"[{stage}] " if stage else ""
+        logger.info("%sLLM PROMPT (%d chars):\n%s", tag, len(user_message), preview)
+
         last_error: Exception | None = None
         for attempt in range(max_retries):
             try:
                 raw = self._llm.chat(messages, max_tokens=4096, temperature=0.2)
             except Exception as e:
                 last_error = e
-                logger.warning("LLM call failed (attempt %d/%d): %s", attempt + 1, max_retries, e)
+                logger.warning("%sLLM call failed (attempt %d/%d): %s",
+                               tag, attempt + 1, max_retries, e)
                 continue
 
-            logger.debug("LLM raw response (attempt %d): %.200s", attempt + 1, raw)
+            logger.info("%sLLM REPLY (%d chars): %.400s",
+                        tag, len(raw), raw.replace("\n", " "))
 
             if not expect_json:
                 return raw

@@ -46,7 +46,7 @@ class Analyzer:
 
     def analyze(self, observation: Observation, context: dict) -> RootCause:
         user_msg = self._build_user_message(observation, context)
-        raw = self._llm.call(_SYSTEM_PROMPT, user_msg, expect_json=True)
+        raw = self._llm.call(_SYSTEM_PROMPT, user_msg, expect_json=True, stage="analyzer")
         return self._validate_and_parse(raw)
 
     def _build_user_message(self, observation: Observation, context: dict) -> str:

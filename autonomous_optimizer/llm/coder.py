@@ -37,14 +37,25 @@ class Coder:
 
     def generate_changes(self, hypothesis: Hypothesis) -> dict[str, str]:
         file_contents: dict[str, str] = {}
+        logger.info("Coder: hypothesis '%s' targets %d file(s): %s",
+                    hypothesis.slug, len(hypothesis.target_files),
+                    hypothesis.target_files)
         for filepath in hypothesis.target_files:
             try:
-                file_contents[filepath] = self._editor.read_file(filepath)
+                content = self._editor.read_file(filepath)
+                file_contents[filepath] = content
+                logger.info("  READ  %s  (%d bytes, %d lines)",
+                            filepath, len(content), content.count("\n") + 1)
             except FileNotFoundError:
                 file_contents[filepath] = ""
+                logger.warning(
+                    "  READ  %s  DOES NOT EXIST — LLM will be shown EMPTY content "
+                    "and will HALLUCINATE the file. Fix hypothesis target_files.",
+                    filepath,
+                )
 
         msg = self._build_user_message(hypothesis, file_contents)
-        data = self._llm.call(_SYSTEM_PROMPT, msg)
+        data = self._llm.call(_SYSTEM_PROMPT, msg, stage="coder")
 
         if not isinstance(data, dict):
             raise CoderError(f"Expected dict from LLM, got {type(data).__name__}")
@@ -56,8 +67,14 @@ class Coder:
                 self._editor.validate_syntax(code, source_label=filepath)
                 self._check_no_truncation(filepath, original, code)
                 valid[filepath] = code
+                orig_lines = original.count("\n") + 1 if original else 0
+                new_lines = code.count("\n") + 1
+                logger.info(
+                    "  PROPOSED  %s  %d -> %d lines (%+d)",
+                    filepath, orig_lines, new_lines, new_lines - orig_lines,
+                )
             except Exception as e:
-                logger.warning("Validation failed for %s: %s", filepath, e)
+                logger.warning("  REJECTED  %s  validation failed: %s", filepath, e)
 
         if not valid:
             raise CoderError("All generated files failed validation")
@@ -96,4 +113,5 @@ class Coder:
         for filepath, code in changes.items():
             self._editor.write_file(filepath, code)
             written.append(filepath)
+            logger.info("  WROTE %s  (%d bytes)", filepath, len(code))
         return written

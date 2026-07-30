@@ -162,8 +162,16 @@ class Agent:
             return
 
         # Step 7: IMPLEMENT — snapshot first
-        self._git.create_snapshot(f"pre-iter-{n}")
-        self._coder.apply_changes(proposed)
+        snap_sha = self._git.create_snapshot(f"pre-iter-{n}")
+        logger.info(f"[Iteration {n}] Git snapshot @ {snap_sha[:8]}")
+        written = self._coder.apply_changes(proposed)
+        logger.info(f"[Iteration {n}] Applied changes to {len(written)} file(s): {written}")
+        # Show a compact diff summary so the operator sees WHAT changed
+        diff_summary = self._git._run(
+            ["git", "diff", "--stat", "HEAD"], check=False,
+        ).stdout.strip()
+        if diff_summary:
+            logger.info(f"[Iteration {n}] Diff summary:\n{diff_summary}")
 
         # Step 8: VALIDATE — always run Tier1 post-change as sanity check
         reverted = False

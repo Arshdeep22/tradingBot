@@ -241,10 +241,10 @@ class AICoreLLM:
         if system_prompt:
             payload["system"] = system_prompt
 
-        logger.info("POST %s  deployment=%s", url, deployment_id)
+        logger.debug("POST %s  deployment=%s", url, deployment_id)
         response = requests.post(url, headers=headers, json=payload, timeout=120)
-        logger.info("Response status=%d  body_preview=%.500s",
-                    response.status_code, response.text)
+        logger.debug("Response status=%d  body_preview=%.500s",
+                     response.status_code, response.text)
 
         if not response.ok:
             raise Exception(f"HTTP {response.status_code}: {response.text}")
