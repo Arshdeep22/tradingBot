@@ -94,6 +94,17 @@ class Agent:
         critic_result = self._critic.review(hypothesis, proposed)
         if not critic_result.approved:
             logger.warning(f"[Iteration {n}] Critic blocked: {critic_result.reason}")
+            self._session.long_term.block_approach(hypothesis.description)
+            self._session.long_term.add_hypothesis_embedding(
+                hypothesis.slug, hypothesis.description, "critic_rejected", n
+            )
+            self._session.state.approaches_tried.append({
+                "slug": hypothesis.slug,
+                "description": hypothesis.description,
+                "iteration": n,
+                "result": "critic_rejected",
+                "reverted": False,
+            })
             self._session.state.iteration += 1
             self._session.save()
             return
@@ -144,6 +155,21 @@ class Agent:
 
         # Step 10: UPDATE STATE
         result_to_record = tier2_result or tier1_result
+        outcome = (
+            "improved" if (tier2_result and not reverted) else
+            "degraded" if reverted else
+            "neutral"
+        )
+        self._session.state.approaches_tried.append({
+            "slug": hypothesis.slug,
+            "description": hypothesis.description,
+            "iteration": n,
+            "result": outcome,
+            "reverted": reverted,
+        })
+        self._session.long_term.add_hypothesis_embedding(
+            hypothesis.slug, hypothesis.description, outcome, n
+        )
         record = IterationRecord(
             iteration=n,
             phase=self._session.state.phase,
@@ -160,4 +186,6 @@ class Agent:
         self._session.maybe_compress()
         self._session.state.iteration += 1
         self._session.save()
-        _maybe_advance_phase(self._session, self._config)
+        new_phase = _maybe_advance_phase(self._session, tier2_result)
+        if new_phase:
+            self._git.tag(f"phase-{new_phase.lower()}-start")

@@ -4,7 +4,7 @@ import logging
 from autonomous_optimizer.config import AgentConfig
 from autonomous_optimizer.models import RootCause, Hypothesis
 from autonomous_optimizer.llm.client import AgentLLMClient
-from autonomous_optimizer.memory.embeddings import novelty_score, most_similar_past
+from autonomous_optimizer.memory.embeddings import novelty_score
 from autonomous_optimizer.memory.long_term_memory import LongTermMemory
 
 logger = logging.getLogger(__name__)
@@ -69,7 +69,7 @@ class Strategist:
             score2 = novelty_score(hypothesis.description, past_embeddings)
             hypothesis.novelty_score = score2
 
-        self._enforce_phase_constraint(hypothesis, context.get("phase", "A"))
+        self._enforce_phase_constraint(hypothesis, context.get("current_phase", "A"))
         return hypothesis
 
     def _enforce_phase_constraint(self, hypothesis: Hypothesis, phase: str) -> None:
@@ -81,7 +81,7 @@ class Strategist:
 
     def _build_user_message(self, root_cause: RootCause, context: dict,
                              explore: bool) -> str:
-        phase = context.get("phase", "A")
+        phase = context.get("current_phase", "A")
         tried = context.get("approaches_tried", [])
         blocked = context.get("blocked_approaches", [])
 

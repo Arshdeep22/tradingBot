@@ -10,6 +10,12 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
+_WRITE_BLACKLIST = [
+    ".streamlit/secrets.toml",
+    ".git/",
+    "autonomous_optimizer/",
+]
+
 
 class FunctionNotFoundError(ValueError):
     pass
@@ -23,7 +29,16 @@ class CodeEditor:
     def read_file(self, path: str) -> str:
         return Path(path).read_text()
 
+    def _check_write_allowed(self, path: str) -> None:
+        normalized = str(Path(path)).replace("\\", "/")
+        for blocked in _WRITE_BLACKLIST:
+            if blocked in normalized:
+                raise PermissionError(
+                    f"Writing to {path!r} is blocked (matches blacklist: {blocked!r})"
+                )
+
     def write_file(self, path: str, new_code: str) -> None:
+        self._check_write_allowed(path)
         self.validate_syntax(new_code, source_label=path)
         p = Path(path)
         p.parent.mkdir(parents=True, exist_ok=True)

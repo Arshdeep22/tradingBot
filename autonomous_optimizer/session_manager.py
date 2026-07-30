@@ -74,6 +74,7 @@ class SessionManager:
             "learned": summaries,
             "blocked": self.long_term._blocked_approaches,
             "current_phase": self.state.phase,
+            "approaches_tried": self.state.approaches_tried[-20:],
             "best_metrics": {
                 "wr": self.state.best_win_rate,
                 "pnl": self.state.best_pnl,
