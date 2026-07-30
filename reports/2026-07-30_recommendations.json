@@ -1,0 +1,127 @@
+{
+  "date": "2026-07-30",
+  "scan_time_ist": "2026-07-30 13:24:29",
+  "total_setups_found": 4,
+  "total_candidates_sent_to_ai": 4,
+  "ai_available": true,
+  "market_context": "Only 4 setups available, far below the minimum 3 qualifying setups threshold after applying filters. INFY BUY is the only trend-aligned setup with a high zone score (58/60) and meets the 60%+ probability threshold. The remaining 3 are SELL setups counter to the trending_up regime and should be rejected per yesterday's learnings. Given the 0% win rate over 5 weeks and recommendation to pause live trading for backtesting, even the INFY setup should be approached with extreme caution.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.7%",
+    "adx": 25.0,
+    "vix": 12.2,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.7%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "INFY.NS",
+      "side": "BUY",
+      "entry": 1157.2,
+      "stop_loss": 1148.2,
+      "target": 1184.2,
+      "zone_score": 58,
+      "win_probability": 68,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Highest zone score (58/60) with pristine demand zone, perfect trend alignment in trending_up regime",
+        "RBR pattern with gap departure and tight base \u2014 textbook demand zone formation",
+        "SL distance is \u20b99.0 (0.78% from entry) which meets the 0.8% threshold for stocks over \u20b9500, and R:R of 3.0 is excellent",
+        "Very fresh zone (15 candles, same session) with slow controlled arrival \u2014 highest quality setup available"
+      ],
+      "risks": "Strategy has 0% win rate over 5 weeks indicating systematic issues; even high-scoring zones have been failing consistently \u2014 consider this a paper trade for validation",
+      "entry_advice": "Wait for 15-minute opening range filter after 9:30 AM; only enter if price pulls back to \u20b91157-1158 zone and prints a bullish confirmation candle (green body closing above midpoint). Do NOT use pure limit order given recent failures.",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "COALINDIA.NS",
+      "side": "SELL",
+      "entry": 426.2,
+      "stop_loss": 429.5,
+      "target": 416.3,
+      "zone_score": 45,
+      "win_probability": 32,
+      "conviction": "LOW",
+      "reasoning": [
+        "Counter-trend SELL in a trending_up regime \u2014 directly conflicts with regime guidance",
+        "Zone score of 45 is moderate but trend score only 5/10 (sideways/neutral)",
+        "Should be rejected per yesterday's learning: avoid counter-trend trades in trending_up regime"
+      ],
+      "risks": "Selling against a +1.7% Nifty uptrend with ADX 25 is high-risk; likely to get squeezed higher",
+      "entry_advice": "DO NOT TRADE \u2014 counter-trend in trending_up regime, below 60% probability threshold",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "ONGC.NS",
+      "side": "SELL",
+      "entry": 248.41,
+      "stop_loss": 249.75,
+      "target": 244.39,
+      "zone_score": 42,
+      "win_probability": 28,
+      "conviction": "LOW",
+      "reasoning": [
+        "Counter-trend SELL setup with only 42/60 zone score",
+        "SL distance of \u20b91.34 is only 0.54% from entry \u2014 below the minimum 1.0% threshold for stocks under \u20b9200",
+        "Moderate 4-candle base weakens the zone quality; neutral trend alignment"
+      ],
+      "risks": "Extremely tight stop of 0.54% will be easily triggered by normal intraday volatility in an uptrending market",
+      "entry_advice": "DO NOT TRADE \u2014 fails minimum SL distance requirement, counter-trend, and below probability threshold",
+      "order_placed": true
+    },
+    {
+      "rank": 4,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 752.6,
+      "stop_loss": 755.57,
+      "target": 743.69,
+      "zone_score": 41,
+      "win_probability": 25,
+      "conviction": "LOW",
+      "reasoning": [
+        "HDFCBANK SELL was explicitly flagged in yesterday's notes as correctly rejected \u2014 continue avoiding",
+        "Zone is aging at 140 candles, reducing reliability significantly",
+        "Counter-trend in trending_up regime with only 41/60 zone score"
+      ],
+      "risks": "Yesterday's notes explicitly state to avoid counter-trend HDFCBANK SELL setups; aging zone likely already absorbed",
+      "entry_advice": "DO NOT TRADE \u2014 explicitly rejected per yesterday's symbol notes and regime filter",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 61,
+      "symbol": "INFY.NS",
+      "side": "BUY",
+      "entry": 1157.2,
+      "stop_loss": 1148.2,
+      "target": 1184.2,
+      "quantity": 111,
+      "win_probability": 68
+    },
+    {
+      "order_id": 62,
+      "symbol": "COALINDIA.NS",
+      "side": "SELL",
+      "entry": 426.2,
+      "stop_loss": 429.5,
+      "target": 416.3,
+      "quantity": 303,
+      "win_probability": 32
+    },
+    {
+      "order_id": 63,
+      "symbol": "ONGC.NS",
+      "side": "SELL",
+      "entry": 248.41,
+      "stop_loss": 249.75,
+      "target": 244.39,
+      "quantity": 746,
+      "win_probability": 28
+    }
+  ]
+}
