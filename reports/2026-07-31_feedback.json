@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-31",
+  "wins_analysis": "No wins today. Zero targets were hit despite a strong trending_up regime with Nifty +2.6%, suggesting entry levels were set too tight or too far from current price action, causing orders to either not fill or get stopped out before reaching targets.",
+  "losses_analysis": "The single executed trade hit its stop loss, resulting in \u20b9-999 loss. In a +2.6% trending_up day, a BUY trade hitting SL suggests either the entry was at a weak/stale demand zone that failed to hold, or the stop was too tight relative to intraday volatility. With VIX at 11.8, moves should be orderly \u2014 a tight SL in a strong uptrend day getting hit indicates poor zone quality or entry timing (likely chasing a pullback that went deeper than expected).",
+  "regime_impact": "The strong trending_up regime should have been highly favorable for BUY setups, but the strategy failed to capitalize. Only 1 of 3 BUY orders executed and it lost. The regime was correct but execution parameters (entry proximity, SL width) were misaligned with the day's price action. The WIPRO SELL order being placed despite the hard-reject rule in the narrative is a critical process failure.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Do NOT place SELL orders when regime is trending_up and Nifty gain > +1.0% \u2014 enforce this as a hard filter in order placement logic, not just narrative",
+      "reason": "WIPRO SELL (id 4, prob 0%) was placed as pending despite the narrative explicitly stating it should be hard-rejected. The filter must be enforced at order-placement level, not just advisory level.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Widen stop-loss by 1.5x on strong trending days (ADX>22, Nifty>+1.5%) to accommodate intraday pullback noise before continuation",
+      "reason": "The executed BUY trade hit SL on a day Nifty rose 2.6% \u2014 the zone likely held but SL was too tight (e.g., \u20b92.86 SL width on HDFCBANK at \u20b9746 is only 0.38%). Minimum SL width should be 0.6% on trending days.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Require minimum AI probability of 55% for order placement; skip setups with prob below this threshold",
+      "reason": "WIPRO had 0% probability and BAJFINANCE had only 52% \u2014 neither should have had orders placed. Only HDFCBANK (65%) met a reasonable quality bar. Filtering by prob>55% would have concentrated capital on the best setup.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "On strong trend days, use market-open momentum entries (first 15-min breakout) rather than limit orders at distant demand zones that may never fill",
+      "reason": "3 of 4 orders remained pending at close on a +2.6% day \u2014 price gapped up and never pulled back to demand zones. Momentum entries would have captured the move instead of waiting for pullbacks that never came.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Set minimum zone_score threshold to 55 for order placement in trending regimes",
+      "reason": "HDFCBANK had the highest zone score (52) and was described as top pick, yet even that barely qualifies. If no setup exceeds score 55, sit the day out rather than force low-quality trades. Today's loss came from deploying capital on subpar zones.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "If trending_up continues, prioritize only BUY setups with AI prob>60% and zone_score>55, use tighter entry criteria (within 0.3% of current price) or momentum breakout entries rather than distant limit orders, and absolutely zero SELL orders.",
+  "symbol_notes": {
+    "HDFCBANK": "Pending BUY at 746.35 \u2014 if still valid tomorrow, monitor whether zone holds; widen SL to at least \u20b94.50 (0.6%) if re-entering",
+    "WIPRO": "SELL setup should never have been placed in trending_up regime \u2014 blacklist for SELL setups until regime shifts to neutral/down",
+    "TATASTEEL": "BUY at 187.51 was not triggered \u2014 if price is now above this level, the zone is validated; look for re-test entries tomorrow with wider SL",
+    "BAJFINANCE": "Pending BUY at low probability (52%) \u2014 do not carry forward unless probability improves above 55% on fresh scan"
+  },
+  "confidence": 5
+}
