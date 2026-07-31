@@ -1,0 +1,124 @@
+{
+  "date": "2026-07-31",
+  "scan_time_ist": "2026-07-31 13:47:30",
+  "total_setups_found": 4,
+  "total_candidates_sent_to_ai": 4,
+  "ai_available": true,
+  "market_context": "In a strong trending_up regime (Nifty +2.6%, ADX 25.0, VIX 11.9), only BUY setups aligned with trend should be considered. WIPRO SELL (id 1) is hard-rejected per yesterday's learnings \u2014 no SELL orders when regime is trending_up and Nifty gain > +1.0%. HDFCBANK BUY has the highest zone score (52) with perfect trend alignment, making it the top pick. Only 3 BUY setups exist, with varying quality.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+2.6%",
+    "adx": 25.0,
+    "vix": 11.9,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +2.6%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 746.35,
+      "stop_loss": 743.49,
+      "target": 752.07,
+      "zone_score": 52,
+      "win_probability": 65,
+      "conviction": "HIGH",
+      "reasoning": [
+        "Highest zone score (52/60) with perfect trend alignment (10/10)",
+        "DBR pattern with fresh zone (37 candles), strong departure (1.5x volume), and instant reversal base",
+        "2.0 R:R in a strong uptrend with controlled arrival approach \u2014 ideal demand zone characteristics",
+        "HDFCBANK is a heavyweight that benefits directly from broad market uptrend"
+      ],
+      "risks": "Four consecutive weeks of losses suggest zone identification may be systematically flawed; tight stop of \u20b92.86 may get swept in volatile conditions",
+      "entry_advice": "Per yesterday's learnings, in strong uptrend with ADX>22, consider entering at or slightly above 746.35 rather than waiting for deep pullback \u2014 use limit at 746.50 or market order if price is near zone",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 187.51,
+      "stop_loss": 185.59,
+      "target": 191.35,
+      "zone_score": 45,
+      "win_probability": 60,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "Perfect trend alignment (10/10) in trending_up regime with RBR pattern",
+        "Very fresh zone (4 candles, same session) with pristine freshness and strong departure (2.6x volume)",
+        "TATASTEEL is a cyclical that tends to outperform in broad market rallies",
+        "2.0 R:R ratio meets minimum threshold"
+      ],
+      "risks": "Poor arrival score (2/10 \u2014 crashing into zone) significantly weakens demand zone reliability; lower zone score of 45 is below ideal threshold",
+      "entry_advice": "Wait for a bullish confirmation candle (green candle closing above 187.51) before entering since the crashing arrival makes immediate bounce less certain",
+      "order_placed": false
+    },
+    {
+      "rank": 3,
+      "symbol": "BAJFINANCE.NS",
+      "side": "BUY",
+      "entry": 1126.2,
+      "stop_loss": 1112.25,
+      "target": 1154.1,
+      "zone_score": 48,
+      "win_probability": 52,
+      "conviction": "LOW",
+      "reasoning": [
+        "BUY setup with pristine fresh zone (9 candles), good R:R of 2.0, and strong base characteristics",
+        "RBR pattern with 1.9x volume departure and instant reversal base",
+        "Very recent formation suggests active institutional interest at this level"
+      ],
+      "risks": "Counter-trend score (4/10) is concerning \u2014 despite being a BUY in trending_up market, the stock's own trend may be weak, reducing reliability below the effective 60% probability threshold",
+      "entry_advice": "Only enter if BAJFINANCE shows intraday strength confirming alignment with broader market trend; set limit at 1126.20 and monitor for bullish momentum before committing",
+      "order_placed": true
+    },
+    {
+      "rank": 4,
+      "symbol": "WIPRO.NS",
+      "side": "SELL",
+      "entry": 186.33,
+      "stop_loss": 187.81,
+      "target": 183.37,
+      "zone_score": 50,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 64,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 746.35,
+      "stop_loss": 743.49,
+      "target": 752.07,
+      "quantity": 349,
+      "win_probability": 65
+    },
+    {
+      "order_id": 65,
+      "symbol": "BAJFINANCE.NS",
+      "side": "BUY",
+      "entry": 1126.2,
+      "stop_loss": 1112.25,
+      "target": 1154.1,
+      "quantity": 71,
+      "win_probability": 52
+    },
+    {
+      "order_id": 66,
+      "symbol": "WIPRO.NS",
+      "side": "SELL",
+      "entry": 186.33,
+      "stop_loss": 187.81,
+      "target": 183.37,
+      "quantity": 675,
+      "win_probability": 0
+    }
+  ]
+}
