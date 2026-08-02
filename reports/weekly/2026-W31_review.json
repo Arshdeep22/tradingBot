@@ -1,0 +1,61 @@
+{
+  "week": "2026-W31",
+  "executive_summary": "Fifth consecutive week of 0% win rate. The Supply & Demand Zone strategy has now accumulated 11 trades over 5 weeks with zero wins and \u20b9-9,978 cumulative loss. This is not a parameter tuning problem \u2014 the strategy is fundamentally broken in current market conditions. The bot is consistently identifying zones that fail to hold, suggesting either zone detection logic is flawed, entry timing is poor, or stop placement is too tight. Continuing to run this strategy without structural overhaul is capital destruction.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70% below 70% target. Strategy is non-functional.",
+  "regime_assessment": "Regime detection appears to be working (correctly identifying trending_up and trending_down days), but the strategy loses equally in both regimes. The issue is not regime misclassification \u2014 the strategy itself cannot generate winning trades regardless of market context. The regime signal is being ignored in trade direction selection.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol-level data available to make informed decisions. Need to add symbol tracking immediately.",
+    "focus_list": [],
+    "focus_reason": "Cannot determine without symbol performance data. This is a critical instrumentation gap."
+  },
+  "dow_pattern": "All days with trades produced losses (Wed, Thu, Fri). Sample size too small to draw day-of-week conclusions. The real pattern is that every single trade loses regardless of day.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      85,
+      95
+    ],
+    "zone_rr_range": [
+      1.2,
+      1.8
+    ],
+    "reasoning": "After 11 consecutive losses, zone quality threshold must be dramatically raised to filter out weak zones. RR ratio must be lowered significantly \u2014 the current 2.0 RR means targets are never reached before stops are hit. A 1.2-1.8 RR with tighter zone filtering gives more realistic profit targets and higher probability of at least some wins."
+  },
+  "structural_recommendations": [
+    {
+      "change": "HALT LIVE TRADING and switch to paper-only mode for 2 weeks. 11 consecutive losses with zero wins is statistically catastrophic (p < 0.001 if strategy had even 30% edge). The strategy has negative expectancy and must be proven in paper trading before risking more capital.",
+      "expected_impact": "Saves \u20b92000-4000 in expected losses next week while allowing strategy debugging",
+      "priority": "high"
+    },
+    {
+      "change": "Add regime-aligned trade direction filter: only take LONG entries at demand zones during trending_up, only SHORT entries at supply zones during trending_down. Currently the strategy appears to be taking counter-trend entries (buying demand in downtrends, selling supply in uptrends).",
+      "expected_impact": "Could flip win rate from 0% to 30-40% by eliminating counter-trend entries that get steamrolled",
+      "priority": "high"
+    },
+    {
+      "change": "Implement zone freshness and retest validation \u2014 only trade zones on their first or second retest, not stale zones that have been tested multiple times. Add volume confirmation at zone touch before entry.",
+      "expected_impact": "Reduce entries at exhausted zones, potentially improving win rate by 15-25%",
+      "priority": "high"
+    },
+    {
+      "change": "Add symbol-level performance tracking to every trade log. Without knowing which symbols are generating losses, we cannot prune the watchlist effectively.",
+      "expected_impact": "Enables data-driven symbol selection within 2 weeks",
+      "priority": "medium"
+    },
+    {
+      "change": "Implement a secondary confirmation strategy (e.g., VWAP bounce, EMA crossover, or candle pattern at zone) before entry. Raw zone touch is clearly insufficient as an entry trigger.",
+      "expected_impact": "Reduces trade frequency by 30-50% but should improve win rate from 0% to 40%+",
+      "priority": "high"
+    },
+    {
+      "change": "Add a circuit breaker: if 3 consecutive trades lose, pause trading for remainder of week. This limits weekly drawdown to ~\u20b93000 maximum.",
+      "expected_impact": "Caps weekly loss at \u20b93000, would have saved \u20b9999 this week",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "PAPER TRADING ONLY \u2014 Supply & Demand Zones with regime-aligned direction filter",
+  "confidence": 2,
+  "apply_to_memory": false
+}
