@@ -1,0 +1,49 @@
+{
+  "date": "2026-08-04",
+  "scan_time_ist": "2026-08-04 13:32:15",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup available (ITC.NS BUY) with a zone score of 45/60, which is below the typical quality threshold of 65+. Despite a trending_up regime favoring demand zone longs, the counter-trend nature of this setup (4/10 trend score) and the strategy's 0% win rate over 5 weeks with 11 consecutive losing trades makes this a very low-conviction opportunity. The zone freshness and timing are excellent but insufficient to overcome structural strategy concerns.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+2.0%",
+    "adx": 25.0,
+    "vix": 12.4,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +2.0%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 285.59,
+      "stop_loss": 283.33,
+      "target": 290.11,
+      "zone_score": 45,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "Pristine demand zone with strong freshness (10/10) and recency (10/10) \u2014 untested zones have higher hold probability",
+        "2.0 R:R ratio is acceptable with strong departure (volume 2.1x average) confirming institutional interest at this level",
+        "Trending_up regime with ADX=25 and low VIX (12.4) provides supportive macro backdrop for demand zone longs"
+      ],
+      "risks": "Counter-trend setup (4/10 trend score) in a stock not showing sector leadership, combined with strategy's 0% win rate over 5 weeks suggesting systematic zone detection or entry timing flaws",
+      "entry_advice": "Wait for bullish confirmation candle (strong green close above 285.80) at the zone before entering; do NOT use limit order at zone edge given strategy's poor historical performance \u2014 confirmation is essential to filter false signals",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 67,
+      "symbol": "ITC.NS",
+      "side": "BUY",
+      "entry": 285.59,
+      "stop_loss": 283.33,
+      "target": 290.11,
+      "quantity": 442,
+      "win_probability": 38
+    }
+  ]
+}
