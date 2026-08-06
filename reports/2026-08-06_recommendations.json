@@ -1,0 +1,126 @@
+{
+  "date": "2026-08-06",
+  "scan_time_ist": "2026-08-06 13:33:04",
+  "total_setups_found": 4,
+  "total_candidates_sent_to_ai": 4,
+  "ai_available": true,
+  "market_context": "Only 4 setups available, far fewer than the requested 10. In a trending_up regime (+1.3% Nifty, ADX 25), BUY setups aligned with trend are preferred, but both BUY setups here are flagged as counter-trend (4/10 trend score), which is contradictory and concerning. The POWERGRID SELL has the highest zone score (52) but is a SELL in an uptrending market. Given the weekly insight of 0% win rate over 5 weeks and 11 consecutive losing trades, conviction is extremely low across all setups \u2014 the strategy appears fundamentally broken and none of these setups warrant high confidence.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+1.3%",
+    "adx": 25.0,
+    "vix": 12.4,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +1.3%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "NTPC.NS",
+      "side": "BUY",
+      "entry": 342.11,
+      "stop_loss": 339.91,
+      "target": 346.51,
+      "zone_score": 47,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "BUY setup aligned with trending_up market regime (Nifty +1.3%)",
+        "NTPC demand zone with instant reversal base (10/10) and strong departure (9/10, 2.4x volume)",
+        "Fresh zone formed 39 candles ago with slow approach \u2014 decent zone quality at 47/60",
+        "Yesterday's learnings prioritize BUY setups on trending days; lowered threshold to 65 accommodates this score given regime context"
+      ],
+      "risks": "Trend alignment scored only 4/10 (counter-trend) which contradicts the bullish market regime \u2014 zone may have already been invalidated by price action",
+      "entry_advice": "Wait for price to pull back to \u20b9342.11 and show a bullish confirmation candle (engulfing or hammer) before entering; do NOT chase if already above entry",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "RELIANCE.NS",
+      "side": "BUY",
+      "entry": 1273.98,
+      "stop_loss": 1263.77,
+      "target": 1294.4,
+      "zone_score": 43,
+      "win_probability": 35,
+      "conviction": "LOW",
+      "reasoning": [
+        "RELIANCE BUY aligns with yesterday's learning to prioritize RELIANCE demand zones in trending_up regime",
+        "Pristine zone (10/10 freshness) with instant reversal base and 5.3x volume departure \u2014 strong institutional footprint",
+        "2:1 R:R ratio with \u20b910.21 SL and \u20b920.42 target provides adequate risk-reward"
+      ],
+      "risks": "Fast momentum approach (3/10 arrival) suggests price may overshoot the zone; counter-trend score (4/10) is alarming given this should be with-trend in a rising market",
+      "entry_advice": "Place limit order at \u20b91273.98; if hit, require price to hold above \u20b91270 for 2 candles before committing full size \u2014 consider half position initially",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "POWERGRID.NS",
+      "side": "SELL",
+      "entry": 281.7,
+      "stop_loss": 283.76,
+      "target": 277.58,
+      "zone_score": 52,
+      "win_probability": 30,
+      "conviction": "LOW",
+      "reasoning": [
+        "Highest zone score (52/60) with excellent departure (gap away, 10/10), pristine freshness, and trend alignment (10/10)",
+        "Very recent formation (14 candles) in same session increases relevance",
+        "2:1 R:R with tight \u20b92.06 stop loss"
+      ],
+      "risks": "SELL setup in a trending_up market regime directly contradicts regime guidance \u2014 even with 10/10 trend alignment score, shorting against Nifty +1.3% is high risk",
+      "entry_advice": "Only consider if POWERGRID shows clear relative weakness vs Nifty (negative RS); wait for rejection candle at \u20b9281.70 supply zone before entry",
+      "order_placed": true
+    },
+    {
+      "rank": 4,
+      "symbol": "NTPC.NS",
+      "side": "SELL",
+      "entry": 346.77,
+      "stop_loss": 349.24,
+      "target": 341.83,
+      "zone_score": 46,
+      "win_probability": 25,
+      "conviction": "LOW",
+      "reasoning": [
+        "Pristine supply zone with tight 2-candle base and recent formation (11 candles)",
+        "Slow approach (8/10) suggests measured move into zone rather than momentum spike"
+      ],
+      "risks": "Counter-trend SELL (4/10 trend) in an uptrending market with lowest zone score (46/60) \u2014 highest probability of failure among all setups",
+      "entry_advice": "Avoid this trade; if forced, require strong bearish engulfing candle at \u20b9346.77 and only take with half position size",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 68,
+      "symbol": "NTPC.NS",
+      "side": "BUY",
+      "entry": 342.11,
+      "stop_loss": 339.91,
+      "target": 346.51,
+      "quantity": 454,
+      "win_probability": 38
+    },
+    {
+      "order_id": 69,
+      "symbol": "RELIANCE.NS",
+      "side": "BUY",
+      "entry": 1273.98,
+      "stop_loss": 1263.77,
+      "target": 1294.4,
+      "quantity": 97,
+      "win_probability": 35
+    },
+    {
+      "order_id": 70,
+      "symbol": "POWERGRID.NS",
+      "side": "SELL",
+      "entry": 281.7,
+      "stop_loss": 283.76,
+      "target": 277.58,
+      "quantity": 485,
+      "win_probability": 30
+    }
+  ]
+}
