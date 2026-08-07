@@ -1,0 +1,50 @@
+{
+  "date": "2026-08-07",
+  "scan_time_ist": "2026-08-07 12:16:34",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup was detected today (SBIN.NS BUY), which fails multiple critical filters: zone score is 39/60 (below quality threshold), trend alignment scores only 4/10 despite a trending_up regime, and the AI probability would be well below the 50% minimum threshold established from yesterday's learnings. Per weekly insights, the strategy has a 0% win rate over 5 weeks with 11 consecutive losing trades. Per yesterday's learnings, if fewer than 6 setups pass quality filters, ZERO orders should be placed for capital preservation.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.6%",
+    "adx": 25.0,
+    "vix": 12.5,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.6%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "SBIN.NS",
+      "side": "BUY",
+      "entry": 1058.2,
+      "stop_loss": 1048.73,
+      "target": 1077.14,
+      "zone_score": 39,
+      "win_probability": 32,
+      "conviction": "LOW",
+      "reasoning": [
+        "Only setup available but fails the minimum 50% AI probability threshold established yesterday",
+        "Zone score 39/60 is mediocre; trend alignment 4/10 contradicts the trending_up regime \u2014 same bug identified yesterday",
+        "Fewer than 6 setups passed filters today \u2014 capital preservation rule dictates ZERO orders should be placed",
+        "Fifth consecutive week of 0% win rate with \u20b9-9,978 cumulative loss \u2014 strategy is fundamentally broken and should not be deployed"
+      ],
+      "risks": "Strategy has zero wins in 11 trades over 5 weeks; placing this trade continues capital destruction with no statistical edge",
+      "entry_advice": "DO NOT PLACE THIS ORDER. Capital preservation mode active per yesterday's learnings and weekly insight. Wait for structural strategy overhaul before resuming live trading.",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 71,
+      "symbol": "SBIN.NS",
+      "side": "BUY",
+      "entry": 1058.2,
+      "stop_loss": 1048.73,
+      "target": 1077.14,
+      "quantity": 105,
+      "win_probability": 32
+    }
+  ]
+}
