@@ -1,0 +1,78 @@
+{
+  "date": "2026-08-10",
+  "scan_time_ist": "2026-08-10 12:22:18",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "With only 2 setups available and a requirement for 10, I can only rank what exists. The market is in a trending_down regime (Nifty -0.7%, ADX 25), which favors supply zone SELL setups. SBIN SELL aligns with the downtrend and has a decent zone score of 43 with 2.7 R:R. KOTAKBANK BUY is counter-trend in a down market with a weak score of 38. However, the weekly insights reveal 0% win rate over 6 weeks with this strategy, so both setups carry extreme caution.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.7%",
+    "adx": 25.0,
+    "vix": 12.5,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.7%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1098.3,
+      "stop_loss": 1112.66,
+      "target": 1059.4,
+      "zone_score": 43,
+      "win_probability": 42,
+      "conviction": "LOW",
+      "reasoning": [
+        "SELL setup aligns with current trending_down regime (Nifty -0.7%, ADX 25)",
+        "Supply zone DBD pattern with strong departure (1.8x volume, 0.77 ratio) and pristine freshness",
+        "Favorable R:R of 2.7 with zone formed very recently (same session, 11 candles ago)"
+      ],
+      "risks": "Strategy has 0% win rate over 6 weeks/13 trades - systemic failure suggests even trend-aligned setups may not execute profitably; zone score only 43/60 with weak arrival component",
+      "entry_advice": "Wait for price to retest the 1098.3 supply zone with a bearish confirmation candle (engulfing or pin bar) before entering; consider reduced position size given strategy's historical failure rate",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 388.24,
+      "stop_loss": 385.51,
+      "target": 393.7,
+      "zone_score": 38,
+      "win_probability": 18,
+      "conviction": "LOW",
+      "reasoning": [
+        "Pristine demand zone formed only 3 candles ago with instant reversal base",
+        "R:R of 2.0 is acceptable for a scalp trade",
+        "Very recent formation suggests zone memory is fresh in market"
+      ],
+      "risks": "BUY setup is fully counter-trend in a down market (trend score 0/10), no volume confirmation on departure, and strategy has never won a trade in 6 weeks",
+      "entry_advice": "Avoid this trade entirely - counter-trend BUY in a confirmed downtrend with weak zone score of 38/60 and zero historical edge from this strategy",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 72,
+      "symbol": "SBIN.NS",
+      "side": "SELL",
+      "entry": 1098.3,
+      "stop_loss": 1112.66,
+      "target": 1059.4,
+      "quantity": 69,
+      "win_probability": 42
+    },
+    {
+      "order_id": 73,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 388.24,
+      "stop_loss": 385.51,
+      "target": 393.7,
+      "quantity": 366,
+      "win_probability": 18
+    }
+  ]
+}
