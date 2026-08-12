@@ -1,0 +1,44 @@
+{
+  "date": "2026-08-12",
+  "wins_analysis": "No wins today. Zero trades executed as the only placed order (TATASTEEL SELL at 187.89) remained pending and price never reached the entry level. The system continues a multi-week drought with no winning trades.",
+  "losses_analysis": "No losses today either, but the underlying problem persists: the system is generating extremely low-conviction setups (42% and below) that don't even get triggered. The TATASTEEL SELL entries were set too far from actual price action, and SBIN BUY setups contradicted the macro regime and were rightly not placed. Six weeks of zero wins indicates a fundamentally broken signal generation process.",
+  "regime_impact": "The trending_down regime (ADX 25, Nifty -0.8%) should have favored SHORT setups at supply zones, but the only SHORT candidates (TATASTEEL at 42% and 38% probability) had such poor scores that even the system's own logic flagged them as weak. The regime was clear but the system failed to find quality setups aligned with it. Low VIX (11.7) also compresses ranges making mean-reversion zone plays harder to profit from.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Set an absolute minimum AI probability threshold of 55% before placing any order. Do not place orders below this regardless of how few setups exist.",
+      "reason": "Today's best setup was 42% probability. Over 6+ weeks, sub-55% setups have produced zero wins. Placing orders at 42% is capital-at-risk for no demonstrated edge.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "When fewer than 3 setups exceed the 55% threshold, place ZERO orders for the day. Accept flat days rather than forcing low-quality trades.",
+      "reason": "Today only 4 setups were found with the best at 42%. The system placed an order anyway. After 6 weeks of losses, preserving capital by sitting out weak days is the highest-priority fix.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "In trending_down regime, ONLY consider SHORT setups where the entry price is within 0.3% of current market price (not distant supply zones that may never be reached).",
+      "reason": "TATASTEEL SELL at 187.89 never triggered because price didn't rally to that supply zone in a down-trending market. Distant entries in trending regimes get left as pending orders that waste opportunity.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "Expand the scan universe beyond Nifty 50 to include Nifty Next 50 or sector leaders showing fresh breakdowns with volume confirmation, specifically looking for stocks down >2% intraday with supply zone retests.",
+      "reason": "Nifty 50 produced only 4 setups today, all below actionable quality. A wider universe increases the chance of finding high-probability setups aligned with the macro regime.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Add a regime-alignment hard filter: in trending_down regime, automatically discard all BUY setups unless they score above 65% probability AND the stock itself is in a confirmed uptrend (RSI>50, above 20-day MA).",
+      "reason": "SBIN BUY setups (35%, 28%) were correctly not placed, but they shouldn't have even appeared in the top recommendations during a down-trending market. Filtering earlier saves processing and reduces temptation.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "If the downtrend continues (ADX>25, Nifty negative), scan for high-probability SHORT setups only where price is actively testing a supply zone NOW (within 0.3%), and refuse to trade if nothing meets the 55% threshold.",
+  "symbol_notes": {
+    "TATASTEEL": "Price failed to rally to 187.89 supply zone in a down market \u2014 avoid placing distant sell limit orders in trending regimes; look for lower supply zones closer to current price instead.",
+    "SBIN": "Counter-trend BUY in a macro downtrend at 35% probability \u2014 avoid until regime shifts or stock shows independent relative strength with higher probability scores."
+  },
+  "confidence": 3
+}
