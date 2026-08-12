@@ -1,0 +1,106 @@
+{
+  "date": "2026-08-12",
+  "scan_time_ist": "2026-08-12 12:25:17",
+  "total_setups_found": 4,
+  "total_candidates_sent_to_ai": 4,
+  "ai_available": true,
+  "market_context": "Market is in a trending_down regime (Nifty -1.4%, ADX 25.0) which favors supply zone SHORT setups. However, only 4 setups are available (not 10), with the best being SBIN BUY (score 54, with-trend alignment per its own zone reasoning) and two TATASTEEL SELL setups that are counter-trend per their own scoring. Given 6 weeks of zero wins and a categorically broken strategy, conviction must be tempered significantly. The SBIN BUY at 54 score contradicts the macro regime (trending_down), while TATASTEEL SELLs align with macro but have poor arrival scores and are marked counter-trend on their own timeframe.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.4%",
+    "adx": 25.0,
+    "vix": 12.0,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.4%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.89,
+      "stop_loss": 189.51,
+      "target": 184.65,
+      "zone_score": 39,
+      "win_probability": 42,
+      "conviction": "LOW",
+      "reasoning": [
+        "SELL setup aligns with trending_down macro regime (Nifty -1.4%)",
+        "Pristine supply zone formed just 5 candles ago with tight 2-candle base",
+        "TATASTEEL is a cyclical/metal stock likely to underperform in broad market selloffs"
+      ],
+      "risks": "Poor arrival score (crashing into zone) and counter-trend on its own 15m timeframe reduces reliability significantly",
+      "entry_advice": "Wait for a pullback INTO the 187.89 zone with a bearish rejection candle (engulfing or pin bar) before entering SHORT; do not chase",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 184.95,
+      "stop_loss": 186.49,
+      "target": 181.87,
+      "zone_score": 39,
+      "win_probability": 38,
+      "conviction": "LOW",
+      "reasoning": [
+        "SELL aligns with macro downtrend regime",
+        "DBD pattern (Drop-Base-Drop) is a continuation pattern suitable for shorts",
+        "Extremely fresh zone (0 candles old) with tight base"
+      ],
+      "risks": "Poor arrival score and counter-trend on local timeframe; zone formed at 0 candles means it may already be playing out with no re-test opportunity",
+      "entry_advice": "Only enter if price retraces back to 184.95 zone from below; if already trading below, this setup is invalidated",
+      "order_placed": true
+    },
+    {
+      "rank": 3,
+      "symbol": "SBIN.NS",
+      "side": "BUY",
+      "entry": 1066.82,
+      "stop_loss": 1058.67,
+      "target": 1083.12,
+      "zone_score": 54,
+      "win_probability": 35,
+      "conviction": "LOW",
+      "reasoning": [
+        "Highest zone score (54/60) with pristine freshness and strong departure",
+        "Very recent formation (11 candles) with ideal slow arrival",
+        "Strong technical scoring across all zone quality metrics"
+      ],
+      "risks": "BUY setup directly contradicts the trending_down macro regime; buying dips in a -1.4% down day with ADX 25 is counter-regime and historically has 0% win rate for this system",
+      "entry_advice": "AVOID unless Nifty shows clear reversal signs; if taking, wait for a bullish engulfing at the 1066.82 level with volume confirmation",
+      "order_placed": false
+    },
+    {
+      "rank": 4,
+      "symbol": "SBIN.NS",
+      "side": "BUY",
+      "entry": 1058.2,
+      "stop_loss": 1050.17,
+      "target": 1074.26,
+      "zone_score": 43,
+      "win_probability": 28,
+      "conviction": "LOW",
+      "reasoning": [
+        "With-trend alignment on local timeframe and slow controlled arrival",
+        "Lower entry provides better value if SBIN finds support",
+        "RBR pattern indicates prior buying interest at this level"
+      ],
+      "risks": "BUY contradicts macro regime; zone is aging (94 candles) reducing freshness; lower zone score of 43 and 6-week losing streak makes any BUY highly suspect",
+      "entry_advice": "AVOID in current regime; this is a counter-regime trade with low probability in a sustained downtrend",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 74,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.89,
+      "stop_loss": 189.51,
+      "target": 184.65,
+      "quantity": 617,
+      "win_probability": 42
+    }
+  ]
+}
