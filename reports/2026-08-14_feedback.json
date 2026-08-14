@@ -1,0 +1,46 @@
+{
+  "date": "2026-08-14",
+  "wins_analysis": "No wins today. The system correctly identified a no-trade day with only 1 setup below the 50% threshold, preserving capital. No new orders were placed which is appropriate discipline.",
+  "losses_analysis": "No losses today from new trades. However, the existing SBIN BUY position from a prior day is still open and faces headwinds given today's trending_down regime (Nifty -0.8%). The position is counter-trend and may be at risk tomorrow if downtrend continues.",
+  "regime_impact": "The trending_down regime with ADX=25 confirms directional selling pressure. The system's only detected setup was a SHORT (TATASTEEL) which aligns with the regime, but was correctly rejected due to low zone score (47) and symbol-specific history of distant entries. The regime hurt the open SBIN long position.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Evaluate SBIN BUY position for early exit \u2014 if price is below entry (1066.82) at tomorrow's open and Nifty continues downtrend, tighten SL to breakeven or close manually rather than waiting for full SL hit at 1059.36",
+      "reason": "Holding a counter-trend long in a confirmed downtrend (ADX=25, Nifty -0.8%) increases probability of SL hit. VIX at 11.3 means low volatility so momentum moves may persist",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "On trending_down days with ADX>=25, only scan for SHORT setups in supply zones and require zone_score >= 55 (not just 50) to compensate for lower setup counts",
+      "reason": "Today produced only 1 setup total and it was a short with score 47 \u2014 raising the bar slightly ensures we only trade high-conviction shorts aligned with regime",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "Add TATASTEEL to a 'distant entry' watchlist \u2014 only consider if price is within 0.3% of entry level at scan time, otherwise skip entirely regardless of zone score",
+      "reason": "Yesterday's learnings and today's result both confirm TATASTEEL setups have entries that never trigger. This is a recurring pattern wasting scan slots",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "On days with fewer than 3 qualifying setups, expand scan to include stocks showing fresh breakdowns below key support (not just predefined zones) to find regime-aligned opportunities",
+      "reason": "Today was a legitimate short day but no valid setups triggered \u2014 the system needs a secondary scan method for trending days when zone-based setups are scarce",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Track whether Independence Day eve (Aug 14) historically has lower liquidity/setups due to holiday positioning \u2014 if Aug 15 is a market holiday, reduce position sizing by 25% on Aug 14 to account for gap risk",
+      "reason": "Only 1 setup found across all 50 Nifty stocks suggests abnormally low activity, possibly due to pre-holiday positioning ahead of Aug 15 (Independence Day)",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If markets are open Aug 15 (verify holiday calendar), prioritize managing SBIN long position in first 15 minutes \u2014 exit if gap down; if Aug 15 is a holiday, prepare Monday's scan with SHORT bias given confirmed downtrend.",
+  "symbol_notes": {
+    "SBIN": "Open long is counter-trend \u2014 manage aggressively, tighten SL if no bounce in first 30 min tomorrow",
+    "TATASTEEL": "Confirmed unreliable for limit orders \u2014 entries too distant from price action, skip unless price is within 0.3% of zone",
+    "HDFCBANK": "In downtrends, banking stocks often lead selloffs \u2014 watch for fresh supply zone SHORT setups if available",
+    "RELIANCE": "Monitor for potential short setup at supply zones given broad market weakness"
+  },
+  "confidence": 6
+}
