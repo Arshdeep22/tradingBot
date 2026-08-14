@@ -1,0 +1,34 @@
+{
+  "date": "2026-08-14",
+  "scan_time_ist": "2026-08-14 12:24:59",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup detected across Nifty 50 stocks. TATASTEEL SHORT at 187.89 has a zone score of 47 (below the 50% minimum threshold) and yesterday's learnings explicitly flag this symbol for having distant entries that never trigger. With fewer than 5 setups found and none exceeding 50% probability, this qualifies as a forced NO-TRADE day per our rules.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.9%",
+    "adx": 25.0,
+    "vix": 11.3,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.9%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 187.89,
+      "stop_loss": 189.29,
+      "target": 185.09,
+      "zone_score": 47,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
