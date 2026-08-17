@@ -1,0 +1,43 @@
+{
+  "date": "2026-08-17",
+  "wins_analysis": "No wins today. Zero target hits out of one executed trade, indicating poor setup selection or entry timing in this environment.",
+  "losses_analysis": "The single executed trade hit stop loss during a trending_down session (Nifty -1.2%). The trade was likely a leftover pending order from a previous session or a zone score fallback entry placed without AI confirmation. Entering without AI probability scoring in a strong downtrend led to an unfiltered, low-conviction trade getting stopped out.",
+  "regime_impact": "The trending_down regime with ADX=25 hurt today. The executed trade was likely a BUY-side setup that got crushed by broad market selling pressure. Only SHORT/SELL setups aligned with supply zones should have been considered. VIX at 11.3 is low, meaning the move was orderly and directional \u2014 trend-following shorts would have been ideal.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Block all BUY-side pending orders when regime is trending_down AND Nifty change < -0.8% \u2014 only allow SELL setups aligned with supply zones",
+      "reason": "Today's loss came from a trade executed against a strong downtrend. Filtering by regime direction would have avoided this \u20b9-999 loss entirely.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Do not execute any trades when AI is unavailable (zone score fallback mode) \u2014 skip the day entirely or require manual confirmation",
+      "reason": "AI was unavailable today, leading to 0 recommendations but still 1 execution (likely a stale pending order). No AI = no edge = no trade.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "Implement auto-cancel for all pending orders from prior sessions at 9:15 AM if market opens with gap > 0.5% against the order direction",
+      "reason": "The executed trade likely came from a prior-day pending order that triggered into an adverse gap-down open. Fresh analysis each morning prevents stale setups.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 4,
+      "action": "On trending_down days with ADX > 22, shift focus to SELL setups on weak relative strength stocks (e.g., stocks already below their 20-day SMA that bounce into supply zones)",
+      "reason": "Today's regime was ideal for short setups. Having no short recommendations while the market dropped 1.2% represents missed opportunity on the correct side.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Set minimum AI probability threshold to 75% for any trade execution; zone score fallback alone should never trigger order placement",
+      "reason": "With 0 AI recommendations and 0% win rate, the fallback mechanism is generating negative expectancy trades. A hard probability floor prevents low-quality entries.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (watch Nifty below today's low), focus exclusively on SELL setups at supply zones in weak stocks like banking/auto sectors; if reversal candle forms, wait for confirmation before any BUY.",
+  "symbol_notes": {
+    "GENERAL": "Identify which stock triggered today's loss and blacklist it for BUY setups until it reclaims a key demand zone. Tomorrow prioritize stocks with highest relative weakness for SHORT setups if regime stays bearish."
+  },
+  "confidence": 5
+}
