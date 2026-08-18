@@ -1,0 +1,44 @@
+{
+  "date": "2026-08-18",
+  "wins_analysis": "No wins today \u2014 zero executions as both pending orders failed to reach their entry levels. The market dropped sharply (-1.7%) but ITC's SELL entry at 273.22 was never triggered, suggesting the supply zone was set too tight or price gapped below it without touching.",
+  "losses_analysis": "No losses either, but the real failure is zero execution for the 8th consecutive reporting period. ITC SELL had correct directional alignment with the trending_down regime but the entry was too precise/narrow \u2014 in a -1.7% Nifty day, ITC likely opened gap-down past the 273.22 entry. ONGC BUY was correctly flagged as 0% probability but was still placed as a pending order, wasting a slot.",
+  "regime_impact": "Strong trending_down regime should have produced profitable SELL trades but hurt us because entry levels were not adjusted for gap-down opens. The strategy type (supply zone SELL) was correct but entry mechanics failed to account for momentum-driven gap openings in strong downtrends.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "When regime is trending_down with Nifty < -1.0%, use market-on-open SELL orders (or limit orders 0.3% ABOVE previous close supply zone) instead of limit orders below the zone, to capture gap-down momentum",
+      "reason": "ITC SELL at 273.22 likely never triggered because price gapped below in a -1.7% market day \u2014 this pattern has repeated across 7+ weeks of zero fills",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 2,
+      "action": "Hard-block any order with AI probability = 0% from being placed as pending. ONGC BUY at 0% should never have been submitted regardless of scan output",
+      "reason": "ONGC BUY was placed despite 0% AI probability and being counter-trend in a strong downtrend \u2014 this wastes capital allocation and order slots",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Expand scan universe beyond Nifty 50 to Nifty 100 on strong trending days (ADX > 22, Nifty move > 1%) to find more setups aligned with regime \u2014 2 setups from 50 stocks is insufficient",
+      "reason": "Only 2 setups found across 50 stocks, one blocked by regime filter \u2014 leaves effectively 1 trade idea which then didn't execute. Need minimum 4-5 aligned candidates",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Widen ITC SELL entry zone by 0.5% upward (e.g., enter at 274.58 instead of 273.22) with proportionally wider SL to account for intraday retrace before continuation",
+      "reason": "ITC has been recommended multiple times but never fills \u2014 the supply zone identification is too precise for real market microstructure in volatile trending days",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "If tomorrow continues trending_down (Nifty futures pre-market < -0.5%), prepare SELL orders on banking/IT heavyweights (HDFCBANK, INFY, TCS) at VWAP retest levels from first 15-min candle rather than static supply zones",
+      "reason": "Static overnight supply zones are failing to trigger in momentum-driven sessions \u2014 dynamic intraday levels (VWAP retests) would capture mean-reversion shorts that actually execute",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "If downtrend continues (check SGX Nifty pre-open), prioritize SELL setups with aggressive entry pricing (at or above previous close) on high-beta Nifty components, and absolutely ensure at least one order executes \u2014 zero fills for 7+ weeks is the critical problem to solve.",
+  "symbol_notes": {
+    "ITC": "Directionally correct SELL but chronic non-execution \u2014 widen entry zone by 0.5% or use market order on open if gaps below supply zone",
+    "ONGC": "0% probability BUY in downtrend \u2014 permanently deprioritize for BUY setups until regime shifts to trending_up or range_bound"
+  },
+  "confidence": 4
+}
