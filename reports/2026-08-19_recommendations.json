@@ -1,0 +1,39 @@
+{
+  "date": "2026-08-19",
+  "scan_time_ist": "2026-08-19 11:27:30",
+  "total_setups_found": 1,
+  "total_candidates_sent_to_ai": 1,
+  "ai_available": true,
+  "market_context": "Only 1 setup detected from the scan universe, and it is the same ITC SELL at 273.22 that has chronically failed to execute for 8+ consecutive sessions. The regime is trending_down (-1.6% Nifty, ADX 25) which directionally supports SELL setups, but the zone score is weak at 38/60, the zone reasoning notes counter-trend risk, and weekly insights confirm 0/14 win rate with the S&D strategy fundamentally broken. There are insufficient quality setups to fill 10 recommendations.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.6%",
+    "adx": 25.0,
+    "vix": 11.5,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.6%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ITC.NS",
+      "side": "SELL",
+      "entry": 273.22,
+      "stop_loss": 274.59,
+      "target": 270.48,
+      "zone_score": 38,
+      "win_probability": 18,
+      "conviction": "LOW",
+      "reasoning": [
+        "Regime alignment: trending_down with ADX 25 supports SELL direction, but this is the only positive factor",
+        "Zone score 38/60 is below minimum quality threshold; departure lacks volume confirmation and arrival momentum is weak",
+        "Chronic non-execution issue: same 273.22 entry has failed to trigger for 8+ sessions \u2014 entry needs widening per yesterday's learnings to ~274.58",
+        "Weekly track record of 0/14 wins indicates strategy is fundamentally broken in current conditions"
+      ],
+      "risks": "Entry at 273.22 is likely to be gapped past again in a strong down day, resulting in another non-execution; even if filled, the 38-score zone has poor departure quality and counter-trend arrival suggesting low holding probability",
+      "entry_advice": "Per yesterday's learnings, widen entry to 274.58 (0.5% above current level) or use market-on-open SELL if pre-market indicates gap-down below 273. However, given 0/14 historical win rate with this strategy, strongly consider NOT placing this order and waiting for higher-quality setups from an expanded Nifty 100 scan universe.",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": []
+}
