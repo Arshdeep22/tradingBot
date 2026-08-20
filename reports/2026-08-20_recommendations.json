@@ -1,0 +1,70 @@
+{
+  "date": "2026-08-20",
+  "scan_time_ist": "2026-08-20 11:27:56",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups detected across 50 stocks, both SELL-side which aligns with the trending_down regime. However, the strategy has a 0/14 track record over 7 weeks and yesterday's learnings explicitly state the S&D zone strategy is fundamentally broken. ITC is flagged for removal from watchlist (score 42 < 50 threshold), and ONGC has a counter-trend note on its zone (4/10 trend score). Neither setup meets the 40% minimum AI probability threshold recommended. Providing rankings of available setups but with very low conviction given systemic strategy failure.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-0.8%",
+    "adx": 25.0,
+    "vix": 10.7,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -0.8%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "ITC.NS",
+      "side": "SELL",
+      "entry": 273.22,
+      "stop_loss": 274.79,
+      "target": 270.08,
+      "zone_score": 42,
+      "win_probability": 28,
+      "conviction": "LOW",
+      "reasoning": [
+        "Trend alignment is 10/10 \u2014 ITC SELL is with the prevailing downtrend which is the only strong positive",
+        "Zone score 42/60 is below the recommended 50/60 minimum threshold from yesterday's learnings",
+        "ITC has been flagged for chronic non-execution over 8+ sessions and should be removed from watchlist per symbol notes",
+        "R:R of 2.0 is acceptable but insufficient to overcome a 0/14 historical win rate on this strategy"
+      ],
+      "risks": "Strategy has 0% win rate over 14 trades and 7 weeks \u2014 no statistical basis to expect this trade to succeed regardless of setup quality",
+      "entry_advice": "AVOID THIS TRADE \u2014 if forced to take it, wait for price to enter the 273.22 zone with a bearish engulfing confirmation candle on the 15min chart and use half position size maximum",
+      "order_placed": false
+    },
+    {
+      "rank": 2,
+      "symbol": "ONGC.NS",
+      "side": "SELL",
+      "entry": 241.59,
+      "stop_loss": 243.59,
+      "target": 237.59,
+      "zone_score": 47,
+      "win_probability": 22,
+      "conviction": "LOW",
+      "reasoning": [
+        "Zone score 47/60 is the highest available and closer to the 50/60 threshold but still below it",
+        "Strong departure (9/10) and pristine freshness (10/10) are technically attractive",
+        "Critical flaw: Trend alignment is only 4/10 \u2014 labeled counter-trend which contradicts regime alignment",
+        "Yesterday's learnings explicitly say to close the existing ONGC BUY at open, adding a SELL here creates confusion"
+      ],
+      "risks": "Counter-trend zone (4/10 trend score) despite market being in downtrend suggests the stock-level trend may be UP, making this a fade trade against ONGC's local momentum",
+      "entry_advice": "AVOID THIS TRADE \u2014 the counter-trend label at stock level means ONGC may be one of the stronger names in a weak market, making it a poor short candidate",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 78,
+      "symbol": "ONGC.NS",
+      "side": "SELL",
+      "entry": 241.59,
+      "stop_loss": 243.59,
+      "target": 237.59,
+      "quantity": 500,
+      "win_probability": 22
+    }
+  ]
+}
