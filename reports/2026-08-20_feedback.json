@@ -1,0 +1,45 @@
+{
+  "date": "2026-08-20",
+  "wins_analysis": "No wins today. Zero wins in 15 consecutive trades over 8 weeks confirms the supply/demand zone strategy is systematically failing rather than experiencing normal variance.",
+  "losses_analysis": "ONGC SELL was placed despite only 22% AI probability (well below the 40% minimum threshold recommended yesterday), a counter-trend zone note (4/10 trend score), and the bot's own commentary acknowledging systemic strategy failure. The SL was hit within the same session, suggesting the supply zone at 241.59 had no meaningful resistance. Placing this trade was a discipline failure \u2014 the system's own filters flagged it as low quality but executed anyway.",
+  "regime_impact": "Trending_down regime with ADX=25 should theoretically favor SELL setups at supply zones, yet the ONGC short still failed. This indicates the zone identification methodology itself is broken \u2014 even regime-aligned trades cannot overcome poor zone selection. Low VIX (10.8) means moves are orderly but the zones being tested simply aren't where institutional supply exists.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "HALT all live order placement immediately until the strategy achieves at least 3/10 wins in backtesting on recent 30-day data. Zero wins in 15 trades (0%) is catastrophic and continuing to trade is burning capital with no edge.",
+      "reason": "0/15 lifetime record. Every single trade has lost. The strategy has negative expectancy and no statistical evidence of any edge whatsoever.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Enforce hard gate: DO NOT place orders when AI probability is below 40%. Today ONGC was placed at 22% probability despite yesterday's explicit recommendation to set 40% minimum. Code must reject orders below threshold regardless of setup count.",
+      "reason": "ONGC had 22% probability, the system's own notes flagged it as low quality, yet it was still placed. This is a code enforcement issue, not an analysis issue.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Replace S&D zone identification with volume-profile based levels (POC, VAH, VAL) or VWAP-anchored levels from significant swing points. Current zone methodology has zero predictive power across 15 trades.",
+      "reason": "Zones identified by the current algorithm have been violated in 15/15 cases. The methodology for identifying support/resistance is fundamentally flawed and needs complete replacement.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "If trading resumes, require minimum 3:1 reward-to-risk ratio instead of current ~2:1. ONGC had 2:1 (target 4pt vs SL 2pt) which requires 50%+ win rate to break even \u2014 impossible with current 0% win rate.",
+      "reason": "Even with improved zone selection, a higher R:R provides margin for error. At 3:1 you only need 25% win rate to break even.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "When only 2 setups are found across 50 stocks, treat this as 'no trade day' and sit flat. Low setup count signals the strategy cannot find high-conviction opportunities.",
+      "reason": "Today only 2 setups were found, both below minimum probability thresholds. Forcing trades from a thin pipeline guarantees poor quality entries.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "DO NOT TRADE. Use tomorrow purely for backtesting alternative zone identification methods (volume profile, VWAP bands) against the last 30 days of Nifty 50 price action to find a methodology that actually has positive expectancy before risking more capital.",
+  "symbol_notes": {
+    "ONGC.NS": "Supply zone at 241.59 completely failed \u2014 remove from watchlist. Counter-trend zones with low trend scores should never be traded.",
+    "ITC.NS": "Already flagged for removal (score 42 < 50 threshold). Do not trade ITC until score improves above 60.",
+    "NIFTY50": "Despite confirmed downtrend (ADX 25, -0.7%), SELL setups at identified zones still fail. The problem is zone quality, not direction."
+  },
+  "confidence": 1
+}
