@@ -1,0 +1,56 @@
+{
+  "week": "2026-W34",
+  "executive_summary": "Eighth consecutive week of 0% win rate with 2 trades taken, both losses, bringing cumulative losses to approximately \u20b9-14,000. The Supply & Demand Zone strategy is fundamentally broken in this persistent trending_down regime \u2014 it has produced zero wins across 13+ trades over 8 weeks. This is a catastrophic strategy-regime mismatch requiring a complete structural overhaul, not parameter adjustments.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70% below 70% target",
+  "regime_assessment": "Regime detection appears accurate (consistent trending_down classification for 7+ weeks), but the bot is NOT adapting its strategy to the regime. The regime signal is being detected but completely ignored in strategy selection. This is the core failure.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol-level data available to make informed decisions",
+    "focus_list": [],
+    "focus_reason": "Cannot determine without symbol-level performance data \u2014 this is itself a structural gap"
+  },
+  "dow_pattern": "Insufficient trade volume (2 trades across 5 days) to identify any day-of-week pattern. Both losses occurred on Mon and Thu but sample is meaningless.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      60,
+      75
+    ],
+    "zone_rr_range": [
+      1.2,
+      1.8
+    ],
+    "reasoning": "IRRELEVANT \u2014 parameter tuning will not fix a strategy that is architecturally wrong for the current regime. However, if forced to trade S&D zones, lower RR targets increase probability of hitting TP in a trending market, and lower min_score allows more setups to generate statistical data."
+  },
+  "structural_recommendations": [
+    {
+      "change": "HALT Supply & Demand Zone strategy in trending_down regime entirely. Implement a trend-following short strategy (e.g., breakdown entries, moving average crossover shorts, or supply zone SHORT entries instead of long entries). The bot appears to be buying demand zones in a downtrend \u2014 this is guaranteed to lose.",
+      "expected_impact": "Eliminating counter-trend longs should immediately stop the bleeding. A proper short/trend-following strategy could achieve 40-55% win rate in trending_down regime.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a regime-strategy mapping table: trending_down \u2192 only short-biased strategies; trending_up \u2192 only long-biased; ranging \u2192 mean-reversion/zones. The bot must REFUSE to take demand zone longs in a downtrend.",
+      "expected_impact": "Prevents the persistent regime-strategy mismatch that has caused 8 weeks of consecutive losses. Expected to reduce losing trades by 80%+.",
+      "priority": "high"
+    },
+    {
+      "change": "Add a circuit breaker: if cumulative losses exceed \u20b9-10,000 or win rate is 0% for 3+ consecutive weeks, the bot should enter paper-trade-only mode until a new strategy proves profitable over 20+ simulated trades.",
+      "expected_impact": "Capital preservation \u2014 would have saved approximately \u20b9-4,000 to \u20b9-6,000 if implemented 5 weeks ago.",
+      "priority": "high"
+    },
+    {
+      "change": "Log symbol-level data for every trade and every REJECTED setup. Without knowing which symbols are being traded and which setups are being filtered, diagnosis is impossible.",
+      "expected_impact": "Enables data-driven decisions on symbol selection and filter calibration within 2-3 weeks.",
+      "priority": "medium"
+    },
+    {
+      "change": "If continuing S&D zones at all, flip the logic: in trending_down, only take SUPPLY zone entries (shorts) with trend, never demand zone entries (longs) against trend.",
+      "expected_impact": "Could convert the existing zone detection logic into a profitable short-selling system with minimal code changes. Expected 45-60% win rate trading with the trend.",
+      "priority": "high"
+    }
+  ],
+  "primary_strategy_next_week": "Trend-Following Shorts (or HALT trading until structural fixes deployed)",
+  "confidence": 2,
+  "apply_to_memory": false
+}
