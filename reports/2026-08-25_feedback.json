@@ -1,0 +1,46 @@
+{
+  "date": "2026-08-25",
+  "wins_analysis": "No wins today as zero recommendations were generated. The AI model was unavailable, and the zone score fallback system failed to produce any actionable setups despite a favorable trending_up regime with ADX at 25.",
+  "losses_analysis": "No losses today since no trades were placed. The core issue is a complete system failure to generate recommendations \u2014 the fallback mechanism produced zero setups even in an ideal trending environment with low VIX (11.1) and clear directional bias.",
+  "regime_impact": "Today's trending_up regime with strong ADX (25) and low VIX (11.1) was ideal for momentum/demand zone BUY setups. The system completely missed this opportunity. Stocks likely broke out of consolidation zones that should have been captured by the scanner.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Debug and fix the zone score fallback system \u2014 lower the minimum zone score threshold from current level to 60 (or whatever allows at least 3-5 setups) when AI is unavailable, especially on trending_up days with ADX > 22",
+      "reason": "Zero recommendations on a strong trending day with VIX 11.1 means the fallback filters are too restrictive or the zone detection module is broken entirely",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Implement an emergency fallback that scans for simple breakout entries (price crossing 20-EMA with volume > 1.5x average) on top 15 Nifty 50 stocks when primary AI and zone score both fail",
+      "reason": "Having zero setups on a clearly bullish day is worse than having moderate-confidence setups \u2014 opportunity cost of missing a +0.7% Nifty day is significant",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Pre-market, identify stocks with fresh demand zones within 1% of current price using previous day's 15-min chart lows. Target HDFCBANK, RELIANCE, INFY, TCS, ICICIBANK as priority symbols in trending_up regime",
+      "reason": "These large-cap leaders typically lead Nifty moves and should have clear intraday demand zones forming near VWAP on trend days",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Add a regime-aware override: when regime=trending_up AND VIX<13 AND ADX>22, automatically reduce minimum probability threshold by 10% and allow BUY-only setups with R:R >= 1.5",
+      "reason": "Low VIX + strong trend = high probability environment where even moderate setups have elevated win rates. System should be more aggressive, not silent",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Set entry timing to first 30 minutes pullback (9:15-9:45 IST) for limit orders at demand zones rather than waiting for full AI scoring which may not be available",
+      "reason": "Morning pullbacks in trending_up regimes offer the best risk-reward entries at demand zones before continuation moves",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "With continued uptrend likely (ADX 25, VIX 11.1), prioritize BUY setups at demand zones on banking and IT heavyweights during morning pullbacks \u2014 ensure the scanner is actually functional and producing outputs before market open.",
+  "symbol_notes": {
+    "HDFCBANK.NS": "Likely benefiting from trending regime \u2014 watch for demand zone entries near previous day's VWAP",
+    "RELIANCE.NS": "Should have strong momentum continuation in low-VIX trending environment \u2014 prioritize BUY setups",
+    "INFY.NS": "IT names tend to trend cleanly when ADX is elevated \u2014 look for breakout above today's high",
+    "BAJFINANCE.NS": "High-beta name in uptrends \u2014 if demand zone forms within 0.5% of open, take the entry"
+  },
+  "confidence": 3
+}
