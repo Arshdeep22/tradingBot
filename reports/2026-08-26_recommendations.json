@@ -1,0 +1,74 @@
+{
+  "date": "2026-08-26",
+  "scan_time_ist": "2026-08-26 11:31:06",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups available, both with low zone scores (41-42/60) and significant issues. HDFCBANK BUY aligns with trending_up regime and yesterday's learnings prioritizing demand zone entries on HDFCBANK, but has a counter-trend score of 0/10. TATASTEEL SELL is counter-trend in an uptrending market. Neither setup meets high-confidence thresholds, but per yesterday's learnings to lower thresholds in trending_up regime with low VIX, HDFCBANK BUY is the only viable candidate.",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+0.9%",
+    "adx": 25.0,
+    "vix": 10.8,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +0.9%). Focus on demand zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 723.79,
+      "stop_loss": 720.36,
+      "target": 730.65,
+      "zone_score": 41,
+      "win_probability": 45,
+      "conviction": "LOW",
+      "reasoning": [
+        "HDFCBANK is a priority symbol per yesterday's learnings for demand zone entries in trending_up regime",
+        "RBR pattern with strong departure (1.8x volume, 1.00 body ratio) and instant reversal base indicates genuine demand",
+        "Regime-aware override applies: trending_up + VIX 10.8 (<13) + ADX 25 (>22) supports BUY-only setups with R:R >= 1.5, and this has 2.0 R:R"
+      ],
+      "risks": "Zone score is only 41/60 with 0/10 trend alignment suggesting this demand zone may be counter to the stock's own short-term trend despite broader market uptrend; 8-week losing streak suggests strategy execution issues persist",
+      "entry_advice": "Place limit order at 723.79 during morning pullback window (9:15-9:45 IST); if price gaps above zone, skip the trade entirely rather than chasing",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 185.53,
+      "stop_loss": 187.26,
+      "target": 182.07,
+      "zone_score": 42,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 80,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 723.79,
+      "stop_loss": 720.36,
+      "target": 730.65,
+      "quantity": 291,
+      "win_probability": 45
+    },
+    {
+      "order_id": 81,
+      "symbol": "TATASTEEL.NS",
+      "side": "SELL",
+      "entry": 185.53,
+      "stop_loss": 187.26,
+      "target": 182.07,
+      "quantity": 578,
+      "win_probability": 0
+    }
+  ]
+}
