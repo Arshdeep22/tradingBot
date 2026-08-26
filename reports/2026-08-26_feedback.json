@@ -1,0 +1,44 @@
+{
+  "date": "2026-08-26",
+  "wins_analysis": "No wins today. Only 2 setups were found, both with low zone scores (41-42/60), and neither met high-confidence thresholds. The HDFCBANK BUY remained pending and never triggered, so there was no opportunity to win.",
+  "losses_analysis": "TATASTEEL SELL was a counter-trend trade in a trending_up regime (Nifty +0.5%). The AI probability was 0%, yet the order was still placed. Selling into an uptrend with a tight stop (\u20b91.73 risk) in a strong momentum stock made the SL hit almost inevitable. The zone score of 41/60 was far too low to justify a counter-trend position.",
+  "regime_impact": "The trending_up regime hurt the SELL trade significantly. TATASTEEL moved with the broader market uptrend, invalidating the supply zone. The regime should have been a hard filter against SELL setups, especially those with 0% AI probability. Only BUY setups aligned with the regime should have been placed.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Hard-block any SELL orders when regime is trending_up and AI probability is below 30%. Never place orders with 0% AI probability regardless of any other factor.",
+      "reason": "TATASTEEL SELL had 0% AI probability and was counter-trend \u2014 this was a guaranteed loss that should never have been placed.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 2,
+      "action": "Set minimum zone score threshold to 48/60 before placing any order. If fewer than 1 setup qualifies, skip the day entirely rather than force low-quality trades.",
+      "reason": "Both setups today scored 41-42/60, well below reliable levels. Forcing trades on thin setup days led to a \u20b9-1000 loss with no upside potential.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "When only 1-2 setups are available across all 50 stocks, treat it as a 'no-trade day' unless at least one setup has AI probability \u2265 55% AND zone score \u2265 50/60.",
+      "reason": "Low setup count (2/50) signals lack of clear opportunity. Today's decision to lower thresholds in trending_up regime backfired \u2014 quality over quantity must be enforced.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "In trending_up regime, only allow BUY setups with counter-trend score \u2265 3/10 or trend-alignment score \u2265 6/10. HDFCBANK had counter-trend score of 0/10 which suggests even the BUY wasn't well-supported.",
+      "reason": "HDFCBANK BUY had a counter-trend score of 0/10 despite being a BUY in an uptrend, indicating the zone quality or timing was poor. It never triggered, confirming price wasn't at a strong demand level.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 5,
+      "action": "Re-evaluate yesterday's learning that suggested lowering thresholds in trending_up + low VIX. Instead, maintain strict thresholds and accept zero trades on days with no quality setups.",
+      "reason": "Following the 'lower threshold' advice directly caused today's loss. Low VIX + trending_up means stocks trend smoothly \u2014 but without a quality zone, entries are random.",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Wait for high-quality BUY setups (zone score \u2265 48, AI prob \u2265 50%) aligned with the uptrend; if none exist, take zero trades rather than forcing low-probability entries.",
+  "symbol_notes": {
+    "TATASTEEL": "Avoid SELL setups \u2014 stock is trending up with broader market. Only consider BUY on pullbacks to strong demand zones with score \u2265 50.",
+    "HDFCBANK": "Demand zone at 723.79 did not trigger \u2014 price may have already moved above. Watch for fresh demand zones forming on pullbacks; do not chase."
+  },
+  "confidence": 8
+}
