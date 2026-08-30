@@ -1,0 +1,56 @@
+{
+  "week": "2026-W35",
+  "executive_summary": "Ninth consecutive week of 0% win rate. The Supply & Demand Zone strategy has now lost \u20b9-16,000 cumulatively over ~9 weeks with zero wins in the last 18+ trades. This is not a parameter tuning problem \u2014 the entire strategy framework is fundamentally broken in current market conditions. Continuing to tweak min_score, RR ratio, or build_days is futile; a complete strategy replacement or fundamental rearchitecture is required. The bot is effectively dead money, taking 0-2 trades per week and losing every single one.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70 percentage points below 70% target, no progress in 9 weeks",
+  "regime_assessment": "Regime detection appears to be identifying trending_down correctly (5 of 7 days), but the strategy has zero ability to profit in ANY regime \u2014 it lost in both trending_down and trending_up environments. Regime detection is irrelevant when the core strategy cannot generate a single winning trade across any market condition over 9 consecutive weeks.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No per-symbol data available to make informed decisions. The problem is not symbol selection \u2014 it is the strategy itself.",
+    "focus_list": [],
+    "focus_reason": "Symbol focus changes are meaningless when the strategy has a 0% win rate across all symbols for 9 weeks."
+  },
+  "dow_pattern": "Insufficient trade volume to identify any day-of-week pattern. Only 2 trades this week (Thursday and Wednesday), both losses. No day-of-week optimization is meaningful at this stage.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      50,
+      70
+    ],
+    "zone_rr_range": [
+      1.0,
+      1.5
+    ],
+    "reasoning": "ONLY if Supply & Demand Zones are kept at all: the current high min_score (75) filters almost everything, and the few that pass still lose. Lowering min_score to 50-70 will increase trade volume for better statistical signal. Reducing RR to 1.0-1.5 will dramatically improve win rate since the current 2.0 RR target is never being reached \u2014 price is hitting stops before targets. However, these are band-aids on a fundamentally broken approach."
+  },
+  "structural_recommendations": [
+    {
+      "change": "HALT LIVE TRADING with Supply & Demand Zones immediately. Switch to paper trading only until a strategy proves >50% win rate over 30+ trades in backtesting.",
+      "expected_impact": "Stops the bleeding of \u20b9-2000/week. Preserves remaining capital. Prevents further psychological damage from 9+ weeks of consecutive losses.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a completely different strategy framework \u2014 consider momentum/breakout or mean-reversion with tight stops on liquid large-cap stocks. Supply & Demand zone identification appears to be systematically wrong (zones are not holding).",
+      "expected_impact": "Even a random 50/50 strategy at 1:1 RR would outperform the current 0% win rate. A properly backtested momentum strategy should achieve 45-55% win rate.",
+      "priority": "high"
+    },
+    {
+      "change": "Add a circuit-breaker rule: if any strategy goes 3 consecutive weeks at 0% win rate, automatically halt live trading and switch to paper mode. The bot allowed 9 weeks of consecutive failure with no automatic shutdown.",
+      "expected_impact": "Would have saved approximately \u20b9-12,000 if implemented after week 3 of failure. Prevents catastrophic drawdowns from strategy decay.",
+      "priority": "high"
+    },
+    {
+      "change": "Validate zone identification accuracy independently \u2014 log every zone identified with screenshot/price level, then manually review whether zones were genuine supply/demand zones. The algo may be identifying zones that have no institutional significance.",
+      "expected_impact": "Diagnoses root cause: is the problem zone identification, entry timing, or stop placement? Without this, any new parameter set is guesswork.",
+      "priority": "medium"
+    },
+    {
+      "change": "If keeping zone-based trading, add a confirmation filter: require a bullish/bearish candle pattern at the zone AND volume spike before entry, rather than entering on zone touch alone.",
+      "expected_impact": "Could reduce false entries by 40-60%, improving win rate from 0% to potentially 30-40%.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "PAPER TRADING ONLY \u2014 test momentum breakout strategy alongside revised Supply & Demand Zones",
+  "confidence": 2,
+  "apply_to_memory": false
+}
