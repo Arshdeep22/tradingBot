@@ -1,0 +1,46 @@
+{
+  "date": "2026-08-31",
+  "wins_analysis": "No wins today as zero recommendations were generated. The AI model was unavailable, and the zone score fallback system failed to produce any qualifying setups despite scanning all Nifty 50 stocks.",
+  "losses_analysis": "No losses today either, but the real loss is opportunity cost \u2014 a trending_down regime with ADX=25 and low VIX=11.2 is a textbook environment for short-side supply zone trades, yet the system generated nothing. The fallback mechanism is clearly too restrictive or broken when AI is unavailable.",
+  "regime_impact": "Today's trending_down regime with strong ADX=25 and low VIX=11.2 was ideal for directional short trades off supply zones. The regime should have helped significantly, but the system couldn't capitalize because no setups were generated at all. This is a system availability failure, not a regime mismatch.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Debug and fix the zone score fallback pipeline \u2014 ensure it generates at least 3-5 candidate setups when AI is unavailable. Check if the fallback min_score threshold is set too high (e.g., lower from 80 to 65 for fallback mode) or if the scan module itself errored out silently.",
+      "reason": "Zero recommendations on a day with ADX=25 and clear trend direction means the fallback system is non-functional. A trending market with low VIX should yield multiple high-quality setups.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Add a SELL-side bias filter for trending_down regimes \u2014 when Nifty is down >0.4% and ADX>22, automatically prioritize supply zone SELL setups and relax entry criteria for shorts by 10-15%.",
+      "reason": "The regime was clearly bearish (Nifty -0.6%, ADX=25) but the system had no mechanism to lean into trend-aligned shorts even via fallback.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Implement an alerting mechanism that flags when AI is unavailable AND fallback produces zero setups \u2014 trigger a manual review or secondary scan using simple technical criteria (e.g., stocks breaking below 20-EMA with volume > 1.5x average).",
+      "reason": "Today was a complete blank day with no trades placed. The system needs a circuit-breaker that escalates when both primary and fallback pipelines produce nothing.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Pre-screen these specific symbols for tomorrow's SHORT setups near supply zones: HDFCBANK.NS, INFY.NS, TCS.NS, ICICIBANK.NS \u2014 heavyweight Nifty stocks that typically lead index moves in downtrends.",
+      "reason": "With Nifty trending down and VIX still low at 11.2, large-cap stocks near resistance/supply zones offer clean short entries with tight stops. These should be force-scanned even if AI remains unavailable.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "If AI remains unavailable tomorrow, use a simplified rule: enter SELL trades only at supply zones where price rejected in the last 5 sessions AND RSI(14) > 55 on the hourly chart, with SL above zone high and target at 1:1.5 RR minimum.",
+      "reason": "Having a concrete mechanical rule prevents another zero-trade day. The trending_down regime supports this directional bias.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Ensure the scan pipeline is operational before market open \u2014 if AI is still down, manually force the fallback to scan for supply-zone SELL setups on index heavyweights, given the continuing downtrend with ADX=25 and low VIX.",
+  "symbol_notes": {
+    "HDFCBANK.NS": "Heavyweight likely leading downside \u2014 scan for supply zone rejection near recent swing highs for SHORT entry",
+    "INFY.NS": "IT sector tends to weaken in broad downtrends \u2014 check for supply zone near 5-day highs",
+    "TCS.NS": "Similar to INFY \u2014 look for failed bounce into supply as a SHORT candidate",
+    "RELIANCE.NS": "Monitor whether it holds recent support \u2014 if broken, becomes a high-conviction SHORT setup"
+  },
+  "confidence": 3
+}
