@@ -1,0 +1,47 @@
+{
+  "date": "2026-09-01",
+  "wins_analysis": "No wins today as zero recommendations were generated. The AI model was unavailable and the zone score fallback system failed to produce any qualifying setups, meaning no capital was deployed and no profits were captured.",
+  "losses_analysis": "No losses today since no trades were placed. However, the real loss is opportunity cost \u2014 a strong trending_down day with ADX 25.0 and Nifty dropping 1.1% likely presented multiple viable SHORT setups on supply zone rejections that went completely untraded.",
+  "regime_impact": "Today's trending_down regime with ADX 25.0 was ideal for directional SHORT trades off supply zones. The system completely missed this opportunity because the AI was unavailable and the fallback zone scoring mechanism generated zero recommendations \u2014 the fallback system is fundamentally broken for trending days.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Fix the zone score fallback to actually generate recommendations when AI is unavailable \u2014 lower the fallback min_score threshold from its current level to 60 for trending regimes with ADX >= 22, ensuring at least 3-5 SHORT candidates surface on down-trending days",
+      "reason": "AI was unavailable today and the fallback produced exactly 0 setups on a day with ADX 25.0 and -1.1% Nifty move, which is an obvious failure in the fallback pipeline",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Add a pre-market health check at 08:45 IST that verifies AI connectivity and, if unavailable, automatically switches to an aggressive fallback scan that prioritizes stocks with recent supply zone touches and relative weakness vs Nifty",
+      "reason": "Today the system silently produced nothing \u2014 there was no alert or adaptive response to AI being offline, resulting in a full day of zero activity in a tradeable market",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 3,
+      "action": "For tomorrow's expected continuation of the downtrend, pre-screen these heavy-weight Nifty stocks for SHORT supply zone setups: RELIANCE.NS, HDFCBANK.NS, INFY.NS, ICICIBANK.NS, TCS.NS \u2014 they tend to lead index moves and will have cleaner supply zones after today's sell-off",
+      "reason": "With Nifty -1.1% and ADX 25.0, index heavyweights likely broke through demand zones today, creating fresh supply zones overhead for tomorrow's continuation shorts",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Set entry orders 0.2-0.3% below today's close for SHORT candidates rather than waiting for intraday supply zone retests \u2014 on trending_down days with low VIX (11.2), gap-downs often don't retrace enough to fill limit orders at supply zones",
+      "reason": "Low VIX 11.2 combined with strong downtrend means moves tend to be smooth and persistent, making aggressive entries more effective than waiting for perfect zone retests",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Tighten stop losses to 1.2x ATR instead of default on SHORT trades when regime is trending_down and VIX < 13, and widen targets to 2.5x ATR to capture the extended directional moves typical of low-vol trends",
+      "reason": "VIX at 11.2 means intraday volatility is compressed \u2014 tight stops are less likely to get clipped by noise while wider targets can capture the full trending move",
+      "applies_to": "strategy_params"
+    }
+  ],
+  "tomorrow_focus": "Expect downtrend continuation with possible gap-down \u2014 prioritize SHORT setups on index heavyweights at fresh supply zones formed today, and ensure the fallback scan is operational before market open.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Likely broke key support on -1.1% Nifty day \u2014 watch for supply zone retest near today's open price for SHORT entry tomorrow",
+    "HDFCBANK.NS": "Heavyweight likely participated heavily in sell-off \u2014 monitor for weak bounce into overhead supply for SHORT setup",
+    "INFY.NS": "IT sector tends to lead in down-trends \u2014 check if today created a clean lower-high supply zone for tomorrow",
+    "ICICIBANK.NS": "Banking names under pressure in downtrends \u2014 look for failed bounce into previous support-turned-resistance",
+    "TCS.NS": "Similar to INFY, watch for supply zone SHORT if it gaps down and attempts to fill"
+  },
+  "confidence": 3
+}
