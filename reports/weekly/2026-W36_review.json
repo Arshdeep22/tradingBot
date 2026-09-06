@@ -1,0 +1,56 @@
+{
+  "week": "2026-W36",
+  "executive_summary": "Tenth consecutive week of failure \u2014 zero trades taken, zero P&L. The Supply & Demand Zone strategy is completely non-functional: it either filters out all setups (current high min_score) or takes losing trades (lower min_score). The bot has been dead money for 10+ weeks with cumulative losses of \u20b9-16,000 and now zero activity. This is a fundamental architecture failure requiring a complete strategy replacement, not parameter adjustment.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70% below 70% target. No measurable progress in 10 weeks.",
+  "regime_assessment": "Regime detection correctly identified trending_down for 6 of 7 days, but this information is completely useless because the bot has no strategy that trades in trending_down regimes. The Supply & Demand Zone strategy appears to require mean-reversion conditions and generates zero signals in trends. Regime detection is working but the strategy-regime mapping is broken \u2014 there is no fallback strategy for trending markets.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol data available \u2014 zero trades means no symbol-level analysis is possible. Cannot make data-driven symbol decisions.",
+    "focus_list": [],
+    "focus_reason": "No basis for focus list. Need to first establish a strategy that actually generates trades."
+  },
+  "dow_pattern": "No day-of-week pattern can be identified \u2014 zero trades across all days for the entire week. Day-of-week analysis is meaningless until the bot is actually trading.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      50,
+      70
+    ],
+    "zone_rr_range": [
+      1.2,
+      2.0
+    ],
+    "reasoning": "STOP optimizing Supply & Demand Zone parameters. The strategy has failed for 10 weeks. If forced to keep it, dramatically lower min_score to 50-70 and reduce RR to 1.2-2.0 to actually generate trades \u2014 but this is a band-aid. The real fix is structural."
+  },
+  "structural_recommendations": [
+    {
+      "change": "REPLACE primary strategy entirely. Implement a trend-following strategy (e.g., moving average crossover, breakout, or momentum) as the primary strategy for trending regimes. Supply & Demand Zones are a mean-reversion approach that generates zero signals in persistent trends \u2014 which has been the dominant regime for 10+ weeks.",
+      "expected_impact": "Moving from 0 trades/week to 5-15 trades/week. Even a 40% win rate with 1.5:1 RR would be positive expectancy vs current zero activity.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a strategy-regime router: trending_up \u2192 trend-following long, trending_down \u2192 trend-following short or cash, ranging \u2192 Supply & Demand Zones. The current architecture uses one strategy regardless of regime, making regime detection decorative.",
+      "expected_impact": "Eliminates the core failure mode where the wrong strategy is applied to the detected regime. Expected to improve strategy-regime alignment from 0% to 70%+.",
+      "priority": "high"
+    },
+    {
+      "change": "Add a 'circuit breaker' inactivity alert: if 0 trades are taken for 3 consecutive trading days, automatically lower min_score by 10 or switch to a backup strategy. The bot should never sit idle for 10 weeks.",
+      "expected_impact": "Prevents prolonged dead-money periods. Ensures the bot generates at minimum 2-3 trades per week for learning and adaptation.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement paper-trade mode for new strategies: run trend-following and mean-reversion strategies in parallel on paper for 1 week, then switch live to whichever shows positive expectancy.",
+      "expected_impact": "De-risks strategy transitions. Allows data collection without capital risk. Expected 1-week validation cycle before going live.",
+      "priority": "medium"
+    },
+    {
+      "change": "Add short-selling or put-buying capability for trending_down regimes. The bot currently appears to have no mechanism to profit from downtrends, which dominated 6 of 7 days this week and most of the past 10 weeks.",
+      "expected_impact": "Doubles the addressable opportunity set. In persistent downtrends, this is the difference between 0 trades and 5+ trades per week.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Trend-Following Breakout (replace Supply & Demand Zones)",
+  "confidence": 2,
+  "apply_to_memory": false
+}
