@@ -1,0 +1,75 @@
+{
+  "date": "2026-09-10",
+  "scan_time_ist": "2026-09-10 15:29:14",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "In a strong trending_down regime (Nifty -2.0%, ADX 25.0), HDFCBANK.NS SELL setup aligns with the dominant trend and was specifically flagged in yesterday's learnings as a high-priority short candidate at a supply zone. TATASTEEL.NS BUY is counter-trend in a strong downtrend, making it significantly riskier despite a higher zone score. With only 2 setups available, only the trend-aligned short merits recommendation; the long is too risky given regime context.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-2.0%",
+    "adx": 25.0,
+    "vix": 11.8,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -2.0%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 697.72,
+      "stop_loss": 702.93,
+      "target": 687.3,
+      "zone_score": 43,
+      "win_probability": 62,
+      "conviction": "MEDIUM",
+      "reasoning": [
+        "SELL setup on HDFCBANK.NS aligns perfectly with the strong trending_down regime (Nifty -2.0%, ADX 25.0) \u2014 trend alignment is the single most important edge in directional markets",
+        "Yesterday's learnings specifically flagged HDFCBANK.NS as a priority: 'Likely broke key support on a -2% Nifty day \u2014 look for retest of broken support as supply zone for SHORT entry'",
+        "Supply zone (DBD) with strong departure (vol 2.5x, body ratio 0.90) and tight 2-candle base indicates institutional selling; 2.0 R:R is solid but per weekly insights, consider tightening target to 1.0-1.2x ATR given low VIX (11.8)",
+        "Zone score of 43 is below typical thresholds but yesterday's learnings explicitly mandate lowering min_score by 10-15 points in trending_down regimes with ADX >= 22, making this a valid candidate"
+      ],
+      "risks": "Zone score is low at 43/60 and the zone_reasoning itself flags 'Counter-trend (risky)' on the trend component which seems contradictory to the macro regime \u2014 verify that the 15-min trend has turned bearish before entry; low VIX (11.8) may cause the move to stall before target",
+      "entry_advice": "Wait for price to retest the 697.70-702.90 supply zone and show a bearish rejection candle (bearish engulfing or shooting star) on the 15-min chart before entering SHORT. Place stop-loss at 702.93. Given low VIX environment, consider booking partial profits at 1.0x ATR (~692) rather than holding for the full 687.30 target. Do not enter if price breaks above 703 with volume.",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 184.39,
+      "stop_loss": 182.96,
+      "target": 187.25,
+      "zone_score": 49,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 83,
+      "symbol": "HDFCBANK.NS",
+      "side": "SELL",
+      "entry": 697.72,
+      "stop_loss": 702.93,
+      "target": 687.3,
+      "quantity": 191,
+      "win_probability": 62
+    },
+    {
+      "order_id": 84,
+      "symbol": "TATASTEEL.NS",
+      "side": "BUY",
+      "entry": 184.39,
+      "stop_loss": 182.96,
+      "target": 187.25,
+      "quantity": 699,
+      "win_probability": 0
+    }
+  ]
+}
