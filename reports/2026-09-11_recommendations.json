@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-11",
+  "scan_time_ist": "2026-09-11 15:27:10",
+  "total_setups_found": 2,
+  "total_candidates_sent_to_ai": 2,
+  "ai_available": true,
+  "market_context": "Only 2 setups were detected, both BUY (demand zone) setups, which are counter-trend in a trending_down regime with Nifty -1.9% and ADX 25. Yesterday's learnings explicitly state: eliminate counter-trend BUY setups entirely when ADX >= 25 and regime is trending_down AND Nifty is down more than 1%. Neither setup meets the minimum criteria for execution. HDFCBANK BUY has a zone score of only 43 and is flagged counter-trend. KOTAKBANK BUY scores 53 but is still a BUY in a strong downtrend. Per weekly insights, the strategy has failed for 10 consecutive weeks \u2014 forcing trades in unfavorable conditions would compound losses.",
+  "regime": {
+    "regime": "trending_down",
+    "nifty_direction": "-1.9%",
+    "adx": 25.0,
+    "vix": 12.3,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong downtrend (Nifty -1.9%). Focus on supply zones aligned with trend."
+  },
+  "top10_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 411.22,
+      "stop_loss": 407.64,
+      "target": 418.38,
+      "zone_score": 53,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": true
+    },
+    {
+      "rank": 2,
+      "symbol": "HDFCBANK.NS",
+      "side": "BUY",
+      "entry": 705.67,
+      "stop_loss": 698.0,
+      "target": 721.01,
+      "zone_score": 43,
+      "win_probability": 0,
+      "conviction": "N/A",
+      "reasoning": [],
+      "risks": "",
+      "entry_advice": "",
+      "order_placed": false
+    }
+  ],
+  "orders_placed": [
+    {
+      "order_id": 85,
+      "symbol": "KOTAKBANK.NS",
+      "side": "BUY",
+      "entry": 411.22,
+      "stop_loss": 407.64,
+      "target": 418.38,
+      "quantity": 279,
+      "win_probability": 0
+    }
+  ]
+}
