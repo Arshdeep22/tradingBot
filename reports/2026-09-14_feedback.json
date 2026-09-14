@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-14",
+  "wins_analysis": "No wins today as zero recommendations were generated. The AI module was unavailable and the zone score fallback system failed to produce any qualifying setups, meaning no trades were placed at all.",
+  "losses_analysis": "No losses today since no trades were executed. The core failure is systemic \u2014 the fallback mechanism produced zero actionable setups on a day with a strong directional move (Nifty -2.1%), which represents a significant missed opportunity for short-side trades.",
+  "regime_impact": "Today's trending_down regime with ADX=25 and Nifty -2.1% was ideal for supply zone SHORT setups. VIX at 12.3 is still low, meaning option premiums were cheap and directional moves were clean. The system completely failed to capitalize on a textbook trending day because the AI was offline and the fallback had no qualifying zones.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Implement an emergency fallback scan that activates when AI is unavailable: use a simple rule-based engine that identifies the top 5 Nifty 50 stocks with highest negative correlation to Nifty on down-trend days (e.g., weakest RSI, below VWAP, near supply zones) and generates SHORT recommendations with min zone score >= 65",
+      "reason": "Zero setups on a -2.1% Nifty day is unacceptable \u2014 the fallback system is essentially non-functional and needs a rules-based backup that guarantees at least 3-5 setups on strong directional days",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the zone_score_threshold from its current level to 60 when the fallback is active AND ADX >= 22 AND the regime is trending_down or trending_up, to ensure directional days always produce candidates",
+      "reason": "The fallback produced zero setups despite a clear trend, suggesting the qualifying threshold is too strict for a secondary system that lacks AI probability scoring",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Pre-compute a watchlist of 10 stocks with fresh daily supply zones (within 2% of current price) every evening so that even if AI is offline next morning, the fallback can immediately scan these pre-identified levels for SHORT entries",
+      "reason": "Today's zero-recommendation failure likely stems from the fallback not having pre-identified zones to evaluate; a nightly pre-computation step removes this cold-start problem",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "On confirmed trending_down days (ADX >= 22, Nifty < -1%), bias all setups 80% SHORT / 20% LONG and use a wider 1:2.5 risk-reward ratio on shorts since momentum favors continuation; set entry orders at VWAP retest or minor pullback levels rather than waiting for perfect zone touches",
+      "reason": "A -2.1% Nifty day with ADX 25 is a high-conviction trend day where chasing shorts on pullbacks is statistically profitable \u2014 missing it entirely is the worst outcome",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Add an alerting/logging mechanism that flags when zero recommendations are generated before market open, triggering a manual override option or auto-relaxing filters by 10% iteratively until at least 3 setups are produced",
+      "reason": "Today's complete inactivity went unnoticed until EOD \u2014 an early morning alert would have allowed manual intervention to capture the down move",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "Monitor for continuation of the downtrend (Nifty -2.1% today) \u2014 prioritize SHORT setups on weak banking and IT names near supply zones, and ensure the fallback scan is functional before 9:00 AM IST regardless of AI availability.",
+  "symbol_notes": {
+    "HDFCBANK.NS": "Typically leads Nifty down moves \u2014 check for fresh supply zone near today's close for a potential SHORT tomorrow",
+    "INFY.NS": "IT sector often accelerates selling on trend-down day 2 \u2014 watch for breakdown below today's low as SHORT trigger",
+    "RELIANCE.NS": "Heavyweight likely dragged index down today \u2014 look for a pullback to VWAP or intraday supply zone for SHORT entry",
+    "TATAMOTORS.NS": "High-beta name that amplifies index moves \u2014 ideal SHORT candidate if gap-down or weak open tomorrow"
+  },
+  "confidence": 3
+}
