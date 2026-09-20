@@ -1,0 +1,56 @@
+{
+  "week": "2026-W38",
+  "executive_summary": "Twelfth consecutive week of failure. The bot took 1 trade across 7 days of persistent trending_down regime, losing \u20b91,000 with 0% win rate. The Supply & Demand Zone strategy is fundamentally incompatible with sustained downtrend regimes \u2014 it has produced zero wins in approximately 20+ consecutive trades over 12 weeks. This is a systemic architecture failure requiring a complete strategy replacement, not parameter adjustment.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70% below 70% target. No meaningful progress in 12 weeks.",
+  "regime_assessment": "Regime detection appears accurate \u2014 it has correctly identified trending_down for 7 consecutive days and likely many weeks prior. However, the regime signal is completely wasted because the bot has NO strategy designed to profit from downtrends. The regime detector is working; the strategy router is broken.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol data available to make informed decisions. This itself is a structural gap \u2014 the bot should be logging per-symbol metrics.",
+    "focus_list": [],
+    "focus_reason": "Cannot determine focus symbols without per-symbol performance data. Logging must be implemented first."
+  },
+  "dow_pattern": "Only 1 trade in 7 days \u2014 insufficient data for day-of-week analysis. The sole Friday trade lost. With 12 weeks of near-zero activity, day-of-week optimization is irrelevant until the core strategy problem is resolved.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      55,
+      70
+    ],
+    "zone_rr_range": [
+      1.2,
+      2.0
+    ],
+    "reasoning": "STOP tuning Supply & Demand Zone parameters \u2014 12 weeks of failure proves this strategy cannot work in the current regime. If forced to continue with S&D zones, dramatically lower min_score to generate trades and lower RR to improve fill rates, but this is a band-aid on a severed limb."
+  },
+  "structural_recommendations": [
+    {
+      "change": "CRITICAL: Implement a short-selling or trend-following-short strategy for trending_down regimes. The bot has spent 12+ weeks in a downtrend with only a long-biased supply/demand strategy. Add a mean-reversion short strategy, a breakdown strategy, or at minimum a short-side EMA crossover system that activates when regime=trending_down.",
+      "expected_impact": "Transform from 0% win rate to estimated 40-55% win rate by aligning trade direction with market regime. This is the single highest-impact change possible.",
+      "priority": "high"
+    },
+    {
+      "change": "Build a strategy router/multiplexer that maps detected regimes to compatible strategies. trending_down \u2192 short strategies or cash; ranging \u2192 mean reversion; trending_up \u2192 Supply & Demand zones. The current architecture detects regime correctly but ignores it entirely.",
+      "expected_impact": "Eliminates the 12-week failure pattern where strategy and regime are mismatched. Expected to reduce drawdown by 60-80% and enable positive expectancy.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a circuit breaker: if a strategy produces 0% win rate for 3+ consecutive weeks, automatically pause it and switch to cash or an alternative strategy. Twelve weeks of compounding losses is unacceptable.",
+      "expected_impact": "Would have saved \u20b916,000+ in cumulative losses by halting after week 3 of failure. Prevents catastrophic strategy persistence.",
+      "priority": "high"
+    },
+    {
+      "change": "Add per-symbol performance logging with fields: symbol, entry_price, exit_price, regime_at_entry, zone_score, P&L. Current lack of symbol data makes it impossible to optimize the watchlist.",
+      "expected_impact": "Enables data-driven symbol selection within 2-3 weeks of implementation. Currently operating blind.",
+      "priority": "medium"
+    },
+    {
+      "change": "If short-selling is not available (regulatory/broker constraint), implement a cash-preservation mode that goes flat when regime=trending_down persists for >5 days, and only re-engage on regime change signal.",
+      "expected_impact": "Preserves capital during adverse regimes. Would have prevented all 12 weeks of losses. Net P&L improvement of \u20b916,000+.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Supply & Demand Zones",
+  "confidence": 1,
+  "apply_to_memory": false
+}
