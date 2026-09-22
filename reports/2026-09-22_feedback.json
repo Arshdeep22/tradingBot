@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-22",
+  "wins_analysis": "No wins today as zero recommendations were generated. The system produced no setups despite a favorable trending_up regime with Nifty gaining +0.9%, indicating the scanning pipeline or AI availability was the bottleneck, not strategy quality.",
+  "losses_analysis": "No losses today since no trades were placed. The core failure is operational \u2014 the AI model was unavailable and the zone score fallback produced zero qualifying setups, resulting in a completely idle day during what was likely a profitable trading environment.",
+  "regime_impact": "Today's trending_up regime with ADX=25 and low VIX=11 was ideal for momentum and demand-zone BUY setups. This regime should have generated multiple high-probability long entries. The system completely failed to capitalize on a favorable market day, which is a significant opportunity cost.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Debug and fix the AI model availability issue \u2014 check API keys, model endpoint health, and add a pre-market health check at 8:45 AM IST that sends an alert if AI is offline so manual intervention can restore it before 9:15 AM",
+      "reason": "AI was marked unavailable today, and the fallback zone score system generated zero setups on a +0.9% trending day \u2014 the fallback is not functioning as a viable backup",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the zone score fallback threshold from its current value by 5-10 points (e.g., if min_score is 75, reduce to 65) specifically when regime is trending_up and VIX < 14, so that at least 3-5 setups pass the filter during favorable conditions",
+      "reason": "Zero setups on a strong trend day means the fallback thresholds are too restrictive \u2014 the fallback should be slightly more permissive to avoid zero-trade days in favorable regimes",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a regime-aware minimum trade count rule: if regime is trending_up with ADX > 20 and fewer than 3 setups are found, automatically relax entry criteria (widen zone tolerance by 0.3%, reduce minimum volume rank requirement) and rescan",
+      "reason": "A trending_up day with ADX=25 and VIX=11 is statistically among the best environments for swing longs \u2014 having zero exposure is worse than having slightly looser entries",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Pre-build a watchlist of top 10 Nifty 50 stocks with strongest relative strength (RS > 1.2 vs Nifty over 10 days) and nearest demand zones, so that even if AI fails, a curated fallback list is ready for manual or rule-based entry",
+      "reason": "Complete system failure produced zero trades; a pre-built watchlist provides a last-resort mechanism to stay active in strong markets",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow's trending regime, prioritize BUY setups on stocks that pulled back 1-2% intraday on 2026-09-22 despite Nifty being up \u2014 these reversion-to-trend entries often have better R:R than chasing momentum",
+      "reason": "In strong uptrends, laggards that dip tend to mean-revert toward the index \u2014 this provides cleaner demand zone entries with tighter stops",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Ensure AI model is online before market open; if trending_up regime continues with VIX < 12, aggressively scan for demand zone BUY setups on large-cap leaders like RELIANCE, INFY, HDFC Bank, and TCS that are near key support levels.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Nifty heavyweight likely participated in today's +0.9% move \u2014 check if it pulled back to a demand zone intraday for a BUY setup tomorrow",
+    "HDFCBANK.NS": "Banking names tend to lead in trending_up regimes with low VIX \u2014 prioritize if near a 1D/4H demand zone",
+    "INFY.NS": "IT sector relative strength should be assessed \u2014 if outperforming Nifty, favor BUY setups aligned with the uptrend",
+    "BAJFINANCE.NS": "High-beta financial name that benefits disproportionately from low VIX trending regimes \u2014 scan for demand zone entries"
+  },
+  "confidence": 3
+}
