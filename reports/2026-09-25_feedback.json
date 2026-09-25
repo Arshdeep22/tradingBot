@@ -1,0 +1,47 @@
+{
+  "date": "2026-09-25",
+  "wins_analysis": "No wins today as the system generated zero recommendations. The AI model was unavailable and the zone score fallback produced no setups that met minimum thresholds, resulting in a completely idle day.",
+  "losses_analysis": "No losses today since no trades were placed. However, the real loss is opportunity cost \u2014 a strong trending_down day with ADX 25.0 and Nifty dropping 0.9% likely offered viable short setups at supply zones that the system entirely missed.",
+  "regime_impact": "Today's trending_down regime with ADX=25.0 and low VIX=12.2 was ideal for supply-zone SHORT entries. The fallback system completely failed to capitalize on a directionally clear day. A SHORT-biased strategy aligned with the downtrend would have fit best.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Implement an emergency fallback scan that activates when AI is unavailable: use zone score \u2265 70 combined with price-below-20EMA filter for SHORT setups and price-above-20EMA for LONG setups, ensuring at least 3-5 candidates are surfaced on trending days with ADX > 22",
+      "reason": "AI was unavailable and the current fallback generated exactly 0 recommendations on a day with clear directional opportunity (Nifty -0.9%, ADX 25.0). The fallback thresholds are too strict or the logic is broken.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Add a regime-aware bias filter: when regime=trending_down AND ADX\u226522, auto-set side=SHORT and scan only supply zones. Lower the minimum zone score threshold from current level to 65 for trend-aligned setups.",
+      "reason": "On a clear downtrend day the system should not require the same confidence threshold as a ranging day. Trend alignment itself adds probability, so the zone score bar can be lower.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Pre-screen Nifty 50 for the 10 weakest stocks (highest negative intraday returns by 9:30 AM) when regime is trending_down, and prioritize these for SHORT supply-zone setups regardless of AI availability.",
+      "reason": "Zero symbol selection occurred today. In a broad selloff, sector laggards like banking or IT heavyweights often provide the cleanest supply-zone rejections and should be identified automatically.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Log and alert when the system produces 0 recommendations before 10:00 AM so a manual override or parameter relaxation can be triggered mid-morning rather than discovering the miss at EOD.",
+      "reason": "Today's zero-trade outcome was only visible at EOD report time. An early warning at 10:00 AM could have triggered a manual parameter adjustment to capture afternoon setups.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow specifically, if AI remains unavailable, use a hardcoded watchlist of high-volume Nifty 50 names (RELIANCE, HDFCBANK, INFY, TCS, ICICIBANK) with supply zones identified from the daily chart, placing SHORT limit orders at those zones with 0.8% SL and 1.6% target.",
+      "reason": "Two consecutive zero-trade days will erode any strategy validation. Even conservative fallback trades on liquid names provide data to refine the system.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Verify AI model availability before market open; if still down, deploy the emergency fallback scan with relaxed thresholds biased SHORT given the active downtrend, targeting supply zones on RELIANCE, HDFCBANK, INFY, TCS, and ICICIBANK.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Likely sold off with the market today \u2014 check for a fresh supply zone near today's open for a SHORT entry tomorrow if downtrend continues.",
+    "HDFCBANK.NS": "Banking sector tends to lead Nifty down moves \u2014 prioritize for SHORT supply-zone setups if ADX stays above 22.",
+    "INFY.NS": "IT names often gap down hard in trending_down regimes \u2014 watch for a supply zone retest near the 9:30-10:00 AM range for SHORT entry.",
+    "TCS.NS": "Similar to INFY, monitor for supply-zone rejection if broad weakness persists.",
+    "ICICIBANK.NS": "High liquidity and beta to Nifty \u2014 strong SHORT candidate at supply zones in a downtrend."
+  },
+  "confidence": 3
+}
