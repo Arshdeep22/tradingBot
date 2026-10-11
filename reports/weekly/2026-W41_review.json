@@ -1,0 +1,56 @@
+{
+  "week": "2026-W41",
+  "executive_summary": "Fifteenth consecutive week of total failure with zero trades taken and zero P&L. The Supply & Demand Zone strategy is categorically dead \u2014 it has not generated actionable signals for nearly four months. No parameter tuning within this framework can fix a strategy that fundamentally cannot produce entries in real market conditions. The bot requires a complete architectural overhaul: either replace the core strategy entirely or add parallel strategies that can actually generate signals across all regime types.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70% below the 70% target. No trades means no progress is possible.",
+  "regime_assessment": "Regime detection appears to be working correctly \u2014 6 days of trending_down and 1 day of trending_up seems plausible for October market conditions. However, regime detection is irrelevant when the strategy generates zero signals in ANY regime. The strategy failed in both trending_down (6 days) and trending_up (1 day), proving regime is not the bottleneck \u2014 the signal generation engine itself is broken.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol data exists because no trades were taken. Symbol selection cannot be evaluated.",
+    "focus_list": [],
+    "focus_reason": "Cannot determine focus symbols without any trade history. The priority is getting ANY signals first."
+  },
+  "dow_pattern": "No day-of-week pattern can be identified \u2014 zero trades across all days for 15 consecutive weeks. Day-of-week optimization is meaningless until the bot can actually trade.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      40,
+      65
+    ],
+    "zone_rr_range": [
+      1.0,
+      1.8
+    ],
+    "reasoning": "After 15 weeks of zero signals, the current min_score of 75 and RR of 2.0 are clearly too restrictive. However, this is a band-aid \u2014 even aggressive parameter loosening has been recommended for months with no effect. The real problem is structural. These ranges are provided only as a last-resort fallback if the structural changes below are not implemented."
+  },
+  "structural_recommendations": [
+    {
+      "change": "ABANDON Supply & Demand Zones as the sole strategy. Implement a multi-strategy engine with at least 2-3 parallel strategies: (1) EMA crossover / trend-following for trending regimes, (2) VWAP mean-reversion for ranging regimes, (3) Opening Range Breakout for high-volatility sessions. Each strategy should independently generate signals.",
+      "expected_impact": "Move from 0 trades/week to 15-30 trades/week. Even at a 45% win rate, this produces data to iterate on \u2014 which is infinitely more valuable than zero trades at a theoretical 66.7% win rate.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement a 'signal generation health check' \u2014 if the bot goes 2 consecutive trading days with zero signals, automatically reduce min_score by 10 points, widen zone tolerances by 20%, and reduce RR ratio by 0.3. Continue loosening every 2 days until signals appear. This prevents the 15-week dead zone we are currently in.",
+      "expected_impact": "Eliminates multi-week zero-trade streaks entirely. Guarantees at least some signals within any given week, even if quality is lower.",
+      "priority": "high"
+    },
+    {
+      "change": "Add a simple momentum/breakout strategy as an immediate parallel signal source. Use 20-period high breakouts with ATR-based stops. This requires minimal development and works in trending_down (short) and trending_up (long) regimes.",
+      "expected_impact": "Could generate 5-10 signals per day in trending markets, which represent 6 of 7 days this week. Even conservative filtering should yield 2-5 trades per week.",
+      "priority": "high"
+    },
+    {
+      "change": "Implement comprehensive signal pipeline logging \u2014 log every candidate zone found, every score calculated, and every reason a potential trade was rejected. Without this diagnostic data, we are blind to WHY zero signals are produced.",
+      "expected_impact": "Enables root cause analysis within 1 week instead of continuing to guess. May reveal a single filter or threshold that is killing all candidates.",
+      "priority": "high"
+    },
+    {
+      "change": "If Supply & Demand Zones must be retained, fundamentally rebuild zone detection: increase lookback from 18 to 60 days, allow up to 8 base candles, accept zone retests (not just fresh zones), and score zones on a 0-100 scale with a passing threshold of 40.",
+      "expected_impact": "Could increase zone detection rate by 5-10x, potentially yielding 3-8 candidates per day for filtering.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Multi-Strategy Engine (EMA Crossover + Breakout + Supply & Demand Zones as fallback)",
+  "confidence": 2,
+  "apply_to_memory": false
+}
