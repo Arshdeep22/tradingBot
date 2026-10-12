@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-13",
+  "wins_analysis": "No wins to analyze \u2014 the system generated zero recommendations and zero trades despite a favorable trending_up regime with ADX=25 and low VIX at 14.4. This represents a complete missed opportunity day.",
+  "losses_analysis": "No losses occurred, but the real failure is the system producing zero setups. The AI module was unavailable (fallback to zone score), and the fallback mechanism clearly failed to identify any qualifying setups across all 50 Nifty stocks on a strong trending day.",
+  "regime_impact": "Today's trending_up regime with ADX=25 and VIX=14.4 was ideal for momentum and demand-zone BUY strategies. The regime should have helped significantly, but the system completely failed to capitalize \u2014 indicating the fallback scoring thresholds are too restrictive or the zone detection logic is broken when AI is offline.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Debug and fix the zone score fallback pipeline \u2014 run it manually against today's data for all 50 stocks and log why every single stock was rejected. Check if zone_score_min threshold is set unreasonably high (e.g., >85) and lower it to 65-70 for trending_up regimes.",
+      "reason": "Zero setups across 50 stocks on a +0.4% trending day with ADX=25 is statistically near-impossible if the scanner is working correctly. The fallback is either crashing silently or filtering too aggressively.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Add a minimum_recommendations_floor of at least 3 setups per day \u2014 if the primary scanner returns 0, trigger a relaxed secondary scan with min_score reduced by 15 points and wider zone proximity tolerance (e.g., from 0.5% to 1.2% from zone boundary).",
+      "reason": "A system that produces zero trades on a favorable day has zero expected value. Even marginal setups in a strong regime can be profitable with proper position sizing.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Specifically scan RELIANCE.NS, ICICIBANK.NS, HDFCBANK.NS, INFY.NS, and TCS.NS for demand zone bounces and breakout-pullback entries tomorrow, using 15-min timeframe zones formed in the last 5 sessions.",
+      "reason": "These high-liquidity, high-beta-to-Nifty names are most likely to respect supply/demand zones in a trending_up regime and should have had setups today. They should be force-included in tomorrow's watchlist.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Implement an AI-availability health check at 08:45 IST \u2014 if AI is offline, immediately switch to a pre-configured rule-based strategy (e.g., opening range breakout on top 10 Nifty movers from previous day) rather than relying solely on zone score fallback.",
+      "reason": "Today's AI unavailability cascaded into total inaction. A robust backup strategy ensures the bot always has at least one operating mode.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow's trending_up continuation, set entry timing to first 30 minutes post-open (09:15-09:45 IST) for breakout plays and 10:00-11:00 IST for pullback-to-demand entries, with BUY-side bias only while ADX remains above 22.",
+      "reason": "Trending regimes reward early participation. Delayed entries in trends reduce reward-to-risk as price moves further from support zones.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "Priority #1 is ensuring the scanner actually produces recommendations \u2014 verify fallback pipeline end-to-end before market open, then focus BUY-side setups on large-cap momentum names aligned with the continuing uptrend.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Likely had demand zone setups today given Nifty uptrend \u2014 prioritize for BUY scanning tomorrow",
+    "HDFCBANK.NS": "Heavyweight with strong trend-following behavior \u2014 check for pullback to 15-min demand zone",
+    "ICICIBANK.NS": "Banking sector typically leads in trending_up regimes \u2014 scan for breakout continuation",
+    "INFY.NS": "IT sector momentum stock \u2014 check if holding above recent demand zone for BUY entry",
+    "TCS.NS": "Similar to INFY \u2014 force-include in tomorrow's scan to avoid zero-setup scenario"
+  },
+  "confidence": 3
+}
