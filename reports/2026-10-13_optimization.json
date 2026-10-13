@@ -1,13 +1,13 @@
 {
   "date": "2026-10-13",
-  "run_time_ist": "2026-10-13 01:34:30",
+  "run_time_ist": "2026-10-13 23:23:07",
   "regime": {
-    "regime": "trending_up",
-    "nifty_direction": "+0.4%",
+    "regime": "trending_down",
+    "nifty_direction": "-0.2%",
     "adx": 25.0,
-    "vix": 14.4,
+    "vix": 14.1,
     "best_strategy": "Supply & Demand Zones",
-    "description": "ADX=25.0 strong uptrend (Nifty +0.4%). Focus on demand zones aligned with trend."
+    "description": "ADX=25.0 strong downtrend (Nifty -0.2%). Focus on supply zones aligned with trend."
   },
   "symbols_tested": 48,
   "combos_tested": 27,
@@ -19,11 +19,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -33,11 +33,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -47,11 +47,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -61,11 +61,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -75,11 +75,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -89,11 +89,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -103,11 +103,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -117,11 +117,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -131,11 +131,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -145,11 +145,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -159,11 +159,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -173,11 +173,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -187,11 +187,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -201,11 +201,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -215,11 +215,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -229,11 +229,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -243,11 +243,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -257,11 +257,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -271,11 +271,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -285,11 +285,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -299,11 +299,11 @@
         "rr_ratio": 2.0,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -313,11 +313,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -327,11 +327,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -341,11 +341,11 @@
         "rr_ratio": 2.5,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -355,11 +355,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 3
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -369,11 +369,11 @@
         "rr_ratio": 3.0,
         "max_base_candles": 4
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     },
     {
@@ -383,24 +383,24 @@
         "rr_ratio": 3.0,
         "max_base_candles": 5
       },
-      "triggers": 2,
+      "triggers": 0,
       "wins": 0,
-      "losses": 2,
+      "losses": 0,
       "win_rate": 0.0,
-      "total_pnl": -9.65,
+      "total_pnl": 0.0,
       "profit_factor": 0.0
     }
   ],
   "claude_output": {
-    "analysis": "All 27 parameter combinations in the grid produced identical results: 2 triggers each with 0% win rate and \u20b9-10 total PnL. No combination meets the minimum 5-trigger statistical threshold, indicating extremely poor zone detection and trigger generation during the test period. The strategy is fundamentally failing to generate actionable signals across all parameter variations.",
-    "regime_context": "Despite a trending-up regime (ADX=25.0, Nifty +0.4%) which should favor demand zone entries, the strategy generated only 2 triggers regardless of parameters \u2014 suggesting either zones are not forming at appropriate levels or price is not revisiting identified zones during this strong trend. Low VIX (14.4) may also reduce the amplitude of pullbacks needed to touch demand zones.",
+    "analysis": "The entire grid produced zero triggers across all 27 parameter combinations tested. No Supply & Demand zones were identified and triggered during the 15-day test window, meaning no valid zone setups met even the loosest criteria (min_score=70, max_base_candles=5). This suggests the 45-day build period and current zone detection logic are not generating actionable zones for the Nifty 50 universe.",
+    "regime_context": "Despite a trending-down regime with ADX=25 which should favor supply zone shorts, low VIX (14.1) indicates compressed price action with fewer impulsive moves away from consolidation bases. This likely reduced the formation of strong supply/demand zones with clear base candle structures. The mild downtrend (-0.2%) may not be producing the sharp rallies-into-supply or drops-into-demand needed to trigger zone entries.",
     "zone_best": {
       "min_score": 70,
       "rr_ratio": 2.0,
       "max_base_candles": 5,
       "win_rate": 0.0,
-      "triggers": 2,
-      "reasoning": "No combo has >= 5 triggers so selecting the most permissive parameters (lowest min_score=70, lowest rr_ratio=2.0, highest max_base_candles=5) to maximize zone detection and trigger generation in the next cycle. Even with the loosest filters, only 2 trades triggered, so relaxing constraints is essential to gather enough data for meaningful evaluation."
+      "triggers": 0,
+      "reasoning": "No combination achieved any triggers. Selecting the most permissive parameters (lowest min_score=70, lowest rr_ratio=2.0, highest max_base_candles=5) to maximize the chance of generating trades in future deployment. The current best in memory (min_score=75, rr_ratio=2.0, max_base_candles=4) is more restrictive and would also produce zero triggers. Loosening parameters is the only viable path to getting the minimum 5 trades needed for statistical evaluation."
     },
     "update_memory": false,
     "confidence": 1
