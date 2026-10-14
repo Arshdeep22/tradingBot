@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-14",
+  "wins_analysis": "No wins today as zero recommendations were generated. The AI model was unavailable and the zone score fallback system failed to produce any qualifying setups, meaning no trades were taken at all.",
+  "losses_analysis": "No losses today since no trades were placed. The core issue is not trade quality but complete trade generation failure \u2014 the system produced zero setups despite a favorable trending_up regime with ADX=25 and low VIX=14.6.",
+  "regime_impact": "Today's regime (trending_up, ADX=25, VIX=14.6) was highly favorable for momentum and demand-zone breakout strategies. The regime should have generated multiple BUY setups in Nifty 50 constituents, but the system completely missed the opportunity due to AI unavailability and overly strict fallback filters.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Fix AI model availability \u2014 check API connectivity, model loading, and timeout settings. If the AI service crashed, implement auto-restart. Log the exact failure reason from today's scan for debugging.",
+      "reason": "AI was marked unavailable, which is the root cause of zero recommendations. The fallback system alone is insufficient.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the zone score fallback threshold from its current level (likely \u226580) to \u226565 specifically when regime is trending_up and ADX\u226522 and VIX<18, so that the fallback can still generate 3-5 setups even without the AI model.",
+      "reason": "Zero setups in a favorable regime means the fallback filters are too restrictive. A trending low-volatility day should always produce at least a few candidates from demand zone bounces.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a minimum-trade-count safety: if the morning scan produces 0 recommendations, automatically re-scan at 9:45 AM with relaxed parameters (e.g., zone_score_min reduced by 10 points, expand lookback from 20 to 30 candles).",
+      "reason": "Today's zero-trade outcome means zero learning and zero P&L. A re-scan mechanism ensures the bot always participates on favorable regime days.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Pre-select 5-7 trending Nifty 50 stocks (e.g., RELIANCE.NS, TCS.NS, HDFCBANK.NS, INFY.NS, ICICIBANK.NS) that are above their 20-EMA and near demand zones as a hardcoded watchlist for tomorrow's scan, ensuring the scanner has high-probability candidates even if AI is degraded.",
+      "reason": "With Nifty in a mild uptrend (+0.1%) and strong ADX, large-cap leaders likely have clean demand zone setups. Pre-filtering ensures the fallback has quality input.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "Implement a health-check ping to the AI service at 8:50 AM (before market open). If AI is down, send an alert and auto-switch to a simplified EMA-crossover + demand-zone strategy with predefined parameters rather than producing zero trades.",
+      "reason": "Today the system silently failed. An early health check with a backup strategy prevents full-day zero-trade outcomes.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "Ensure AI model is online before 9:15 AM; if not, deploy the relaxed fallback with zone_score\u226565 targeting BUY setups in large-cap stocks trading above 20-EMA in the continuing uptrend (watch for ADX staying above 22 and VIX holding below 16).",
+  "symbol_notes": {
+    "RELIANCE.NS": "Likely near a demand zone in this uptrend \u2014 prioritize for BUY setup if price pulls back to 20-EMA support tomorrow",
+    "HDFCBANK.NS": "Banking sector tends to lead in trending_up regimes with low VIX \u2014 scan for demand zone entries near intraday support",
+    "INFY.NS": "IT large-cap with clean trends \u2014 check if price is consolidating near a supply/demand zone for breakout entry",
+    "TCS.NS": "Co-moves with INFY \u2014 if both show demand zone alignment, take the one with tighter spread and higher zone score",
+    "ICICIBANK.NS": "Another banking leader to watch for demand zone bounce setups aligned with the broad uptrend"
+  },
+  "confidence": 3
+}
