@@ -1,0 +1,417 @@
+{
+  "date": "2026-10-20",
+  "run_time_ist": "2026-10-20 20:58:50",
+  "regime": {
+    "regime": "trending_up",
+    "nifty_direction": "+2.4%",
+    "adx": 25.0,
+    "vix": 14.8,
+    "best_strategy": "Supply & Demand Zones",
+    "description": "ADX=25.0 strong uptrend (Nifty +2.4%). Focus on demand zones aligned with trend."
+  },
+  "symbols_tested": 48,
+  "combos_tested": 27,
+  "zone_results": [
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.0,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.5,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 2.5,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 3.0,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 3.0,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 70,
+        "rr_ratio": 3.0,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.0,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 2.5,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 3.0,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 3.0,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 75,
+        "rr_ratio": 3.0,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 2.0,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 2.0,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 2.0,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 2.5,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 2.5,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 2.5,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 3.0,
+        "max_base_candles": 3
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 3.0,
+        "max_base_candles": 4
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    },
+    {
+      "strategy": "Supply & Demand Zones",
+      "params": {
+        "min_score": 80,
+        "rr_ratio": 3.0,
+        "max_base_candles": 5
+      },
+      "triggers": 3,
+      "wins": 0,
+      "losses": 3,
+      "win_rate": 0.0,
+      "total_pnl": -52.06,
+      "profit_factor": 0.0
+    }
+  ],
+  "claude_output": {
+    "analysis": "All 27 parameter combinations produced identical results: 3 triggers each with 0% win rate and \u20b9-52 total PnL. No combination meets the minimum 5-trigger threshold, and there is zero differentiation across the entire grid. The strategy completely failed during this test period regardless of parameter selection.",
+    "regime_context": "Despite a strong uptrend (ADX=25, Nifty +2.4%) which should favor demand zone entries, the strategy generated extremely few triggers (only 3 across all Nifty 50 symbols) and all were losing trades. This suggests the zones identified during the 45-day build period were either too narrow or already consumed by the strong momentum move, leaving no fresh demand zones to trigger entries during the test window.",
+    "zone_best": {
+      "min_score": 70,
+      "rr_ratio": 2.0,
+      "max_base_candles": 5,
+      "win_rate": 0.0,
+      "triggers": 3,
+      "reasoning": "No combination achieved >= 5 triggers; all had exactly 3 triggers at 0% win rate. Selecting the most permissive parameters (lowest min_score=70, lowest rr_ratio=2.0, highest max_base_candles=5) to maximize the chance of generating more triggers in future periods. In a strong uptrend, lower min_score captures more demand zones, lower R:R improves hit rate on targets, and wider base candle allowance identifies more zone formations."
+    },
+    "update_memory": false,
+    "confidence": 1
+  },
+  "memory_updated": false,
+  "new_best_params": {
+    "min_score": 75,
+    "rr_ratio": 2.0,
+    "max_base_candles": 4,
+    "build_days": 18,
+    "test_days": 14
+  },
+  "new_best_win_rate": 66.66666666666666
+}
