@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-22",
+  "wins_analysis": "No wins today as the system generated zero recommendations. The AI model was unavailable and the zone score fallback mechanism failed to produce any qualifying setups, meaning no trades were even attempted.",
+  "losses_analysis": "No losses occurred since no trades were placed. However, the real loss is opportunity cost \u2014 a trending_up regime with ADX=25 and low VIX=15.8 is an ideal environment for long setups, yet the system sat completely idle.",
+  "regime_impact": "Today's trending_up regime with strong ADX=25 and moderate VIX=15.8 was highly favorable for momentum and demand-zone BUY strategies. The system completely failed to capitalize on this \u2014 the regime was helpful but the system was non-functional. Demand-zone breakout longs would have been the ideal strategy type.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Fix the AI model availability issue immediately \u2014 check API keys, model endpoint health, and add a retry mechanism with 3 attempts and 10-second backoff before falling back to zone scoring",
+      "reason": "AI was marked unavailable today, which appears to be the root cause of zero recommendations. This is the second-order failure \u2014 without AI scoring, the fallback also produced nothing.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the zone score fallback minimum threshold from its current level to 60 (or whatever is 15% below current) specifically when regime is trending_up and ADX>=22 and VIX<18",
+      "reason": "The fallback produced zero setups in a clean trending environment, meaning the threshold is too restrictive. In favorable regimes, even moderate-probability demand zones tend to perform well.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a pre-market health check at 8:45 AM IST that validates: (a) AI model responds within 5 seconds, (b) zone score fallback can score at least 5 Nifty50 stocks, (c) data feeds are live \u2014 and send an alert if any check fails",
+      "reason": "Today's complete system failure was silent. Zero recommendations on a strong trending day should have triggered an alert before market open so manual intervention was possible.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 4,
+      "action": "Pre-screen and cache the top 10 Nifty50 stocks by proximity to demand zones (within 1.5% of zone) the night before, so even if the AI is down, the fallback has a curated watchlist to score against",
+      "reason": "Scanning all 50 stocks with a degraded fallback system likely found nothing. A pre-filtered list of stocks already near actionable levels would give the fallback a much higher hit rate.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow's trending_up regime, prioritize BUY entries on stocks that consolidated today with volume below 20-day average \u2014 these are coiling for continuation. Set entry triggers 0.3% above today's high to capture breakout momentum.",
+      "reason": "In trending_up regimes with ADX=25, stocks that pause one day often break out the next. Nifty gained only +0.3% today suggesting a shallow pullback/consolidation within the uptrend \u2014 ideal for next-day breakout longs.",
+      "applies_to": "entry_timing"
+    }
+  ],
+  "tomorrow_focus": "First priority is restoring AI model connectivity; if regime stays trending_up with ADX>22 and VIX<18, aggressively scan for demand-zone BUY setups on banking and IT heavyweights that consolidated today.",
+  "symbol_notes": {
+    "HDFCBANK.NS": "Typically leads in trending_up regimes \u2014 check if price is near a demand zone for a long entry tomorrow",
+    "RELIANCE.NS": "High-liquidity name likely participated in today's +0.3% move \u2014 scan for demand zone proximity for continuation long",
+    "INFY.NS": "IT sector often catches momentum in low-VIX uptrends \u2014 monitor for breakout above recent consolidation range",
+    "ICICIBANK.NS": "Banking heavyweights tend to outperform when ADX is strong \u2014 prioritize if within 1% of a demand zone"
+  },
+  "confidence": 3
+}
