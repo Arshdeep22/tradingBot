@@ -1,0 +1,56 @@
+{
+  "week": "2026-W43",
+  "executive_summary": "Seventeenth consecutive week of complete failure with zero trades executed and zero P&L. The Supply & Demand Zone strategy is categorically non-functional and has not produced a single trade in approximately four and a half months. This is no longer a parameter tuning problem \u2014 the entire signal generation pipeline is fundamentally broken or the entry criteria are structurally impossible to satisfy in live market conditions. Continuing to run this strategy unchanged is indistinguishable from having the bot turned off.",
+  "overall_win_rate": 0.0,
+  "win_rate_trend": "stable",
+  "target_progress": "0% \u2014 70% below 70% target. No trades generated in 17+ weeks.",
+  "regime_assessment": "Regime detection appears to be functioning (correctly identifying trending_up for 6 days and trending_down for 1 day), but it is entirely irrelevant because no trades are generated in ANY regime. The strategy fails equally in trending_up, trending_down, and all other previously observed regimes. Regime detection cannot help a strategy that never fires.",
+  "symbol_changes": {
+    "remove_from_watchlist": [],
+    "remove_reason": "No symbol-level data exists because zero trades have been taken. Cannot evaluate symbol performance.",
+    "focus_list": [],
+    "focus_reason": "Symbol selection is meaningless when the strategy generates zero signals. Must fix signal generation first."
+  },
+  "dow_pattern": "No day-of-week pattern can be identified \u2014 zero trades across all days for 17+ consecutive weeks. Every day performs identically at 0%.",
+  "param_search_adjustments": {
+    "zone_min_score_range": [
+      30,
+      55
+    ],
+    "zone_rr_range": [
+      1.0,
+      1.5
+    ],
+    "reasoning": "After 17 weeks of zero trades, the current min_score of 75 and RR of 2.0 are provably too restrictive for any signal to pass. However, parameter adjustments alone have been recommended for months and have never been applied or have never worked. The real issue is structural \u2014 see recommendations below. These relaxed params are provided as a diagnostic: if even score=30 and RR=1.0 produce zero trades, the zone detection or data pipeline itself is broken."
+  },
+  "structural_recommendations": [
+    {
+      "change": "EMERGENCY: Replace the Supply & Demand Zone strategy entirely with a simple momentum/breakout or moving-average crossover strategy that is guaranteed to generate signals. Run it in parallel with minimal position sizing as a proof-of-life test for the execution pipeline.",
+      "expected_impact": "Move from 0 trades/week to 5-15 trades/week minimum. Even at 45% win rate, this produces data to iterate on \u2014 infinitely more valuable than 0 trades at 0% win rate.",
+      "priority": "high"
+    },
+    {
+      "change": "Add a diagnostic/health-check layer that logs every candidate signal that is evaluated and rejected, including the rejection reason (score too low, RR insufficient, no zone detected, no price data, etc.). Without this, we are completely blind to WHY zero trades occur.",
+      "expected_impact": "Identify the exact bottleneck in the signal pipeline within 1-2 days. This is prerequisite to any meaningful fix.",
+      "priority": "high"
+    },
+    {
+      "change": "Verify the data pipeline end-to-end: confirm that price data is actually being ingested, candles are forming correctly, and the zone detection algorithm is receiving valid input. 17 weeks of zero signals strongly suggests a data feed issue, a broken dependency, or a silent exception being swallowed.",
+      "expected_impact": "High probability (>60%) that this reveals a technical bug rather than a strategy problem. Fixing it could immediately restore signal generation.",
+      "priority": "high"
+    },
+    {
+      "change": "If Supply & Demand Zones must be retained, implement a 'forced minimum signal' mode: if zero qualifying zones are found by 11:00 AM, progressively relax min_score by 5 points every 30 minutes until at least one zone qualifies or the session ends. Log all relaxation events.",
+      "expected_impact": "Guarantees at least some trade attempts per week, providing data for actual strategy evaluation rather than perpetual silence.",
+      "priority": "medium"
+    },
+    {
+      "change": "Establish a circuit-breaker policy: if any strategy produces zero trades for 3 consecutive weeks, it is automatically suspended and replaced with a fallback strategy. This prevents the current situation of 17 weeks of inaction.",
+      "expected_impact": "Prevents future multi-month dead periods. Ensures the system is always learning from live market interaction.",
+      "priority": "medium"
+    }
+  ],
+  "primary_strategy_next_week": "Supply & Demand Zones",
+  "confidence": 1,
+  "apply_to_memory": false
+}
