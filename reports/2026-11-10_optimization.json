@@ -1,13 +1,13 @@
 {
   "date": "2026-11-10",
-  "run_time_ist": "2026-11-10 02:43:00",
+  "run_time_ist": "2026-11-10 23:53:25",
   "regime": {
     "regime": "trending_up",
-    "nifty_direction": "+8.6%",
+    "nifty_direction": "+6.8%",
     "adx": 25.0,
-    "vix": 17.5,
+    "vix": 17.4,
     "best_strategy": "Supply & Demand Zones",
-    "description": "ADX=25.0 strong uptrend (Nifty +8.6%). Focus on demand zones aligned with trend."
+    "description": "ADX=25.0 strong uptrend (Nifty +6.8%). Focus on demand zones aligned with trend."
   },
   "symbols_tested": 48,
   "combos_tested": 27,
@@ -392,15 +392,15 @@
     }
   ],
   "claude_output": {
-    "analysis": "All 27 parameter combinations produced exactly 1 trigger each with a 0% win rate and identical \u20b9-3 losses. No combination meets the minimum 5-trigger threshold, indicating that Supply & Demand zones were rarely touched during the 15-day test window despite a strong uptrend. The grid reveals a fundamental lack of zone engagement across all parameter permutations.",
-    "regime_context": "The strong uptrend (+8.6% with ADX=25) likely pushed prices away from established demand zones without meaningful pullbacks, resulting in almost no zone retests. In such a trending regime, prices tend to break through supply zones and not revisit demand zones, explaining the extremely low trigger count across all settings.",
+    "analysis": "The grid revealed uniformly poor results across all 27 parameter combinations, with every single combo producing exactly 1 trigger and a 0% win rate with \u20b9-3 PnL. No parameter set meets the minimum 5-trigger threshold, indicating the Supply & Demand Zone strategy failed to generate sufficient trade signals during this 15-day test window despite a strong uptrend environment.",
+    "regime_context": "Despite a strong trending-up regime (ADX=25, Nifty +6.8%) that should theoretically favor demand zone entries, the strategy generated almost no triggers. This suggests zones identified during the 45-day build period were either too far from current price action in a strong rally, or the scoring/filtering criteria were too restrictive to capture the rapid move. VIX at 17.4 is moderate, so volatility wasn't suppressing zone touches \u2014 price simply moved away from established zones.",
     "zone_best": {
       "min_score": 70,
       "rr_ratio": 2.0,
       "max_base_candles": 5,
       "win_rate": 0.0,
       "triggers": 1,
-      "reasoning": "No combination achieved >= 5 triggers; all had exactly 1 trigger. Selecting the most permissive parameters (lowest min_score=70, lowest rr_ratio=2.0, highest max_base_candles=5) to maximize the chance of generating more triggers going forward. In a strong uptrend, relaxing filters gives the best probability of capturing demand zone bounces on any pullbacks that do occur."
+      "reasoning": "No combo achieved >= 5 triggers; all tied at 1 trigger. Selecting the most permissive parameters (lowest min_score=70, lowest rr_ratio=2.0, highest max_base_candles=5) to maximize future trigger generation. In a strong uptrend, loosening filters gives demand zones the best chance of being reached and triggered. Keeping current memory params is preferable since the new data is statistically meaningless with only 1 trade per combo."
     },
     "update_memory": false,
     "confidence": 1
