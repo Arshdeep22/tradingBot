@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-13",
+  "wins_analysis": "No wins to analyze \u2014 the system generated zero recommendations despite a strong trending-up day with Nifty rallying +2.5%. This represents a significant missed opportunity as trending days with ADX=25 and moderate VIX=15.5 are ideal for momentum and demand-zone strategies.",
+  "losses_analysis": "No losses occurred, but the real failure is the system producing zero setups. The AI module was unavailable (zone score fallback mode), and the fallback logic appears to have filtered out all 50 Nifty stocks \u2014 likely due to overly conservative thresholds or a bug in the fallback scan pipeline that produced no candidates at all.",
+  "regime_impact": "Today's trending_up regime with ADX=25 and VIX=15.5 was an ideal environment for long-biased demand-zone and breakout strategies. The regime should have helped significantly, but the system failed to capitalize because the scanning/recommendation engine was completely offline or misconfigured. BUY-side momentum strategies would have been the best fit.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Debug and fix the zone score fallback pipeline \u2014 ensure it produces at least 5-10 candidate setups when AI is unavailable. Add a health check that logs an alert if zero recommendations are generated on any trading day with ADX>20 and abs(Nifty change)>0.5%.",
+      "reason": "Zero recommendations on a +2.5% trending day with ADX=25 means the fallback system is broken or has impossibly strict filters. This is the single biggest issue \u2014 a non-functioning system cannot generate P&L.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the minimum zone score threshold in fallback mode from whatever current value to 60 (or implement a dynamic threshold that relaxes by 10 points when AI is unavailable), specifically for BUY setups when regime is trending_up.",
+      "reason": "The fallback mode likely uses the same strict AI probability cutoff meant for the full AI model. A simpler zone-score heuristic needs a more permissive threshold to produce actionable setups.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Pre-screen and hardcode a watchlist of 10-15 high-momentum Nifty 50 leaders (e.g., RELIANCE.NS, HDFCBANK.NS, INFY.NS, TCS.NS, ICICIBANK.NS, BHARTIARTL.NS, LT.NS) for trending_up days. If the main scan fails, run a simplified breakout/demand-zone check on just this watchlist.",
+      "reason": "On a +2.5% Nifty day, large-cap leaders in banking, IT, and energy almost certainly had tradeable demand-zone bounces or breakout setups. Having a fallback watchlist prevents total system failure.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Implement a market-open momentum scan at 9:30 AM that identifies stocks gapping up >0.5% with volume >1.5x average, and generates BUY limit orders at VWAP or nearest demand zone within 0.3% of current price, when regime is trending_up.",
+      "reason": "On strong trending days, waiting for perfect demand-zone pullbacks can mean missing entries entirely. A VWAP-based entry on gap-up stocks with tight stops would have captured the day's momentum.",
+      "applies_to": "entry_timing"
+    },
+    {
+      "priority": 5,
+      "action": "Add an AI availability monitoring cron job that checks model status at 8:45 AM and automatically switches to a pre-tested 'simple momentum + zone confluence' strategy if AI is down, rather than relying on a fallback that produces nothing.",
+      "reason": "Today's AI unavailability cascaded into zero trades. A robust secondary strategy (e.g., RSI>50 + price near demand zone + regime=trending_up) would have generated 3-5 viable BUY setups.",
+      "applies_to": "morning_scan"
+    }
+  ],
+  "tomorrow_focus": "First priority is fixing the fallback scan so it actually produces recommendations; if Nifty's uptrend continues (watch for follow-through above today's close with ADX staying >22 and VIX<18), aggressively scan for BUY setups on banking and IT heavyweights at demand zones formed by today's rally.",
+  "symbol_notes": {
+    "RELIANCE.NS": "Likely rallied with the broad market today \u2014 check for demand zone formation near today's VWAP as potential BUY entry tomorrow if pullback occurs",
+    "HDFCBANK.NS": "Banking sector typically leads in trending_up regimes with ADX=25 \u2014 prioritize for demand zone BUY setups tomorrow",
+    "INFY.NS": "IT large-caps tend to trend cleanly on broad market up days \u2014 look for continuation BUY setup above today's high",
+    "BHARTIARTL.NS": "Defensive momentum name \u2014 if market pulls back slightly, this may hold demand zones better than cyclicals",
+    "ICICIBANK.NS": "Second banking pick \u2014 check if it formed a higher-low demand zone today that can be used for tomorrow's entry"
+  },
+  "confidence": 3
+}
