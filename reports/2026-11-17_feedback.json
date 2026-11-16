@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-17",
+  "wins_analysis": "No wins to analyze \u2014 zero trades were placed today. The system generated no AI recommendations, meaning the entire pipeline failed to produce actionable setups despite a strong trending market.",
+  "losses_analysis": "No losses occurred, but the real loss is opportunity cost. A +2.5% Nifty rally with ADX=25 and VIX at 15.5 is an ideal environment for momentum/demand-zone longs, yet the bot sat completely idle with zero orders placed.",
+  "regime_impact": "Today's trending_up regime with strong ADX=25 and low VIX=15.5 was highly favorable for long setups. This was one of the best possible days to be active, making the zero-trade outcome a critical system failure rather than prudent risk management.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Fix the AI availability issue immediately \u2014 diagnose why AI was unavailable (API key expiry, connectivity, model timeout) and implement a retry mechanism with 3 attempts and 30s backoff before falling to zone score fallback",
+      "reason": "AI was marked unavailable and zone score fallback produced exactly 0 recommendations on a +2.5% trending day, indicating the fallback logic is broken or overly restrictive",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Audit and fix the zone score fallback path \u2014 lower the minimum zone score threshold from its current value to at least 60 on trending_up days with ADX>=20, and ensure the fallback scanner actually iterates all 50 Nifty symbols",
+      "reason": "The fallback produced zero setups on a day when broad market rallied 2.5%, suggesting the fallback scanner is either not running or filtering too aggressively",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Add a regime-aware emergency scan: if regime=trending_up and ADX>=22 and VIX<18, automatically scan for stocks breaking above 20-period high with volume>1.5x average and place at least top 3 BUY setups with 1.5% SL and 2.5% target",
+      "reason": "Today's regime was textbook trending_up \u2014 the system needs a hardcoded momentum strategy that activates when primary AI and fallback both fail, to avoid missing strong trend days entirely",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 4,
+      "action": "Implement an alerting mechanism that fires if morning scan completes with 0 recommendations on any day where abs(Nifty change) > 1% \u2014 this should trigger an immediate re-scan with relaxed parameters (e.g., min_score reduced by 15 points)",
+      "reason": "Zero recommendations on a high-momentum day is always a system bug, not a valid market read. Auto-retry with relaxed thresholds would have caught setups today",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "Pre-select 5 high-beta Nifty 50 stocks (TATAMOTORS.NS, ADANIENT.NS, BAJFINANCE.NS, HINDALCO.NS, TATACONSUM.NS) as priority scan targets on trending_up days to ensure the scanner focuses on stocks most likely to produce valid setups",
+      "reason": "On a +2.5% Nifty day, high-beta names likely moved 3-5% and would have had clear demand zone bounces or breakout entries \u2014 narrowing the scan universe increases likelihood of finding setups even with degraded AI",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "Priority #1 is restoring AI availability before market open; if Nifty continues its uptrend, scan aggressively for pullback-to-demand-zone BUY setups in high-beta names that led today's rally.",
+  "symbol_notes": {
+    "TATAMOTORS.NS": "High-beta name likely surged on today's +2.5% Nifty \u2014 check for demand zone retest tomorrow for long entry",
+    "BAJFINANCE.NS": "Financials typically lead in trending_up regimes \u2014 scan for breakout continuation or pullback entry",
+    "HINDALCO.NS": "Metals/commodities often have strong momentum follow-through \u2014 watch for volume confirmation on any pullback",
+    "RELIANCE.NS": "Heavyweight likely contributed to Nifty move \u2014 check if it formed a clean demand zone that can be traded tomorrow",
+    "ADANIENT.NS": "High-beta Adani name worth scanning for continuation if broad trend holds"
+  },
+  "confidence": 3
+}
