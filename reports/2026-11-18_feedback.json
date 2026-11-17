@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-18",
+  "wins_analysis": "No wins recorded today as the system generated zero recommendations. The AI model was unavailable, and the zone score fallback mechanism failed to produce any actionable setups despite a favorable trending_up market regime with Nifty gaining +1.0%.",
+  "losses_analysis": "No losses recorded, but the real loss is opportunity cost. A strong uptrend day with ADX=25.0 and VIX at a comfortable 15.7 should have generated multiple high-probability long setups. The fallback system's inability to produce even a single recommendation represents a critical system failure.",
+  "regime_impact": "Today's trending_up regime with ADX=25.0 and moderate VIX=15.7 was ideal for momentum-based demand zone longs. This was a high-opportunity day entirely missed. Strategy types like breakout longs and demand zone bounces would have performed well given the broad +1.0% Nifty move.",
+  "improvements": [
+    {
+      "priority": 1,
+      "action": "Fix the AI availability issue immediately \u2014 check API keys, model endpoint health, and add a retry mechanism with 3 attempts and 30-second backoff before falling back to zone scoring",
+      "reason": "AI was unavailable today causing zero recommendations on a textbook trending day. This is the second-order cause of all missed opportunity.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 2,
+      "action": "Lower the zone score fallback threshold from its current level by 5-10 points on trending_up days with ADX>=22 so that the fallback can actually produce setups when AI is down",
+      "reason": "Even without AI, the fallback should have found demand zone longs on a +1.0% Nifty day. The threshold is too restrictive for the fallback to be useful.",
+      "applies_to": "strategy_params"
+    },
+    {
+      "priority": 3,
+      "action": "Implement a hardcoded 'trending regime auto-scan' that selects top 5 Nifty 50 stocks by relative strength (RS > 1.0 vs Nifty) with fresh demand zones within 1.5% of current price, and places BUY orders automatically when AI is unavailable and regime is trending_up",
+      "reason": "Zero trades on a strong trend day is unacceptable. A simple RS-based fallback would have caught movers like large-cap banks, RELIANCE, or IT stocks riding the broad rally.",
+      "applies_to": "symbol_selection"
+    },
+    {
+      "priority": 4,
+      "action": "Add pre-market health check at 8:45 AM IST that validates AI endpoint, data feeds, and zone database, and sends an alert if any component is down so manual intervention can happen before 9:15 AM open",
+      "reason": "Today's AI unavailability was discovered only at report time. Early detection would allow manual override or parameter adjustment before market open.",
+      "applies_to": "morning_scan"
+    },
+    {
+      "priority": 5,
+      "action": "For tomorrow specifically, pre-screen these sectors for demand zone longs: Banking (HDFCBANK, ICICIBANK, SBIN, KOTAKBANK), IT (TCS, INFY), and Energy (RELIANCE) \u2014 use entry within 0.5% of demand zone with 1:2 RR minimum",
+      "reason": "After a +1.0% Nifty day with strong ADX, follow-through buying is likely. These heavyweight sectors drive Nifty and will show the clearest continuation patterns.",
+      "applies_to": "symbol_selection"
+    }
+  ],
+  "tomorrow_focus": "With AI hopefully restored, aggressively scan for BUY setups at demand zones in banking and heavyweight stocks \u2014 the trending_up regime with ADX=25 suggests continuation, but watch for a gap-up open that may overshoot demand zones requiring adjusted entry levels.",
+  "symbol_notes": {
+    "HDFCBANK.NS": "Likely participated in today's broad rally \u2014 check for fresh demand zone formation near today's consolidation lows for a continuation long",
+    "RELIANCE.NS": "Heavyweight likely moved with Nifty +1.0% \u2014 scout for pullback to intraday demand zone for tomorrow's long entry",
+    "ICICIBANK.NS": "Banking sector strength in uptrends \u2014 prioritize demand zone longs if price pulls back to VWAP or nearby support",
+    "TCS.NS": "If IT sector participated in today's rally, look for continuation pattern with demand zone within 1% of close",
+    "SBIN.NS": "PSU bank momentum tends to sustain in trending regimes \u2014 check for volume-confirmed demand zones"
+  },
+  "confidence": 3
+}
